@@ -20,6 +20,7 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 
+// Provider Registration Components
 import GeneralInfo from '../ProviderRegistration/GeneralInfo';
 import GeneralInfoAddress from '../ProviderRegistration/GeneralInfoAddress';
 import WorkHistory from '../ProviderRegistration/WorkHistory';
@@ -60,13 +61,13 @@ function App() {
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
             Even though it seems like they are different pages, the user is always on localhost:3000/user */}
-          {/* <ProtectedRoute
+          <ProtectedRoute
             // logged in shows UserPage else shows LoginPage
             exact
             path="/user"
           >
             <UserPage />
-          </ProtectedRoute> */}
+          </ProtectedRoute>
 
           <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage
@@ -143,6 +144,12 @@ function App() {
             exact
             path="/missionhistory">
             <MissionHistory/>
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact
+            path="/education">
+            <Education/>
           </ProtectedRoute>
 
           <ProtectedRoute
