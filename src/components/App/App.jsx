@@ -20,6 +20,14 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 
+import GeneralInfo from '../ProviderRegistration/GeneralInfo';
+import GeneralInfoAddress from '../ProviderRegistration/GeneralInfoAddress';
+import WorkHistory from '../ProviderRegistration/WorkHistory';
+import MissionHistory from '../ProviderRegistration/MissionHistory';
+import Education from '../ProviderRegistration/Education';
+import MedCred from '../ProviderRegistration/MedCred';
+import Insurance from '../ProviderRegistration/Insurance';
+
 import ProviderLandingPage from '../Provider/ProviderLandingPage';
 
 import './App.css';
@@ -109,6 +117,49 @@ function App() {
           >
             <ProviderLandingPage />
           </ProtectedRoute>
+
+
+          {/* PROVIDER REGISTRATION */}
+
+          <ProtectedRoute
+            exact
+            path="/generalInfo">
+            <GeneralInfo/>
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact
+            path="/generalInfoAddress">
+            <GeneralInfoAddress/>
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact
+            path="/workhistory">
+            <WorkHistory/>
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact
+            path="/missionhistory">
+            <MissionHistory/>
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact
+            path="/medcred">
+            <MedCred/>
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact
+            path="/insurance">
+            <Insurance/>
+          </ProtectedRoute>
+
+
+
+
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
