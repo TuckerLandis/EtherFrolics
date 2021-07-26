@@ -41,12 +41,14 @@ function ProtectedRoute(props) {
   }
 
 
-  if (user.authorization === 1 && adminRedirect != null) {
-    return <Redirect exact from={otherProps.path} to={adminRedirect} />
-  }
+  // if (user.authorization === 100 && adminRedirect != null) {
+  //   return <Redirect exact from={otherProps.path} to={adminRedirect} />
+  // }
 
   // redirect a logged in user if an authRedirect prop has been provided
-  if (user.id && authRedirect != null) {
+  if (user.authorization === 100 && adminRedirect != null) {
+    return <Redirect exact from={otherProps.path} to={adminRedirect} />
+  } else if (user.id && authRedirect != null) {
     return <Redirect exact from={otherProps.path} to={authRedirect} />;
   } else if (!user.id && authRedirect != null) {
     ComponentToShow = ComponentToProtect;

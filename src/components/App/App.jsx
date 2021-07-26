@@ -20,6 +20,7 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 
+import AdminLandingPage from '../Admin/AdminLandingPage';
 import ProviderLandingPage from '../Provider/ProviderLandingPage';
 
 import './App.css';
@@ -78,6 +79,7 @@ function App() {
             exact
             path="/login"
             authRedirect="/providerlandingpage"
+            adminRedirect="/adminlandingpage"
           >
             <LoginPage />
           </ProtectedRoute>
@@ -88,15 +90,25 @@ function App() {
             // - else shows RegisterPage at "/registration"
             exact
             path="/registration"
-            authRedirect="/user"
+            authRedirect="/providerlandingpage"
           >
             <RegisterPage />
           </ProtectedRoute>
 
           <ProtectedRoute
             exact
-            path="/providerlandingpage">
-            < ProviderLandingPage/>
+            path="/providerlandingpage"
+            adminRedirect="/adminlandingpage"
+            >
+            < ProviderLandingPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact
+            path="/adminlandingpage"
+            authRedirect="/providerlandingpage"
+            >
+            < AdminLandingPage />
           </ProtectedRoute>
 
           <ProtectedRoute

@@ -13,3 +13,11 @@ CHECKLIST
         [] 
     []
 */
+
+function AdminLandingPage() {
+    return(
+        <p>in Admin Landing Page</p>
+    )
+}
+
+export default AdminLandingPage;
