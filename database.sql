@@ -10,8 +10,8 @@ CREATE TABLE "user" (
 );
 
 CREATE TABLE "provider" (
-  "provider_id" serial PRIMARY KEY,
-	"user_id" int REFERENCES “user”,
+  "provider_id" SERIAL PRIMARY KEY,
+	"user_id" int references "user",
 	"firstName" varchar(255),
 	"lastName" varchar(255),
 	"DOB" DATE,
@@ -29,7 +29,7 @@ CREATE TABLE "provider" (
 	"availability" DATE,
 	"peerReviews" TEXT [],
 	"missionReviews" TEXT [],
-	"publications" TEXT [],
+	"publications" TEXT []
 );
 
 
@@ -85,7 +85,7 @@ CREATE TABLE "insurance" (
 	"dateExpiring" DATE,
 	"policyNumber" integer,
 	"insuranceImageKey" varchar(100),
-	"user_id" int REFERENCES "user",
+	"user_id" int REFERENCES "user"
 );
 
 CREATE TABLE "mission" (
@@ -97,7 +97,7 @@ CREATE TABLE "mission" (
 	"startDate" DATE,
 	"endDate" DATE,
 	"providerReviews" varchar (10000)[],
-	"organization_id" REFERENCES "organization"
+	"organization_id" int REFERENCES "organization"
 );
 
 CREATE TABLE "organization" (
@@ -105,5 +105,5 @@ CREATE TABLE "organization" (
 	"name" varchar(255),
 	"contactName" varchar(255),
 	"contactPostion" varchar(255),
-	"contactPhone" varchar(12), 
+	"contactPhone" varchar(12)
 );
