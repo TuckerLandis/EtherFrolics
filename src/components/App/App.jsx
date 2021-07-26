@@ -20,6 +20,8 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 
+import ProviderLandingPage from '../Provider/ProviderLandingPage';
+
 import './App.css';
 
 function App() {
@@ -50,13 +52,13 @@ function App() {
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
             Even though it seems like they are different pages, the user is always on localhost:3000/user */}
-          <ProtectedRoute
+          {/* <ProtectedRoute
             // logged in shows UserPage else shows LoginPage
             exact
             path="/user"
           >
             <UserPage />
-          </ProtectedRoute>
+          </ProtectedRoute> */}
 
           <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage
@@ -75,7 +77,7 @@ function App() {
             // - else shows LoginPage at /login
             exact
             path="/login"
-            authRedirect="/user"
+            authRedirect="/providerlandingpage"
           >
             <LoginPage />
           </ProtectedRoute>
@@ -92,14 +94,20 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
+            exact
+            path="/providerlandingpage">
+            < ProviderLandingPage/>
+          </ProtectedRoute>
+
+          <ProtectedRoute
             // with authRedirect:
             // - if logged in, redirects to "/user"
             // - else shows LandingPage at "/home"
             exact
-            path="/home"
-            authRedirect="/user"
+            path="/providerlandingpage"
+            authRedirect="/providerlandingpage"
           >
-            <LandingPage />
+            <ProviderLandingPage />
           </ProtectedRoute>
 
           {/* If none of the other routes matched, we will show a 404. */}
