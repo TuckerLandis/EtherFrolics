@@ -40,10 +40,10 @@ function GeneralInfo () {
             setValidPassport(false)
             break
             case "soleProviderRadioTrue" :
-            setValidPassport(true)
+            setSoleProvider(true)
             break
             case "soleProviderRadioFalse" :
-            setValidPassport(false)
+            setSoleProvider(false)
             break
 
         }
@@ -53,9 +53,25 @@ function GeneralInfo () {
     function handleNext () {
         // triggers submit function
         // triggers history push to address
+
+        // form validation
+
+
         console.log('next clicked');
 
+        const newProviderGeneralInfo = {
+            firstName : firstName,
+            lastName : lastName,
+            dob : dob,
+            providerRole : providerRole,
+            validPassport : validPassport,
+            soleProvider : soleProvider
+        }
 
+        dispatch({
+            type: 'POST_PROVIDER_GENERAL',
+            payload: newProviderGeneralInfo 
+        })
 
         // history.push('/generalinfoaddress') // works, commenting out for testing submit
 
