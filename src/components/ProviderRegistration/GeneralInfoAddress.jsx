@@ -28,7 +28,7 @@ function GeneralInfoAddress () {
         history.push('/workhistory')
     }
 
-    function handleChange() {
+    function handleChange(e) {
         switch(e.target.id){
             case 'streetAddressInput' : 
             setStreetAddress(e.target.value)
