@@ -1,6 +1,11 @@
 import { useState } from "react"
+import { useDispatch } from "react-redux"
+import { useHistory } from "react-router"
 
 function GeneralInfoAddress () {
+
+    const dispatch = useDispatch();
+    const history = useHistory()
 
     const [streetAddress, setStreetAddress] = useState('')
     const [city, setCity] = useState('')
@@ -8,13 +13,24 @@ function GeneralInfoAddress () {
     const [zip, setZip] = useState('')
 
     function handleNext() {
-        
+
+        dispatch({
+            type: 'PUT_PROVIDER_ADDRESS',
+            payload : {
+                streetAddress : streetAddress,
+                city : city,
+                state : state,
+                zip : zip,
+            }
+        })
+
+        history.push('/workhistory')
     }
 
     function handleChange() {
         switch(e.target.id){
             case 'streetAddressInput' : 
-            setstreetAddress(e.target.value)
+            setStreetAddress(e.target.value)
             break
             case 'cityInput' : 
             setCity(e.target.value)
