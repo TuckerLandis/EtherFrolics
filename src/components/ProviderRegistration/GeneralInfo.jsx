@@ -79,7 +79,7 @@ function GeneralInfo () {
             payload: newProviderGeneralInfo 
         })
         
-        // history.push('/generalinfoaddress') // works, commenting out for testing submit
+        history.push('/generalinfoaddress')
     }
 
 
@@ -119,10 +119,12 @@ function GeneralInfo () {
             <input type="radio" name="soleProvider" id="soleProviderRadioFalse" value="false"  onChange={handleChange}/>
 
 
-            <button onClick={handleNext}>Next</button>
+            
 
              <label htmlFor="emailAdressInput">Email Address</label>
-            <TextField type="text" id="emailAdressInput" value={emailAddress} onChange={handleChange}/>
+            <TextField type="text" id="emailAddressInput" value={emailAddress} onChange={handleChange}/>
+
+            <button onClick={handleNext}>Next</button>
 
             {/* stepper goes here with props of which page */}
 
