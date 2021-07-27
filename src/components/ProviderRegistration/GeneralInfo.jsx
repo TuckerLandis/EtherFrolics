@@ -122,7 +122,7 @@ function GeneralInfo () {
             
 
              <label htmlFor="emailAdressInput">Email Address</label>
-            <TextField type="text" id="emailAdressInput" value={emailAddress} onChange={handleChange}/>
+            <TextField type="text" id="emailAddressInput" value={emailAddress} onChange={handleChange}/>
 
             <button onClick={handleNext}>Next</button>
 
