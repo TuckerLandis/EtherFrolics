@@ -1,3 +1,29 @@
+function WorkHistory () {
+    return(
+        <div>
+            <label htmlFor="yearsExperienceInput">Years of experience</label>
+            <input type="range" name="yearsExperience" id="yearsExperienceInput" 
+            min="0" max="100"
+            />
+            {/* this can and likely will change to be a radio with different year chuncks, 
+            but our DB would need to change? maybe it wouldn't. regardless, it's a range slider for now  */}
+
+           {/* work history multi row form component goes here, along with submit button, included in that component */}
+
+           {/* next button goes here */}
+
+            {/* stepper goes here with props of which page */}
+
+        </div>
+    )
+}
+
+
+export default WorkHistory
+
+
+
+
 // ## Checklist
 
 // - [ ]  Inputs

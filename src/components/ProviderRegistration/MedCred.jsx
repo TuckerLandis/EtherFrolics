@@ -1,3 +1,22 @@
+function MedCred () {
+    return(
+        <div>
+          
+
+           {/* medCred multi row form component goes here, along with submit button, included in that component */}
+
+           {/* next button goes here */}
+
+            {/* stepper goes here with props of which page */}
+
+        </div>
+    )
+}
+
+
+export default MedCred
+
+
 // ## Checklist
 
 // - [ ]  Inputs
