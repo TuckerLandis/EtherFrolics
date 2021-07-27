@@ -20,3 +20,14 @@
 
 //         - [ ]  GET
 //             - [ ]  Missions Table
+
+
+function ProviderMissionTable() {
+
+    
+    return (
+        <p>in Provider Landing Page</p>
+    )
+}
+
+export default ProviderMissionTable;
