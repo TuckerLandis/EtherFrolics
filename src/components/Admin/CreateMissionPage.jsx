@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import { useDispatch } from 'react-redux'
 
 // ## Checklist
 
@@ -12,6 +13,7 @@ import {useState} from 'react';
 // - [ ]  Post route to the missions table
 
 function CreateMissionPage() {
+    const dispatch = useDispatch();
 
     //create local states to collect data
     const [organization, setOrganization] = useState('');
@@ -22,7 +24,6 @@ function CreateMissionPage() {
     const [soloPractitioner, setSoloPractitioner] = useState(false);
 
     //create a function that will send the form data to the server
-
     const handleSubmit = (evt) => {
         //need to create an object that will collect the data and dispatch it to the saga
         const missionObj = {
@@ -33,9 +34,15 @@ function CreateMissionPage() {
             endDate: endDate,
             missionLink: missionLink
         }
-
         console.log(missionObj);
+        
+        dispatch({
+            type: 'POST_MISSION_DATA',
+            payload: missionObj
+        })
     }
+
+
 
     return (
         <div>
