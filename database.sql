@@ -16,6 +16,7 @@ CREATE TABLE "provider" (
 	"firstName" varchar(255),
 	"lastName" varchar(255),
 	"DOB" DATE,
+	"emailAddress" varchar(50),
 	"providerRole" varchar(255),
 	"streetAddress" varchar(255),
 	"city" varchar(255),
