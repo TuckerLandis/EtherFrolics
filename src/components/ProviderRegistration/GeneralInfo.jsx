@@ -14,9 +14,13 @@ function GeneralInfo () {
     const [providerRole, setProviderRole] = useState('')
     const [validPassport, setValidPassport] = useState(false)
     const [soleProvider, setSoleProvider] = useState(false)
+    // const [emailAddress, setEmailAddress] = useState('')
 
+    /**
+     * Takes in an event from all inputs, changes their state variable
+     * @param {*} e 
+     */
     function handleChange (e) {
-        // switch on evt.target.id to set specific states
 
         console.log(e.target.id);
 
@@ -45,17 +49,18 @@ function GeneralInfo () {
             case "soleProviderRadioFalse" :
             setSoleProvider(false)
             break
-
+            // case "emailAddressInput" : 
+            // setEmailAddress(e.target.value)
+            // break
         }
     }
 
-
+    /**
+     * Upon clicking next button, validate forms, bundle info, send dispatch, push to next page
+     */
     function handleNext () {
-        // triggers submit function
-        // triggers history push to address
 
-        // form validation
-
+        // TODO - form validation goes here
 
         console.log('next clicked');
 
@@ -72,10 +77,11 @@ function GeneralInfo () {
             type: 'POST_PROVIDER_GENERAL',
             payload: newProviderGeneralInfo 
         })
-
+        
         // history.push('/generalinfoaddress') // works, commenting out for testing submit
-
     }
+
+
 
     return(
         <div>
@@ -88,7 +94,7 @@ function GeneralInfo () {
             <label htmlFor="dateOfBirthInput">Date of Birth</label>
             <input type="date" name="dateOfBirth" id="dateOfBirthInput" value={dob} onChange={handleChange}/>
 
-
+           
             <label htmlFor="providerRoleInput">Provider Role</label>
             <select name="providerRole" id="providerRoleInput" value={providerRole} onChange={handleChange}>
             <option value="CRNA">CRNA</option>
@@ -97,14 +103,13 @@ function GeneralInfo () {
                 </select>
 
 
-            {/* need to figure out how to do this with the switch statement / not*/}
+            
             <p>Do you have a valid passport?</p>
             <label htmlFor="yes">Yes</label>
             <input type="radio" name="validPassport" id="validPassportRadioTrue" value="true" onChange={handleChange}/>
             <label htmlFor="no">No</label>
             <input type="radio" name="validPassport" id="validPassportRadioFalse" value="false" onChange={handleChange}/>
 
-            {/* need to figure out how to do this with the switch statement / not*/}
 
             <p>Are you comfrotable working as a sole provider?</p>
             <label htmlFor="yes">Yes</label>
@@ -112,13 +117,14 @@ function GeneralInfo () {
             <label htmlFor="no">No</label>
             <input type="radio" name="soleProvider" id="soleProviderRadioFalse" value="false"  onChange={handleChange}/>
 
-            {/* next button goes here */}
+
             <button onClick={handleNext}>Next</button>
+
+             {/* <label htmlFor="emailAdressInput">Email Address</label>
+            <input type="text" id="emailAdressInput" value={emailAddress} onChange={handleChange}/> */}
 
             {/* stepper goes here with props of which page */}
 
-
-            
         </div>
     )
 }
@@ -130,14 +136,14 @@ export default GeneralInfo
 
 // ## Checklist
 
-// - [ ]  Input fields
-//     - [ ]  Name
-//     - [ ]  DOB
-//     - [ ]  Provider role
-//     - [ ]  sole provider checkbox
-//     - [ ]  valid passport checkbox
-//     - [ ]  opt -in recruiters checkbox
-//     - [ ]  next button
+// - [x]  Input fields
+//     - [x]  Name
+//     - [x]  DOB
+//     - [x]  Provider role
+//     - [x]  sole provider checkbox
+//     - [x]  valid passport checkbox
+//     - [x]  opt -in recruiters checkbox
+//     - [x]  next button
 //     - [ ]  steppers specific - separate component - url params
 // - [ ]  divs - structure
 //     - [ ]  
