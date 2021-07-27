@@ -9,6 +9,8 @@ function WorkHistory () {
         console.log('clicked Add Work History');
         // keyForWorkHistoryMultiRow++
         setAmountOfWorkHistories(amountOfWorkHistories => [...amountOfWorkHistories, amountOfWorkHistories.length + 1])
+
+
         
     }
 
@@ -26,11 +28,11 @@ function WorkHistory () {
 
            {amountOfWorkHistories.map(history => {
                return(
-                   <WorkHistoryMultiRow /> // key={keyForWorkHistoryMultiRow} 
+                   <WorkHistoryMultiRow addWorkHistoryItem={addWorkHistoryItem} /> // key={keyForWorkHistoryMultiRow} 
                )
            })}
 
-           <button onClick={addWorkHistoryItem}>+</button>
+           
 
            {/* next button goes here */}
 

@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { TextField } from "@material-ui/core"
 
-function WorkHistoryMultiRow () {
+function WorkHistoryMultiRow (props) {
 
     const [workplace, setWorkplace] = useState('')
     const [jobTitle, setJobTitle] = useState('')
@@ -10,6 +10,16 @@ function WorkHistoryMultiRow () {
     const [referenceEmailAddress, setReferenceEmailAddress] = useState('')
     const [startDate, setStartDate] = useState('')
     const [endDate, setEndDate] = useState('')
+    const [hasBeenSubmitted, setHasBeenSubmitted] = useState(false)
+
+    function submitWorkHistoryItem () {
+        
+        setHasBeenSubmitted(true)
+
+        props.addWorkHistoryItem()
+
+    }
+    
 
 
     function handleChange (e) {
@@ -61,6 +71,15 @@ function WorkHistoryMultiRow () {
 
             <label htmlFor="endDateInput">End Date</label>
             <TextField type="date" name="endDate" id="endDateInput" value={endDate} onChange={handleChange}/>
+
+            {hasBeenSubmitted ? (
+                <p>submitted</p>
+            ) : (
+                
+                <button onClick={submitWorkHistoryItem}>+</button>
+            )}
+
+            
 
         </div>
     )
