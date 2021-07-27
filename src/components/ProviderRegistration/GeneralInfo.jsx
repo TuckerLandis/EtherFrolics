@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { useHistory } from "react-router"
+import { TextField } from "@material-ui/core"
 
 
 
@@ -14,7 +15,7 @@ function GeneralInfo () {
     const [providerRole, setProviderRole] = useState('')
     const [validPassport, setValidPassport] = useState(false)
     const [soleProvider, setSoleProvider] = useState(false)
-    // const [emailAddress, setEmailAddress] = useState('')
+    const [emailAddress, setEmailAddress] = useState('')
 
     /**
      * Takes in an event from all inputs, changes their state variable
@@ -49,9 +50,9 @@ function GeneralInfo () {
             case "soleProviderRadioFalse" :
             setSoleProvider(false)
             break
-            // case "emailAddressInput" : 
-            // setEmailAddress(e.target.value)
-            // break
+            case "emailAddressInput" : 
+            setEmailAddress(e.target.value)
+            break
         }
     }
 
@@ -86,13 +87,13 @@ function GeneralInfo () {
     return(
         <div>
             <label htmlFor="firstNameInput">First Name</label>
-            <input type="text" name="firstName" id="firstNameInput" value={firstName} onChange={handleChange}/>
+            <TextField type="text" name="firstName" id="firstNameInput" value={firstName} onChange={handleChange}/>
 
             <label htmlFor="lastNameInput">Last Name</label>
-            <input type="text" name="lastName" id="lastNameInput" value={lastName} onChange={handleChange}/>
+            <TextField type="text" name="lastName" id="lastNameInput" value={lastName} onChange={handleChange}/>
 
             <label htmlFor="dateOfBirthInput">Date of Birth</label>
-            <input type="date" name="dateOfBirth" id="dateOfBirthInput" value={dob} onChange={handleChange}/>
+            <TextField type="date" name="dateOfBirth" id="dateOfBirthInput" value={dob} onChange={handleChange}/>
 
            
             <label htmlFor="providerRoleInput">Provider Role</label>
@@ -111,7 +112,7 @@ function GeneralInfo () {
             <input type="radio" name="validPassport" id="validPassportRadioFalse" value="false" onChange={handleChange}/>
 
 
-            <p>Are you comfrotable working as a sole provider?</p>
+            <p>Are you comfortable working as a sole provider?</p>
             <label htmlFor="yes">Yes</label>
             <input type="radio" name="soleProvider" id="soleProviderRadioTrue" value="true" onChange={handleChange}/>
             <label htmlFor="no">No</label>
@@ -120,8 +121,8 @@ function GeneralInfo () {
 
             <button onClick={handleNext}>Next</button>
 
-             {/* <label htmlFor="emailAdressInput">Email Address</label>
-            <input type="text" id="emailAdressInput" value={emailAddress} onChange={handleChange}/> */}
+             <label htmlFor="emailAdressInput">Email Address</label>
+            <TextField type="text" id="emailAdressInput" value={emailAddress} onChange={handleChange}/>
 
             {/* stepper goes here with props of which page */}
 
