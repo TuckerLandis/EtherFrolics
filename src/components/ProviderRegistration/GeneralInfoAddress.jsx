@@ -1,19 +1,48 @@
+import { useState } from "react"
+
 function GeneralInfoAddress () {
+
+    const [streetAddress, setStreetAddress] = useState('')
+    const [city, setCity] = useState('')
+    const [state, setState] = useState('')
+    const [zip, setZip] = useState('')
+
+    function handleNext() {
+        switch(e.target.id){
+            case 'streetAddressInput' : 
+            setstreetAddress(e.target.value)
+            break
+            case 'cityInput' : 
+            setCity(e.target.value)
+            break
+            case 'stateInput' : 
+            setState(e.target.value)
+            break
+            case 'zipInput' : 
+            setZip(e.target.value)
+            break
+        }
+    }
+
+    function handleChange() {
+
+    }
+
     return(
         <div>
             <label htmlFor="streetAddressInput">Street Address</label>
-            <TextField type="text" name="streetAddress" id="streetAddressInput" />
+            <TextField type="text" name="streetAddress" id="streetAddressInput" value={streetAddress} onChange={handleChange} />
 
             <label htmlFor="cityInput">City</label>
-            <TextField type="text" name="city" id="cityInput" />
+            <TextField type="text" name="city" id="cityInput" value={city} onChange={handleChange}/>
 
             <label htmlFor="stateInput">State</label>
-            <TextField type="text" name="state" id="stateInput" />
+            <TextField type="text" name="state" id="stateInput" value={state} onChange={handleChange} />
 
             <label htmlFor="zipInput">Zip Code</label>
-            <TextField type="text" name="zip" id="zipInput" />
+            <TextField type="text" name="zip" id="zipInput" value={zip} onChange={handleChange}/>
 
-            {/* next button goes here */}
+            <button onClick={handleNext}>Next</button>
 
             {/* stepper goes here with props of which page */}
 

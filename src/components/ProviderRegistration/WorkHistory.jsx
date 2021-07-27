@@ -10,12 +10,8 @@ function WorkHistory() {
         // keyForWorkHistoryMultiRow++
         setAmountOfWorkHistories(amountOfWorkHistories => [...amountOfWorkHistories, amountOfWorkHistories.length + 1])
 
-
-
     }
 
-
-    // a function to pass down to WorkHistoryMultiRow in props to send a dispatch upon pressing the add history button, also increments the amountOfWorkHistories, rendering a new one
 
     return (
         <div>
@@ -43,7 +39,7 @@ function WorkHistory() {
 
 
 
-            {/* next button goes here */}
+            <button> Next </button>
 
             {/* stepper goes here with props of which page */}
 
