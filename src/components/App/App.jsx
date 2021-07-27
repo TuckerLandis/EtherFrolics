@@ -20,6 +20,7 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 
+
 // Provider Registration Components
 import GeneralInfo from '../ProviderRegistration/GeneralInfo';
 import GeneralInfoAddress from '../ProviderRegistration/GeneralInfoAddress';
@@ -28,7 +29,7 @@ import MissionHistory from '../ProviderRegistration/MissionHistory';
 import Education from '../ProviderRegistration/Education';
 import MedCred from '../ProviderRegistration/MedCred';
 import Insurance from '../ProviderRegistration/Insurance';
-
+import AdminLandingPage from '../Admin/AdminLandingPage';
 import ProviderLandingPage from '../Provider/ProviderLandingPage';
 
 import './App.css';
@@ -87,6 +88,7 @@ function App() {
             exact
             path="/login"
             authRedirect="/providerlandingpage"
+            adminRedirect="/adminlandingpage"
           >
             <LoginPage />
           </ProtectedRoute>
@@ -97,15 +99,25 @@ function App() {
             // - else shows RegisterPage at "/registration"
             exact
             path="/registration"
-            authRedirect="/user"
+            authRedirect="/providerlandingpage"
           >
             <RegisterPage />
           </ProtectedRoute>
 
           <ProtectedRoute
             exact
-            path="/providerlandingpage">
-            < ProviderLandingPage/>
+            path="/providerlandingpage"
+            adminRedirect="/adminlandingpage"
+            >
+            < ProviderLandingPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact
+            path="/adminlandingpage"
+            authRedirect="/providerlandingpage"
+            >
+            < AdminLandingPage />
           </ProtectedRoute>
 
           <ProtectedRoute
@@ -114,11 +126,9 @@ function App() {
             // - else shows LandingPage at "/home"
             exact
             path="/providerlandingpage"
-            authRedirect="/providerlandingpage"
           >
             <ProviderLandingPage />
           </ProtectedRoute>
-
 
           {/* PROVIDER REGISTRATION */}
 
@@ -164,9 +174,17 @@ function App() {
             <Insurance/>
           </ProtectedRoute>
 
-
-
-
+          <ProtectedRoute
+            // with authRedirect:
+            // - if logged in, redirects to “/user”
+            // - else shows LandingPage at “/home”
+            exact
+            path="/home"
+            authRedirect="/providerlandingpage"
+            adminRedirect="/adminlandingpage"
+          >
+            <LandingPage />
+          </ProtectedRoute>
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
