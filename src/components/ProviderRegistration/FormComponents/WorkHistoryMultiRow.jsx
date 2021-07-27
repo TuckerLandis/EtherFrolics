@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { TextField } from "@material-ui/core"
 
 function WorkHistoryMultiRow () {
 
@@ -26,12 +27,12 @@ function WorkHistoryMultiRow () {
             setReferencePhone(e.target.value)
             break
             case 'referenceEmailInput' : 
-            setReferencePhone(e.target.value)
+            setReferenceEmailAddress(e.target.value)
             break
             case 'startDateInput' : 
             setStartDate(e.target.value)
             break
-            case 'startEndInput' : 
+            case 'endDateInput' : 
             setEndDate(e.target.value)
             break
         }

@@ -1,7 +1,11 @@
-
+import { useState } from "react"
+import WorkHistoryMultiRow from './FormComponents/WorkHistoryMultiRow'
 
 function WorkHistory () {
+    const [amountOfWorkHistories, setAmountOfWorkHistories] = useState([1])
 
+
+    // a function to pass down to WorkHistoryMultiRow in props to send a dispatch upon pressing the add history button, also increments the amountOfWorkHistories, rendering a new one
 
     return(
         <div>
@@ -12,7 +16,11 @@ function WorkHistory () {
             {/* this can and likely will change to be a radio with different year chuncks, 
             but our DB would need to change? maybe it wouldn't. regardless, it's a range slider for now  */}
 
-           {/* work history multi row form component goes here, along with submit button, included in that component */}
+           {amountOfWorkHistories.map(history => {
+               return(
+                   <WorkHistoryMultiRow />
+               )
+           })}
 
            {/* next button goes here */}
 
