@@ -26,7 +26,23 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
+// Material UI imports
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+
+// Table Data styled with Material UI
+
+
 function MissionTable() {
+
+    const classes = useStyles();
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -41,8 +57,12 @@ function MissionTable() {
     }, []);
 
     return (
+        <div>
+            <h2>Upcoming Missions</h2>
 
-        <p>in Mission Table </p>
+            <p>in Mission Table </p>
+
+        </div>
 
     )
 } // end Mission Table
