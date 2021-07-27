@@ -26,7 +26,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-function ProviderMissionTable() {
+function MissionTable() {
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -41,9 +41,12 @@ function ProviderMissionTable() {
     }, []);
 
     return (
-        <p>in Provider Landing Page</p>
-    )
-}
 
-export default ProviderMissionTable;
+        <p>in Mission Table </p>
+
+    )
+} // end Mission Table
+
+export default MissionTable;
+
 
