@@ -106,14 +106,6 @@ function App() {
 
           <ProtectedRoute
             exact
-            path="/providerlandingpage"
-            // adminRedirect="/adminlandingpage"
-            >
-            < ProviderLandingPage />
-          </ProtectedRoute>
-
-          <ProtectedRoute
-            exact
             path="/adminlandingpage"
             // authRedirect="/providerlandingpage"
             >
