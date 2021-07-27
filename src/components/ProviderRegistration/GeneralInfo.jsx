@@ -79,7 +79,7 @@ function GeneralInfo () {
             payload: newProviderGeneralInfo 
         })
         
-        // history.push('/generalinfoaddress') // works, commenting out for testing submit
+        history.push('/generalinfoaddress')
     }
 
 

@@ -1,45 +1,76 @@
 import { useState } from "react"
+import { useDispatch } from "react-redux"
+import { useHistory } from "react-router"
 import WorkHistoryMultiRow from './FormComponents/WorkHistoryMultiRow'
 
 function WorkHistory() {
+    const dispatch = useDispatch();
+    const history = useHistory();
+
+    const [yearsExperience, setYearsExperience] = useState('');
+
+    // state array on which work history sub components are rendered
     const [amountOfWorkHistories, setAmountOfWorkHistories] = useState([1])
     // let keyForWorkHistoryMultiRow = 1
 
+    // increases the amount of work history elements in the array above
     function addWorkHistoryItem() {
-        console.log('clicked Add Work History');
+
         // keyForWorkHistoryMultiRow++
-        setAmountOfWorkHistories(amountOfWorkHistories => [...amountOfWorkHistories, amountOfWorkHistories.length + 1])
+        setAmountOfWorkHistories(amountOfWorkHistories =>
+            [...amountOfWorkHistories, amountOfWorkHistories.length + 1])
 
     }
 
+    function handleChange(e) {
+        console.log(e.target.value);
+        setYearsExperience(e.target.value)
+
+    }
+
+    function handleNext() {
+        // send dispatch with just years of experience, also post resume to s3
+        dispatch({
+            type: 'PUT_WORK_HISTORY',
+            payload: {
+                yearsExperience: yearsExperience,
+            }
+        })
+
+    }
 
     return (
         <div>
             <label htmlFor="yearsExperienceInput">Years of experience</label>
-            <input type="range" name="yearsExperience" id="yearsExperienceInput"
-                min="0" max="100"
-            />
-            {/* this can and likely will change to be a radio with different year chuncks, 
-            but our DB would need to change? maybe it wouldn't. regardless, it's a range slider for now  */}
+            <select name="yearsExperience" id="yearsExperienceInput" onChange={handleChange}>
+                <option value="1-2">1-2</option>
+                <option value="2-3">2-3</option>
+                <option value="3-5">3-5</option>
+                <option value="5-10">5-10</option>
+                <option value="10-15">10-15</option>
+                <option value="15-20">15-20</option>
+                <option value="20+">20+</option>
+            </select>
+
 
             <button>Resume Upload (Dummy) </button>
 
             {/* spacers, to be removed */}
             <br></br>
-            <br></br> 
+            <br></br>
             <br></br>
             <br></br>
 
-            {/* maps a state array to render relevant number of  */}
+            {/* maps a state array to render relevant number of work history forms */}
             {amountOfWorkHistories.map(history => {
                 return (
-                    <WorkHistoryMultiRow addWorkHistoryItem={addWorkHistoryItem} /> // key={keyForWorkHistoryMultiRow} 
+                    <WorkHistoryMultiRow addWorkHistoryItem={addWorkHistoryItem} /> // key={keyForWorkHistoryMultiRow} https://reactjs.org/docs/lists-and-keys.html
                 )
             })}
 
 
 
-            <button> Next </button>
+            <button onClick={handleNext}> Next </button>
 
             {/* stepper goes here with props of which page */}
 
@@ -49,35 +80,3 @@ function WorkHistory() {
 
 
 export default WorkHistory
-
-
-
-
-// ## Checklist
-
-// - [ ]  Inputs
-//     - [ ]  years of experience - divided into 1-2 2-5 5-10 +5 year chunks (range)
-// - [ ]  multi row work submit
-//     - [ ]  workplace
-//     - [ ]  job title
-//     - [ ]  reference name
-//     - [ ]  reference contact #
-//     - [ ]  start date
-//     - [ ]  end date
-//     - [ ]  button to add another form for work
-//     - [ ]  resume upload
-// - [ ]  next button → mission experience
-// - [ ]  stepper
-
-// ## Components
-
-// - [ ]  work history form component - this contains inputs for work history, gets duplicated by + button
-// - [ ]  header, stepper
-
-// - [ ]  pdf upload component - gets passed props from URL params to denote which type of file is uploaded
-
-// ## Routes
-
-// - [ ]  put route to provider table
-// - [ ]  post route to work history table
-// - [ ]  post to amazon s3
