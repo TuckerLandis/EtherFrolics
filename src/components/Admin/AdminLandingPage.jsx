@@ -62,7 +62,7 @@ function AdminLandingPage() {
             })}
 
             <Button variant="contained" onClick={() => history.push('/providermgmt')}>Provider Management</Button>
-            <Button variant="contained">Mission Management</Button>
+            <Button variant="contained" onClick={() => history.push('/missions')}>Mission Management</Button>
 
         </div>
 
