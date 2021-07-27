@@ -151,23 +151,15 @@ function App() {
               // - else shows RegisterPage at "/registration"
               exact
               path="/registration"
-              authRedirect="/providerlandingpage"
+              // authRedirect="/providerlandingpage"
             >
               <RegisterPage />
             </ProtectedRoute>
 
             <ProtectedRoute
               exact
-              path="/providerlandingpage"
-              adminRedirect="/adminlandingpage"
-              >
-              < ProviderLandingPage />
-            </ProtectedRoute>
-
-            <ProtectedRoute
-              exact
               path="/adminlandingpage"
-              authRedirect="/providerlandingpage"
+              // authRedirect="/providerlandingpage"
               >
               < AdminLandingPage />
             </ProtectedRoute>
@@ -178,6 +170,7 @@ function App() {
               // - else shows LandingPage at "/home"
               exact
               path="/providerlandingpage"
+              // adminRedirect="/adminlandingpage"
             >
               <ProviderLandingPage />
             </ProtectedRoute>
