@@ -23,13 +23,16 @@
 
 
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-const dispatch = useDispatch();
-const history = useHistory();
-
 function ProviderMissionTable() {
+
+    const dispatch = useDispatch();
+    const history = useHistory();
+
+    // Get the Missions information from the reducer so we can render it
+    // const trails = useSelector(store => store.trails);
 
     // Upon page load, this function dispatches "fetch missions" command to the generator function 
     useEffect(() => {
