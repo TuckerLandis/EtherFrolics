@@ -1,20 +1,59 @@
+import { useState } from "react"
+
 function WorkHistoryMultiRow () {
+
+    const [workplace, setWorkplace] = useState('')
+    const [jobTitle, setJobTitle] = useState('')
+    const [referenceName, setReferenceName] = useState('')
+    const [referencePhone, setReferencePhone] = useState('')
+    const [referenceEmailAddress, setReferenceEmailAddress] = useState('')
+    const [startDate, setStartDate] = useState('')
+    const [endDate, setEndDate] = useState('')
+
+
+    function handleChange (e) {
+        switch(e.target.id){
+            case 'workplaceInput' : 
+            setWorkplace(e.target.value)
+            break
+            case 'jobTitleInput' : 
+            setJobTitle(e.target.value)
+            break
+            case 'referenceNameInput' : 
+            setReferenceName(e.target.value)
+            break
+            case 'referencePhoneInput' : 
+            setReferencePhone(e.target.value)
+            break
+            case 'referenceEmailInput' : 
+            setReferencePhone(e.target.value)
+            break
+            case 'startDateInput' : 
+            setStartDate(e.target.value)
+            break
+            case 'startEndInput' : 
+            setEndDate(e.target.value)
+            break
+        }
+    }
+
+
     return(
         <div>
             <label htmlFor="workPlaceInput">Work Place</label>
-            <TextField type="text" name="workplace" id="workplace" />
+            <TextField type="text" name="workplace" id="workplaceInput" value={workplace} onChange={handleChange}/>
 
             <label htmlFor="jobTitleInput">Job Title</label>
-            <TextField type="text" name="city" id="cityInput" />
+            <TextField type="text" name="city" id="jobTitleInput" value={jobTitle} onChange={handleChange} />
 
             <label htmlFor="referenceNameInput">Reference Name</label>
-            <TextField type="text" name="referenceName" id="referenceNameInput" />
+            <TextField type="text" name="referenceName" id="referenceNameInput" value={referenceName} onChange={handleChange}/>
 
             <label htmlFor="referencePhoneInput">Reference Contact #</label>
-            <TextField type="text" name="referencePhone" id="referencePhoneInput" />
+            <TextField type="text" name="referencePhone" id="referencePhoneInput" value={referencePhone} onChange={handleChange}/>
 
             <label htmlFor="referenceEmailInput">Reference Email Address</label>
-            <TextField type="text" name="referenceEmail" id="referenceEmailInput" />
+            <TextField type="text" name="referenceEmail" id="referenceEmailInput" value={referenceEmailAddress} onChange={handleChange}/>
 
             <label htmlFor="startDateInput">Start Date</label>
             <TextField type="date" name="startDate" id="startDateInput" value={startDate} onChange={handleChange}/>
