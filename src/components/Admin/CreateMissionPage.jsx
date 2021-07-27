@@ -25,6 +25,7 @@ function CreateMissionPage() {
 
     //create a function that will send the form data to the server
     const handleSubmit = (evt) => {
+        evt.preventDefault();
         //need to create an object that will collect the data and dispatch it to the saga
         const missionObj = {
             name: organization,
@@ -40,6 +41,14 @@ function CreateMissionPage() {
             type: 'POST_MISSION_DATA',
             payload: missionObj
         })
+        
+        //clear local states
+        setOrganization('');
+        setLocation('');
+        setStartDate('');
+        setEndDate('');
+        setMissionLink('');
+        setSoloPractitioner('');
     }
 
 
