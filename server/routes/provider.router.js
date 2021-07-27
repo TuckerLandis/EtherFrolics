@@ -14,6 +14,9 @@ router.get('/', (req, res) => {
  */
 router.post('/', (req, res) => {
   // POST route code here
+  console.log('Reached provider POST:', req.body);
+  
+  
 });
 
 module.exports = router;

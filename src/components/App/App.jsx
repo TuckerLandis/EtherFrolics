@@ -20,6 +20,15 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 
+
+// Provider Registration Components
+import GeneralInfo from '../ProviderRegistration/GeneralInfo';
+import GeneralInfoAddress from '../ProviderRegistration/GeneralInfoAddress';
+import WorkHistory from '../ProviderRegistration/WorkHistory';
+import MissionHistory from '../ProviderRegistration/MissionHistory';
+import Education from '../ProviderRegistration/Education';
+import MedCred from '../ProviderRegistration/MedCred';
+import Insurance from '../ProviderRegistration/Insurance';
 import AdminLandingPage from '../Admin/AdminLandingPage';
 import ProviderLandingPage from '../Provider/ProviderLandingPage';
 
@@ -53,13 +62,13 @@ function App() {
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
             Even though it seems like they are different pages, the user is always on localhost:3000/user */}
-          {/* <ProtectedRoute
+          <ProtectedRoute
             // logged in shows UserPage else shows LoginPage
             exact
             path="/user"
           >
             <UserPage />
-          </ProtectedRoute> */}
+          </ProtectedRoute>
 
           <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage
@@ -119,6 +128,50 @@ function App() {
             path="/providerlandingpage"
           >
             <ProviderLandingPage />
+          </ProtectedRoute>
+
+          {/* PROVIDER REGISTRATION */}
+
+          <ProtectedRoute
+            exact
+            path="/generalInfo">
+            <GeneralInfo/>
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact
+            path="/generalInfoAddress">
+            <GeneralInfoAddress/>
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact
+            path="/workhistory">
+            <WorkHistory/>
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact
+            path="/missionhistory">
+            <MissionHistory/>
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact
+            path="/education">
+            <Education/>
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact
+            path="/medcred">
+            <MedCred/>
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact
+            path="/insurance">
+            <Insurance/>
           </ProtectedRoute>
 
           <ProtectedRoute
