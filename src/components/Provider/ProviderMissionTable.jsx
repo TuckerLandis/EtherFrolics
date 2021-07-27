@@ -22,9 +22,21 @@
 //             - [ ]  Missions Table
 
 
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+
+const dispatch = useDispatch();
+const history = useHistory();
+
 function ProviderMissionTable() {
 
-    
+    // Upon page load, this function dispatches "fetch missions" command to the generator function 
+    useEffect(() => {
+        dispatch({ type: 'FETCH_MISSIONS' })
+
+    }, []);
+
     return (
         <p>in Provider Landing Page</p>
     )
