@@ -14,7 +14,7 @@ function GeneralInfo () {
     const [providerRole, setProviderRole] = useState('')
     const [validPassport, setValidPassport] = useState(false)
     const [soleProvider, setSoleProvider] = useState(false)
-    // const [emailAddress, setEmailAddress] = useState('')
+    const [emailAddress, setEmailAddress] = useState('')
 
     /**
      * Takes in an event from all inputs, changes their state variable
@@ -49,9 +49,9 @@ function GeneralInfo () {
             case "soleProviderRadioFalse" :
             setSoleProvider(false)
             break
-            // case "emailAddressInput" : 
-            // setEmailAddress(e.target.value)
-            // break
+            case "emailAddressInput" : 
+            setEmailAddress(e.target.value)
+            break
         }
     }
 
@@ -120,8 +120,8 @@ function GeneralInfo () {
 
             <button onClick={handleNext}>Next</button>
 
-             {/* <label htmlFor="emailAdressInput">Email Address</label>
-            <input type="text" id="emailAdressInput" value={emailAddress} onChange={handleChange}/> */}
+             <label htmlFor="emailAdressInput">Email Address</label>
+            <input type="text" id="emailAdressInput" value={emailAddress} onChange={handleChange}/>
 
             {/* stepper goes here with props of which page */}
 
