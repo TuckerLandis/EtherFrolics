@@ -20,6 +20,9 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 
+// Admin Components
+import AdminLandingPage from '../Admin/AdminLandingPage';
+import ProviderManagementGeneral from '../Admin/ProviderManagementGeneral';
 
 // Provider Registration Components
 import GeneralInfo from '../ProviderRegistration/GeneralInfo';
@@ -29,7 +32,8 @@ import MissionHistory from '../ProviderRegistration/MissionHistory';
 import Education from '../ProviderRegistration/Education';
 import MedCred from '../ProviderRegistration/MedCred';
 import Insurance from '../ProviderRegistration/Insurance';
-import AdminLandingPage from '../Admin/AdminLandingPage';
+
+// Provider Components
 import ProviderLandingPage from '../Provider/ProviderLandingPage';
 import CreateMissionPage from '../Admin/CreateMissionPage';
 
@@ -152,26 +156,30 @@ function App() {
               // - else shows RegisterPage at "/registration"
               exact
               path="/registration"
-              authRedirect="/providerlandingpage"
+              // authRedirect="/providerlandingpage"
             >
               <RegisterPage />
             </ProtectedRoute>
 
-            <ProtectedRoute
-              exact
-              path="/providerlandingpage"
-              adminRedirect="/adminlandingpage"
-              >
-              < ProviderLandingPage />
-            </ProtectedRoute>
+            {/* Admin Views */}
 
             <ProtectedRoute
               exact
               path="/adminlandingpage"
-              authRedirect="/providerlandingpage"
+              // authRedirect="/providerlandingpage"
               >
-              < AdminLandingPage />
+              <AdminLandingPage />
             </ProtectedRoute>
+
+            <ProtectedRoute
+              exact
+              path="/providermgmt"
+              // authRedirect="/providerlandingpage"
+              >
+              <ProviderManagementGeneral />
+            </ProtectedRoute>
+
+            {/* Provider Views */}
 
             <ProtectedRoute
               // with authRedirect:
@@ -179,6 +187,7 @@ function App() {
               // - else shows LandingPage at "/home"
               exact
               path="/providerlandingpage"
+              // adminRedirect="/adminlandingpage"
             >
               <ProviderLandingPage />
             </ProtectedRoute>
