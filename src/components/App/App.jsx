@@ -31,6 +31,7 @@ import MedCred from '../ProviderRegistration/MedCred';
 import Insurance from '../ProviderRegistration/Insurance';
 import AdminLandingPage from '../Admin/AdminLandingPage';
 import ProviderLandingPage from '../Provider/ProviderLandingPage';
+import CreateMissionPage from '../Admin/CreateMissionPage';
 
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 
@@ -236,6 +237,13 @@ function App() {
               adminRedirect="/adminlandingpage"
             >
               <LandingPage />
+            </ProtectedRoute>
+
+            <ProtectedRoute
+
+            exact path="/createmissionpage"
+            >
+              <CreateMissionPage />
             </ProtectedRoute>
 
             {/* If none of the other routes matched, we will show a 404. */}
