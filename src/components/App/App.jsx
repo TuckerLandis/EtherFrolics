@@ -32,7 +32,57 @@ import Insurance from '../ProviderRegistration/Insurance';
 import AdminLandingPage from '../Admin/AdminLandingPage';
 import ProviderLandingPage from '../Provider/ProviderLandingPage';
 
+import { createTheme, ThemeProvider } from '@material-ui/core/styles';
+
+import CssBaseline from '@material-ui/core/CssBaseline';
+
+/* Alegreya-sans Font imports */
+import AlegreyaSansEot from "../../fonts/alegreya-sans-v14-latin-regular.eot";
+import AlegreyaSansSvg from "../../fonts/alegreya-sans-v14-latin-regular.svg";
+import AlegreyaSansTtf from "../../fonts/alegreya-sans-v14-latin-regular.ttf";
+import AlegreyaSansWoff from "../../fonts/alegreya-sans-v14-latin-regular.woff";
+import AlegreyaSansWoff2 from "../../fonts/alegreya-sans-v14-latin-regular.woff2"
+/**/
+
 import './App.css';
+
+  const alegreyaSans = {
+    fontFamily: 'Alegreya-Sans',
+    fontStyle: 'normal',
+    fontDisplay: 'swap',
+    fontWeight: 400,
+    src: `
+      local('Alegreya-Sans'),
+      url(${AlegreyaSansEot}) format('embedded-opentype'),
+      url(${AlegreyaSansSvg}) format('svg')
+      url(${AlegreyaSansTtf}) format('truetype')
+      url(${AlegreyaSansWoff}) format('woff')
+      url(${AlegreyaSansWoff2}) format('woff2')
+    `,
+  }
+
+  /*Material-UI Theme Config.*/
+  const theme = createTheme({
+    typography: {
+      fontFamily: ['Alegreya-Sans', 'Arial', 'Georgia', 'system-ui'].join(','),
+    },
+    overrides: {
+      MuiCssBaseline: {
+        '@global': {
+          '@font-face': [alegreyaSans],
+        },
+      },
+    },
+    palette: {
+        primary: {
+        main: '#7fbf7f'
+      },
+      secondary: {
+        main: '#7fbfbf'
+      }
+    },
+  });
+  /*Material-UI Theme Config.*/
 
 function App() {
   const dispatch = useDispatch();
@@ -43,156 +93,159 @@ function App() {
 
   return (
     <Router>
-      <div>
-        <Nav />
-        <Switch>
-          {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
-          <Redirect exact from="/" to="/home" />
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <div>
+          <Nav />
+          <Switch>
+            {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
+            <Redirect exact from="/" to="/home" />
 
-          {/* Visiting localhost:3000/about will show the about page. */}
-          <Route
-            // shows AboutPage at all times (logged in or not)
-            exact
-            path="/about"
-          >
-            <AboutPage />
-          </Route>
-
-          {/* For protected routes, the view could show one of several things on the same route.
-            Visiting localhost:3000/user will show the UserPage if the user is logged in.
-            If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
-            Even though it seems like they are different pages, the user is always on localhost:3000/user */}
-          <ProtectedRoute
-            // logged in shows UserPage else shows LoginPage
-            exact
-            path="/user"
-          >
-            <UserPage />
-          </ProtectedRoute>
-
-          <ProtectedRoute
-            // logged in shows InfoPage else shows LoginPage
-            exact
-            path="/info"
-          >
-            <InfoPage />
-          </ProtectedRoute>
-
-          {/* When a value is supplied for the authRedirect prop the user will
-            be redirected to the path supplied when logged in, otherwise they will
-            be taken to the component and path supplied. */}
-          <ProtectedRoute
-            // with authRedirect:
-            // - if logged in, redirects to "/user"
-            // - else shows LoginPage at /login
-            exact
-            path="/login"
-            authRedirect="/providerlandingpage"
-            adminRedirect="/adminlandingpage"
-          >
-            <LoginPage />
-          </ProtectedRoute>
-
-          <ProtectedRoute
-            // with authRedirect:
-            // - if logged in, redirects to "/user"
-            // - else shows RegisterPage at "/registration"
-            exact
-            path="/registration"
-            authRedirect="/providerlandingpage"
-          >
-            <RegisterPage />
-          </ProtectedRoute>
-
-          <ProtectedRoute
-            exact
-            path="/providerlandingpage"
-            adminRedirect="/adminlandingpage"
+            {/* Visiting localhost:3000/about will show the about page. */}
+            <Route
+              // shows AboutPage at all times (logged in or not)
+              exact
+              path="/about"
             >
-            < ProviderLandingPage />
-          </ProtectedRoute>
+              <AboutPage />
+            </Route>
 
-          <ProtectedRoute
-            exact
-            path="/adminlandingpage"
-            authRedirect="/providerlandingpage"
+            {/* For protected routes, the view could show one of several things on the same route.
+              Visiting localhost:3000/user will show the UserPage if the user is logged in.
+              If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
+              Even though it seems like they are different pages, the user is always on localhost:3000/user */}
+            <ProtectedRoute
+              // logged in shows UserPage else shows LoginPage
+              exact
+              path="/user"
             >
-            < AdminLandingPage />
-          </ProtectedRoute>
+              <UserPage />
+            </ProtectedRoute>
 
-          <ProtectedRoute
-            // with authRedirect:
-            // - if logged in, redirects to "/user"
-            // - else shows LandingPage at "/home"
-            exact
-            path="/providerlandingpage"
-          >
-            <ProviderLandingPage />
-          </ProtectedRoute>
+            <ProtectedRoute
+              // logged in shows InfoPage else shows LoginPage
+              exact
+              path="/info"
+            >
+              <InfoPage />
+            </ProtectedRoute>
 
-          {/* PROVIDER REGISTRATION */}
+            {/* When a value is supplied for the authRedirect prop the user will
+              be redirected to the path supplied when logged in, otherwise they will
+              be taken to the component and path supplied. */}
+            <ProtectedRoute
+              // with authRedirect:
+              // - if logged in, redirects to "/user"
+              // - else shows LoginPage at /login
+              exact
+              path="/login"
+              authRedirect="/providerlandingpage"
+              adminRedirect="/adminlandingpage"
+            >
+              <LoginPage />
+            </ProtectedRoute>
 
-          <ProtectedRoute
-            exact
-            path="/generalInfo">
-            <GeneralInfo/>
-          </ProtectedRoute>
+            <ProtectedRoute
+              // with authRedirect:
+              // - if logged in, redirects to "/user"
+              // - else shows RegisterPage at "/registration"
+              exact
+              path="/registration"
+              authRedirect="/providerlandingpage"
+            >
+              <RegisterPage />
+            </ProtectedRoute>
 
-          <ProtectedRoute
-            exact
-            path="/generalInfoAddress">
-            <GeneralInfoAddress/>
-          </ProtectedRoute>
+            <ProtectedRoute
+              exact
+              path="/providerlandingpage"
+              adminRedirect="/adminlandingpage"
+              >
+              < ProviderLandingPage />
+            </ProtectedRoute>
 
-          <ProtectedRoute
-            exact
-            path="/workhistory">
-            <WorkHistory/>
-          </ProtectedRoute>
+            <ProtectedRoute
+              exact
+              path="/adminlandingpage"
+              authRedirect="/providerlandingpage"
+              >
+              < AdminLandingPage />
+            </ProtectedRoute>
 
-          <ProtectedRoute
-            exact
-            path="/missionhistory">
-            <MissionHistory/>
-          </ProtectedRoute>
+            <ProtectedRoute
+              // with authRedirect:
+              // - if logged in, redirects to "/user"
+              // - else shows LandingPage at "/home"
+              exact
+              path="/providerlandingpage"
+            >
+              <ProviderLandingPage />
+            </ProtectedRoute>
 
-          <ProtectedRoute
-            exact
-            path="/education">
-            <Education/>
-          </ProtectedRoute>
+            {/* PROVIDER REGISTRATION */}
 
-          <ProtectedRoute
-            exact
-            path="/medcred">
-            <MedCred/>
-          </ProtectedRoute>
+            <ProtectedRoute
+              exact
+              path="/generalInfo">
+              <GeneralInfo/>
+            </ProtectedRoute>
 
-          <ProtectedRoute
-            exact
-            path="/insurance">
-            <Insurance/>
-          </ProtectedRoute>
+            <ProtectedRoute
+              exact
+              path="/generalInfoAddress">
+              <GeneralInfoAddress/>
+            </ProtectedRoute>
 
-          <ProtectedRoute
-            // with authRedirect:
-            // - if logged in, redirects to “/user”
-            // - else shows LandingPage at “/home”
-            exact
-            path="/home"
-            authRedirect="/providerlandingpage"
-            adminRedirect="/adminlandingpage"
-          >
-            <LandingPage />
-          </ProtectedRoute>
+            <ProtectedRoute
+              exact
+              path="/workhistory">
+              <WorkHistory/>
+            </ProtectedRoute>
 
-          {/* If none of the other routes matched, we will show a 404. */}
-          <Route>
-            <h1>404</h1>
-          </Route>
-        </Switch>
-        <Footer />
-      </div>
+            <ProtectedRoute
+              exact
+              path="/missionhistory">
+              <MissionHistory/>
+            </ProtectedRoute>
+
+            <ProtectedRoute
+              exact
+              path="/education">
+              <Education/>
+            </ProtectedRoute>
+
+            <ProtectedRoute
+              exact
+              path="/medcred">
+              <MedCred/>
+            </ProtectedRoute>
+
+            <ProtectedRoute
+              exact
+              path="/insurance">
+              <Insurance/>
+            </ProtectedRoute>
+
+            <ProtectedRoute
+              // with authRedirect:
+              // - if logged in, redirects to “/user”
+              // - else shows LandingPage at “/home”
+              exact
+              path="/home"
+              authRedirect="/providerlandingpage"
+              adminRedirect="/adminlandingpage"
+            >
+              <LandingPage />
+            </ProtectedRoute>
+
+            {/* If none of the other routes matched, we will show a 404. */}
+            <Route>
+              <h1>404</h1>
+            </Route>
+          </Switch>
+          <Footer />
+        </div>
+      </ThemeProvider>
     </Router>
   );
 }
