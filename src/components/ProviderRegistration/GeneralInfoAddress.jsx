@@ -2,16 +2,16 @@ function GeneralInfoAddress () {
     return(
         <div>
             <label htmlFor="streetAddressInput">Street Address</label>
-            <input type="text" name="streetAddress" id="streetAddressInput" />
+            <TextField type="text" name="streetAddress" id="streetAddressInput" />
 
             <label htmlFor="cityInput">City</label>
-            <input type="text" name="city" id="cityInput" />
+            <TextField type="text" name="city" id="cityInput" />
 
             <label htmlFor="stateInput">State</label>
-            <input type="text" name="state" id="stateInput" />
+            <TextField type="text" name="state" id="stateInput" />
 
             <label htmlFor="zipInput">Zip Code</label>
-            <input type="text" name="zip" id="zipInput" />
+            <TextField type="text" name="zip" id="zipInput" />
 
             {/* next button goes here */}
 
