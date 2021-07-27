@@ -8,6 +8,10 @@ function GeneralInfoAddress () {
     const [zip, setZip] = useState('')
 
     function handleNext() {
+        
+    }
+
+    function handleChange() {
         switch(e.target.id){
             case 'streetAddressInput' : 
             setstreetAddress(e.target.value)
@@ -22,10 +26,6 @@ function GeneralInfoAddress () {
             setZip(e.target.value)
             break
         }
-    }
-
-    function handleChange() {
-
     }
 
     return(
@@ -57,12 +57,12 @@ export default GeneralInfoAddress
 
 // ## Checklist
 
-// - [ ]  Input fields
-//     - [ ]  street address
-//     - [ ]  city
-//     - [ ]  state
-//     - [ ]  zip
-// - [ ]  next button → work history
+// - [x ]  Input fields
+//     - [ x]  street address
+//     - [ x]  city
+//     - [ x]  state
+//     - [x ]  zip
+// - [x ]  next button → work history
 
 // ## Components
 
