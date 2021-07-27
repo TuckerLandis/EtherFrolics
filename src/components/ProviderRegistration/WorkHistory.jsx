@@ -3,6 +3,14 @@ import WorkHistoryMultiRow from './FormComponents/WorkHistoryMultiRow'
 
 function WorkHistory () {
     const [amountOfWorkHistories, setAmountOfWorkHistories] = useState([1])
+    // let keyForWorkHistoryMultiRow = 1
+
+    function addWorkHistoryItem () {
+        console.log('clicked Add Work History');
+        // keyForWorkHistoryMultiRow++
+        setAmountOfWorkHistories(amountOfWorkHistories => [...amountOfWorkHistories, amountOfWorkHistories.length + 1])
+        
+    }
 
 
     // a function to pass down to WorkHistoryMultiRow in props to send a dispatch upon pressing the add history button, also increments the amountOfWorkHistories, rendering a new one
@@ -18,9 +26,11 @@ function WorkHistory () {
 
            {amountOfWorkHistories.map(history => {
                return(
-                   <WorkHistoryMultiRow />
+                   <WorkHistoryMultiRow /> // key={keyForWorkHistoryMultiRow} 
                )
            })}
+
+           <button onClick={addWorkHistoryItem}>+</button>
 
            {/* next button goes here */}
 
