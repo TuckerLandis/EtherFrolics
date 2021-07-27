@@ -1,40 +1,49 @@
 import { useState } from "react"
 import WorkHistoryMultiRow from './FormComponents/WorkHistoryMultiRow'
 
-function WorkHistory () {
+function WorkHistory() {
     const [amountOfWorkHistories, setAmountOfWorkHistories] = useState([1])
     // let keyForWorkHistoryMultiRow = 1
 
-    function addWorkHistoryItem () {
+    function addWorkHistoryItem() {
         console.log('clicked Add Work History');
         // keyForWorkHistoryMultiRow++
         setAmountOfWorkHistories(amountOfWorkHistories => [...amountOfWorkHistories, amountOfWorkHistories.length + 1])
 
 
-        
+
     }
 
 
     // a function to pass down to WorkHistoryMultiRow in props to send a dispatch upon pressing the add history button, also increments the amountOfWorkHistories, rendering a new one
 
-    return(
+    return (
         <div>
             <label htmlFor="yearsExperienceInput">Years of experience</label>
-            <input type="range" name="yearsExperience" id="yearsExperienceInput" 
-            min="0" max="100"
+            <input type="range" name="yearsExperience" id="yearsExperienceInput"
+                min="0" max="100"
             />
             {/* this can and likely will change to be a radio with different year chuncks, 
             but our DB would need to change? maybe it wouldn't. regardless, it's a range slider for now  */}
 
-           {amountOfWorkHistories.map(history => {
-               return(
-                   <WorkHistoryMultiRow addWorkHistoryItem={addWorkHistoryItem} /> // key={keyForWorkHistoryMultiRow} 
-               )
-           })}
+            <button>Resume Upload (Dummy) </button>
 
-           
+            {/* spacers, to be removed */}
+            <br></br>
+            <br></br> 
+            <br></br>
+            <br></br>
 
-           {/* next button goes here */}
+            {/* maps a state array to render relevant number of  */}
+            {amountOfWorkHistories.map(history => {
+                return (
+                    <WorkHistoryMultiRow addWorkHistoryItem={addWorkHistoryItem} /> // key={keyForWorkHistoryMultiRow} 
+                )
+            })}
+
+
+
+            {/* next button goes here */}
 
             {/* stepper goes here with props of which page */}
 

@@ -1,7 +1,10 @@
 import { useState } from "react"
 import { TextField } from "@material-ui/core"
+import { useDispatch } from "react-redux"
 
 function WorkHistoryMultiRow (props) {
+
+    const dispatch = useDispatch()
 
     const [workplace, setWorkplace] = useState('')
     const [jobTitle, setJobTitle] = useState('')
@@ -12,16 +15,36 @@ function WorkHistoryMultiRow (props) {
     const [endDate, setEndDate] = useState('')
     const [hasBeenSubmitted, setHasBeenSubmitted] = useState(false)
 
+
+    /**
+     * on clicking the add button, flip boolean for this item, send dispatch, call function that lives in WorkHistory to render new item
+     */
     function submitWorkHistoryItem () {
         
         setHasBeenSubmitted(true)
+
+        dispatch({
+            type: 'ADD_WORK_HISTORY_ITEM',
+            payload : {
+                workplace : workplace,
+                jobTitle : jobTitle,
+                referenceName : referenceName,
+                referencePhone : referencePhone,
+                referenceEmailAddress :referenceEmailAddress,
+                startDate : startDate,
+                endDate : endDate,
+            }
+        })
 
         props.addWorkHistoryItem()
 
     }
     
 
-
+    /**
+     * Takes in an event from all inputs, conditonally changes the related state variable
+     * @param {*} e 
+     */
     function handleChange (e) {
         switch(e.target.id){
             case 'workplaceInput' : 
