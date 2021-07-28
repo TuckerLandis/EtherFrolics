@@ -28,7 +28,7 @@ function MissionHistory () {
     function handleNext() {
 
         dispatch({
-            type: "PUT_MISSION_HISTORY",
+            type: "PUT_LAST_MISSION",
             payload: {
                 lastMission: lastMission
             }

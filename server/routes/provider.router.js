@@ -41,7 +41,19 @@ router.put('/address', (req, res) => {
 })
 
 router.post('/educationhistoryitem', (req, res) => {
-  console.log('Reached provider reg POST:', req.body);
+  console.log('Reached provider reg POST: educationhistory', req.body);
+  res.sendStatus(200)
+
+})
+
+router.put('/lastmission', (req, res) => {
+  console.log('reached provider reg PUT: lastmission');
+  res.sendStatus(200)
+
+})
+
+router.post('/missionhistoryitem', (req, res) => {
+  console.log('Reached provider reg POST: missionHistory', req.body);
   res.sendStatus(200)
 
 })
