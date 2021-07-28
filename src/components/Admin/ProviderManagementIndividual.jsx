@@ -35,3 +35,9 @@
 //     - [ ]  deactivate
 // - [ ]  PUT - Provider table
 //     - [ ]  verify
+
+import React, { useState, useEffect } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+
+function 

@@ -6,36 +6,29 @@ import { useDispatch, useSelector } from 'react-redux';
 import './ProviderManagementGeneral.css';
 
 // material-ui
-import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
+import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-// import { FixedSizeList } from 'react-window';
+import ListSubheader from '@material-ui/core/ListSubheader';
 
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
-        height: 400,
-        maxWidth: 300,
+        maxWidth: 360,
         backgroundColor: theme.palette.background.paper,
+        position: 'relative',
+        overflow: 'auto',
+        maxHeight: 300,
+    },
+    listSection: {
+        backgroundColor: 'inherit',
+    },
+    ul: {
+        backgroundColor: 'inherit',
+        padding: 0,
     },
 }));
-
-function renderRow(props) {
-    const { index, style } = props;
-
-    return (
-        <ListItem button style={style} key={index}>
-            <ListItemText primary={`Item ${index + 1}`} />
-        </ListItem>
-    );
-}
-
-renderRow.propTypes = {
-    index: PropTypes.number.isRequired,
-    style: PropTypes.object.isRequired,
-};
-
 
 function ProviderManagementGeneral() {
 
@@ -53,13 +46,30 @@ function ProviderManagementGeneral() {
 
     console.log('Provider Mgmt Gen providers:', providers);
 
+    const handleSelect = (providerId) => {
+        dispatch({
+            type: 'SELECT_PROVIDER',
+            payload: providerId
+        })
+        history.push(`/providermgmt/${providerId}`);
+    } // end handleSelect
+
     return (
 
-        <div className={classes.root}>
-            <FixedSizeList height={400} width={300} itemSize={46} itemCount={200}>
-                {renderRow}
-            </FixedSizeList>
-        </div>
+        <List className={classes.root} subheader={<li />}>
+            {[0, 1, 2, 3, 4].map((sectionId) => (
+                <li key={`section-${sectionId}`} className={classes.listSection}>
+                    <ul className={classes.ul}>
+                        <ListSubheader>{`Verified ${sectionId}`}</ListSubheader>
+                        {[0, 1, 2].map((item) => (
+                            <ListItem key={`item-${sectionId}-${item}`}>
+                                <ListItemText primary={`Item ${item}`} />
+                            </ListItem>
+                        ))}
+                    </ul>
+                </li>
+            ))}
+        </List>
 
     )
 
