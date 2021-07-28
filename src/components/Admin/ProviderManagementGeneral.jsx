@@ -63,7 +63,7 @@ function ProviderManagementGeneral() {
                         <ListSubheader>{`Verified ${sectionId}`}</ListSubheader>
                         {[0, 1, 2].map((item) => (
                             <ListItem key={`item-${sectionId}-${item}`}>
-                                <ListItemText primary={`Item ${item}`} />
+                                <ListItemText primary={`Item ${item}`} onClick={() => handleSelect(item?.id)} />
                             </ListItem>
                         ))}
                     </ul>
