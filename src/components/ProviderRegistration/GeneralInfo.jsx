@@ -5,6 +5,7 @@ import { TextField } from "@material-ui/core"
 
 
 
+
 function GeneralInfo() {
     const dispatch = useDispatch()
     const history = useHistory()
@@ -96,11 +97,11 @@ function GeneralInfo() {
                 <TextField label="Last Name" required type="text" name="lastName" id="lastNameInput"
                     value={lastName} onChange={handleChange} variant="outlined" />
 
-                {/* <label htmlFor="dateOfBirthInput">Date of Birth</label>
+                <label htmlFor="dateOfBirthInput">Date of Birth</label>
                 <TextField required type="date" name="dateOfBirth" id="dateOfBirthInput"
-                    value={dob} onChange={handleChange} variant="outlined" /> */}
+                    value={dob} onChange={handleChange} variant="outlined" />
 
-                <KeyboardDatePicker
+                {/* <KeyboardDatePicker
                     margin="normal"
                     id="dateOfBirthInput"
                     label="Date of Birth"
@@ -110,7 +111,7 @@ function GeneralInfo() {
                     KeyboardButtonProps={{
                         'aria-label': 'change date',
                     }}
-                />
+                /> */}
 
 
                 <label htmlFor="providerRoleInput">Provider Role</label>
