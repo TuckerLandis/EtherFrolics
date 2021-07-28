@@ -139,8 +139,9 @@ function GeneralInfo() {
 
 
 
-                <label htmlFor="emailAdressInput">Email Address</label>
-                <TextField required type="text" id="emailAddressInput" value={emailAddress} onChange={handleChange} />
+                {/* <label htmlFor="emailAdressInput">Email Address</label> */}
+                <TextField label="Email Address" required type="text" id="emailAddressInput" value={emailAddress}
+                onChange={handleChange} variant="outlined"/>
 
                 <button type="submit">Next</button>
             </form>
