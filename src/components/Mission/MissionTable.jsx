@@ -39,16 +39,53 @@ import Paper from '@material-ui/core/Paper';
 
 // Table Data styled with Material UI
 
+const useStyles = makeStyles({
+    table: {
+        minWidth: 650,
+    },
+});
+
+function createData(Date, Location, Organization, Apply ) {
+    return { Date, Location, Organization, Apply };
+}
+
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+
+const useStyles = makeStyles({
+    table: {
+        minWidth: 650,
+    },
+});
+
+function createData(Date, Location, Organization, Apply ) {
+    return { Date, Location, Organization, Apply };
+}
+
+const rows = [
+    createData( 9/4 - 9/18, 'Sangolqui,Ecuador', 'Medical Ministry International', 'Apply'),
+    createData( 9/11 - 9/18, 'Rio San Juan, Dominican Republic', 'Medical Ministry International', 'Apply'),
+    createData(9/11 - 9/18, 'Quevado, Ecuador', 'Medical Ministry International', 'Apply'),
+]
+
 
 function MissionTable() {
 
+    // Material UI classes 
     const classes = useStyles();
 
     const dispatch = useDispatch();
     const history = useHistory();
 
     // Get the Missions information from the reducer so we can render it
-    // const trails = useSelector(store => store.trails);
+    // const mission = useSelector(store => store.missions);
 
     // Upon page load, this function dispatches "fetch missions" command to the generator function 
     useEffect(() => {
@@ -60,10 +97,16 @@ function MissionTable() {
         <div>
             <h2>Upcoming Missions</h2>
 
-            <p>in Mission Table </p>
-
+        <TableContainer component={Paper}>
+            <Table className={classes.table}>
+                <TableHead>
+                    <TableRow>
+                        <TableCell></TableCell>
+                    </TableRow>
+                </TableHead>
+            </Table>
+        </TableContainer>
         </div>
-
     )
 } // end Mission Table
 
