@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
 /**
  * GET featured provider route template
  */
-router.get('/', (req, res) => {
+router.get('/:id', (req, res) => {
   console.log('got to selected provider GET 👨🏻‍⚕️');
   res.send('👨🏻‍⚕️');
 });

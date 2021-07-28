@@ -47,6 +47,9 @@ function ProviderManagementGeneral() {
     console.log('Provider Mgmt Gen providers:', providers);
 
     const handleSelect = (providerId) => {
+
+        console.log('prvdrmgmtgen provider id (item id): ', providerId);
+
         dispatch({
             type: 'SELECT_PROVIDER',
             payload: providerId
@@ -63,7 +66,7 @@ function ProviderManagementGeneral() {
                         <ListSubheader>{`Verified ${sectionId}`}</ListSubheader>
                         {[0, 1, 2].map((item) => (
                             <ListItem key={`item-${sectionId}-${item}`}>
-                                <ListItemText primary={`Item ${item}`} onClick={() => handleSelect(item?.id)} />
+                                <ListItemText primary={`Item ${item}`} onClick={() => handleSelect(sectionId)} />
                             </ListItem>
                         ))}
                     </ul>
