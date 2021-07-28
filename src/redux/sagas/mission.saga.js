@@ -1,7 +1,7 @@
 import { takeLatest } from "@redux-saga/core/effects";
 import axios from "axios";
 
-function* fetchMissions () {
+function* getMissions () {
     
     try {
         const missions = yield axios.get('/api/admin/mission');
@@ -26,7 +26,7 @@ function* postMission (action) {
 
 
 function* missionSaga () {
-    yield takeLatest('FETCH_MISSIONS', fetchMissions)
+    yield takeLatest('FETCH_MISSIONS', getMissions)
     yield takeLatest('POST_MISSION_DATA', postMission)
 }
 
