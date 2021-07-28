@@ -30,7 +30,7 @@ function MissionHistoryMultiRow(props) {
             }
         })
 
-        props.addEducationHistoryItem()
+        props.addMissionHistoryItem()
     }
 
     function handleChange(e) {
@@ -48,7 +48,7 @@ function MissionHistoryMultiRow(props) {
                 setReferencePhone(e.target.value)
                 break
             case 'referenceEmailInput':
-                setReferencePhone(e.target.value)
+                setReferenceEmail(e.target.value)
                 break
             case 'startDateInput':
                 setStartDate(e.target.value)

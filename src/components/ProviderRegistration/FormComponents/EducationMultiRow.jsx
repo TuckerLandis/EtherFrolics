@@ -58,7 +58,7 @@ function EducationMultiRow(props) {
             <TextField type="date" id="startDateInput" value={startDate} onChange={handleChange} />
 
             <label htmlFor="endDateInput">End Date</label>
-            <TextField type="date" id="endDateInput" value={startDate} onChange={handleChange} />
+            <TextField type="date" id="endDateInput" value={endDate} onChange={handleChange} />
 
             {hasBeenSubmitted ? (
                 <p>submitted</p>
