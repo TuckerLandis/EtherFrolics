@@ -2,7 +2,8 @@ import { useState } from "react"
 import { TextField } from "@material-ui/core"
 import { useDispatch } from "react-redux"
 
-function EducationMultiRow() {
+function EducationMultiRow(props) {
+    const dispatch = useDispatch();
 
     const [school, setSchool] = useState('')
     const [degree, setDegree] = useState('')
@@ -24,7 +25,7 @@ function EducationMultiRow() {
             }
         })
 
-        props.addWorkHistoryItem()
+        props.addEducationHistoryItem()
     }
 
     function handleChange(e) {
@@ -63,38 +64,11 @@ function EducationMultiRow() {
                 <p>submitted</p>
             ) : (
 
-                <button onClick={submitWorkHistoryItem}>+</button>
+                <button onClick={submitEducationHistoryItem}>+</button>
             )}
+
         </div>
     )
 }
 
 export default EducationMultiRow
-
-// ## Checklist
-
-// - [ ]  Inputs
-//     - [ ]  school
-//     - [ ]  degree
-//     - [ ]  start date
-//     - [ ]  end date
-//     - [ ]  + button to add another school
-//     - [ ]  publications upload, text input for link, button to add a new
-// - [ ]  PDF upload degrees/transcripts
-// - [ ]  stepper
-
-// - [ ]  next button → credential upload
-
-// ## Components
-
-// - [ ]  education history form component - this contains inputs for education history, gets duplicated by + button
-// - [ ]  header, stepper
-
-// - [ ]  pdf upload component - gets passed props from URL params to denote which type of file is uploaded
-
-// ## Routes
-
-// - [ ]  put route to provider table
-// - [ ]  post route to education history table
-// - [ ]  post to amazon s3 type: education
-// - [ ]  put route to provider table - publications array
