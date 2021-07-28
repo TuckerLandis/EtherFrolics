@@ -36,6 +36,9 @@ import Insurance from '../ProviderRegistration/Insurance';
 // Provider Components
 import ProviderLandingPage from '../Provider/ProviderLandingPage';
 
+// Mission Components
+import MissionTable from '../Mission/MissionTable';
+
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -245,6 +248,14 @@ function App() {
               adminRedirect="/adminlandingpage"
             >
               <LandingPage />
+            </ProtectedRoute>
+
+            {/* Mission Views */}
+
+            <ProtectedRoute
+              exact
+              path="/missions">
+              <MissionTable />
             </ProtectedRoute>
 
             {/* If none of the other routes matched, we will show a 404. */}

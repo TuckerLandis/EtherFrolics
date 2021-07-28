@@ -1,19 +1,3 @@
-// welcome justin!
-// links to provider mgmt
-// links to create mission
-
-/* 
-
-CHECKLIST 
-
-    [] Welcome Statement
-
-    [] Navigation
-        [] link/button to redirects to Mission Display (MissionTable component)
-        [] 
-    []
-*/
-
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -47,11 +31,11 @@ function AdminLandingPage() {
         dispatch({ type: 'GET_ADMIN' });
     }, []);
 
-    console.log(administrators);
+    console.log('Admin Landing Page administrators:', administrators);
 
     return (
 
-        <div classname={classes.root}>
+        <div className={classes.root}>
 
             {administrators?.map(admin => {
                 return (
@@ -62,7 +46,7 @@ function AdminLandingPage() {
             })}
 
             <Button variant="contained" onClick={() => history.push('/providermgmt')}>Provider Management</Button>
-            <Button variant="contained">Mission Management</Button>
+            <Button variant="contained" onClick={() => history.push('/missions')}>Mission Management</Button>
 
         </div>
 
