@@ -60,18 +60,27 @@ function ProviderManagementGeneral() {
     return (
 
         <List className={classes.root} subheader={<li />}>
-            {[0, 1, 2, 3, 4].map((sectionId) => (
-                <li key={`section-${sectionId}`} className={classes.listSection}>
+                <li className={classes.listSection}>
                     <ul className={classes.ul}>
-                        <ListSubheader>{`Verified ${sectionId}`}</ListSubheader>
-                        {[0, 1, 2].map((item) => (
-                            <ListItem key={`item-${sectionId}-${item}`}>
-                                <ListItemText primary={`Item ${item}`} onClick={() => handleSelect(sectionId)} />
+                        <ListSubheader>Verified</ListSubheader>
+                        {providers?.map((provider) => (
+                            <ListItem key={provider?.provider_id}>
+                                <ListItemText onClick={() => handleSelect(provider?.user_id)}>{provider?.firstName}</ListItemText>
                             </ListItem>
                         ))}
                     </ul>
                 </li>
-            ))}
+
+                <li className={classes.listSection}>
+                    <ul className={classes.ul}>
+                        <ListSubheader>Unverified</ListSubheader>
+                        {[0, 1, 2].map((item) => (
+                            <ListItem key={`item-${item}`}>
+                                <ListItemText>Ouch</ListItemText>
+                            </ListItem>
+                        ))}
+                    </ul>
+                </li>
         </List>
 
     )
