@@ -1,6 +1,6 @@
 // ## Checklist
 
-// - [ ]  Mission Table
+// - [x]  Mission Table
 //     - [ ]  Missions are organized by date with the most current mission at the top (use-effect that sorts by date GET route)
 //     - [ ]  Sort-by feature to organize table data (stretch)
 // - [ ]  Table Columns
@@ -93,7 +93,7 @@ function MissionTable() {
 
     }, []);
 
-    
+
 
     return (
         <div>
