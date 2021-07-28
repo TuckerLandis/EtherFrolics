@@ -23,6 +23,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 // Admin Components
 import AdminLandingPage from '../Admin/AdminLandingPage';
 import ProviderManagementGeneral from '../Admin/ProviderManagementGeneral';
+import ProviderManagementIndividual from '../Admin/ProviderManagementIndividual';
 
 // Provider Registration Components
 import GeneralInfo from '../ProviderRegistration/GeneralInfo';
@@ -179,6 +180,14 @@ function App() {
               // authRedirect="/providerlandingpage"
               >
               <ProviderManagementGeneral />
+            </ProtectedRoute>
+
+            <ProtectedRoute
+              exact
+              path="/providermgmt/:id"
+              // authRedirect="/providerlandingpage"
+              >
+              <ProviderManagementIndividual />
             </ProtectedRoute>
 
             {/* Provider Views */}
