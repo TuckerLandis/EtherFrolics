@@ -11,9 +11,37 @@ router.get('/', async (req, res) => {
   // res.send('🧍‍♂️');
 
   const queryText = `
-  SELECT
+  SELECT "provider".*,
+  "credential".*,
+  "education".*,
+  "insurance".*,
+  "mission_experience".*,
+  "work_experience".*
+  FROM "provider"
+  JOIN "credential"
+  ON "provider".user_id = "credential".user_id
+  JOIN "education"
+  ON "education".user_id = "provider".user_id
+  JOIN "insurance"
+  ON "insurance".user_id = "provider".user_id
+  JOIN "mission_experience"
+  ON "mission_experience".user_id = "provider".user_id
+  JOIN "work_experience"
+  ON "work_experience".user_id = "provider".user_id
+  JOIN "user"
+  ON "user".id = "provider".user_id
+  WHERE "user".authorization = 1;
   `;
 
+  try {
+    const result = await pool.query(queryText);
+    console.log('provider get result: ', result.rows);
+    res.send(result.rows);
+  }
+  catch (err) {
+    console.log('Error getting provider info: ', err);
+    res.sendStatus(500);
+  }
 
 });
 
@@ -32,20 +60,20 @@ router.post('/', (req, res) => {
   // POST route code here
   console.log('Reached provider reg POST:', req.body);
   res.sendStatus(200)
-  
+
 });
 
 router.post('/workhistoryitem', (req, res) => {
   // POST route code here
   console.log('Reached provider reg POST /workhistoryitem', req.body);
   res.sendStatus(200)
-  
+
 });
 
 router.put('/workhistory', (req, res) => {
   console.log('Reached provider PUT /workhistory', req.body);
   res.sendStatus(200)
-  
+
 })
 
 router.put('/address', (req, res) => {
