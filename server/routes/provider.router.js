@@ -5,10 +5,16 @@ const router = express.Router();
 /**
  * GET route template
  */
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
   // GET route code here
-  console.log('got to provider GET 🧍‍♂️');
-  res.send('🧍‍♂️');
+  // console.log('got to provider GET 🧍‍♂️');
+  // res.send('🧍‍♂️');
+
+  const queryText = `
+  SELECT
+  `;
+
+
 });
 
 /**
