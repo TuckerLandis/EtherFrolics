@@ -42,7 +42,6 @@ function EducationMultiRow(props) {
             case 'endDateInput':
                 setEndDate(e.target.value)
                 break
-
         }
     }
 

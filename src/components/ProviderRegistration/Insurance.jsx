@@ -1,9 +1,31 @@
+import {useState} from 'react';
+import {useDispatch} from 'react-redux';
+import {useHistory} from 'react-router-dom';
+import InsuranceMultiRow from './FormComponents/InsuranceMultiRow';
+
+
+
 function Insurance () {
+    const dispatch = useDispatch();
+    const history = useHistory();
+
+    // create an array that will render the insurance history subcomponents
+    const [amountOfInsuranceHistories, setAmountOfInsuranceHistories] = useState([1]);
+
+    // create a function that will increase the amount of insurance histories
+    const addInsuranceItem = () => {
+        setAmountOfInsuranceHistories(amountOfInsuranceHistories => {
+            [...amountOfInsuranceHistories, amountOfInsuranceHistories.length + 1]
+        })
+    }
+
     return(
         <div>
           <p>Insurance</p>
 
-           {/* insurance multi row form component goes here, along with submit button, included in that component */}
+            {amountOfInsuranceHistories.map( () => {
+                return (<InsuranceMultiRow addInsuranceItem={addInsuranceItem}/>)
+            })}
 
            {/* next button goes here */}
 
