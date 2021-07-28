@@ -12,13 +12,29 @@ function* getProviders() {
         })
     }
     catch (err) {
-        console.log('Error getting provider info', err);
-        
+        console.log('Error getting provider info', err); 
     }
 } // end getProviders fn*
 
+function* selectProvider(action){
+    try{
+        const response = yield axios.get(`/api/provider/${action.payload}`);
+
+        yield put({
+            type: 'SEND_PROVIDER',
+            payload: response.data
+        });
+
+        yield put({ type: 'GET_PROVIDERS' });
+    }
+    catch (err) {
+        console.log('Error selecting individual provider', err);
+    }
+} // end selectProvider fn*
+
 function* providerSaga() {
     yield takeLatest('GET_PROVIDERS', getProviders);
+    yield takeLatest('SELECT_PROVIDER', selectProvider);
 }
 
 export default providerSaga;
