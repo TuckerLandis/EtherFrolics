@@ -23,6 +23,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 // Admin Components
 import AdminLandingPage from '../Admin/AdminLandingPage';
 import ProviderManagementGeneral from '../Admin/ProviderManagementGeneral';
+import ProviderManagementIndividual from '../Admin/ProviderManagementIndividual';
 
 // Provider Registration Components
 import GeneralInfo from '../ProviderRegistration/GeneralInfo';
@@ -35,6 +36,7 @@ import Insurance from '../ProviderRegistration/Insurance';
 
 // Provider Components
 import ProviderLandingPage from '../Provider/ProviderLandingPage';
+import CreateMissionPage from '../Admin/CreateMissionPage';
 
 // Mission Components
 import MissionTable from '../Mission/MissionTable';
@@ -181,6 +183,14 @@ function App() {
               <ProviderManagementGeneral />
             </ProtectedRoute>
 
+            <ProtectedRoute
+              exact
+              path="/providermgmt/:id"
+              // authRedirect="/providerlandingpage"
+              >
+              <ProviderManagementIndividual />
+            </ProtectedRoute>
+
             {/* Provider Views */}
 
             <ProtectedRoute
@@ -250,7 +260,14 @@ function App() {
               <LandingPage />
             </ProtectedRoute>
 
-            {/* Mission Views */}
+              {/* Mission Views */}
+
+            <ProtectedRoute
+
+            exact path="/createmissionpage"
+            >
+              <CreateMissionPage />
+              </ProtectedRoute>
 
             <ProtectedRoute
               exact
