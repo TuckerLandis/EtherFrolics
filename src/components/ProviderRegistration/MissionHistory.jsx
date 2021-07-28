@@ -9,9 +9,11 @@ function MissionHistory () {
     const dispatch = useDispatch();
     const history = useHistory();
 
+    const [lastMission, setLastMission] = useState('')
+
     const [amountOfMissionHistories, setAmountOfMissionHistories] = useState([1])
 
-    // increases the amount of education history elements in the array above
+    // increases the amount of mission history elements in the array above
     function addMissionHistoryItem() {
 
         setAmountOfMissionHistories(amountOfMissionHistories =>
@@ -19,7 +21,19 @@ function MissionHistory () {
 
     }
 
+    function handleChange(e) {
+        setLastMission(e.target.value)
+    }
+
     function handleNext() {
+
+        dispatch({
+            type: "PUT_MISSION_HISTORY",
+            payload: {
+                lastMission: lastMission
+            }
+        })
+
         history.push('/education')
     }
 
@@ -28,7 +42,7 @@ function MissionHistory () {
     return(
         <div>
             <label htmlFor="lastMissionInput">When was your last mission trip?</label>
-            <select name="lastMission" id="lastMissionInput" >
+            <select name="lastMission" id="lastMissionInput" onChange={handleChange}>
                 <option value="1">Within the last year</option>
                 <option value="2">Within the last 2 years</option>
                 <option value="3">Within the last 3 years</option>
