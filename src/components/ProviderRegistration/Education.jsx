@@ -21,14 +21,14 @@ function Education() {
 
     function handleNext() {
         // submit last one? some sort of check
-        // history.push('/')
+        history.push('/medcred')
     }
 
     return (
         <div>
             <p>Education</p>
 
-            {/* maps a state array to render relevant number of work history forms */}
+            {/* maps a state array to render relevant number of education history forms */}
             {amountOfEducationHistories.map(education => {
                 return (
                     <EducationMultiRow addEducationHistoryItem={addEducationHistoryItem} />

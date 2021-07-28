@@ -36,12 +36,28 @@ function* putWorkHistory(action) {
 
 function* addEducationHistoryItem(action) {
   try {
-    yield axios.put('/api/provider/educationhistoryitem', action.payload)
+    yield axios.post('/api/provider/educationhistoryitem', action.payload)
   } catch (error) {
     console.log('Error in providerRegistration saga, addWorkHistory', error);
   }
 }
 
+function* putLastMission(action) {
+  try{
+    yield axios.put('/api/provider/lastmission', action.payload)
+  } catch (error) {
+    console.log('Error in providerRegistration saga, putLastMission', error);
+  }
+}
+
+function* addMissionHistoryItem(action){
+  try{
+    yield axios.post('/api/provider/missionhistoryitem', action.payload)
+  } catch (error) {
+    console.log('Error in providerRegistration saga, addMissionHistoryItem', error);
+    
+  }
+}
 
 
 
@@ -50,7 +66,9 @@ function* addEducationHistoryItem(action) {
     yield takeLatest('PUT_PROVIDER_ADDRESS', putProviderAddress);
     yield takeLatest('ADD_WORK_HISTORY_ITEM', addWorkHistoryItem);
     yield takeLatest('PUT_WORK_HISTORY', putWorkHistory);
-    yield takeLatest('ADD_EDUCATION_HISTORY_ITEM', addEducationHistoryItem)
+    yield takeLatest('ADD_EDUCATION_HISTORY_ITEM', addEducationHistoryItem);
+    yield takeLatest('PUT_LAST_MISSION', putLastMission);
+    yield takeLatest('ADD_MISSION_HISTORY_ITEM', addMissionHistoryItem)
    
   }
   

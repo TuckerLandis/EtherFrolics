@@ -357,3 +357,14 @@ links to create mission
 ----------------------IMAGE UPLOAD---------------------
 
 -- IMAGE UPLOAD
+
+
+--------------------Reg Flow---------------------
+
+Generalinfo > 
+generalinfoaddress >
+workhistory >
+missionhistory >
+education >
+medCred >
+insurance > 

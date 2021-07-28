@@ -36,7 +36,7 @@ function WorkHistory() {
                 yearsExperience: yearsExperience,
             }
         })
-        history.push('/education')
+        history.push('/missionhistory')
     }
 
     return (
