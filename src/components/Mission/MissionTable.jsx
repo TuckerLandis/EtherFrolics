@@ -49,9 +49,9 @@ function createData(Date, Location, Organization, Apply ) {
 }
 
 const rows = [
-    createData( 9/4 - 9/18, 'Sangolqui,Ecuador', 'Medical Ministry International', 'Apply'),
-    createData( 9/11 - 9/18, 'Rio San Juan, Dominican Republic', 'Medical Ministry International', 'Apply'),
-    createData(9/11 - 9/18, 'Quevado, Ecuador', 'Medical Ministry International', 'Apply'),
+    createData( '9/4', 'Sangolqui,Ecuador', 'Medical Ministry International', 'Apply'),
+    createData( '9/11', 'Rio San Juan, Dominican Republic', 'Medical Ministry International', 'Apply'),
+    createData( '9/11', 'Quevado, Ecuador', 'Medical Ministry International', 'Apply'),
 ]
 
 
@@ -73,6 +73,13 @@ function MissionTable() {
     }, []);
 
 
+    // This function handles the apply button
+    const handleApplyButton = () => {
+        console.log('apply button clicked')
+        // Sends the user to Apply on MMI
+        window.location.assign('https://www.mmi.org/projects-usd');
+
+    }
 
     return (
         <div>
@@ -93,13 +100,15 @@ function MissionTable() {
                             <TableCell component="th" scope="row">
                                 {row.Date}
                             </TableCell>
-                            <TableCell align="right">{row.Date}</TableCell>
                             <TableCell align="right">{row.Location}</TableCell>
                             <TableCell align="right">{row.Organization}</TableCell>
-                            <TableCell align="right"><Button>Apply</Button></TableCell>
+                            <TableCell align="right"><Button onClick={handleApplyButton} color="primary" variant="outlined">Apply</Button></TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
+                {/* <TableBody>
+                    
+                </TableBody> */}
             </Table>
         </TableContainer>
         </div>
