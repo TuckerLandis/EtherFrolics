@@ -36,6 +36,7 @@ import Insurance from '../ProviderRegistration/Insurance';
 
 // Provider Components
 import ProviderLandingPage from '../Provider/ProviderLandingPage';
+import CreateMissionPage from '../Admin/CreateMissionPage';
 
 // Mission Components
 import MissionTable from '../Mission/MissionTable';
@@ -259,7 +260,14 @@ function App() {
               <LandingPage />
             </ProtectedRoute>
 
-            {/* Mission Views */}
+              {/* Mission Views */}
+
+            <ProtectedRoute
+
+            exact path="/createmissionpage"
+            >
+              <CreateMissionPage />
+              </ProtectedRoute>
 
             <ProtectedRoute
               exact
