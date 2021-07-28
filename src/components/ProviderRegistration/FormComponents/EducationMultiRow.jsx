@@ -13,7 +13,7 @@ function EducationMultiRow(props) {
 
 
     function submitEducationHistoryItem(e) {
-        e.preventDefault
+        e.preventDefault()
         setHasBeenSubmitted(true)
 
         dispatch({

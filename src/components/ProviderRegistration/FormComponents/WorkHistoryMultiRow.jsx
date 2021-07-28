@@ -20,7 +20,7 @@ function WorkHistoryMultiRow (props) {
      * on clicking the add button, flip boolean for this item, send dispatch, call function that lives in WorkHistory to render new item
      */
     function submitWorkHistoryItem (e) {
-        e.preventDefault
+        e.preventDefault()
         
         setHasBeenSubmitted(true)
 
