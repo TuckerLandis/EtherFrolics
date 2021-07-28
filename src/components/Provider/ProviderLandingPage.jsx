@@ -31,9 +31,18 @@ CHECKLIST
 
 */
 
+import React, { useEffect } from 'react';
+
+import MissionTable from '../Mission/MissionTable';
+
 function ProviderLandingPage() {
     return(
-        <p>in Provider Landing Page</p>
+        <div>
+            <p>in Provider Landing Page</p>
+            <div>
+                <MissionTable />
+            </div>
+        </div>
     )
 }
 
