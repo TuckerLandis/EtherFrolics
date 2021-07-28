@@ -104,7 +104,6 @@ function MissionTable() {
                         <TableCell>Date</TableCell>
                         <TableCell align="right">Location</TableCell>
                         <TableCell align="right">Organization</TableCell>
-                        <TableCell align="right"><Button>Apply</Button></TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -116,6 +115,7 @@ function MissionTable() {
                             <TableCell align="right">{row.Date}</TableCell>
                             <TableCell align="right">{row.Location}</TableCell>
                             <TableCell align="right">{row.Organization}</TableCell>
+                            <TableCell align="right"><Button>Apply</Button></TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
