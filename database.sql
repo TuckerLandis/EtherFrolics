@@ -68,9 +68,10 @@ CREATE TABLE "mission_experience" (
 );
 
 CREATE TABLE "credential" (
+	"credential_id" serial PRIMARY KEY,
 	"licensingBoard" varchar(255),
 	"credentialName" varchar(255),
-	"dateInital" DATE,
+	"dateInitial" DATE,
 	"dateRenewed" DATE,
 	"dateExpiring" DATE,
 	"credentialImageKey" varchar(1000),
@@ -82,7 +83,7 @@ CREATE TABLE "insurance" (
 	"insuranceType" varchar(255),
 	"insuranceProvider" varchar(255),
 	"state" varchar(2),
-	"dateInital" DATE,
+	"dateInitial" DATE,
 	"dateRenewed" DATE,
 	"dateExpiring" DATE,
 	"policyNumber" integer,
@@ -98,6 +99,7 @@ CREATE TABLE "mission" (
 	"soleProvider" BOOLEAN DEFAULT FALSE,
 	"startDate" DATE,
 	"endDate" DATE,
+	"missionLink" TEXT,
 	"providerReviews" varchar (10000)[],
 	"organization_id" int REFERENCES "organization"
 );

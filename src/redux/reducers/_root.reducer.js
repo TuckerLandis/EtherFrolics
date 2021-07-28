@@ -2,6 +2,8 @@ import { combineReducers } from 'redux';
 import errors from './errors.reducer';
 import user from './user.reducer';
 import administrators from './admin.reducer';
+import providers from './provider.reducer';
+import selectedProvider from './selected.provider.reducer';
 
 
 import homeStepper from './homeStepper.reducer';
@@ -18,7 +20,9 @@ const rootReducer = combineReducers({
   administrators,
 
 
-  homeStepper
+  homeStepper,
+  providers,
+  selectedProvider
 });
 
 export default rootReducer;
