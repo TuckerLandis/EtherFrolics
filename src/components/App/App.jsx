@@ -158,7 +158,7 @@ function App() {
               // - else shows RegisterPage at "/registration"
               exact
               path="/registration"
-              // authRedirect="/providerlandingpage"
+              authRedirect="/providerlandingpage"
             >
               <RegisterPage />
             </ProtectedRoute>
@@ -240,9 +240,9 @@ function App() {
 
             <ProtectedRoute
               // with authRedirect:
-              // - if logged in, redirects to “/user”
+              // - if logged in, redirects to “/providerlandingpage"
+              // - if logged in as admin, redirects to "/adminlandingpage"
               // - else shows LandingPage at “/home”
-              exact
               path="/home"
               authRedirect="/providerlandingpage"
               adminRedirect="/adminlandingpage"
