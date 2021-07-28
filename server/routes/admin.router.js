@@ -23,9 +23,10 @@ router.get('/', (req, res) => {
 
 // Get request for info in the Mission Table
 router.get('/mission', (req, res) => {
-    const queryText = 
+    const queryText = `SELECT "mission".startDate, "mission".location, "mission".name FROM "mission"
+		ORDER BY "mission".startDate ASC;`
 
-    pool.query(query)
+    pool.query(queryText, [req.user.id], )
         .then(result => {
             res.send(result.rows);
         })
