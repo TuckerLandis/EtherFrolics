@@ -16,14 +16,14 @@ router.get('/', (req, res) => {
  */
 router.post('/', (req, res) => {
   // POST route code here
-  console.log('Reached provider POST:', req.body);
+  console.log('Reached provider reg POST:', req.body);
   res.sendStatus(200)
   
 });
 
 router.post('/workhistoryitem', (req, res) => {
   // POST route code here
-  console.log('Reached provider POST /workhistoryitem', req.body);
+  console.log('Reached provider reg POST /workhistoryitem', req.body);
   res.sendStatus(200)
   
 });
@@ -35,9 +35,27 @@ router.put('/workhistory', (req, res) => {
 })
 
 router.put('/address', (req, res) => {
-  console.log('Reached provider PUT /address', req.body);
+  console.log('Reached provider reg PUT /address', req.body);
   res.sendStatus(200)
-  
+
+})
+
+router.post('/educationhistoryitem', (req, res) => {
+  console.log('Reached provider reg POST: educationhistory', req.body);
+  res.sendStatus(200)
+
+})
+
+router.put('/lastmission', (req, res) => {
+  console.log('reached provider reg PUT: lastmission');
+  res.sendStatus(200)
+
+})
+
+router.post('/missionhistoryitem', (req, res) => {
+  console.log('Reached provider reg POST: missionHistory', req.body);
+  res.sendStatus(200)
+
 })
 
 module.exports = router;
