@@ -1,4 +1,26 @@
+import { useState } from "react"
+import { useDispatch } from "react-redux"
+import { useHistory } from "react-router"
+import MissionHistoryMultiRow from "./FormComponents/MissionHistoryMultiRow"
+
+
 function MissionHistory () {
+
+    const dispatch = useDispatch();
+    const history = useHistory();
+
+    const [amountOfMissionHistories, setAmountOfMissionHistories] = useState([1])
+
+    // increases the amount of education history elements in the array above
+    function addMissionHistoryItem() {
+
+        setAmountOfMissionHistories(amountOfMissionHistories =>
+            [...amountOfMissionHistories, amountOfMissionHistories.length + 1])
+
+    }
+
+
+
     return(
         <div>
             <label htmlFor="lastMissionInput">When was your last mission trip?</label>
@@ -11,9 +33,14 @@ function MissionHistory () {
                 <option value="6">More than 5 years ago</option>
                 </select>
 
-           {/* mission history multi row form component goes here, along with submit button, included in that component */}
+            {/* maps a state array to render relevant number of work history forms */}
+            {amountOfMissionHistories.map(education => {
+                return (
+                    <MissionHistoryMultiRow addMissionHistoryItem={addMissionHistoryItem} />
+                )
+            })}
 
-           {/* next button goes here */}
+<button onClick={handleNext}>Next</button>
 
             {/* stepper goes here with props of which page */}
 
@@ -27,29 +54,3 @@ export default MissionHistory
 
 
 
-// ## Checklist
-
-
-// - [ ]  inputs
-//     - [ ]  last mission - dropdown
-//     - [ ]  organization
-//     - [ ]  location
-//     - [ ]  reference
-//     - [ ]  reference contact
-//     - [ ]  start date
-//     - [ ]  end date
-//     - [ ]  button to add mission form
-// - [ ]  PDF upload
-// - [ ]  Next button → education
-
-// ## Components
-
-// - [ ]  mission history form component - this contains inputs for mission history, gets duplicated by + button
-// - [ ]  header, stepper
-// - [ ]  pdf upload component - gets passed props from URL params to denote which type of file is uploaded
-
-// ## Routes
-
-// - [ ]  put route to provider table
-// - [ ]  post route to mission history table
-// - [ ]  post to amazon s3 type: missionHistory
