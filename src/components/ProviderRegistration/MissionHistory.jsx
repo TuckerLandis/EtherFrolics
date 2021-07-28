@@ -25,7 +25,8 @@ function MissionHistory () {
         setLastMission(e.target.value)
     }
 
-    function handleNext() {
+    function handleNext(e) {
+        e.preventDefault
 
         dispatch({
             type: "PUT_LAST_MISSION",
@@ -42,7 +43,7 @@ function MissionHistory () {
     return(
         <div>
             <label htmlFor="lastMissionInput">When was your last mission trip?</label>
-            <select name="lastMission" id="lastMissionInput" onChange={handleChange}>
+            <select required name="lastMission" id="lastMissionInput" onChange={handleChange}>
                 <option value="1">Within the last year</option>
                 <option value="2">Within the last 2 years</option>
                 <option value="3">Within the last 3 years</option>
@@ -50,6 +51,10 @@ function MissionHistory () {
                 <option value="5">Within the last 5 years</option>
                 <option value="6">More than 5 years ago</option>
                 </select>
+
+                <br></br>
+                <br></br>
+                <br></br>
 
             {/* maps a state array to render relevant number of work history forms */}
             {amountOfMissionHistories.map(education => {
