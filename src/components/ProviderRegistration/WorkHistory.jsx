@@ -29,6 +29,10 @@ function WorkHistory() {
     }
 
     function handleNext() {
+
+        if(yearsExperience === 0) {
+            return alert('Please enter years of experience')
+        }
         // send dispatch with just years of experience, also post resume to s3
         dispatch({
             type: 'PUT_WORK_HISTORY',

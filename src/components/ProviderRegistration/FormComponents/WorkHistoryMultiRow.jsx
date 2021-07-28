@@ -19,7 +19,8 @@ function WorkHistoryMultiRow (props) {
     /**
      * on clicking the add button, flip boolean for this item, send dispatch, call function that lives in WorkHistory to render new item
      */
-    function submitWorkHistoryItem () {
+    function submitWorkHistoryItem (e) {
+        e.preventDefault()
         
         setHasBeenSubmitted(true)
 
@@ -74,35 +75,45 @@ function WorkHistoryMultiRow (props) {
 
     return(
         <div>
-            <label htmlFor="workPlaceInput">Work Place</label>
-            <TextField type="text" name="workplace" id="workplaceInput" value={workplace} onChange={handleChange}/>
+            <form onSubmit={submitWorkHistoryItem}>
+            {/* <label htmlFor="workPlaceInput">Work Place</label> */}
+            <TextField required label="Work Place" type="text" name="workplace" id="workplaceInput" 
+            value={workplace} onChange={handleChange} variant="outlined" />
 
-            <label htmlFor="jobTitleInput">Job Title</label>
-            <TextField type="text" name="city" id="jobTitleInput" value={jobTitle} onChange={handleChange} />
+            {/* <label htmlFor="jobTitleInput">Job Title</label> */}
+            <TextField required label="Job Title" type="text" name="city" id="jobTitleInput" 
+            value={jobTitle} onChange={handleChange} variant="outlined" />
 
-            <label htmlFor="referenceNameInput">Reference Name</label>
-            <TextField type="text" name="referenceName" id="referenceNameInput" value={referenceName} onChange={handleChange}/>
+            {/* <label htmlFor="referenceNameInput">Reference Name</label> */}
+            <TextField required label="Reference Name" type="text" name="referenceName" id="referenceNameInput" 
+            value={referenceName} onChange={handleChange} variant="outlined" />
 
-            <label htmlFor="referencePhoneInput">Reference Contact #</label>
-            <TextField type="text" name="referencePhone" id="referencePhoneInput" value={referencePhone} onChange={handleChange}/>
+            {/* <label htmlFor="referencePhoneInput">Reference Contact #</label> */}
+            <TextField required label="Reference's Phone #" type="text" name="referencePhone" id="referencePhoneInput" 
+            value={referencePhone} onChange={handleChange} variant="outlined" />
 
-            <label htmlFor="referenceEmailInput">Reference Email Address</label>
-            <TextField type="text" name="referenceEmail" id="referenceEmailInput" value={referenceEmailAddress} onChange={handleChange}/>
+            {/* <label htmlFor="referenceEmailInput">Reference Email Address</label> */}
+            <TextField required label="Reference's Email" type="text" name="referenceEmail" id="referenceEmailInput" 
+            value={referenceEmailAddress} onChange={handleChange} variant="outlined" />
 
             <label htmlFor="startDateInput">Start Date</label>
-            <TextField type="date" name="startDate" id="startDateInput" value={startDate} onChange={handleChange}/>
+            <TextField type="date" name="startDate" id="startDateInput" 
+            value={startDate} onChange={handleChange} variant="outlined" />
 
             <label htmlFor="endDateInput">End Date</label>
-            <TextField type="date" name="endDate" id="endDateInput" value={endDate} onChange={handleChange}/>
+            <TextField type="date" name="endDate" id="endDateInput" 
+            value={endDate} onChange={handleChange} variant="outlined" />
 
             {hasBeenSubmitted ? (
                 <p>submitted</p>
             ) : (
                 
-                <button onClick={submitWorkHistoryItem}>+</button>
+                <button type="submit">+</button>
             )}
 
+            </form>
             
+
 
         </div>
     )
