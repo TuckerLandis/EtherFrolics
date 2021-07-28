@@ -1,5 +1,13 @@
-import {useState} from 'react';
-import { useDispatch } from 'react-redux'
+import React from 'react';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormLabel from '@material-ui/core/FormLabel';
+// import AdapterDateFns from '@material-ui/lab/AdapterDateFns';
+// import LocalizationProvider from '@material-ui/lab/LocalizationProvider';
+// import DatePicker from '@material-ui/lab/DatePicker';
 
 // ## Checklist
 
@@ -21,7 +29,7 @@ function CreateMissionPage() {
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
     const [missionLink, setMissionLink] = useState('');
-    const [soloPractitioner, setSoloPractitioner] = useState(false);
+    const [solePractitioner, setSolePractitioner] = useState(false);
 
     //create a function that will send the form data to the server
     const handleSubmit = (evt) => {
@@ -30,65 +38,85 @@ function CreateMissionPage() {
         const missionObj = {
             name: organization,
             location: location,
-            soloProvider: soloPractitioner,
+            soleProvider: solePractitioner,
             startDate: startDate,
             endDate: endDate,
             missionLink: missionLink
         }
         console.log(missionObj);
-        
+
         dispatch({
             type: 'POST_MISSION_DATA',
             payload: missionObj
         })
-        
+
         //clear local states
         setOrganization('');
         setLocation('');
         setStartDate('');
         setEndDate('');
         setMissionLink('');
-        setSoloPractitioner('');
+        // setSoloPractitioner('');
+        //need to find a way to clear the check box upon posting
     }
-
-
+    
+        const handleChange = (event) => {
+          setSolePractitioner(event.target.checked);
+        };
+    
 
     return (
         <div>
 
             <h2>Create Mission</h2>
             <form onSubmit={handleSubmit}>
-                <input 
-                type="text"
-                placeholder="organization" 
-                value={organization} 
-                onChange={(evt) => setOrganization(evt.target.value)} />
+                <TextField
+                    type="text"
+                    label="Organization"
+                    value={organization}
+                    onChange={(evt) => setOrganization(evt.target.value)} />
+                <TextField
+                    type="text"
+                    label="Location"
+                    value={location}
+                    onChange={(evt) => setLocation(evt.target.value)} />
                 <input
-                type="text"
-                placeholder="location"
-                value={location}
-                onChange={(evt) => setLocation(evt.target.value)}/>
-                <input 
-                type="date"
-                placeholder="start date"
-                value={startDate}
-                onChange={(evt) => setStartDate(evt.target.value)} />
-                <input 
-                type="date"
-                placeholder="end date"
-                value={endDate}
-                onChange={(evt) => setEndDate(evt.target.value)}
+                    type="date"
+                    placeholder="start date"
+                    value={startDate}
+                    onChange={(evt) => setStartDate(evt.target.value)} />
+                <input
+                    type="date"
+                    placeholder="end date"
+                    value={endDate}
+                    onChange={(evt) => setEndDate(evt.target.value)}
                 />
-                <input 
-                type="text"
-                placeholder="link to mission application"
-                value={missionLink}
-                onChange={(evt) => setMissionLink(evt.target.value)} />
-                <input 
-                type="checkbox"
-                value={soloPractitioner}
-                onChange={(evt) => setSoloPractitioner(evt.target.checked) } />
-                <button type="submit">Add Mission</button>
+                {/* <LocalizationProvider dateAdapter={AdapterDateFns}>
+                    <DatePicker
+                        label="Start Date"
+                        value={value}
+                        onChange={(newValue) => {
+                            setValue(newValue);
+                        }}
+                        renderInput={(params) => <TextField {...params} />}
+                    />
+                </LocalizationProvider> */}
+                <TextField
+                    type="text"
+                    label="Link to Apply "
+                    value={missionLink}
+                    onChange={(evt) => setMissionLink(evt.target.value)} />
+                
+                <FormLabel>Solo Practitioner?</FormLabel>
+                <Checkbox
+                    value={solePractitioner}
+                    onChange={handleChange} 
+                    />
+                                        
+                <Button
+                    type="submit"
+                    variant="contained"
+                >Add Mission</Button>
 
 
             </form>
