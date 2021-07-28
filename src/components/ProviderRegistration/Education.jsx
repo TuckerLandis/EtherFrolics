@@ -21,7 +21,7 @@ function Education() {
 
     function handleNext() {
         // submit last one? some sort of check
-        // history.push('/')
+        history.push('/medcred')
     }
 
     return (

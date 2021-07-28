@@ -19,6 +19,10 @@ function MissionHistory () {
 
     }
 
+    function handleNext() {
+        history.push('/education')
+    }
+
 
 
     return(
