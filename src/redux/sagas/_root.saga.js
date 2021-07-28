@@ -4,6 +4,7 @@ import registrationSaga from './registration.saga';
 import userSaga from './user.saga';
 import adminSaga from './admin.saga';
 import providerRegistrationSaga from './providerRegistration.saga';
+import missionSaga from './mission.saga';
 import providerSaga from './provider.saga';
 
 // rootSaga is the primary saga.
@@ -18,8 +19,9 @@ export default function* rootSaga() {
     loginSaga(), // login saga is now registered
     registrationSaga(),
     userSaga(),
+    adminSaga(), 
     providerRegistrationSaga(),
-    adminSaga(),
+    missionSaga(),
     providerSaga()
   ]);
 }

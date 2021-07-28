@@ -21,4 +21,21 @@ router.get('/', (req, res) => {
         })
 });
 
+router.post('/mission', (req, res) => {
+    console.log('req.body is', req.body);
+    let mission = req.body;
+    //define query text
+    const queryText = `INSERT INTO mission ("name", "location", "soleProvider", "startDate", "endDate",
+    missionLink) VALUES ($1, $2, $3, $4, $5, $6);`;
+    //use pool to contact the server
+    pool.query(queryText, [mission.name, mission.location, mission.soleProvider, mission.startDate,
+                mission.endDate, mission.missionLink])
+    .then( result => {
+        res.sendStatus(201);
+    })
+    .catch( err => {
+        res.sendStatus(500);
+    })
+})
+
 module.exports = router;

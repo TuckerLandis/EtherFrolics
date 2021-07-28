@@ -7,10 +7,15 @@ links to provider mgmt
 links to create mission
 
 [x] Welcome Statement
+    [x] include admin name(username)
 
 [x] Navigation
     [x] link/button to redirect to Mission Display (MissionTable component)
     [x] link/button to redirect to Provider Management General View
+
+[x] Routes
+    [x] GET '/api/admin'
+        [x] query for admin id and username info
 
 
 
@@ -352,3 +357,14 @@ links to create mission
 ----------------------IMAGE UPLOAD---------------------
 
 -- IMAGE UPLOAD
+
+
+--------------------Reg Flow---------------------
+
+Generalinfo > 
+generalinfoaddress >
+workhistory >
+missionhistory >
+education >
+medCred >
+insurance > 
