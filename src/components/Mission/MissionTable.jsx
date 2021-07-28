@@ -93,6 +93,8 @@ function MissionTable() {
 
     }, []);
 
+    
+
     return (
         <div>
             <h2>Upcoming Missions</h2>
