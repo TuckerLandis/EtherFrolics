@@ -203,8 +203,34 @@ router.put('/address', (req, res) => {
 
 router.post('/educationhistoryitem', (req, res) => {
   console.log('Reached provider reg POST: educationhistory', req.body);
-  res.sendStatus(200)
-  // ben
+  const educationhistoryItem = req.body
+
+  const queryText = `INSERT INTO "education"
+  (
+    "institution",
+    "degree",
+    "startDate",
+    "endDate",
+    "user_id"
+  )
+  VALUES ($1, $2, $3, $4, $5);
+  `;
+    pool.query(queryText, [
+      educationhistoryItem.school,
+      educationhistoryItem.degree,
+      educationhistoryItem.startDate,
+      educationhistoryItem.endDate,
+      req.user.id
+    ])
+
+    .then( result => {
+      console.log('created new education history item');
+      res.sendStatus(200)
+    })
+    .catch (error => {
+      console.log('Error in Education Post', error);
+      res.sendStatus(500)
+    })
 })
 
 router.put('/lastmission', (req, res) => {
