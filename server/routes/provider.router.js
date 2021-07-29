@@ -165,7 +165,7 @@ router.post('/workhistoryitem', (req, res) => {
     workHistoryItem.endDate,
     req.user.id
   ])
-  .then( result => {
+  .then(result => {
     console.log('POSTED new work history');
     res.sendStatus(200)
   })
