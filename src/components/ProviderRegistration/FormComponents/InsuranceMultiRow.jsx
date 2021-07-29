@@ -73,7 +73,10 @@ function InsuranceMultiRow (props) {
     }
     
     //need a function to dispatch the information
-    const submitInsurance = () => {
+    const submitInsurance = (evt) => {
+        evt.preventDefault();
+        //set submitted state to true
+        setSubmitted(true);
         //create an object that captures the form data
         const insuranceObj = {
             insuranceType: insuranceType,
@@ -87,17 +90,19 @@ function InsuranceMultiRow (props) {
         }
         console.log(insuranceObj);
 
-        // dispatch({
-        //     type: 'ADD_INSURANCE_ITEM',
-        //     payload: insuranceObj
-        // })
+        dispatch({
+            type: 'ADD_INSURANCE_ITEM',
+            payload: insuranceObj
+        })
 
-        // props.addInsuranceItem();
+        //call on add insurace item to produce another form
+        props.addInsuranceItem();
 
     }
 
     return (
         <div>
+            <form onSubmit={submitInsurance}>
             <TextField
                 label="Type of Insurance"
                 id="type"
@@ -140,9 +145,14 @@ function InsuranceMultiRow (props) {
                 value={dateExpired}
                 onChange={handleChange}/>
 
-            <Button
-            variant="contained"
-            onClick={submitInsurance}>+</Button>
+            {submitted ? (
+                <p>Information Submitted!</p>
+            ) : (
+                <Button
+                variant="contained"
+                type="submit">+</Button>  
+            )}
+            </form>
         </div>
     )
 }

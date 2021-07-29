@@ -137,7 +137,10 @@ router.post('/missionhistoryitem', (req, res) => {
 
 })
 
-
+router.post('/insuranceitem', (req, res) => {
+  console.log(req.body);
+  //define the query text of where you want to post in the database
+})
 
 
 

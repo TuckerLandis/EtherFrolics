@@ -77,4 +77,4 @@ function EducationMultiRow(props) {
     )
 }
 
-export default EducationMultiRow
+export default EducationMultiRow;
