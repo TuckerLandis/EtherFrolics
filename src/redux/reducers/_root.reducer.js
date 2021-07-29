@@ -4,6 +4,7 @@ import user from './user.reducer';
 import administrators from './admin.reducer';
 import providers from './provider.reducer';
 import selectedProvider from './selected.provider.reducer';
+import mission from './mission.reducer';
 
 
 import homeStepper from './homeStepper.reducer';
@@ -22,7 +23,9 @@ const rootReducer = combineReducers({
 
   homeStepper,
   providers,
-  selectedProvider
+  selectedProvider,
+  mission,
+  
 });
 
 export default rootReducer;
