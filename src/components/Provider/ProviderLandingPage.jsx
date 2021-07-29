@@ -36,6 +36,10 @@ CHECKLIST
 
 */
 
+import React, { useEffect } from 'react';
+
+import MissionTable from '../Mission/MissionTable';
+
 function ProviderLandingPage() {
     const dispatch = useDispatch();
     const history = useHistory();
