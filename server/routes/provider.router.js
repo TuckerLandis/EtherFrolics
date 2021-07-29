@@ -137,8 +137,43 @@ router.post('/', (req, res) => {
 router.post('/workhistoryitem', (req, res) => {
   // POST route code here
   console.log('Reached provider reg POST /workhistoryitem', req.body);
-  res.sendStatus(200)
+  // res.sendStatus(200)
   // Tucker
+
+  const workHistoryItem = req.body
+  const queryText = `INSERT INTO "work_experience" 
+  (
+    "workplace",
+    "jobTitle",
+    "referenceName",
+    "referencePhone",
+    "referenceEmail",
+    "startDate",
+    "endDate",
+    "user_id"
+  )
+  VALUES ($1, $2, $3, $4, $5, $6, $7, $8);
+  `;
+
+  pool.query(queryText, [
+    workHistoryItem.workplace,
+    workHistoryItem.jobTitle,
+    workHistoryItem.referenceName,
+    workHistoryItem.referencePhone,
+    workHistoryItem.referenceEmailAddress,
+    workHistoryItem.startDate,
+    workHistoryItem.endDate,
+    req.user.id
+  ])
+  .then( result => {
+    console.log('POSTED new work history');
+    res.sendStatus(200)
+  })
+  .catch (error => {
+    console.log('Error in WorkHistory POST', error);
+    res.sendStatus(500)
+  })
+
 });
 
 router.put('/workhistory', (req, res) => {
