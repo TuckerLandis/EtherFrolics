@@ -60,7 +60,8 @@ function GeneralInfo() {
     /**
      * Upon clicking next button, validate forms, bundle info, send dispatch, push to next page
      */
-    function handleNext() {
+    function handleNext(e) {
+        e.preventDefault()
 
         // TODO - form validation goes here
 
@@ -72,7 +73,8 @@ function GeneralInfo() {
             dob: dob,
             providerRole: providerRole,
             validPassport: validPassport,
-            soleProvider: soleProvider
+            soleProvider: soleProvider,
+            providerEmail: emailAddress
         }
 
         dispatch({
