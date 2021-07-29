@@ -21,13 +21,8 @@ Grid
 
 .welcome {
   text-align: center;
-  margin: 20px 20px 40px 20px;
+  margin: 20px 20px 0 20px;
   padding: 5px 5px 5px 5px;
-}
-
-.missionStatement {
-  width: 317px;
-  max-height: 700px;
 }
 
 .infoCardStepper {
@@ -41,11 +36,43 @@ Grid
 .userNav {
   display: flex;
   align-items: center;
-  flex-flow: column wrap;
-  padding: 10px 10px 10px 10px;
+  flex-direction: row;
+  width: 100%;
 }
 
 .infoCarousel {
   border-radius: 2%;
-  padding: 16px 8px 16px 8px;
+  padding: 16px 0 16px 0;
+  width: 317px;
+  max-height: 800px;
+  display: flex;
+  align-items: center;
+  flex-flow: column wrap;
+}
+
+.titleViewHeading {
+  display: flex;
+  align-items: center;
+  flex-flow: column wrap;
+  width: 100%;
+  max-height: 546px;
+  height: 450px;
+}
+
+.globe {
+  max-width: 250px;
+  max-height: 250px;
+}
+
+.organizationPillars {
+  width: 100%;
+  max-height: 800px;
+  display: flex;
+  align-items: center;
+  flex-flow: column wrap;
+}
+
+.userLink {
+  width: 100%;
+  padding: 10px 10px 10px 10px;
 }
