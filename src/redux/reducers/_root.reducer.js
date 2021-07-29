@@ -24,7 +24,8 @@ const rootReducer = combineReducers({
   homeStepper,
   providers,
   selectedProvider,
-  mission
+  mission,
+  
 });
 
 export default rootReducer;
