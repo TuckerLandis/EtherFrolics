@@ -112,10 +112,10 @@ function MissionTable() {
                     {mission.map((mission) => (
                         <TableRow key={mission.name}>
                             <TableCell component="th" scope="mission">
-                                {mission.Date}
+                                {mission.startDate}
                             </TableCell>
-                            <TableCell align="right">{mission.Location}</TableCell>
-                            <TableCell align="right">{mission.Organization}</TableCell>
+                            <TableCell align="right">{mission.location}</TableCell>
+                            <TableCell align="right">{mission.name}</TableCell>
                             <TableCell align="right"><Button onClick={handleApplyButton} color="primary" variant="outlined">Apply</Button></TableCell>
                         </TableRow>
                     ))}
