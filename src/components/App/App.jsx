@@ -257,7 +257,7 @@ function App() {
               authRedirect="/providerlandingpage"
               adminRedirect="/adminlandingpage"
             >
-              <LandingPage />
+              <LandingPage theme={theme} />
             </ProtectedRoute>
 
               {/* Mission Views */}
