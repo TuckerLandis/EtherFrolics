@@ -91,13 +91,12 @@ router.get('/:id', async (req, res) => {
 });
 
 /**
- * POST route template
+ * POST route for initial provider post from /generalinfo
  */
 router.post('/', (req, res) => {
-  // POST route code here
+  
   console.log('Reached provider reg POST:', req.body);
-  // res.sendStatus(200)
-  // Tucker
+  
   let provider = req.body
 
   const queryText = `INSERT INTO "provider" (
@@ -125,7 +124,14 @@ router.post('/', (req, res) => {
     provider.providerEmail
 
   ])
-
+  .then( result => {
+    console.log('created new provider', result.rows);
+    res.sendStatus(200)
+  })
+  .catch (error => {
+    console.log('Error in Provider POST', error);
+    res.sendStatus(500)
+  })
 
 
 });
