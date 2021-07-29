@@ -1,5 +1,8 @@
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import Button from '@material-ui/core/Button';
+import ProviderItem from './ProviderItem';
 
 /*
 CHECKLIST
@@ -37,14 +40,49 @@ function ProviderLandingPage() {
     const dispatch = useDispatch();
     const history = useHistory();
 
+    useEffect( () => {
+        dispatch({
+            type: 'GET_PROVIDERS'
+        })
+    }, []);
+
     //bring in the provider name from the reducer
-    const provider = useSelector( store => store.providers);
+    const provider = useSelector(store => store.providers);
 
-    return(
+    const [providerRegistered, setProviderRegistered] = useState(false);
+
+    //create a function so that the provider can view upcoming missions
+    const viewMissions = () => {
+        console.log(provider);
+        history.push('/missions')
+    }
+
+    //create a function so that the provider can register
+    const providerRegister = () => {
+        setProviderRegistered(true);
+        history.push('/generalInfo')
+    }
+
+    return (
         <div>
-            <h2>Welcome, {provider.firstName} {provider.lastName} </h2>
-        </div>
+            <h2>Welcome, {provider.firstName} {provider.lastName} {/* might need to change this aroung */} </h2>
 
+            {providerRegistered ? (
+                <Button
+                    variant="contained"
+                    onClick={viewMissions}>View Missions</Button>
+            ) : (
+                <Button
+                    variant="contained"
+                    onClick={providerRegister}>Register</Button>
+            )}
+
+            {provider.map (() => {
+                return (<ProviderItem provider={provider}/>)
+            })}
+
+
+        </div>
 
     )
 }
