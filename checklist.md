@@ -368,3 +368,19 @@ missionhistory >
 education >
 medCred >
 insurance > 
+
+
+  "streetAddress",
+	    "city",
+	    "state",
+	    "zipCode",
+	    "soloProvider",
+	    "verified",
+	    "recruiterOpt",
+	    "lastMission",
+	    "yearsExperience",
+	    "validPassport",
+	    "availability",
+	    "peerReviews",
+	    "missionReviews",
+	    "publications"
