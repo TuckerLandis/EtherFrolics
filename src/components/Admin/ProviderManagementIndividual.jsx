@@ -70,6 +70,15 @@ function ProviderManagementIndividual() {
         }
     } // end soloProviderStatus
 
+    // dispatch uses useParams() to get id of selected provider (uses same action.type as ProviderManagementGeneral line 55)
+    // bring it back with useSelector, save to variable selectedProvider, line 48
+    // map over selectedProvider array (should be just the one provider object inside the array), line 82
+    // ^ since there's only ever one selected provider, is there a more efficient way to append their info to the DOM besides mapping over an array?
+    // started to create sections to put provider info into, lines 90, 106, 109, 112, 115, 118
+    // need to create edit button, work on functionality to conditionally render inputs and populate their values with preexisting data
+    // need to set up dispatch for put routes to update provider object
+    // need DISABLE functionality for admin - which db column will this change and how?
+
     return (
 
         <div>
