@@ -143,7 +143,7 @@ router.post('/workhistoryitem', (req, res) => {
 
 router.put('/workhistory', (req, res) => {
   console.log('Reached provider PUT /workhistory', req.body);
-  res.sendStatus(200)
+
   // Tucker
   const provider = req.body
 
