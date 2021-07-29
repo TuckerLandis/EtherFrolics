@@ -1,5 +1,7 @@
-/*
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
+/*
 CHECKLIST
 
     [] UseEffect
@@ -32,8 +34,18 @@ CHECKLIST
 */
 
 function ProviderLandingPage() {
+    const dispatch = useDispatch();
+    const history = useHistory();
+
+    //bring in the provider name from the reducer
+    const provider = useSelector( store => store.providers);
+
     return(
-        <p>in Provider Landing Page</p>
+        <div>
+            <h2>Welcome, {provider.firstName} {provider.lastName} </h2>
+        </div>
+
+
     )
 }
 
