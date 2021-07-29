@@ -26,7 +26,7 @@ CREATE TABLE "provider" (
 	"verified" BOOLEAN default FALSE,
 	"recruiterOpt" BOOLEAN default FALSE,
 	"lastMission" DATE,
-	"yearsExperience" int,
+	"yearsExperience" varchar(10),
 	"validPassport" BOOLEAN default FALSE,
 	"availability" DATE,
 	"peerReviews" TEXT [],
@@ -51,7 +51,9 @@ CREATE TABLE "work_experience" (
 	"jobTitle" varchar(255),
 	"startDate" DATE,
 	"endDate" DATE,
-	"references" varchar (1000)[],
+	"referenceName" varchar (100),
+	"referencePhone" varchar (100),
+	"referenceEmail" varchar (100),
 	"resumeImageKey" varchar(100),
 	"user_id" int REFERENCES "user"
 );
