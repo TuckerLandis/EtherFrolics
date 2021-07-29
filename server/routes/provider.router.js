@@ -91,13 +91,12 @@ router.get('/:id', async (req, res) => {
 });
 
 /**
- * POST route template
+ * POST route for initial provider post from /generalinfo
  */
 router.post('/', (req, res) => {
-  // POST route code here
+  
   console.log('Reached provider reg POST:', req.body);
-  // res.sendStatus(200)
-  // Tucker
+  
   let provider = req.body
 
   const queryText = `INSERT INTO "provider" (
@@ -125,46 +124,229 @@ router.post('/', (req, res) => {
     provider.providerEmail
 
   ])
-
-
-
+  .then( result => {
+    console.log('created new provider');
+    res.sendStatus(200)
+  })
+  .catch (error => {
+    console.log('Error in Provider POST', error);
+    res.sendStatus(500)
+  })
 });
 
 router.post('/workhistoryitem', (req, res) => {
   // POST route code here
   console.log('Reached provider reg POST /workhistoryitem', req.body);
-  res.sendStatus(200)
+  // res.sendStatus(200)
   // Tucker
+
+  const workHistoryItem = req.body
+  const queryText = `INSERT INTO "work_experience" 
+  (
+    "workplace",
+    "jobTitle",
+    "referenceName",
+    "referencePhone",
+    "referenceEmail",
+    "startDate",
+    "endDate",
+    "user_id"
+  )
+  VALUES ($1, $2, $3, $4, $5, $6, $7, $8);
+  `;
+
+  pool.query(queryText, [
+    workHistoryItem.workplace,
+    workHistoryItem.jobTitle,
+    workHistoryItem.referenceName,
+    workHistoryItem.referencePhone,
+    workHistoryItem.referenceEmailAddress,
+    workHistoryItem.startDate,
+    workHistoryItem.endDate,
+    req.user.id
+  ])
+  .then( result => {
+    console.log('POSTED new work history');
+    res.sendStatus(200)
+  })
+  .catch (error => {
+    console.log('Error in WorkHistory POST', error);
+    res.sendStatus(500)
+  })
+
 });
 
 router.put('/workhistory', (req, res) => {
   console.log('Reached provider PUT /workhistory', req.body);
-  res.sendStatus(200)
+
   // Tucker
+  const provider = req.body
+
+  const queryText = `UPDATE "provider" SET "yearsExperience" = $1 WHERE "user_id" = $2; `;
+
+  pool.query(queryText, [provider.yearsExperience, req.user.id])
+  .then( result => {
+    console.log('updated yearsExperience');
+    res.sendStatus(200)
+  })
+  .catch (error => {
+    console.log('Error in Provider PUT', error);
+    res.sendStatus(500)
+  })
 })
 
+// Put request to the database to update the address info of the provider
 router.put('/address', (req, res) => {
   console.log('Reached provider reg PUT /address', req.body);
-  res.sendStatus(200)
-  // ben
-})
+
+  console.log(req.user.id);
+
+  let updatedAddress = req.body; 
+  console.log('the updated address is', updatedAddress);
+
+  let queryText = `UPDATE "provider" SET "streetAddress" = $1, "city" = $2, "state" = $3, "zipCode" = $4 WHERE "user_id" = $5;`;
+
+  pool.query(queryText, [updatedAddress.streetAddress, updatedAddress.city, updatedAddress.state, updatedAddress.zipCode, req.user.id])
+  .then(response => {
+    console.log(response.rowCount);
+    res.sendStatus(200)
+  }).catch(err => {
+    console.log('address put request error', err);
+    res.sendStatus(500);
+  })
+}) // End PUT Route
 
 router.post('/educationhistoryitem', (req, res) => {
   console.log('Reached provider reg POST: educationhistory', req.body);
-  res.sendStatus(200)
-  // ben
+  const educationhistoryItem = req.body
+
+  const queryText = `INSERT INTO "education"
+  (
+    "institution",
+    "degree",
+    "startDate",
+    "endDate",
+    "user_id"
+  )
+  VALUES ($1, $2, $3, $4, $5);
+  `;
+    pool.query(queryText, [
+      educationhistoryItem.school,
+      educationhistoryItem.degree,
+      educationhistoryItem.startDate,
+      educationhistoryItem.endDate,
+      req.user.id
+    ])
+
+    .then( result => {
+      console.log('created new education history item');
+      res.sendStatus(200)
+    })
+    .catch (error => {
+      console.log('Error in Education Post', error);
+      res.sendStatus(500)
+    })
 })
 
 router.put('/lastmission', (req, res) => {
-  console.log('reached provider reg PUT: lastmission');
-  res.sendStatus(200)
-  // pesto
+  console.log('reached provider reg PUT: lastmission', req.body);
+  console.log(req);
+
+  // variable for user ID
+  const user_id = req.user.id;
+
+  // variable for number of years since last mission
+  const lastMission = req.body.lastMission + ' ' + 'years ago';
+
+  const queryText = `
+    UPDATE "provider" SET "lastMission" = $1
+    WHERE "provider".user_id = $2;
+  `
+
+  pool.query(queryText, [lastMission, user_id])
+    .then(result => {
+      console.log('lastMission UPDATE success');
+      res.sendStatus(200);
+    })
+    .catch(error => {
+      console.log('UPDATE lastMission unsuccessful', error);
+    })
 })
 
-router.post('/missionhistoryitem', (req, res) => {
+router.post('/missionhistoryitem', async (req, res) => {
   console.log('Reached provider reg POST: missionHistory', req.body);
-  res.sendStatus(200)
-  // pesto
+
+  // make connection to pool client 
+  // to initiate transaction
+  const client = await pool.connect();
+
+  // variable for the user id
+  const user_id = req.user.id;
+
+  // variable for the organization name
+  const organizationName = req.body.organization;
+
+  // variable for mission location
+  const location = req.body.location;
+
+  // variable for the name of the reference
+  const referenceName = req.body.referenceName;
+
+  // variable for phone number of reference
+  const referencePhone = req.body.referencePhone;
+
+  // variable for mission start date
+  const startDate = req.body.startDate;
+
+  // variable for mission end date
+  const endDate = req.body.endDate;
+
+  // query text makes post of data from MissionHistoryMultiRow to mission_experience table
+  const queryText = `
+    INSERT INTO "mission_experience" ("organizationName", "location", "referenceName", "referencePhone", "startDate", "endDate", "user_id")
+    VALUES ($1, $2, $3, $4, $5, $6, $7);
+  `;
+
+  try {
+
+    await client.query('BEGIN;');
+
+    await client.
+      query(queryText, [organizationName, location, referenceName, referencePhone, startDate, endDate, user_id])
+      await client.query('COMMIT;');
+
+      res.sendStatus(200)
+
+  } catch (error) {
+
+    await client.query('ROLLBACK')
+    console.error('Could not finish mission experience POST, /missionhistoryitem', error);
+  } finally {
+
+    client.release();
+
+  }
+})
+
+router.post('/insuranceitem', (req, res) => {
+  console.log('Reg.body in /insurance item is', req.body);
+  console.log('user id is', req.user.id);
+  let ins = req.body;
+  //define the query text of where you want to post in the database
+  const queryText = `INSERT INTO "insurance" ("insuranceType", "insuranceProvider", "policyNumber", 
+  "state", "dateInitial", "dateRenewed", "dateExpiring", "user_id")
+  VALUES ($1, $2, $3, $4, $5, $6, $7, $8);`;
+
+  pool.query(queryText, [ins.insuranceType, ins.insuranceProvider, ins.policyNumber, ins.state, ins.dateInitial,
+  ins.dateRenewed, ins.dateExpiring, req.user.id])
+  .then( result => {
+    res.sendStatus(201);
+  })
+  .catch (err => {
+    console.log('error is', err);
+    res.sendStatus(500);
+  })
+
 })
 
 

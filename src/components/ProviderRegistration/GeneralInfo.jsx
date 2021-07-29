@@ -82,7 +82,7 @@ function GeneralInfo() {
             payload: newProviderGeneralInfo
         })
 
-        // history.push('/generalinfoaddress')
+        history.push('/generalinfoaddress')
     }
 
 

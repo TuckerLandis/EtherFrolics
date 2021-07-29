@@ -43,7 +43,6 @@ function EducationMultiRow(props) {
             case 'endDateInput':
                 setEndDate(e.target.value)
                 break
-
         }
     }
 
@@ -78,4 +77,4 @@ function EducationMultiRow(props) {
     )
 }
 
-export default EducationMultiRow
+export default EducationMultiRow;
