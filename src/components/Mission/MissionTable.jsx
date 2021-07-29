@@ -64,7 +64,7 @@ function MissionTable() {
     const history = useHistory();
 
     // Get the Missions information from the reducer so we can render it
-    const mission = useSelector(store => store.missions);
+    const mission = useSelector(store => store.mission);
 
     // Upon page load, this function dispatches "fetch missions" command to the generator function 
     useEffect(() => {
@@ -109,7 +109,7 @@ function MissionTable() {
                 </TableBody> */}
                 {/*The Real Table will take Mission Data from the Reducer */}
                 <TableBody>
-                    {mission.map((row) => (
+                    {mission.map((mission) => (
                         <TableRow key={mission.name}>
                             <TableCell component="th" scope="mission">
                                 {mission.Date}
