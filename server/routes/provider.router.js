@@ -96,57 +96,54 @@ router.get('/:id', async (req, res) => {
 router.post('/', (req, res) => {
   // POST route code here
   console.log('Reached provider reg POST:', req.body);
-  res.sendStatus(200)
-
+  // res.sendStatus(200)
+    // Tucker
+  
+  
 });
 
 router.post('/workhistoryitem', (req, res) => {
   // POST route code here
   console.log('Reached provider reg POST /workhistoryitem', req.body);
   res.sendStatus(200)
-
+  // Tucker
 });
 
 router.put('/workhistory', (req, res) => {
   console.log('Reached provider PUT /workhistory', req.body);
   res.sendStatus(200)
-
+  // Tucker
 })
 
 router.put('/address', (req, res) => {
   console.log('Reached provider reg PUT /address', req.body);
   res.sendStatus(200)
-
+    // ben
 })
 
 router.post('/educationhistoryitem', (req, res) => {
   console.log('Reached provider reg POST: educationhistory', req.body);
   res.sendStatus(200)
-
+  // ben
 })
 
 router.put('/lastmission', (req, res) => {
   console.log('reached provider reg PUT: lastmission');
   res.sendStatus(200)
-
+  // pesto
 })
 
 router.post('/missionhistoryitem', (req, res) => {
   console.log('Reached provider reg POST: missionHistory', req.body);
   res.sendStatus(200)
-
+  // pesto
 })
-
-
-
-
-
 
 
 router.post('/credentialhistory', async (req, res) => {
   console.log('Credential History POST for provider', req.body);
   res.sendStatus(200);
-
+   // pesto/ben
 })
 
 module.exports = router;
