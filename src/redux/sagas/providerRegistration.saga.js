@@ -61,14 +61,34 @@ function* addMissionHistoryItem(action){
 
 
 
-  function* providerRegistrationSaga() {
+
+
+
+
+
+
+
+
+
+
+function* addCredentialHistoryData(action){
+  try {
+    yield axios.post('/api/provider/credentialhistory', action.payload);
+  } catch (error) {
+    console.error(`Error in providerRegistration.saga, addCredentialHistoryData ${error}`);
+  }
+}
+
+function* providerRegistrationSaga() {
     yield takeLatest('POST_PROVIDER_GENERAL', postProvider);
     yield takeLatest('PUT_PROVIDER_ADDRESS', putProviderAddress);
     yield takeLatest('ADD_WORK_HISTORY_ITEM', addWorkHistoryItem);
     yield takeLatest('PUT_WORK_HISTORY', putWorkHistory);
     yield takeLatest('ADD_EDUCATION_HISTORY_ITEM', addEducationHistoryItem);
     yield takeLatest('PUT_LAST_MISSION', putLastMission);
-    yield takeLatest('ADD_MISSION_HISTORY_ITEM', addMissionHistoryItem)
+    yield takeLatest('ADD_MISSION_HISTORY_ITEM', addMissionHistoryItem);
+
+    yield takeLatest('ADD_CREDENTIAL_HISTORY_DATA', addCredentialHistoryData);
    
   }
   
