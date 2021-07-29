@@ -26,7 +26,7 @@ router.get('/mission', (req, res) => {
     const queryText = `SELECT "mission"."startDate", "mission".location, "mission".name FROM "mission"
 		ORDER BY "mission"."startDate" ASC;`
 
-    pool.query(queryText, [req.user.id], )
+    pool.query(queryText)
         .then(result => {
             res.send(result.rows);
         })
