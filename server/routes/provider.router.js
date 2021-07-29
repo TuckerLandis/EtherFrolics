@@ -209,16 +209,17 @@ router.post('/educationhistoryitem', (req, res) => {
 
 router.put('/lastmission', (req, res) => {
   console.log('reached provider reg PUT: lastmission', req.body);
+  console.log(req);
 
   // variable for user ID
   const user_id = req.user.id;
 
   // variable for number of years since last mission
-  const lastMission = req.body.lastMission + 'years ago';
+  const lastMission = req.body.lastMission + ' ' + 'years ago';
 
   const queryText = `
     UPDATE "provider" SET "lastMission" = $1
-    WHERE "user".id = $2;
+    WHERE "provider".user_id = $2;
   `
 
   pool.query(queryText, [lastMission, user_id])
