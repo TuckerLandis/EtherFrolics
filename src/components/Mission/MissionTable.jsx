@@ -44,8 +44,8 @@ const useStyles = makeStyles({
     },
 });
 
-function createData(Date, Location, Organization, Apply ) {
-    return { Date, Location, Organization, Apply };
+function createData(Date, Location, Organization ) {
+    return { Date, Location, Organization };
 }
 
 const rows = [
