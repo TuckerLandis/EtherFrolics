@@ -176,10 +176,13 @@ router.post('/workhistoryitem', (req, res) => {
 
 });
 
+
+/**
+ * Takes a years of experience value from /workhistory and updates wthe relevant column in the provider table
+ */
 router.put('/workhistory', (req, res) => {
   console.log('Reached provider PUT /workhistory', req.body);
 
-  // Tucker
   const provider = req.body
 
   const queryText = `UPDATE "provider" SET "yearsExperience" = $1 WHERE "user_id" = $2; `;
@@ -201,6 +204,9 @@ router.put('/address', (req, res) => {
   // ben
 })
 
+/**
+ * Takes an object from /education and posts it to the education table
+ */
 router.post('/educationhistoryitem', (req, res) => {
   console.log('Reached provider reg POST: educationhistory', req.body);
   const educationhistoryItem = req.body
