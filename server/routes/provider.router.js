@@ -203,8 +203,34 @@ router.put('/address', (req, res) => {
 
 router.post('/educationhistoryitem', (req, res) => {
   console.log('Reached provider reg POST: educationhistory', req.body);
-  res.sendStatus(200)
-  // ben
+  const educationhistoryItem = req.body
+
+  const queryText = `INSERT INTO "education"
+  (
+    "institution",
+    "degree",
+    "startDate",
+    "endDate",
+    "user_id"
+  )
+  VALUES ($1, $2, $3, $4, $5);
+  `;
+    pool.query(queryText, [
+      educationhistoryItem.school,
+      educationhistoryItem.degree,
+      educationhistoryItem.startDate,
+      educationhistoryItem.endDate,
+      req.user.id
+    ])
+
+    .then( result => {
+      console.log('created new education history item');
+      res.sendStatus(200)
+    })
+    .catch (error => {
+      console.log('Error in Education Post', error);
+      res.sendStatus(500)
+    })
 })
 
 router.put('/lastmission', (req, res) => {
@@ -266,6 +292,27 @@ router.post('/missionhistoryitem', async (req, res) => {
     client.release();
 
   }
+})
+
+router.post('/insuranceitem', (req, res) => {
+  console.log('Reg.body in /insurance item is', req.body);
+  console.log('user id is', req.user.id);
+  let ins = req.body;
+  //define the query text of where you want to post in the database
+  const queryText = `INSERT INTO "insurance" ("insuranceType", "insuranceProvider", "policyNumber", 
+  "state", "dateInitial", "dateRenewed", "dateExpiring", "user_id")
+  VALUES ($1, $2, $3, $4, $5, $6, $7, $8);`;
+
+  pool.query(queryText, [ins.insuranceType, ins.insuranceProvider, ins.policyNumber, ins.state, ins.dateInitial,
+  ins.dateRenewed, ins.dateExpiring, req.user.id])
+  .then( result => {
+    res.sendStatus(201);
+  })
+  .catch (err => {
+    console.log('error is', err);
+    res.sendStatus(500);
+  })
+
 })
 
 

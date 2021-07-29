@@ -1,20 +1,50 @@
+import {useState} from 'react';
+import {useDispatch} from 'react-redux';
+import {useHistory} from 'react-router-dom';
+import InsuranceMultiRow from './FormComponents/InsuranceMultiRow';
+import Button from '@material-ui/core/Button';
+
+
 function Insurance () {
+    const dispatch = useDispatch();
+    const history = useHistory();
+
+    // create an array that will render the insurance history subcomponents
+    const [amountOfInsuranceHistories, setAmountOfInsuranceHistories] = useState([1]);
+
+    // create a function that will increase the amount of insurance histories
+    function addInsuranceItem () {
+        setAmountOfInsuranceHistories(amountOfInsuranceHistories => 
+            [...amountOfInsuranceHistories, amountOfInsuranceHistories.length + 1]
+        )
+    }
+
+    //send user to the next page but it is peer review... so may want to send them elsewhere
+    // const nextPage = () => {
+    //     history.push()
+    // }
+
     return(
         <div>
           <p>Insurance</p>
 
-           {/* insurance multi row form component goes here, along with submit button, included in that component */}
+            {amountOfInsuranceHistories.map( () => {
+                return (<InsuranceMultiRow addInsuranceItem={addInsuranceItem}/>)
+            })}
 
            {/* next button goes here */}
-
+            {/*<Button
+            variant="contained"
+            onClick={}>NEXT</Button>*/}
+            
             {/* stepper goes here with props of which page */}
-
+            
         </div>
     )
 }
 
 
-export default Insurance
+export default Insurance;
 
 
 // ## Checklist
