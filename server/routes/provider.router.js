@@ -199,25 +199,14 @@ router.put('/workhistory', (req, res) => {
 router.put('/address', (req, res) => {
   console.log('Reached provider reg PUT /address', req.body);
 
+  console.log(req.user.id);
+
   let updatedAddress = req.body; 
   console.log('the updated address is', updatedAddress);
 
-  let queryText = `UPDATE "provider" (
-    "user_id",
-    "streetAddress",
-    "city",
-    "state",
-    "zipCode"
-  )
-  VALUES ($1, $2, $3, $4);`
+  let queryText = `UPDATE "provider" SET "streetAddress" = $1, "city" = $2, "state" = $3, "zipCode" = $4 WHERE "user_id" = $5;`;
 
-  pool.query(queryText, [
-      req.user.id,
-      updatedAddress.streetAddress,
-      updatedAddress.city,
-      updatedAddress.state,
-      updatedAddress.zipCode
-  ]) 
+  pool.query(queryText, [updatedAddress.streetAddress, updatedAddress.city, updatedAddress.state, updatedAddress.zipCode, req.user.id])
   .then(response => {
     console.log(response.rowCount);
     res.sendStatus(200)
