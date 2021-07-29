@@ -358,7 +358,59 @@ router.post('/insuranceitem', (req, res) => {
 
 router.post('/credentialhistory', async (req, res) => {
   console.log('Credential History POST for provider', req.body);
-  res.sendStatus(200);
+  
+  // make a connection to pool client for transaction
+  const client = await pool.connect();
+
+  // variable for user ID
+  const user_id = req.user.id;
+
+  // variable for licensingBoard
+  const liscensingBoard = req.body.liscensingBoard;
+
+  // variable for credentialName
+  const credentialName = req.body.credentialTaxonomy;
+
+  // variable for liscenseNumber
+  const liscenseNumber = req.body.liscenseNumber;
+
+  // variable for dateInitial
+  const dateInitial = req.body.dateRecieved;
+
+  // variable for dateRenewed
+  const dateRenewed = req.body.dateRenewed;
+
+  // variable for dateExpiring
+  const dateExpiring = req.body.dateExpired;
+
+  const credentialInsertStatement = `
+    INSERT INTO "credential" ("licensingBoard", "credentialName", "liscenseNumber", "dateInitial", "dateRenewed", "dateExpiring", "user_id")
+    VALUES ($1, $2, $3, $4, $5, $6, $7);
+  `;
+
+  try {
+
+    await client.query('BEGIN;');
+
+    await client.query(credentialInsertStatement, [liscensingBoard, credentialName, liscenseNumber, dateInitial, dateRenewed, dateExpiring, user_id]);
+
+    await client.query('COMMIT;');
+
+    res.sendStatus(200);
+    
+  } catch (error) {
+    
+    console.error(`Error in Credential POST, changes rolledback ${error}`);
+
+    await client.query('ROLLBACK;');
+
+  } finally {
+    console.log('End cred POST')
+
+    await client.release();
+
+  }
+
   // pesto/ben
 })
 
