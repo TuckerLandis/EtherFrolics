@@ -59,6 +59,15 @@ function* addMissionHistoryItem(action){
   }
 }
 
+function* addInsuranceItem (action) {
+  console.log(action.payload);
+  try {
+    yield axios.post('/api/provider/insuranceitem', action.payload)
+  } catch (error) {
+    console.log('Error in providerRegistration saga, addInsuranceItem', error);
+  }
+}
+
 
 
 
@@ -89,6 +98,7 @@ function* providerRegistrationSaga() {
     yield takeLatest('ADD_MISSION_HISTORY_ITEM', addMissionHistoryItem);
 
     yield takeLatest('ADD_CREDENTIAL_HISTORY_DATA', addCredentialHistoryData);
+    yield takeLatest('ADD_INSURANCE_ITEM', addInsuranceItem);
    
   }
   
