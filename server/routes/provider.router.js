@@ -125,15 +125,13 @@ router.post('/', (req, res) => {
 
   ])
   .then( result => {
-    console.log('created new provider', result.rows);
+    console.log('created new provider');
     res.sendStatus(200)
   })
   .catch (error => {
     console.log('Error in Provider POST', error);
     res.sendStatus(500)
   })
-
-
 });
 
 router.post('/workhistoryitem', (req, res) => {
@@ -147,6 +145,19 @@ router.put('/workhistory', (req, res) => {
   console.log('Reached provider PUT /workhistory', req.body);
   res.sendStatus(200)
   // Tucker
+  const provider = req.body
+
+  const queryText = `UPDATE "provider" SET "yearsExperience" = $1 WHERE "user_id" = $2; `;
+
+  pool.query(queryText, [provider.yearsExperience, req.user.id])
+  .then( result => {
+    console.log('updated yearsExperience');
+    res.sendStatus(200)
+  })
+  .catch (error => {
+    console.log('Error in Provider PUT', error);
+    res.sendStatus(500)
+  })
 })
 
 router.put('/address', (req, res) => {
