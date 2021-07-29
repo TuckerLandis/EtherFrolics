@@ -94,6 +94,7 @@ function MissionTable() {
                         <TableCell align="right">Organization</TableCell>
                     </TableRow>
                 </TableHead>
+                {/* Dummy Data to see how table shows up */}
                 <TableBody>
                     {rows.map((row) => (
                         <TableRow key={row.name}>
@@ -106,7 +107,14 @@ function MissionTable() {
                         </TableRow>
                     ))}
                 </TableBody>
-                {/* <TableBody>
+                {/* The Real Table will take Mission Data from the Reducer
+                <TableBody>
+                    {mission.map((row) => (
+                        <TableRow key={mission.name}>
+                            <TableCell component="th" scope="mission">
+                                {mission.Date}
+                        </TableRow>
+                    ))}
                     
                 </TableBody> */}
             </Table>
