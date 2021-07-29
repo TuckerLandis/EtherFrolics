@@ -208,9 +208,27 @@ router.post('/educationhistoryitem', (req, res) => {
 })
 
 router.put('/lastmission', (req, res) => {
-  console.log('reached provider reg PUT: lastmission');
-  res.sendStatus(200)
-  // pesto
+  console.log('reached provider reg PUT: lastmission', req.body);
+
+  // variable for user ID
+  const user_id = req.user.id;
+
+  // variable for number of years since last mission
+  const lastMission = req.body.lastMission + 'years ago';
+
+  const queryText = `
+    UPDATE "provider" SET "lastMission" = $1
+    WHERE "user".id = $2;
+  `
+
+  pool.query(queryText, [lastMission, user_id])
+    .then(result => {
+      console.log('lastMission UPDATE success');
+      res.sendStatus(200);
+    })
+    .catch(error => {
+      console.log('UPDATE lastMission unsuccessful', error);
+    })
 })
 
 router.post('/missionhistoryitem', async (req, res) => {
