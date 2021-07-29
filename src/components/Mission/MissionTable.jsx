@@ -1,26 +1,3 @@
-// ## Checklist
-
-// - [ ]  Mission Table
-//     - [x]  Missions are organized by date with the most current mission at the top (use-effect that sorts by date GET route)
-//     - [ ]  Sort-by feature to organize table data (stretch)
-// - [ ]  Table Columns
-//     - [x]  Date
-//     - [x]  Location
-//         - [ ]  Location links to information on the location (travel info, possible wikipedia link? maybe something else that looks cleaner)
-//     - [x]  Organization
-//     - [x]  Pseudo column that will have the apply button
-
-//     # Component(s)
-
-//     - [x]  Missions Table
-//     - [x]  I'm Interested Button
-//         - [x]  Will link to [mmi.org/projects-usd](http://mmi.org/projects-usd) for the provider to be able to apply to selected mission
-
-//         # Route(s)
-
-//         - [x]  GET
-//             - [x]  Missions Table
-
 
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -111,9 +88,7 @@ function MissionTable() {
                 <TableBody>
                     {mission.map((mission) => (
                         <TableRow key={mission.name}>
-                            <TableCell component="th" scope="mission">
-                                {mission.startDate}
-                            </TableCell>
+                            <TableCell>{mission.startDate}</TableCell>
                             <TableCell align="right">{mission.location}</TableCell>
                             <TableCell align="right">{mission.name}</TableCell>
                             <TableCell align="right"><Button onClick={handleApplyButton} color="primary" variant="outlined">Apply</Button></TableCell>
@@ -129,3 +104,25 @@ function MissionTable() {
 export default MissionTable;
 
 
+// ## Checklist
+
+// - [ ]  Mission Table
+//     - [x]  Missions are organized by date with the most current mission at the top (use-effect that sorts by date GET route)
+//     - [ ]  Sort-by feature to organize table data (stretch)
+// - [ ]  Table Columns
+//     - [x]  Date
+//     - [x]  Location
+//         - [ ]  Location links to information on the location (travel info, possible wikipedia link? maybe something else that looks cleaner)
+//     - [x]  Organization
+//     - [x]  Pseudo column that will have the apply button
+
+//     # Component(s)
+
+//     - [x]  Missions Table
+//     - [x]  I'm Interested Button
+//         - [x]  Will link to [mmi.org/projects-usd](http://mmi.org/projects-usd) for the provider to be able to apply to selected mission
+
+//         # Route(s)
+
+//         - [x]  GET
+//             - [x]  Missions Table
