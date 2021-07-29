@@ -131,10 +131,59 @@ router.put('/lastmission', (req, res) => {
 
 })
 
-router.post('/missionhistoryitem', (req, res) => {
+router.post('/missionhistoryitem', async (req, res) => {
   console.log('Reached provider reg POST: missionHistory', req.body);
-  res.sendStatus(200)
 
+  // make connection to pool client 
+  // to initiate transaction
+  const client = await pool.connect();
+
+  // variable for the user id
+  const user_id = req.user.id;
+
+  // variable for the organization name
+  const organizationName = req.body.organization;
+
+  // variable for mission location
+  const location = req.body.location;
+
+  // variable for the name of the reference
+  const referenceName = req.body.referenceName;
+
+  // variable for phone number of reference
+  const referencePhone = req.body.referencePhone;
+
+  // variable for mission start date
+  const startDate = req.body.startDate;
+
+  // variable for mission end date
+  const endDate = req.body.endDate;
+
+  // query text makes post of data from MissionHistoryMultiRow to mission_experience table
+  const queryText = `
+    INSERT INTO "mission_experience" ("organizationName", "location", "referenceName", "referencePhone", "startDate", "endDate", "user_id")
+    VALUES ($1, $2, $3, $4, $5, $6, $7);
+  `;
+
+  try {
+
+    await client.query('BEGIN;');
+
+    await client.
+      query(queryText, [organizationName, location, referenceName, referencePhone, startDate, endDate, user_id])
+      await client.query('COMMIT;');
+
+      res.sendStatus(200)
+
+  } catch (error) {
+
+    await client.query('ROLLBACK')
+    console.error('Could not finish mission experience POST, /missionhistoryitem', error);
+  } finally {
+
+    client.release();
+
+  }
 })
 
 
