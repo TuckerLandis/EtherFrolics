@@ -15,7 +15,9 @@ function MissionHistoryMultiRow(props) {
     const [hasBeenSubmitted, setHasBeenSubmitted] = useState(false)
 
 
-    function submitMissionHistoryItem() {
+    function submitMissionHistoryItem(e) {
+
+        e.preventDefault();
         
         setHasBeenSubmitted(true)
 
@@ -85,7 +87,7 @@ function MissionHistoryMultiRow(props) {
             <TextField required variant="outlined" type="date" id="startDateInput" value={startDate} onChange={handleChange} />
 
             <label htmlFor="endDateInput">End Date</label>
-            <TextField required variant="outlined" type="date" id="endDateInput" value={startDate} onChange={handleChange} />
+            <TextField required variant="outlined" type="date" id="endDateInput" value={endDate} onChange={handleChange} />
 
             {hasBeenSubmitted ? (
                 <p>submitted</p>

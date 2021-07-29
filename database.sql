@@ -62,7 +62,8 @@ CREATE TABLE "mission_experience" (
 	"location" varchar(255),
 	"startDate" DATE,
 	"endDate" DATE,
-	"references" varchar (1000)[],
+	"referenceName" varchar (75),
+	"referencePhone" varchar(11),
 	"missionExperienceImageKey" varchar(100),
 	"user_id" int REFERENCES "user"
 );
