@@ -11,6 +11,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
+import { Info } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -48,7 +49,7 @@ function ProviderManagementGeneral() {
 
     const handleSelect = (providerId) => {
 
-        console.log('prvdrmgmtgen provider id (item id): ', providerId);
+        console.log('Provider Mgmt Gen provider id: ', providerId);
 
         dispatch({
             type: 'SELECT_PROVIDER',
@@ -57,12 +58,25 @@ function ProviderManagementGeneral() {
         history.push(`/providermgmt/${providerId}`);
     } // end handleSelect
 
+    // dispatch to get all provider info, line 43
+    // bring it back with useSelector, save to variable providers, line 39
+    // map over array of provider objects to append them to material-ui list, line 80
+    // handleSelect fn takes in clicked provider's user_id, line 82
+    // dispatches with user_id as payload to get all info for selected provider, line 54
+    // handleSelect fn pushes user to individual provider's page, line 58
+    // copied and pasted another <li below line 86 to get second subheader 'Unverified'
+    // ^ honestly probably don't need this. i forgot we're doing the icon thing (wireframe 2.4.1a), line 88
+    // possibly conditionally render providers in either verified or unverified list based on provider.verified boolean value?
+    // need to integrate icons into list for verified/unverified and flag icon for expiring credentials warning
+    // need to add functionality to icons
+
     return (
 
         <List className={classes.root} subheader={<li />}>
                 <li className={classes.listSection}>
                     <ul className={classes.ul}>
                         <ListSubheader>Verified</ListSubheader>
+                        {/* conditionally render in Verified section based on their verified status */}
                         {providers?.map((provider) => (
                             <ListItem key={provider?.provider_id}>
                                 <ListItemText onClick={() => handleSelect(provider?.user_id)}>{provider?.firstName}</ListItemText>
@@ -87,4 +101,4 @@ function ProviderManagementGeneral() {
 
 } // end ProviderManagementGeneral
 
-export default ProviderManagementGeneral
+export default ProviderManagementGeneral;
