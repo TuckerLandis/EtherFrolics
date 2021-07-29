@@ -28,7 +28,7 @@ function Insurance () {
         <div>
           <p>Insurance</p>
 
-            {amountOfInsuranceHistories.map( (insurance) => {
+            {amountOfInsuranceHistories.map( () => {
                 return (<InsuranceMultiRow addInsuranceItem={addInsuranceItem}/>)
             })}
 

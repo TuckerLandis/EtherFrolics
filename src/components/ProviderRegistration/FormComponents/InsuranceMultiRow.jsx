@@ -41,9 +41,9 @@ function InsuranceMultiRow (props) {
     const [insuranceProvider, setInsuranceProvider] = useState('');
     const [policyNumber, setPolicyNumber] = useState('');
     const [state, setState] = useState('');
-    const [dateIssued, setDateIssued] = useState('');
+    const [dateInitial, setDateInitial] = useState('');
     const [dateRenewed, setDateRenewed] = useState('');
-    const [dateExpired, setDateExpired] = useState('');
+    const [dateExpiring, setDateExpiring] = useState('');
     const [submitted, setSubmitted] = useState(false);
     //Still need PDF upload
 
@@ -62,13 +62,13 @@ function InsuranceMultiRow (props) {
                 setState(evt.target.value);
                 break
             case "issued" :
-                setDateIssued(evt.target.value);
+                setDateInitial(evt.target.value);
                 break
             case "renewed" :
                 setDateRenewed(evt.target.value);
                 break
             case "expired" :
-                setDateExpired(evt.target.value);
+                setDateExpiring(evt.target.value);
         }
     }
     
@@ -83,9 +83,9 @@ function InsuranceMultiRow (props) {
             insuranceProvider: insuranceProvider,
             policyNumber: policyNumber,
             state: state,
-            dateIssued: dateIssued,
+            dateInitial: dateInitial,
             dateRenewed: dateRenewed,
-            dateExpired: dateExpired,
+            dateExpiring: dateExpiring,
             //possibly need a pdf upload here
         }
         console.log(insuranceObj);
@@ -128,7 +128,7 @@ function InsuranceMultiRow (props) {
             <TextField
                 type="date"
                 id="issued"
-                value={dateIssued}
+                value={dateInitial}
                 onChange={handleChange}/>
            
            <FormLabel>Date Renewed:</FormLabel>
@@ -142,7 +142,7 @@ function InsuranceMultiRow (props) {
             <TextField
                 type="date"
                 id="expired"
-                value={dateExpired}
+                value={dateExpiring}
                 onChange={handleChange}/>
 
             {submitted ? (
