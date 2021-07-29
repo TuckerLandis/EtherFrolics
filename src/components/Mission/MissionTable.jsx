@@ -48,11 +48,11 @@ function createData(Date, Location, Organization ) {
     return { Date, Location, Organization };
 }
 
-const rows = [
-    createData( '9/4', 'Sangolqui,Ecuador', 'Medical Ministry International', 'Apply'),
-    createData( '9/11', 'Rio San Juan, Dominican Republic', 'Medical Ministry International', 'Apply'),
-    createData( '9/11', 'Quevado, Ecuador', 'Medical Ministry International', 'Apply'),
-]
+// const rows = [
+//     createData( '9/4', 'Sangolqui,Ecuador', 'Medical Ministry International', 'Apply'),
+//     createData( '9/11', 'Rio San Juan, Dominican Republic', 'Medical Ministry International', 'Apply'),
+//     createData( '9/11', 'Quevado, Ecuador', 'Medical Ministry International', 'Apply'),
+// ]
 
 
 function MissionTable() {
@@ -64,7 +64,7 @@ function MissionTable() {
     const history = useHistory();
 
     // Get the Missions information from the reducer so we can render it
-    // const mission = useSelector(store => store.missions);
+    const mission = useSelector(store => store.missions);
 
     // Upon page load, this function dispatches "fetch missions" command to the generator function 
     useEffect(() => {
@@ -95,7 +95,7 @@ function MissionTable() {
                     </TableRow>
                 </TableHead>
                 {/* Dummy Data to see how table shows up */}
-                <TableBody>
+                {/* <TableBody>
                     {rows.map((row) => (
                         <TableRow key={row.name}>
                             <TableCell component="th" scope="row">
@@ -106,17 +106,20 @@ function MissionTable() {
                             <TableCell align="right"><Button onClick={handleApplyButton} color="primary" variant="outlined">Apply</Button></TableCell>
                         </TableRow>
                     ))}
-                </TableBody>
-                {/* The Real Table will take Mission Data from the Reducer
+                </TableBody> */}
+                {/*The Real Table will take Mission Data from the Reducer */}
                 <TableBody>
                     {mission.map((row) => (
                         <TableRow key={mission.name}>
                             <TableCell component="th" scope="mission">
                                 {mission.Date}
+                            </TableCell>
+                            <TableCell align="right">{mission.Location}</TableCell>
+                            <TableCell align="right">{mission.Organization}</TableCell>
+                            <TableCell align="right"><Button onClick={handleApplyButton} color="primary" variant="outlined">Apply</Button></TableCell>
                         </TableRow>
                     ))}
-                    
-                </TableBody> */}
+                </TableBody>
             </Table>
         </TableContainer>
         </div>
