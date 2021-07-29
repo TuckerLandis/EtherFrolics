@@ -137,4 +137,16 @@ router.post('/missionhistoryitem', (req, res) => {
 
 })
 
+
+
+
+
+
+
+router.post('/credentialhistory', async (req, res) => {
+  console.log('Credential History POST for provider', req.body);
+  res.sendStatus(200);
+
+})
+
 module.exports = router;
