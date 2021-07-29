@@ -18,17 +18,17 @@ router.get('/', async (req, res) => {
   "mission_experience".*,
   "work_experience".*
   FROM "provider"
-  JOIN "credential"
+  FULL JOIN "credential"
   ON "provider".user_id = "credential".user_id
-  JOIN "education"
+  FULL JOIN "education"
   ON "education".user_id = "provider".user_id
-  JOIN "insurance"
+  FULL JOIN "insurance"
   ON "insurance".user_id = "provider".user_id
-  JOIN "mission_experience"
+  FULL JOIN "mission_experience"
   ON "mission_experience".user_id = "provider".user_id
-  JOIN "work_experience"
+  FULL JOIN "work_experience"
   ON "work_experience".user_id = "provider".user_id
-  JOIN "user"
+  FULL JOIN "user"
   ON "user".id = "provider".user_id
   WHERE "user".authorization = 1;
   `;
