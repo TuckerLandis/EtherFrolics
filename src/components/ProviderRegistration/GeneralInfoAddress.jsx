@@ -47,6 +47,8 @@ function GeneralInfoAddress () {
 
     return(
         <div>
+
+            <form onSubmit={handleNext}>
             <label htmlFor="streetAddressInput">Street Address</label>
             <TextField type="text" name="streetAddress" id="streetAddressInput" value={streetAddress} onChange={handleChange} />
 
@@ -59,7 +61,10 @@ function GeneralInfoAddress () {
             <label htmlFor="zipInput">Zip Code</label>
             <TextField type="text" name="zip" id="zipInput" value={zip} onChange={handleChange}/>
 
-            <button onClick={handleNext}>Next</button>
+            <button type="submit">Next</button>
+
+            </form>
+            
 
             {/* stepper goes here with props of which page */}
 

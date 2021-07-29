@@ -53,7 +53,7 @@ router.get('/:id', async (req, res) => {
   // res.send('👨🏻‍⚕️');
 
   console.log('selected provider req.params.id: ', req.params.id);
-  
+
 
   const queryText = `
   SELECT "provider".*,
@@ -96,7 +96,37 @@ router.get('/:id', async (req, res) => {
 router.post('/', (req, res) => {
   // POST route code here
   console.log('Reached provider reg POST:', req.body);
-  res.sendStatus(200)
+  // res.sendStatus(200)
+  // Tucker
+  let provider = req.body
+
+  const queryText = `INSERT INTO "provider" (
+      "user_id",
+      "firstName",
+      "lastName",
+      "DOB",
+      "providerRole",
+      "validPassport",
+      "soloProvider",
+      "emailAddress"
+
+    
+    ) 
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8);
+    `
+  pool.query(queryText, [
+    req.user.id,
+    provider.firstName,
+    provider.lastName,
+    provider.dob,
+    provider.providerRole,
+    provider.validPassport,
+    provider.soleProvider,
+    provider.providerEmail
+
+  ])
+
+
 
 });
 
@@ -104,37 +134,44 @@ router.post('/workhistoryitem', (req, res) => {
   // POST route code here
   console.log('Reached provider reg POST /workhistoryitem', req.body);
   res.sendStatus(200)
-
+  // Tucker
 });
 
 router.put('/workhistory', (req, res) => {
   console.log('Reached provider PUT /workhistory', req.body);
   res.sendStatus(200)
-
+  // Tucker
 })
 
 router.put('/address', (req, res) => {
   console.log('Reached provider reg PUT /address', req.body);
   res.sendStatus(200)
-
+  // ben
 })
 
 router.post('/educationhistoryitem', (req, res) => {
   console.log('Reached provider reg POST: educationhistory', req.body);
   res.sendStatus(200)
-
+  // ben
 })
 
 router.put('/lastmission', (req, res) => {
   console.log('reached provider reg PUT: lastmission');
   res.sendStatus(200)
-
+  // pesto
 })
 
 router.post('/missionhistoryitem', (req, res) => {
   console.log('Reached provider reg POST: missionHistory', req.body);
   res.sendStatus(200)
+  // pesto
+})
 
+
+router.post('/credentialhistory', async (req, res) => {
+  console.log('Credential History POST for provider', req.body);
+  res.sendStatus(200);
+  // pesto/ben
 })
 
 module.exports = router;
