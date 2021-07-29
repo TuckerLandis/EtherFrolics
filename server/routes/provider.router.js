@@ -143,17 +143,45 @@ router.put('/workhistory', (req, res) => {
   // Tucker
 })
 
+// Put request to the database to update the address info of the provider
 router.put('/address', (req, res) => {
   console.log('Reached provider reg PUT /address', req.body);
-  res.sendStatus(200)
-  // ben
-})
+
+  let updatedAddress = req.body; 
+  console.log('the updated address is', updatedAddress);
+
+  let queryText = `UPDATE "provider" (
+    "user_id",
+    "streetAddress",
+    "city",
+    "state",
+    "zipCode"
+  )
+  VALUES ($1, $2, $3, $4);`
+
+  pool.query(queryText, [
+      req.user.id,
+      updatedAddress.streetAddress,
+      updatedAddress.city,
+      updatedAddress.state,
+      updatedAddress.zipCode
+  ]) 
+  .then(response => {
+    console.log(response.rowCount);
+    res.sendStatus(200)
+  }).catch(err => {
+    console.log('address put request error', err);
+    res.sendStatus(500);
+  })
+}) // End PUT Route
 
 router.post('/educationhistoryitem', (req, res) => {
   console.log('Reached provider reg POST: educationhistory', req.body);
+  
+
   res.sendStatus(200)
   // ben
-})
+})// End POST Route
 
 router.put('/lastmission', (req, res) => {
   console.log('reached provider reg PUT: lastmission');
