@@ -18,6 +18,10 @@ function GeneralInfo() {
     const [soleProvider, setSoleProvider] = useState(false)
     const [emailAddress, setEmailAddress] = useState('')
 
+    // state variable to track if all inputs
+    // have content
+    const [addressFormComplete, setAddressFormComplete] = useState(false); 
+
     /**
      * Takes in an event from all inputs, changes their state variable
      * @param {*} e 

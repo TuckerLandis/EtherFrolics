@@ -13,8 +13,8 @@ function GeneralInfoAddress () {
     const [state, setState] = useState('')
     const [zip, setZip] = useState('')
 
-    // state variable to track if at least 1 section
-    // of insurance data has been submitted to the DB
+    // state variable to track if all inputs
+    // have content
     const [addressFormComplete, setAddressFormComplete] = useState(false); 
 
     function handleNext() {
@@ -49,6 +49,8 @@ function GeneralInfoAddress () {
         }
         if (streetAddress != '' && city != '' && state != '' && zip != '') {
             setAddressFormComplete(true);
+        } else {
+            setAddressFormComplete(false)
         }
     }
 
