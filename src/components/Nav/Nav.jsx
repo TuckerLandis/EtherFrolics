@@ -12,17 +12,17 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import MenuIcon from '@material-ui/icons/Menu';
 import Drawer from '@material-ui/core/Drawer';
-import Link from '@material-ui/core/Link';
+// import Link from '@material-ui/core/Link';
 
 function Nav() {
 
-  // Material UI
-  const [drawer, setDrawer] = useState(false);
+  // // Material UI
+  // const [drawer, setDrawer] = useState(false);
 
-  const toggleDrawer = () => {
-    setDrawer(!drawer);
-  };
-  // End Material UI
+  // const toggleDrawer = () => {
+  //   setDrawer(!drawer);
+  // };
+  // // End Material UI
 
   const history = useHistory();
   const user = useSelector((store) => store.user);
