@@ -18,6 +18,7 @@ function* getProviders() {
 
 function* selectProvider(action){
     try{
+        console.log(action.payload);
         const response = yield axios.get(`/api/provider/${action.payload}`);
 
         yield put({
