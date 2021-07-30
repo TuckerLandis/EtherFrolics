@@ -12,17 +12,26 @@ function Insurance () {
     // create an array that will render the insurance history subcomponents
     const [amountOfInsuranceHistories, setAmountOfInsuranceHistories] = useState([1]);
 
+    // state variable to track if at least 1 section
+    // of insurance data has been submitted to the DB
+    const [insuranceSubmitted, setInsuranceSubmitted] = useState(false);
+
     // create a function that will increase the amount of insurance histories
     function addInsuranceItem () {
         setAmountOfInsuranceHistories(amountOfInsuranceHistories => 
             [...amountOfInsuranceHistories, amountOfInsuranceHistories.length + 1]
         )
+
+        // insuranceSubmitted being true enables next button
+        setInsuranceSubmitted(true)
     }
 
     //send user to the next page but it is peer review... so may want to send them elsewhere
-    // const nextPage = () => {
-    //     history.push()
-    // }
+    const nextPage = () => {
+
+        history.push('/providerlandingpage');
+
+    }
 
     return(
         <div>
@@ -32,10 +41,12 @@ function Insurance () {
                 return (<InsuranceMultiRow addInsuranceItem={addInsuranceItem}/>)
             })}
 
-           {/* next button goes here */}
-            {/*<Button
+           
+            <Button
+            disabled={!insuranceSubmitted ? true : false}
             variant="contained"
-            onClick={}>NEXT</Button>*/}
+            color="primary"
+            onClick={nextPage}>NEXT</Button>
             
             {/* stepper goes here with props of which page */}
             
