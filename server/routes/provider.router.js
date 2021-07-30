@@ -214,9 +214,9 @@ router.put('/address', (req, res) => {
   let updatedAddress = req.body; 
   console.log('the updated address is', updatedAddress);
 
-  let queryText = `UPDATE "provider" SET "streetAddress" = $1, "city" = $2, "state" = $3, "zipCode" = $4 WHERE "user_id" = $5;`;
+  let queryText = `UPDATE "provider" SET "streetAddress" = $1, "city" = $2, "state" = $3, "zipCode" = $4 "phoneNumer" = $5 WHERE "user_id" = $6;`;
 
-  pool.query(queryText, [updatedAddress.streetAddress, updatedAddress.city, updatedAddress.state, updatedAddress.zipCode, req.user.id])
+  pool.query(queryText, [updatedAddress.streetAddress, updatedAddress.city, updatedAddress.state, updatedAddress.zipCode, updatedAddress.phone, req.user.id])
   .then(response => {
     console.log(response.rowCount);
     res.sendStatus(200)
