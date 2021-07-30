@@ -24,6 +24,9 @@ function WorkHistory() {
         setAmountOfWorkHistories(amountOfWorkHistories =>
             [...amountOfWorkHistories, amountOfWorkHistories.length + 1])
 
+        // workHistorySubmitted becoming true enables the next button
+        setWorkHistorySubmitted(true);
+
     }
 
     function handleChange(e) {
@@ -72,7 +75,7 @@ function WorkHistory() {
             {/* maps a state array to render relevant number of work history forms */}
             {amountOfWorkHistories.map(history => {
                 return (
-                    <WorkHistoryMultiRow addWorkHistoryItem={addWorkHistoryItem} setWorkHistorySubmitted={setWorkHistorySubmitted} /> // key={keyForWorkHistoryMultiRow} https://reactjs.org/docs/lists-and-keys.html
+                    <WorkHistoryMultiRow addWorkHistoryItem={addWorkHistoryItem} /> // key={keyForWorkHistoryMultiRow} https://reactjs.org/docs/lists-and-keys.html
                 )
             })}
 
