@@ -13,11 +13,19 @@ function MissionHistory () {
 
     const [amountOfMissionHistories, setAmountOfMissionHistories] = useState([1])
 
+    // state variable to track if at least 1 section
+    // of mission history data has been submitted to the DB
+    const [missionHistorySubmitted, setMissionHistorySubmitted] = useState(false);
+
     // increases the amount of mission history elements in the array above
     function addMissionHistoryItem() {
 
         setAmountOfMissionHistories(amountOfMissionHistories =>
             [...amountOfMissionHistories, amountOfMissionHistories.length + 1])
+
+        // missionHistorySubmitted set to true enables
+        // NEXT button to navigate to the next page
+        setMissionHistorySubmitted(true);
 
     }
 
@@ -63,7 +71,7 @@ function MissionHistory () {
                 )
             })}
 
-<button onClick={handleNext}>Next</button>
+        <button disabled={!missionHistorySubmitted ? true : false} onClick={handleNext}>Next</button>
 
             {/* stepper goes here with props of which page */}
 
