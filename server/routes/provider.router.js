@@ -214,7 +214,7 @@ router.put('/address', (req, res) => {
   let updatedAddress = req.body; 
   console.log('the updated address is', updatedAddress);
 
-  let queryText = `UPDATE "provider" SET "streetAddress" = $1, "city" = $2, "state" = $3, "zipCode" = $4 "phoneNumer" = $5 WHERE "user_id" = $6;`;
+  let queryText = `UPDATE "provider" SET "streetAddress" = $1, "city" = $2, "state" = $3, "zipCode" = $4, "phoneNumber" = $5 WHERE "user_id" = $6;`;
 
   pool.query(queryText, [updatedAddress.streetAddress, updatedAddress.city, updatedAddress.state, updatedAddress.zipCode, updatedAddress.phone, req.user.id])
   .then(response => {
@@ -420,5 +420,23 @@ router.post('/credentialhistory', async (req, res) => {
 
   // pesto/ben
 })
+
+  router.put('/completeregistration', (req, res) => {
+    console.log('completing registration for: ', req.user.id);
+
+    const queryText = `UPDATE "provider" SET "registrationComplete" = true
+    WHERE "provider".user_id = $1
+    ;`;
+
+    pool.query(queryText, [req.user.id])
+    .then(result => {
+      res.sendStatus(200)
+    })
+    .catch(error => {
+      console.log('error completing registration', error);
+      
+    })
+  })
+
 
 module.exports = router;
