@@ -74,6 +74,7 @@ CREATE TABLE "credential" (
 	"credential_id" serial PRIMARY KEY,
 	"licensingBoard" varchar(255),
 	"credentialName" varchar(255),
+	"liscenseNumber" int,
 	"dateInitial" DATE,
 	"dateRenewed" DATE,
 	"dateExpiring" DATE,
