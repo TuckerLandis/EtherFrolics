@@ -1,12 +1,13 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
 
 /**
  * GETs all providers for render on provider management general page
  */
-router.get('/', async (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
 
   const queryText = `SELECT "provider".* FROM "provider"
   JOIN "user" 
@@ -100,7 +101,7 @@ router.get('/:id', (req, res) => {
 /**
  * POST route for initial provider post from /generalinfo
  */
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
   
   console.log('Reached provider reg POST:', req.body);
   
@@ -141,7 +142,7 @@ router.post('/', (req, res) => {
   })
 });
 
-router.post('/workhistoryitem', (req, res) => {
+router.post('/workhistoryitem', rejectUnauthenticated, (req, res) => {
   // POST route code here
   console.log('Reached provider reg POST /workhistoryitem', req.body);
   // res.sendStatus(200)
@@ -187,7 +188,7 @@ router.post('/workhistoryitem', (req, res) => {
 /**
  * Takes a years of experience value from /workhistory and updates wthe relevant column in the provider table
  */
-router.put('/workhistory', (req, res) => {
+router.put('/workhistory', rejectUnauthenticated, (req, res) => {
   console.log('Reached provider PUT /workhistory', req.body);
 
   const provider = req.body
@@ -206,7 +207,7 @@ router.put('/workhistory', (req, res) => {
 })
 
 // Put request to the database to update the address info of the provider
-router.put('/address', (req, res) => {
+router.put('/address', rejectUnauthenticated, (req, res) => {
   console.log('Reached provider reg PUT /address', req.body);
 
   console.log(req.user.id);
@@ -229,7 +230,7 @@ router.put('/address', (req, res) => {
 /**
  * Takes an object from /education and posts it to the education table
  */
-router.post('/educationhistoryitem', (req, res) => {
+router.post('/educationhistoryitem', rejectUnauthenticated (req, res) => {
   console.log('Reached provider reg POST: educationhistory', req.body);
   const educationhistoryItem = req.body
 
@@ -261,7 +262,7 @@ router.post('/educationhistoryitem', (req, res) => {
     })
 })
 
-router.put('/lastmission', (req, res) => {
+router.put('/lastmission', rejectUnauthenticated, (req, res) => {
   console.log('reached provider reg PUT: lastmission', req.body);
   console.log(req);
 
@@ -286,7 +287,7 @@ router.put('/lastmission', (req, res) => {
     })
 })
 
-router.post('/missionhistoryitem', async (req, res) => {
+router.post('/missionhistoryitem', rejectUnauthenticated, async (req, res) => {
   console.log('Reached provider reg POST: missionHistory', req.body);
 
   // make connection to pool client 
@@ -341,7 +342,7 @@ router.post('/missionhistoryitem', async (req, res) => {
   }
 })
 
-router.post('/insuranceitem', (req, res) => {
+router.post('/insuranceitem', rejectUnauthenticated, (req, res) => {
   console.log('Reg.body in /insurance item is', req.body);
   console.log('user id is', req.user.id);
   let ins = req.body;
@@ -363,7 +364,7 @@ router.post('/insuranceitem', (req, res) => {
 })
 
 
-router.post('/credentialhistory', async (req, res) => {
+router.post('/credentialhistory', rejectUnauthenticated, async (req, res) => {
   console.log('Credential History POST for provider', req.body);
   
   // make a connection to pool client for transaction
@@ -421,7 +422,7 @@ router.post('/credentialhistory', async (req, res) => {
   // pesto/ben
 })
 
-  router.put('/completeregistration', (req, res) => {
+  router.put('/completeregistration', rejectUnauthenticated, (req, res) => {
     console.log('completing registration for: ', req.user.id);
 
     const queryText = `UPDATE "provider" SET "registrationComplete" = true
