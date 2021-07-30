@@ -366,16 +366,16 @@ router.post('/credentialhistory', async (req, res) => {
   const user_id = req.user.id;
 
   // variable for licensingBoard
-  const liscensingBoard = req.body.liscensingBoard;
+  const licensingBoard = req.body.licensingBoard;
 
   // variable for credentialName
   const credentialName = req.body.credentialTaxonomy;
 
-  // variable for liscenseNumber
-  const liscenseNumber = req.body.liscenseNumber;
+  // variable for licenseNumber
+  const licenseNumber = req.body.licenseNumber;
 
   // variable for dateInitial
-  const dateInitial = req.body.dateRecieved;
+  const dateInitial = req.body.dateReceived;
 
   // variable for dateRenewed
   const dateRenewed = req.body.dateRenewed;
@@ -384,7 +384,7 @@ router.post('/credentialhistory', async (req, res) => {
   const dateExpiring = req.body.dateExpired;
 
   const credentialInsertStatement = `
-    INSERT INTO "credential" ("licensingBoard", "credentialName", "liscenseNumber", "dateInitial", "dateRenewed", "dateExpiring", "user_id")
+    INSERT INTO "credential" ("licensingBoard", "credentialName", "licenseNumber", "dateInitial", "dateRenewed", "dateExpiring", "user_id")
     VALUES ($1, $2, $3, $4, $5, $6, $7);
   `;
 
@@ -392,7 +392,7 @@ router.post('/credentialhistory', async (req, res) => {
 
     await client.query('BEGIN;');
 
-    await client.query(credentialInsertStatement, [liscensingBoard, credentialName, liscenseNumber, dateInitial, dateRenewed, dateExpiring, user_id]);
+    await client.query(credentialInsertStatement, [licensingBoard, credentialName, licenseNumber, dateInitial, dateRenewed, dateExpiring, user_id]);
 
     await client.query('COMMIT;');
 
