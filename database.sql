@@ -17,6 +17,7 @@ CREATE TABLE "provider" (
 	"lastName" varchar(255),
 	"DOB" DATE,
 	"emailAddress" varchar(50),
+	"phoneNumber" varchar(11),
 	"providerRole" varchar(255),
 	"streetAddress" varchar(255),
 	"city" varchar(255),
@@ -31,7 +32,8 @@ CREATE TABLE "provider" (
 	"availability" DATE,
 	"peerReviews" TEXT [],
 	"missionReviews" TEXT [],
-	"publications" TEXT []
+	"publications" TEXT [],
+	"registrationComplete" BOOLEAN default FALSE
 );
 
 
