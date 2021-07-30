@@ -13,6 +13,10 @@ function GeneralInfoAddress () {
     const [state, setState] = useState('')
     const [zip, setZip] = useState('')
 
+    // state variable to track if all inputs
+    // have content
+    const [addressFormComplete, setAddressFormComplete] = useState(false); 
+
     function handleNext() {
 
         dispatch({
@@ -43,6 +47,11 @@ function GeneralInfoAddress () {
             setZip(e.target.value)
             break
         }
+        if (streetAddress != '' && city != '' && state != '' && zip != '') {
+            setAddressFormComplete(true);
+        } else {
+            setAddressFormComplete(false)
+        }
     }
 
     return(
@@ -61,7 +70,7 @@ function GeneralInfoAddress () {
             <label htmlFor="zipInput">Zip Code</label>
             <TextField type="text" name="zip" id="zipInput" value={zip} onChange={handleChange}/>
 
-            <button type="submit">Next</button>
+            <button disabled={!addressFormComplete ? true : false} type="submit">Next</button>
 
             </form>
             
