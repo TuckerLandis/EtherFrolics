@@ -115,3 +115,57 @@ CREATE TABLE "mission" (
 	"providerReviews" varchar (10000)[],
 	"organization_id" int REFERENCES "organization"
 );
+
+SELECT 
+"user".id, "user".username, 
+"provider".provider_id, 
+"provider"."firstName", 
+"provider"."lastName", 
+"provider"."DOB", 
+"provider"."emailAddress", 
+"provider"."providerRole", 
+"provider"."streetAddress", 
+"provider".city, 
+"provider".state, 
+"provider"."zipCode", 
+"provider"."soloProvider", 
+"provider".verified, 
+"provider"."recruiterOpt", 
+"provider"."lastMission", 
+"provider"."yearsExperience", 
+"provider"."validPassport", 
+"provider".availability, 
+"provider"."peerReviews", 
+"provider"."missionReviews", 
+"provider".publications, 
+(SELECT JSON_AGG(providerCredentials)
+	FROM
+		(SELECT "credential_id", "licensingBoard", "credentialName", "liscenseNumber", "dateInitial", "dateRenewed", "dateExpiring", "credentialImageKey" 
+		FROM "credential"
+		WHERE "credential".user_id = "user".id) AS providerCredentials) AS credential_array, 
+(SELECT JSON_AGG(providerEducation)
+	FROM 
+		(SELECT "education_id", "institution", "startDate", "endDate", "degree", "degreeImageKey"
+		FROM "education"
+		WHERE "education".user_id = "user".id) AS providerEducation) AS education_array, 
+(SELECT JSON_AGG(providerInsurance)
+	FROM
+		(SELECT "insurance_id", "insuranceType", "insuranceProvider", "state", "dateInitial", "dateRenewed", "dateExpiring", "policyNumber", 		"insuranceImageKey"
+		FROM "insurance"
+		WHERE "insurance".user_id = "user".id) AS providerInsurance) AS insurance_array, 
+(SELECT JSON_AGG(providerMissionExperience)
+	FROM
+		(SELECT "missionExperience_id", "organizationName", "location", "startDate", "endDate", "referenceName", "referencePhone", "missionExperienceImageKey"
+		FROM "mission_experience"
+		WHERE "mission_experience".user_id = "user".id) AS providerMissionExperience) AS mission_experience_array, 
+(SELECT JSON_AGG(providerWorkExperience)
+	FROM
+		(SELECT "workplace", "jobTitle", "startDate", "endDate", "referenceName", "referencePhone", "referenceEmail", "resumeImageKey"
+		FROM "work_experience"
+		WHERE "work_experience".user_id = "user".id) AS providerWorkExperience) AS work_experience_array
+	FROM "user"
+	JOIN "provider" 
+	ON "user".id = "provider".user_id
+	WHERE "user".authorization = 1
+	GROUP BY "user".id, "user".username, "provider".provider_id
+	ORDER BY "provider".verified;
