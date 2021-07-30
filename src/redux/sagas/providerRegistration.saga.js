@@ -70,7 +70,17 @@ function* addInsuranceItem (action) {
 
 
 
+function* completeRegistration (action) {
+  console.log('completing registration');
 
+  try {
+    yield axios.put('/api/provider/completeregistration')
+  } catch (error) {
+    console.log('error completing registration', error);
+    
+  }
+  
+}
 
 
 
@@ -99,6 +109,7 @@ function* providerRegistrationSaga() {
 
     yield takeLatest('ADD_CREDENTIAL_HISTORY_DATA', addCredentialHistoryData);
     yield takeLatest('ADD_INSURANCE_ITEM', addInsuranceItem);
+    yield takeLatest('COMPLETE_REGISTRATION', completeRegistration)
    
   }
   

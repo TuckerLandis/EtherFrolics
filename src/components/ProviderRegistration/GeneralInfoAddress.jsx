@@ -8,6 +8,8 @@ function GeneralInfoAddress () {
     const dispatch = useDispatch();
     const history = useHistory()
 
+
+    const [phone, setPhone] = useState('')
     const [streetAddress, setStreetAddress] = useState('')
     const [city, setCity] = useState('')
     const [state, setState] = useState('')
@@ -46,8 +48,10 @@ function GeneralInfoAddress () {
             case 'zipInput' : 
             setZip(e.target.value)
             break
+            case 'phoneInput' :
+            setPhone(e.target.value)
         }
-        if (streetAddress != '' && city != '' && state != '' && zip != '') {
+        if (streetAddress != '' && city != '' && state != '' && zip != '' && phone !='') {
             setAddressFormComplete(true);
         } else {
             setAddressFormComplete(false)
@@ -58,6 +62,10 @@ function GeneralInfoAddress () {
         <div>
 
             <form onSubmit={handleNext}>
+
+            <label htmlFor="phoneInput">Phone Number</label>
+            <TextField type="text" name="phone" id="phoneInput" value={phone} onChange={handleChange}/>
+
             <label htmlFor="streetAddressInput">Street Address</label>
             <TextField type="text" name="streetAddress" id="streetAddressInput" value={streetAddress} onChange={handleChange} />
 

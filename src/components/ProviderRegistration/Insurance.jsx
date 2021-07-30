@@ -28,6 +28,11 @@ function Insurance () {
 
     //send user to the next page but it is peer review... so may want to send them elsewhere
     const nextPage = () => {
+        
+        dispatch({
+            type: 'COMPLETE_REGISTRATION'
+
+        })
 
         history.push('/providerlandingpage');
 
