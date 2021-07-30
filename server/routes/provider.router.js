@@ -230,7 +230,7 @@ router.put('/address', rejectUnauthenticated, (req, res) => {
 /**
  * Takes an object from /education and posts it to the education table
  */
-router.post('/educationhistoryitem', rejectUnauthenticated (req, res) => {
+router.post('/educationhistoryitem', rejectUnauthenticated, (req, res) => {
   console.log('Reached provider reg POST: educationhistory', req.body);
   const educationhistoryItem = req.body
 
