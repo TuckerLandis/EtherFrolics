@@ -118,6 +118,8 @@ CREATE TABLE "mission" (
 	"organization_id" int REFERENCES "organization"
 );
 
+-- Get request for an idividual provider
+
 SELECT 
 "user".id, "user".username, 
 "provider".provider_id, 
