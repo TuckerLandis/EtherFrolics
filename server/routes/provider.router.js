@@ -2,93 +2,99 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
+
 /**
- * GET route template
+ * GETs all providers for render on provider management general page
  */
 router.get('/', async (req, res) => {
-  // GET route code here
-  // console.log('got to provider GET 🧍‍♂️');
-  // res.send('🧍‍♂️');
 
-  const queryText = `
-  SELECT "provider".*,
-  "credential".*,
-  "education".*,
-  "insurance".*,
-  "mission_experience".*,
-  "work_experience".*
-  FROM "provider"
-  FULL JOIN "credential"
-  ON "provider".user_id = "credential".user_id
-  FULL JOIN "education"
-  ON "education".user_id = "provider".user_id
-  FULL JOIN "insurance"
-  ON "insurance".user_id = "provider".user_id
-  FULL JOIN "mission_experience"
-  ON "mission_experience".user_id = "provider".user_id
-  FULL JOIN "work_experience"
-  ON "work_experience".user_id = "provider".user_id
-  FULL JOIN "user"
+  const queryText = `SELECT "provider".* FROM "provider"
+  JOIN "user" 
   ON "user".id = "provider".user_id
-  WHERE "user".authorization = 1;
-  `;
+  WHERE "user".authorization = 1;`;
 
-  try {
-    const result = await pool.query(queryText);
-    console.log('provider get result: ', result.rows);
-    res.send(result.rows);
-  }
-  catch (err) {
-    console.log('Error getting provider info: ', err);
-    res.sendStatus(500);
-  }
-
-});
+  pool.query(queryText)
+  .then(result => {
+    console.log('prov mgmt get: ');
+    
+    res.send(result.rows)
+  })
+  .catch(error => {
+    console.log('error in prov mgmt get: ');
+    res.sendStatus(500)
+    
+  })
+})
 
 /**
- * GET featured provider route template
+ * GETs a provider's data for rendering on provider management individual and provider landing page
+ * 
  */
-router.get('/:id', async (req, res) => {
-  // console.log('got to selected provider GET 👨🏻‍⚕️');
-  // res.send('👨🏻‍⚕️');
+router.get('/:id', (req, res) => {
 
-  console.log('selected provider req.params.id: ', req.params.id);
+  const queryText = `SELECT 
+  "user".id, "user".username, 
+  "provider".provider_id, 
+  "provider"."firstName", 
+  "provider"."lastName", 
+  "provider"."DOB", 
+  "provider"."emailAddress", 
+  "provider"."providerRole", 
+  "provider"."streetAddress", 
+  "provider".city, 
+  "provider".state, 
+  "provider"."zipCode", 
+  "provider"."soloProvider", 
+  "provider".verified, 
+  "provider"."recruiterOpt", 
+  "provider"."lastMission", 
+  "provider"."yearsExperience", 
+  "provider"."validPassport", 
+  "provider".availability, 
+  "provider"."peerReviews", 
+  "provider"."missionReviews", 
+  "provider".publications, 
+  (SELECT JSON_AGG(providerCredentials)
+    FROM
+      (SELECT "credential_id", "licensingBoard", "credentialName", "licenseNumber", "dateInitial", "dateRenewed", "dateExpiring", "credentialImageKey" 
+      FROM "credential"
+      WHERE "credential".user_id = "user".id) AS providerCredentials) AS credential_array, 
+  (SELECT JSON_AGG(providerEducation)
+    FROM 
+      (SELECT "education_id", "institution", "startDate", "endDate", "degree", "degreeImageKey"
+      FROM "education"
+      WHERE "education".user_id = "user".id) AS providerEducation) AS education_array, 
+  (SELECT JSON_AGG(providerInsurance)
+    FROM
+      (SELECT "insurance_id", "insuranceType", "insuranceProvider", "state", "dateInitial", "dateRenewed", "dateExpiring", "policyNumber", 		"insuranceImageKey"
+      FROM "insurance"
+      WHERE "insurance".user_id = "user".id) AS providerInsurance) AS insurance_array, 
+  (SELECT JSON_AGG(providerMissionExperience)
+    FROM
+      (SELECT "missionExperience_id", "organizationName", "location", "startDate", "endDate", "referenceName", "referencePhone", "missionExperienceImageKey"
+      FROM "mission_experience"
+      WHERE "mission_experience".user_id = "user".id) AS providerMissionExperience) AS mission_experience_array, 
+  (SELECT JSON_AGG(providerWorkExperience)
+    FROM
+      (SELECT "workplace", "jobTitle", "startDate", "endDate", "referenceName", "referencePhone", "referenceEmail", "resumeImageKey"
+      FROM "work_experience"
+      WHERE "work_experience".user_id = "user".id) AS providerWorkExperience) AS work_experience_array
+    FROM "user"
+    JOIN "provider" 
+    ON "user".id = "provider".user_id
+    WHERE "user".id = $1
+    GROUP BY "user".id, "user".username, "provider".provider_id
+    ORDER BY "provider".verified;`;
 
-
-  const queryText = `
-  SELECT "provider".*,
-  "credential".*,
-  "education".*,
-  "insurance".*,
-  "mission_experience".*,
-  "work_experience".*
-  FROM "provider"
-  JOIN "credential"
-  ON "provider".user_id = "credential".user_id
-  JOIN "education"
-  ON "education".user_id = "provider".user_id
-  JOIN "insurance"
-  ON "insurance".user_id = "provider".user_id
-  JOIN "mission_experience"
-  ON "mission_experience".user_id = "provider".user_id
-  JOIN "work_experience"
-  ON "work_experience".user_id = "provider".user_id
-  JOIN "user"
-  ON "user".id = "provider".user_id
-  WHERE "user".id = $1;
-  `;
-
-  try {
-    const result = await pool.query(queryText, [req.params.id]);
-    console.log('selected provider get result: ', result.rows);
-    res.send(result.rows);
-  }
-  catch (err) {
-    console.error('Error getting selected provider info: ', err);
-    res.sendStatus(500);
-  }
-
-});
+    pool.query(queryText, [req.params.id])
+    .then(result => {
+      res.send(result.rows)
+    })
+    .catch(error => {
+      console.log('error in individual provider get');
+      
+    })
+})
 
 /**
  * POST route for initial provider post from /generalinfo
