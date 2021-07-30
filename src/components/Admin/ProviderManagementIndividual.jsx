@@ -104,18 +104,33 @@ function ProviderManagementIndividual() {
                         </div>
                         <div>
                             <h1>Provider Credentials</h1>
+                            {provider.credential_array.map(credential => {
+                                return <p>{credential.credentialName}</p> // needs to be flesched out, but gets data back
+                            })}
                         </div>
                         <div>
                             <h1>Provider Work History</h1>
+                            {provider.work_experience_array.map(workHistory => {
+                                return <p>{workHistory.workplace}</p> // needs to be flesched out, but gets data back
+                            })}
                         </div>
                         <div>
                             <h1>Provider Mission History</h1>
+                            {provider.mission_experience_array.map(missionExp => {
+                                return <p>{missionExp.location}</p> // needs to be flesched out, but gets data back
+                            })}
                         </div>
                         <div>
                             <h1>Provider Education</h1>
+                            {provider.education_array.map(education => {
+                                return <p>{education.institution}</p> // needs to be flesched out, but gets data back
+                            })}
                         </div>
                         <div>
                             <h1>Provider Insurance</h1>
+                            {provider.insurance_array.map(insurance => {
+                                return <p>{insurance.insuranceProvider}</p> // needs to be flesched out, but gets data back
+                            })}
                         </div>
                     </div>
 
