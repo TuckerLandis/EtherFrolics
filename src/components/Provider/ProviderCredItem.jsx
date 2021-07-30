@@ -4,8 +4,7 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
-function ProviderItem({ provider }) {
-
+function ProviderCredItem({ provider }) {
 
     return (
         <div>
@@ -13,11 +12,11 @@ function ProviderItem({ provider }) {
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                 >
-                    <Typography>Name</Typography>
+                    <Typography>Credential Name</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        {provider[0]?.firstName} {provider[0]?.lastName}
+                        {provider[0]?.credentialName}
                     </Typography>
                 </AccordionDetails>
             </Accordion>
@@ -26,11 +25,11 @@ function ProviderItem({ provider }) {
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                 >
-                    <Typography>Provider Role</Typography>
+                    <Typography>Licensing Board</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        {provider[0]?.providerRole}
+                        {provider[0]?.licensingBoard}
                     </Typography>
                 </AccordionDetails>
             </Accordion>
@@ -39,11 +38,11 @@ function ProviderItem({ provider }) {
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                 >
-                    <Typography>Phone Number</Typography>
+                    <Typography>License Number</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-            
+                        {provider[0]?.licenseNumber}
                     </Typography>
                 </AccordionDetails>
             </Accordion>
@@ -52,22 +51,48 @@ function ProviderItem({ provider }) {
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                 >
-                    <Typography>Email</Typography>
+                    <Typography>Issued Date</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        {provider[0]?.emailAddress}
+                        {provider[0]?.dateInitial}
                     </Typography>
                 </AccordionDetails>
             </Accordion>
+
+            <Accordion>
+                <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                >
+                    <Typography>Date Renewed</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                    <Typography>
+                        {provider[0]?.dateRenewed}
+                    </Typography>
+                </AccordionDetails>
+            </Accordion>
+
+            <Accordion>
+                <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                >
+                    <Typography>Expiration Date</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                    <Typography>
+                        {provider[0]?.dateExpiring}
+                    </Typography>
+                </AccordionDetails>
+            </Accordion>
+
+
+
+
 
 
         </div>
     )
 }
 
-
-
-
-
-export default ProviderItem;
+export default ProviderCredItem;

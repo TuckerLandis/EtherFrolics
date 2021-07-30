@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
-import ProviderItem from './ProviderItem';
+import ProviderGenItem from './ProviderGenItem';
+import ProviderCredItem from './ProviderCredItem';
 
 /*
 CHECKLIST
@@ -42,20 +43,17 @@ function ProviderLandingPage() {
     const history = useHistory();
 
     const user = useSelector(store => store.user);
-    //bring in the provider name from the reducer
-    const provider = useSelector(store => store.providers)
-
+    //bring in the provider data from the reducer
+    const provider = useSelector(store => store.selectedProvider)
+    //bring in the credential data from the reducer
 
     useEffect( () => {
-        console.log(user);
         dispatch({
             type: 'SELECT_PROVIDER',
             payload: user.id
         })
     }, []);
 
-
-    const [providerRegistered, setProviderRegistered] = useState(false);
 
     //create a function so that the provider can view upcoming missions
     const viewMissions = () => {
@@ -64,15 +62,14 @@ function ProviderLandingPage() {
 
     //create a function so that the provider can register
     const providerRegister = () => {
-        setProviderRegistered(true);
         history.push('/generalInfo')
     }
 
     return (
         <div>
-            <h2>Welcome,  {provider[0]?.firstName} {provider[0]?.lastName} </h2>
+            <h2>Welcome,  {user.username} </h2>
 
-            {providerRegistered ? (
+            {provider[0]?.registrationComplete ? (
                 <Button
                     variant="contained"
                     onClick={viewMissions}>View Missions</Button>
@@ -82,15 +79,36 @@ function ProviderLandingPage() {
                     onClick={providerRegister}>Register</Button>
             )}
 
+            {provider[0]?.registrationComplete ? (
+            <div>
             <h2>General Info</h2>
-
+        
             {provider.map (() => {
-                return (<ProviderItem provider={provider}/>)
+                 return (<ProviderGenItem provider={provider}/>)
             })}
 
+            <Button
+            variant="contained">Edit General Info</Button>
+            </div>
+            ) : (
+                <h3>Please register to view upcoming missions</h3>
+            )}
 
+            {provider[0]?.registrationComplete ? (
+            <div>
+            <h2>Credential Info</h2>
+        
+            {provider.map (() => {
+                 return (<ProviderCredItem provider={provider}/>)
+            })}
+            <Button
+            variant="contained">Edit Credentials</Button>
+            </div>
+            ) : (
+            <p></p>
+
+            )}  
         </div>
-
     )
 }
 
