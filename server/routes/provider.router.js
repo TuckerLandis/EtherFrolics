@@ -18,17 +18,17 @@ router.get('/', async (req, res) => {
   "mission_experience".*,
   "work_experience".*
   FROM "provider"
-  JOIN "credential"
+  FULL JOIN "credential"
   ON "provider".user_id = "credential".user_id
-  JOIN "education"
+  FULL JOIN "education"
   ON "education".user_id = "provider".user_id
-  JOIN "insurance"
+  FULL JOIN "insurance"
   ON "insurance".user_id = "provider".user_id
-  JOIN "mission_experience"
+  FULL JOIN "mission_experience"
   ON "mission_experience".user_id = "provider".user_id
-  JOIN "work_experience"
+  FULL JOIN "work_experience"
   ON "work_experience".user_id = "provider".user_id
-  JOIN "user"
+  FULL JOIN "user"
   ON "user".id = "provider".user_id
   WHERE "user".authorization = 1;
   `;
@@ -360,16 +360,16 @@ router.post('/credentialhistory', async (req, res) => {
   const user_id = req.user.id;
 
   // variable for licensingBoard
-  const liscensingBoard = req.body.liscensingBoard;
+  const licensingBoard = req.body.licensingBoard;
 
   // variable for credentialName
   const credentialName = req.body.credentialTaxonomy;
 
-  // variable for liscenseNumber
-  const liscenseNumber = req.body.liscenseNumber;
+  // variable for licenseNumber
+  const licenseNumber = req.body.licenseNumber;
 
   // variable for dateInitial
-  const dateInitial = req.body.dateRecieved;
+  const dateInitial = req.body.dateReceived;
 
   // variable for dateRenewed
   const dateRenewed = req.body.dateRenewed;
@@ -378,7 +378,7 @@ router.post('/credentialhistory', async (req, res) => {
   const dateExpiring = req.body.dateExpired;
 
   const credentialInsertStatement = `
-    INSERT INTO "credential" ("licensingBoard", "credentialName", "liscenseNumber", "dateInitial", "dateRenewed", "dateExpiring", "user_id")
+    INSERT INTO "credential" ("licensingBoard", "credentialName", "licenseNumber", "dateInitial", "dateRenewed", "dateExpiring", "user_id")
     VALUES ($1, $2, $3, $4, $5, $6, $7);
   `;
 
@@ -386,7 +386,7 @@ router.post('/credentialhistory', async (req, res) => {
 
     await client.query('BEGIN;');
 
-    await client.query(credentialInsertStatement, [liscensingBoard, credentialName, liscenseNumber, dateInitial, dateRenewed, dateExpiring, user_id]);
+    await client.query(credentialInsertStatement, [licensingBoard, credentialName, licenseNumber, dateInitial, dateRenewed, dateExpiring, user_id]);
 
     await client.query('COMMIT;');
 
