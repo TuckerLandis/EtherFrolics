@@ -59,7 +59,6 @@ function ProviderLandingPage() {
 
     //create a function so that the provider can view upcoming missions
     const viewMissions = () => {
-        console.log(provider);
         history.push('/missions')
     }
 
@@ -82,6 +81,8 @@ function ProviderLandingPage() {
                     variant="contained"
                     onClick={providerRegister}>Register</Button>
             )}
+
+            <h2>General Info</h2>
 
             {provider.map (() => {
                 return (<ProviderItem provider={provider}/>)

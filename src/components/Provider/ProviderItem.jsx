@@ -1,12 +1,67 @@
+import Accordion from '@material-ui/core/Accordion';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import Typography from '@material-ui/core/Typography';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
+function ProviderItem({ provider }) {
 
-
-function ProviderItem ({provider}) {
-    
 
     return (
         <div>
-            <h2>Hello</h2>
+            <Accordion>
+                <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                >
+                    <Typography>Name</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                    <Typography>
+                        {provider[0]?.firstName} {provider[0]?.lastName}
+                    </Typography>
+                </AccordionDetails>
+            </Accordion>
+
+            <Accordion>
+                <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                >
+                    <Typography>Provider Role</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                    <Typography>
+                        {provider[0]?.providerRole}
+                    </Typography>
+                </AccordionDetails>
+            </Accordion>
+
+            <Accordion>
+                <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                >
+                    <Typography>Phone Number</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                    <Typography>
+            
+                    </Typography>
+                </AccordionDetails>
+            </Accordion>
+
+            <Accordion>
+                <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                >
+                    <Typography>Email</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                    <Typography>
+                        {provider[0]?.emailAddress}
+                    </Typography>
+                </AccordionDetails>
+            </Accordion>
+
+
         </div>
     )
 }
