@@ -141,10 +141,11 @@ SELECT
 "provider".availability, 
 "provider"."peerReviews", 
 "provider"."missionReviews", 
-"provider".publications, 
+"provider".publications,
+"provider"."registrationComplete", 
 (SELECT JSON_AGG(providerCredentials)
 	FROM
-		(SELECT "credential_id", "licensingBoard", "credentialName", "liscenseNumber", "dateInitial", "dateRenewed", "dateExpiring", "credentialImageKey" 
+		(SELECT "credential_id", "licensingBoard", "credentialName", "licenseNumber", "dateInitial", "dateRenewed", "dateExpiring", "credentialImageKey" 
 		FROM "credential"
 		WHERE "credential".user_id = "user".id) AS providerCredentials) AS credential_array, 
 (SELECT JSON_AGG(providerEducation)

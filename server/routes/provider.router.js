@@ -53,7 +53,8 @@ router.get('/:id', (req, res) => {
   "provider".availability, 
   "provider"."peerReviews", 
   "provider"."missionReviews", 
-  "provider".publications, 
+  "provider".publications,
+  "provider"."registrationComplete",
   (SELECT JSON_AGG(providerCredentials)
     FROM
       (SELECT "credential_id", "licensingBoard", "credentialName", "licenseNumber", "dateInitial", "dateRenewed", "dateExpiring", "credentialImageKey" 
