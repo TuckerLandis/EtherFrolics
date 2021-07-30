@@ -11,11 +11,18 @@ function Education() {
     // state array on which education history sub components are rendered
     const [amountOfEducationHistories, setAmountOfEducationHistories] = useState([1])
 
+    // state variable to track if at least 1 section
+    // of education data has been submitted to the DB
+    const [educationSubmitted, setEducationSubmitted] = useState(false);
+
     // increases the amount of education history elements in the array above
     function addEducationHistoryItem() {
 
         setAmountOfEducationHistories(amountOfEducationHistories =>
             [...amountOfEducationHistories, amountOfEducationHistories.length + 1])
+
+        // education submitted set to true renders next button enabled
+        setEducationSubmitted(true);
 
     }
 
@@ -35,7 +42,7 @@ function Education() {
                 )
             })}
 
-            <button onClick={handleNext}>Next</button>
+            <button disabled={!educationSubmitted ? true : false} onClick={handleNext}>Next</button>
 
             {/* stepper goes here with props of which page */}
 
