@@ -13,6 +13,10 @@ function WorkHistory() {
     const [amountOfWorkHistories, setAmountOfWorkHistories] = useState([1])
     // let keyForWorkHistoryMultiRow = 1
 
+    // state variable to track if at least 1 section
+    // of work history data has been submitted to the DB
+    const [workHistorySubmitted, setWorkHistorySubmitted] = useState(false);
+
     // increases the amount of work history elements in the array above
     function addWorkHistoryItem() {
 
@@ -68,13 +72,13 @@ function WorkHistory() {
             {/* maps a state array to render relevant number of work history forms */}
             {amountOfWorkHistories.map(history => {
                 return (
-                    <WorkHistoryMultiRow addWorkHistoryItem={addWorkHistoryItem} /> // key={keyForWorkHistoryMultiRow} https://reactjs.org/docs/lists-and-keys.html
+                    <WorkHistoryMultiRow addWorkHistoryItem={addWorkHistoryItem} setWorkHistorySubmitted={setWorkHistorySubmitted} /> // key={keyForWorkHistoryMultiRow} https://reactjs.org/docs/lists-and-keys.html
                 )
             })}
 
 
 
-            <button onClick={handleNext}> Next </button>
+            <button disabled={!workHistorySubmitted ? true : false} onClick={handleNext}> Next </button>
 
             {/* stepper goes here with props of which page */}
 
