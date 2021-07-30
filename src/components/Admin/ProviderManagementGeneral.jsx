@@ -70,6 +70,9 @@ function ProviderManagementGeneral() {
     // need to integrate icons into list for verified/unverified and flag icon for expiring credentials warning
     // need to add functionality to icons
 
+    //const verifi
+    //
+
     return (
 
         <List className={classes.root} subheader={<li />}>
