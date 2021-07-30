@@ -20,7 +20,7 @@ function GeneralInfo() {
 
     // state variable to track if all inputs
     // have content
-    const [addressFormComplete, setAddressFormComplete] = useState(false); 
+    const [generalInfoFormComplete, setGeneralInfoFormComplete] = useState(false); 
 
     /**
      * Takes in an event from all inputs, changes their state variable
@@ -58,6 +58,14 @@ function GeneralInfo() {
             case "emailAddressInput":
                 setEmailAddress(e.target.value)
                 break
+        }
+
+        if (firstName != '' && lastName != '' && dob != '' /*&& providerRole != ''*/ && validPassport != '' && soleProvider != '' && emailAddress != ''){
+            console.log('in if');
+            setGeneralInfoFormComplete(true);
+        } else {
+            console.log('in else');
+            setGeneralInfoFormComplete(false);
         }
     }
 
@@ -149,7 +157,7 @@ function GeneralInfo() {
                 <TextField label="Email Address" required type="text" id="emailAddressInput" value={emailAddress}
                 onChange={handleChange} variant="outlined"/>
 
-                <button type="submit">Next</button>
+                <button disabled={!generalInfoFormComplete ? true : false} type="submit">Next</button>
             </form>
 
 
