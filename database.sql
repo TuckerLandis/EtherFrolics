@@ -74,7 +74,7 @@ CREATE TABLE "credential" (
 	"credential_id" serial PRIMARY KEY,
 	"licensingBoard" varchar(255),
 	"credentialName" varchar(255),
-	"liscenseNumber" int,
+	"licenseNumber" int,
 	"dateInitial" DATE,
 	"dateRenewed" DATE,
 	"dateExpiring" DATE,
@@ -95,6 +95,14 @@ CREATE TABLE "insurance" (
 	"user_id" int REFERENCES "user"
 );
 
+CREATE TABLE "organization" (
+	"organization_id" serial PRIMARY KEY,
+	"name" varchar(255),
+	"contactName" varchar(255),
+	"contactPostion" varchar(255),
+	"contactPhone" varchar(12)
+);
+
 CREATE TABLE "mission" (
 	"mission_id" serial PRIMARY KEY,
 	"name" varchar(255),
@@ -106,12 +114,4 @@ CREATE TABLE "mission" (
 	"missionLink" TEXT,
 	"providerReviews" varchar (10000)[],
 	"organization_id" int REFERENCES "organization"
-);
-
-CREATE TABLE "organization" (
-	"organization_id" serial PRIMARY KEY,
-	"name" varchar(255),
-	"contactName" varchar(255),
-	"contactPostion" varchar(255),
-	"contactPhone" varchar(12)
 );
