@@ -36,22 +36,24 @@ CHECKLIST
 
 */
 
-import React, { useEffect } from 'react';
-
-import MissionTable from '../Mission/MissionTable';
 
 function ProviderLandingPage() {
     const dispatch = useDispatch();
     const history = useHistory();
 
+    const user = useSelector(store => store.user);
+    //bring in the provider name from the reducer
+    const provider = useSelector(store => store.providers)
+
+
     useEffect( () => {
+        console.log(user);
         dispatch({
-            type: 'GET_PROVIDERS'
+            type: 'SELECT_PROVIDER',
+            payload: user.id
         })
     }, []);
 
-    //bring in the provider name from the reducer
-    const provider = useSelector(store => store.providers);
 
     const [providerRegistered, setProviderRegistered] = useState(false);
 
@@ -69,7 +71,7 @@ function ProviderLandingPage() {
 
     return (
         <div>
-            <h2>Welcome, {provider.firstName} {provider.lastName} {/* might need to change this aroung */} </h2>
+            <h2>Welcome,  {provider[0]?.firstName} {provider[0]?.lastName} </h2>
 
             {providerRegistered ? (
                 <Button
