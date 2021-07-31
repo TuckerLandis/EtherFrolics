@@ -95,7 +95,10 @@ function GeneralInfo() {
         dispatch({
             type: 'POST_PROVIDER_GENERAL',
             payload: newProviderGeneralInfo
+            // saga, key oncomplete - do history.push
         })
+
+
 
         history.push('/generalinfoaddress')
     }

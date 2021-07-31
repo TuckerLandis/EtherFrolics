@@ -1,13 +1,13 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
-const { rejectUnauthenticated } = require('../modules/authentication-middleware');
+const { rejectUnauthenticated, rejectNonAdmin } = require('../modules/authentication-middleware');
 
 
 /**
  * GETs all providers for render on provider management general page
  */
-router.get('/', rejectUnauthenticated, (req, res) => {
+router.get('/', rejectNonAdmin, (req, res) => {
 
   const queryText = `SELECT "provider".* FROM "provider"
   JOIN "user" 
@@ -28,10 +28,11 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 })
 
 /**
- * GETs a provider's data for rendering on provider management individual and provider landing page
+ * GETs a provider's data for rendering on provider management individual
+ * rejects non admins
  * 
  */
-router.get('/:id', (req, res) => {
+router.get('/ind/:id', rejectNonAdmin, (req, res) => {
 
   const queryText = `SELECT 
   "user".id, "user".username, 
@@ -93,7 +94,82 @@ router.get('/:id', (req, res) => {
       res.send(result.rows)
     })
     .catch(error => {
-      console.log('error in individual provider get');
+      console.log('error in individual provider get', error);
+      
+    })
+})
+
+
+/**
+ * GETs a provider's data for rendering onprovider landing page
+ * 
+ */
+ router.get('/landing', rejectUnauthenticated, (req, res) => {
+
+  console.log('got to providerLanding GET');
+  
+
+  const queryText = `SELECT 
+  "user".id, "user".username, 
+  "provider".provider_id, 
+  "provider"."firstName", 
+  "provider"."lastName", 
+  "provider"."DOB", 
+  "provider"."emailAddress", 
+  "provider"."providerRole", 
+  "provider"."streetAddress", 
+  "provider".city, 
+  "provider".state, 
+  "provider"."zipCode", 
+  "provider"."soloProvider", 
+  "provider".verified, 
+  "provider"."recruiterOpt", 
+  "provider"."lastMission", 
+  "provider"."yearsExperience", 
+  "provider"."validPassport", 
+  "provider".availability, 
+  "provider"."peerReviews", 
+  "provider"."missionReviews", 
+  "provider".publications,
+  "provider"."registrationComplete",
+  (SELECT JSON_AGG(providerCredentials)
+    FROM
+      (SELECT "credential_id", "licensingBoard", "credentialName", "licenseNumber", "dateInitial", "dateRenewed", "dateExpiring", "credentialImageKey" 
+      FROM "credential"
+      WHERE "credential".user_id = "user".id) AS providerCredentials) AS credential_array, 
+  (SELECT JSON_AGG(providerEducation)
+    FROM 
+      (SELECT "education_id", "institution", "startDate", "endDate", "degree", "degreeImageKey"
+      FROM "education"
+      WHERE "education".user_id = "user".id) AS providerEducation) AS education_array, 
+  (SELECT JSON_AGG(providerInsurance)
+    FROM
+      (SELECT "insurance_id", "insuranceType", "insuranceProvider", "state", "dateInitial", "dateRenewed", "dateExpiring", "policyNumber", 		"insuranceImageKey"
+      FROM "insurance"
+      WHERE "insurance".user_id = "user".id) AS providerInsurance) AS insurance_array, 
+  (SELECT JSON_AGG(providerMissionExperience)
+    FROM
+      (SELECT "missionExperience_id", "organizationName", "location", "startDate", "endDate", "referenceName", "referencePhone", "missionExperienceImageKey"
+      FROM "mission_experience"
+      WHERE "mission_experience".user_id = "user".id) AS providerMissionExperience) AS mission_experience_array, 
+  (SELECT JSON_AGG(providerWorkExperience)
+    FROM
+      (SELECT "workplace", "jobTitle", "startDate", "endDate", "referenceName", "referencePhone", "referenceEmail", "resumeImageKey"
+      FROM "work_experience"
+      WHERE "work_experience".user_id = "user".id) AS providerWorkExperience) AS work_experience_array
+    FROM "user"
+    JOIN "provider" 
+    ON "user".id = "provider".user_id
+    WHERE "user".id = $1
+    GROUP BY "user".id, "user".username, "provider".provider_id
+    ORDER BY "provider".verified;`;
+
+    pool.query(queryText, [req.user.id])
+    .then(result => {
+      res.send(result.rows)
+    })
+    .catch(error => {
+      console.log('error in provider landing get', error);
       
     })
 })
