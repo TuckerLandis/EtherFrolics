@@ -22,4 +22,4 @@ const rejectNonAdmin = (req, res, next) => {
   }
 };
 
-module.exports = { rejectUnauthenticated };
+module.exports = { rejectUnauthenticated, rejectNonAdmin };
