@@ -44,13 +44,23 @@ function ProviderLandingPage() {
 
     const user = useSelector(store => store.user);
     //bring in the provider data from the reducer
-    const provider = useSelector(store => store.selectedProvider)
+    // const provider = useSelector(store => store.selectedProvider)
+
+    const provider = useSelector(store => store.providerLandingReducer) // < ---- changed reducer to new provider landing reducer
     //bring in the credential data from the reducer
 
+    // useEffect( () => {
+    //     dispatch({
+    //         type: 'SELECT_PROVIDER',
+    //         payload: user.id
+    //     })
+    // }, []);
+
+    // tl - new dispatch 
     useEffect( () => {
         dispatch({
-            type: 'SELECT_PROVIDER',
-            payload: user.id
+            type: 'GET_PROVIDER_LANDING'
+            // uses req.user.id
         })
     }, []);
 
@@ -79,7 +89,7 @@ function ProviderLandingPage() {
                     onClick={providerRegister}>Register</Button>
             )}
 
-            {provider[0]?.registrationComplete ? (
+            {provider[0]?.registrationComplete ? (  // <------ even though the new reducer is an object, this [0] doesn't bug, i think we can remove this though?
             <div>
             <h2>General Info</h2>
         
