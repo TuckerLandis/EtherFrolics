@@ -10,10 +10,10 @@ function ImageUploader(props) {
     // const imageType = props.imageType
 
     async function postImage(image) {
-        const formData = newFormData()
+        const formData = new FormData()
         formData.append("image", image)
 
-        const result = await axios.post('image', formData, { headers: {'Content-Type': 'multipart/formData'}})
+        const result = await axios.post('/api/image', formData, { headers: {'Content-Type': 'multipart/formData'}})
 
         console.log(result);
 
