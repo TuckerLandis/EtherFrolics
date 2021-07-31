@@ -54,8 +54,8 @@ function ProviderManagementIndividual() {
             type: 'SELECT_PROVIDER',
             payload: params.id
         })
-    }, [])
-    // params.id ^
+    }, [params.id])
+    // params.id in this array so that when it changes, the page refreshes^
 
     console.log('Selected provider: ', selectedProvider);
 
