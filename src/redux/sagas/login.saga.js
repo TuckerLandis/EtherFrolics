@@ -57,7 +57,9 @@ function* logoutUser(action) {
     console.log('Error with user logout:', error);
   }
   finally {
-    action.pushToHome()
+    console.log('pushing to home');
+    
+    yield action.pushToHome()
   }
 }
 
