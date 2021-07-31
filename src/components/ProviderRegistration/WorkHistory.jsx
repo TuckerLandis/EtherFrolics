@@ -2,6 +2,7 @@ import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { useHistory } from "react-router"
 import WorkHistoryMultiRow from './FormComponents/WorkHistoryMultiRow'
+import ImageUploader from "../ImageUploader/ImageUploader";
 
 function WorkHistory() {
     const dispatch = useDispatch();
@@ -50,6 +51,9 @@ function WorkHistory() {
         history.push('/missionhistory')
     }
 
+    const resume = 'resume'
+    const dispatchText = 'POST_RESUME'
+
     return (
         <div>
             <label htmlFor="yearsExperienceInput">Years of experience</label>
@@ -73,13 +77,13 @@ function WorkHistory() {
             <br></br>
 
             {/* maps a state array to render relevant number of work history forms */}
-            {amountOfWorkHistories.map(history => {
+            {amountOfWorkHistories.map((history, i )=> {
                 return (
-                    <WorkHistoryMultiRow addWorkHistoryItem={addWorkHistoryItem} /> // key={keyForWorkHistoryMultiRow} https://reactjs.org/docs/lists-and-keys.html
+                    <WorkHistoryMultiRow key={i} addWorkHistoryItem={addWorkHistoryItem} /> // key={keyForWorkHistoryMultiRow} https://reactjs.org/docs/lists-and-keys.html
                 )
             })}
 
-
+            <ImageUploader imageType={resume} dispatchText={dispatchText}/>
 
             <button disabled={!workHistorySubmitted ? true : false} onClick={handleNext}> Next </button>
 
