@@ -1,7 +1,7 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
-const { rejectUnauthenticated } = require('../modules/authentication-middleware');
+const { rejectUnauthenticated, rejectNonAdmin } = require('../modules/authentication-middleware');
 
 
 /**
@@ -31,7 +31,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
  * GETs a provider's data for rendering on provider management individual and provider landing page
  * 
  */
-router.get('/:id', rejectUnauthenticated, (req, res) => {
+router.get('/:id', rejectNonAdmin, (req, res) => {
 
   const queryText = `SELECT 
   "user".id, "user".username, 
