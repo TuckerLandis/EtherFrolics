@@ -55,10 +55,13 @@ function ProviderManagementIndividual() {
             payload: params.id
         })
     }, [])
+    // params.id ^
 
     console.log('Selected provider: ', selectedProvider);
 
     const soloProviderStatus = () => {
+
+        // don't need ?
         if (selectedProvider[0]?.soloProvider == true) {
             return(
                 <p>Yes</p>
