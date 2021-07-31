@@ -27,6 +27,7 @@ function ImageUploader(props) {
             setFile(file)
         }
 
+    // awaits the post image function above, validates an image has been selected
     const localSubmit = async event => {
         event.preventDefault()
     
