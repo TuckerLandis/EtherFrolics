@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux"
 import { useHistory } from "react-router"
 import WorkHistoryMultiRow from './FormComponents/WorkHistoryMultiRow'
 import ImageUploader from "../ImageUploader/ImageUploader";
+import {Button} from '@material-ui/core'
 
 function WorkHistory() {
     const dispatch = useDispatch();
@@ -17,6 +18,15 @@ function WorkHistory() {
     // state variable to track if at least 1 section
     // of work history data has been submitted to the DB
     const [workHistorySubmitted, setWorkHistorySubmitted] = useState(false);
+ 
+    // state variable to be flipped upon resume submission
+    const [resumeSubmitted, setResumeSubmitted] = useState(false)
+
+    // this function is passed down as props to the imageUploader component, so that it can flip this boolean for render usage on this page
+    function resumeSubmitFunction () {
+        setResumeSubmitted(true)
+        console.log('resume submitted');
+    }
 
     // increases the amount of work history elements in the array above
     function addWorkHistoryItem() {
@@ -69,7 +79,6 @@ function WorkHistory() {
             </select>
 
 
-            <button>Resume Upload (Dummy) </button>
 
             {/* spacers, to be removed */}
             <br></br>
@@ -84,9 +93,9 @@ function WorkHistory() {
                 )
             })}
 
-            <ImageUploader imageType={resume} dispatchText={dispatchText} DBdispatchText={DBdispatchText}/>
+            <ImageUploader imageType={resume} dispatchText={dispatchText} DBdispatchText={DBdispatchText} submitFunction={resumeSubmitFunction}/>
 
-            <button disabled={!workHistorySubmitted ? true : false} onClick={handleNext}> Next </button>
+            <Button variant="contained" color="primary" disabled={!workHistorySubmitted ? true : false} onClick={handleNext}> Next </Button>
 
             {/* stepper goes here with props of which page */}
 

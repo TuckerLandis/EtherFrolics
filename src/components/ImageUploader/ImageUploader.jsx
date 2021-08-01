@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import axios from 'axios';
+import {Button} from '@material-ui/core'
 
 
 function ImageUploader(props) {
@@ -28,7 +29,7 @@ function ImageUploader(props) {
         }
 
     // awaits the post image function above, validates an image has been selected
-    const localSubmit = async event => {
+    const handleSubmit = async event => {
         event.preventDefault()
     
         if (file === '') {
@@ -46,6 +47,8 @@ function ImageUploader(props) {
             payload: result,
             imageType: imageType
         })
+
+        props.submitFunction()
       }
 
 
@@ -53,10 +56,10 @@ function ImageUploader(props) {
 
 
     return (
-        <form onSubmit={localSubmit}>
+        <form onSubmit={handleSubmit}>
         <input onChange={fileSelected} type="file" accept="image/*"></input>
 
-        <button type="submit">Submit</button>
+        <Button variant="contained" color="primary" type="submit">Submit</Button>
       </form>
     )
 }
