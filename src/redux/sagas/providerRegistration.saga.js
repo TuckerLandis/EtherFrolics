@@ -98,7 +98,7 @@ function* addCredentialHistoryData(action){
   }
 }
 
-function* postImage(action) {
+function* postImageDB(action) {
   try {
     yield axios.post('/api/image/db', action)
   } catch (error) {
@@ -120,7 +120,7 @@ function* providerRegistrationSaga() {
     yield takeLatest('COMPLETE_REGISTRATION', completeRegistration)
    
 
-    yield takeLatest('POST_IMAGE_TO_DB', postImage)
+    yield takeLatest('POST_IMAGE_TO_DB', postImageDB)
   }
   
   export default providerRegistrationSaga;

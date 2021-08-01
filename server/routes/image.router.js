@@ -36,9 +36,20 @@ router.post('/db', rejectUnauthenticated, async (req, res) => {
 
     switch (image.imageType) {
         case 'resume' :
-            queryText = `INSERT INTO ""`
+            queryText = `UPDATE "provider" SET "resumeKey" = $1 WHERE "provider".user_id = $2`;
+            break
     }
     
+    pool.query(queryText, [image.payload.Location, req.user.id])
+    .then(result => {
+        console.log(result);
+        
+        res.sendStatus(200)
+    })
+    .catch(error => {
+        console.log('error in posting image key to DB', error);
+        
+    })
     
 })
 
