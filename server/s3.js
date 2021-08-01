@@ -16,7 +16,7 @@ const s3 = new S3({
 })
 
 // upload to s3
-export function uploadFile(file) {
+function uploadFile(file) {
     const fileStream = fs.createReadStream(file.path)
 
     const uploadParams = {
@@ -24,6 +24,8 @@ export function uploadFile(file) {
         Body: fileStream,
         Key: file.filename
     }
+
+    return s3.upload(uploadParams).promise()
 }
 
 exports.uploadFile = uploadFile
