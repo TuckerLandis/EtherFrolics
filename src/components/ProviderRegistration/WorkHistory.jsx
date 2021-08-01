@@ -53,6 +53,7 @@ function WorkHistory() {
 
     const resume = 'resume'
     const dispatchText = 'POST_RESUME'
+    const DBdispatchText = 'POST_RESUME_TO_DB'
 
     return (
         <div>
@@ -83,7 +84,7 @@ function WorkHistory() {
                 )
             })}
 
-            <ImageUploader imageType={resume} dispatchText={dispatchText}/>
+            <ImageUploader imageType={resume} dispatchText={dispatchText} DBdispatchText={DBdispatchText}/>
 
             <button disabled={!workHistorySubmitted ? true : false} onClick={handleNext}> Next </button>
 

@@ -33,7 +33,8 @@ CREATE TABLE "provider" (
 	"peerReviews" TEXT [],
 	"missionReviews" TEXT [],
 	"publications" TEXT [],
-	"registrationComplete" BOOLEAN default FALSE
+	"registrationComplete" BOOLEAN default FALSE,
+	"resumeKey" varchar(200)
 );
 
 

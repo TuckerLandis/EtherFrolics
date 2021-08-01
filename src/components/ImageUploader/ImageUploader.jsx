@@ -7,13 +7,13 @@ function ImageUploader(props) {
     const dispatch = useDispatch();
     const [file, setFile] = useState('')
 
-    // const imageType = props.imageType
+    const imageType = props.imageType
 
     async function postImage(image) {
         const formData = new FormData()
         formData.append("image", image)
 
-        const result = await axios.post('/api/image', formData, { headers: {'Content-Type': 'multipart/formData'}})
+        const result = await axios.post('/api/image/s3', formData, { headers: {'Content-Type': 'multipart/formData'}})
 
         console.log(result);
 
@@ -35,10 +35,17 @@ function ImageUploader(props) {
           return alert('select an image')
         }
         
+        // triggers postImage function with the file state variable
         const result = await postImage(file)
 
+        // logs the s3 info to show a succesful post, possible render somewhere if we pass down a callback
         console.log(result);
         
+        dispatch({
+            type: 'POST_IMAGE_TO_DB',
+            payload: result,
+            imageType: imageType
+        })
       }
 
 

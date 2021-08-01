@@ -9,7 +9,7 @@ const multer = require('multer')
 const upload = multer({ dest: 'uploads/' })
 
 // endpoint for posting an image, succesfully posts to s3. this should likely be a try catch finally that both posts to s3, and then posts the images key to the DB
-router.post('/', upload.single('image'), rejectUnauthenticated, async (req, res) => {
+router.post('/s3', upload.single('image'), rejectUnauthenticated, async (req, res) => {
 
     
     const file = req.file
@@ -28,6 +28,19 @@ router.post('/', upload.single('image'), rejectUnauthenticated, async (req, res)
     
 })
 
+
+router.post('/db', rejectUnauthenticated, async (req, res) => {
+
+    const image = req.body
+    console.log(image);
+
+    switch (image.imageType) {
+        case 'resume' :
+            queryText = `INSERT INTO ""`
+    }
+    
+    
+})
 
 
 
