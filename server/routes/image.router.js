@@ -19,7 +19,7 @@ router.post('/', upload.single('image'), rejectUnauthenticated, async (req, res)
     const result = await uploadFile(file)
     .then(result => {
         console.log('response from s3', result);
-    res.sendStatus(result)
+    res.send(result)
     })
     .catch(error => {
         console.log('error in image post', error);
