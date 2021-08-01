@@ -57,6 +57,7 @@ router.get('/ind/:id', rejectNonAdmin, (req, res) => {
   "provider"."missionReviews", 
   "provider".publications,
   "provider"."registrationComplete",
+  "provider"."resumeKey",
   (SELECT JSON_AGG(providerCredentials)
     FROM
       (SELECT "credential_id", "licensingBoard", "credentialName", "licenseNumber", "dateInitial", "dateRenewed", "dateExpiring", "credentialImageKey" 
@@ -132,6 +133,7 @@ router.get('/ind/:id', rejectNonAdmin, (req, res) => {
   "provider"."missionReviews", 
   "provider".publications,
   "provider"."registrationComplete",
+  "provider"."resumeKey",
   (SELECT JSON_AGG(providerCredentials)
     FROM
       (SELECT "credential_id", "licensingBoard", "credentialName", "licenseNumber", "dateInitial", "dateRenewed", "dateExpiring", "credentialImageKey" 

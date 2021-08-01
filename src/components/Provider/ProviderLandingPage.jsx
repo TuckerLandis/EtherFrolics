@@ -75,6 +75,9 @@ function ProviderLandingPage() {
         history.push('/generalInfo')
     }
 
+
+    
+
     return (
         <div>
             <h2>Welcome,  {user.username} </h2>
@@ -92,7 +95,10 @@ function ProviderLandingPage() {
             {provider[0]?.registrationComplete ? (  // <------ even though the new reducer is an object, this [0] doesn't bug, i think we can remove this though?
             <div>
             <h2>General Info</h2>
-        
+                
+               
+
+
             {provider.map (() => {
                  return (<ProviderGenItem provider={provider}/>)
             })}

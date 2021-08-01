@@ -16,10 +16,10 @@ const upload = multer({ dest: 'uploads/' })
 /**
  * endpoint for POSTing an image, succesfully posts to s3, sends result back to client
  * 
- *  */ 
+ *  */
 router.post('/s3', upload.single('image'), rejectUnauthenticated, async (req, res) => {
 
-    
+
     const file = req.file
     const info = req.body // .type?
     console.log('file info', file);
@@ -28,18 +28,18 @@ router.post('/s3', upload.single('image'), rejectUnauthenticated, async (req, re
     const result = await uploadFile(file)
 
     // scrubs image from server /uploads
-    await unlinkFile(file.path)
+    // await unlinkFile(file.path)
 
 
-    .then(result => {
-        console.log('response from s3', result);
-    res.send(result)
-    })
-    .catch(error => {
-        console.log('error in image post', error);
-        
-    })
-    
+        .then(result => {
+            console.log('response from s3', result);
+            res.send(result)
+        })
+        .catch(error => {
+            console.log('error in image post', error);
+
+        })
+
 })
 
 
@@ -67,23 +67,23 @@ router.post('/db', rejectUnauthenticated, async (req, res) => {
 
     // sending a imageType from props where each image uploader is rendered, using the below switch statement to generate query text based on that
     switch (image.imageType) {
-        case 'resume' :
+        case 'resume':
             queryText = `UPDATE "provider" SET "resumeKey" = $1 WHERE "provider".user_id = $2`;
             break
 
 
     }
     pool.query(queryText, [image.payload.Key, req.user.id])
-    .then(result => {
-        console.log(result);
-        
-        res.sendStatus(200)
-    })
-    .catch(error => {
-        console.log('error in posting image key to DB', error);
-        
-    })
-    
+        .then(result => {
+            console.log(result);
+
+            res.sendStatus(200)
+        })
+        .catch(error => {
+            console.log('error in posting image key to DB', error);
+
+        })
+
 })
 
 
