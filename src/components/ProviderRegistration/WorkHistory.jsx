@@ -61,6 +61,8 @@ function WorkHistory() {
         history.push('/missionhistory')
     }
 
+
+    // props for imageUploader. only declaring these here for visibility
     const resume = 'resume'
     const dispatchText = 'POST_RESUME'
     const DBdispatchText = 'POST_RESUME_TO_DB'
@@ -93,8 +95,10 @@ function WorkHistory() {
                 )
             })}
 
-            <ImageUploader imageType={resume} dispatchText={dispatchText} DBdispatchText={DBdispatchText} submitFunction={resumeSubmitFunction}/>
-
+            {/* takes in props above the return, and the submitResumeFunction */}
+            <ImageUploader imageType={resume} dispatchText={dispatchText} DBdispatchText={DBdispatchText} submitFunction={resumeSubmitFunction} imageSubmitted={resumeSubmitted}/>
+            
+            
             <Button variant="contained" color="primary" disabled={!workHistorySubmitted ? true : false} onClick={handleNext}> Next </Button>
 
             {/* stepper goes here with props of which page */}
