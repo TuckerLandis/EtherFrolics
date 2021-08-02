@@ -102,15 +102,10 @@ function ProviderLandingPage() {
                 
 
              {/* test for reading an image, works, see path declaration on line 80 */}
-            <h3>Your Resume</h3>
+             <h3>Your Resume</h3>
             {/* <img src={resumePath} alt="" /> */}
             <ImageViewer imagePath={resumePath} />
-
-
-        
             <ProviderGenItem provider={provider}/>
-            
-
             <Button
             variant="contained">Edit General Info</Button>
             </div>
@@ -121,15 +116,12 @@ function ProviderLandingPage() {
             {provider?.registrationComplete ? (
             <div>
             <h2>Credential Info</h2>
-        
             <ProviderCredItem provider={provider}/>
-            
             <Button
             variant="contained">Edit Credentials</Button>
             </div>
             ) : (
             <p></p>
-
             )}  
         </div>
     )

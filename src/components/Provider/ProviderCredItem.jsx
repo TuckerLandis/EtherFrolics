@@ -16,7 +16,7 @@ function ProviderCredItem({ provider }) {
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        {provider[0]?.credential_array[0]?.credentialName}
+                        {provider?.credential_array[0]?.credentialName}
                     </Typography>
                 </AccordionDetails>
             </Accordion>
@@ -29,7 +29,7 @@ function ProviderCredItem({ provider }) {
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        {provider[0]?.credential_array[0]?.licensingBoard}
+                        {provider?.credential_array[0]?.licensingBoard}
                     </Typography>
                 </AccordionDetails>
             </Accordion>
@@ -42,7 +42,7 @@ function ProviderCredItem({ provider }) {
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        {provider[0]?.credential_array[0]?.licenseNumber}
+                        {provider?.credential_array[0]?.licenseNumber}
                     </Typography>
                 </AccordionDetails>
             </Accordion>
@@ -55,7 +55,7 @@ function ProviderCredItem({ provider }) {
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        {provider[0]?.credential_array[0]?.dateInitial}
+                        {provider?.credential_array[0]?.dateInitial}
                     </Typography>
                 </AccordionDetails>
             </Accordion>
@@ -68,7 +68,7 @@ function ProviderCredItem({ provider }) {
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        {provider[0]?.credential_array[0]?.dateRenewed}
+                        {provider?.credential_array[0]?.dateRenewed}
                     </Typography>
                 </AccordionDetails>
             </Accordion>
@@ -81,7 +81,7 @@ function ProviderCredItem({ provider }) {
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        {provider[0]?.credential_array[0]?.dateExpiring}
+                        {provider?.credential_array[0]?.dateExpiring}
                     </Typography>
                 </AccordionDetails>
             </Accordion>
