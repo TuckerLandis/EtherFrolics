@@ -172,7 +172,7 @@ function Nav() {
         <h2 className="nav-title">EtherFrolics</h2>
      </Link>
       <IconButton onClick={toggleDrawer}>
-        <MenuIcon fontSize="large" />
+        <MenuIcon fontSize="large" className="leftside" />
       </IconButton>
       <Drawer anchor="left" open={drawer} onClose={toggleDrawer}>
         {list}
