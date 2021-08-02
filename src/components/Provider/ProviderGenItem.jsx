@@ -17,7 +17,7 @@ function ProviderGenItem({ provider }) {
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        {provider[0]?.firstName} {provider[0]?.lastName}
+                        {provider?.firstName} {provider?.lastName}
                     </Typography>
                 </AccordionDetails>
             </Accordion>
@@ -30,7 +30,7 @@ function ProviderGenItem({ provider }) {
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        {provider[0]?.providerRole}
+                        {provider?.providerRole}
                     </Typography>
                 </AccordionDetails>
             </Accordion>
@@ -43,7 +43,7 @@ function ProviderGenItem({ provider }) {
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        {provider[0]?.phoneNumber}
+                        {provider?.phoneNumber}
                     </Typography>
                 </AccordionDetails>
             </Accordion>
@@ -56,7 +56,7 @@ function ProviderGenItem({ provider }) {
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        {provider[0]?.emailAddress}
+                        {provider?.emailAddress}
                     </Typography>
                 </AccordionDetails>
             </Accordion>
@@ -69,7 +69,7 @@ function ProviderGenItem({ provider }) {
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        {provider[0]?.validPassport}
+                        {provider?.validPassport}
                     </Typography>
                 </AccordionDetails>
             </Accordion>
