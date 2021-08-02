@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import ProviderGenItem from './ProviderGenItem';
 import ProviderCredItem from './ProviderCredItem';
+import ImageViewer from '../ImageComponents/ImageViewer';
 
 /*
 CHECKLIST
@@ -100,7 +101,8 @@ function ProviderLandingPage() {
 
              {/* test for reading an image, works, see path declaration on line 80 */}
             <h3>Your Resume</h3>
-            <img src={resumePath} alt="" />
+            {/* <img src={resumePath} alt="" /> */}
+            <ImageViewer imagePath={resumePath} />
 
 
             {provider.map (() => {
