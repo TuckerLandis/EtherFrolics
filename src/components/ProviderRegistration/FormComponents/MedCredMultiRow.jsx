@@ -13,8 +13,8 @@ function MedCredMultiRow(props) {
 
   const credentialTextInputConfig = [
     {
-      inputLabel: 'Licensing Board',
-      inputName: 'licensingBoard'
+      inputLabel: 'Liscensing Board',
+      inputName: 'liscensingBoard'
     },
     {
       inputLabel: 'Credential Taxonomy',
@@ -28,8 +28,8 @@ function MedCredMultiRow(props) {
 
   const credentialDateInputConfig = [
     {
-      inputLabel: 'Date Recieved',
-      inputName: 'dateRecieved'
+      inputLabel: 'Date Received',
+      inputName: 'dateReceived'
     },
     {
       inputLabel: 'Date Renewed',
@@ -42,10 +42,10 @@ function MedCredMultiRow(props) {
   ];
   
   const [medCredValues, setMedCredValues] = useState({
-      licensingBoard: '',
+      liscensingBoard: '',
       credentialTaxonomy: '',
       liscenseNumber: '',
-      dateRecieved: '',
+      dateReceived: '',
       dateRenewed: '',
       dateExpired: '',
   });
