@@ -8,6 +8,9 @@ import mission from './mission.reducer';
 import providerLandingReducer from './providerLanding.reducer';
 import workHistoryReducer from './workHistory.reducer';
 import missionHistoryReducer from './missionHistory.reducer';
+import educationHistoryReducer from './educationHistory.reducer'
+import credentialHistoryReducer from './credentialHistory.reducer';
+
 
 
 import homeStepper from './homeStepper.reducer';
@@ -30,7 +33,10 @@ const rootReducer = combineReducers({
   mission,
   providerLandingReducer,
   workHistoryReducer,
-  missionHistoryReducer
+  missionHistoryReducer,
+  educationHistoryReducer,
+  credentialHistoryReducer
+
   
 });
 
