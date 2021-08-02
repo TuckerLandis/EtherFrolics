@@ -76,7 +76,8 @@ function ProviderLandingPage() {
     }
 
 
-    
+    // test concat for image path
+    const resumePath = `/api/image/prov/${provider[0]?.resumeKey}`
 
     return (
         <div>
@@ -96,7 +97,10 @@ function ProviderLandingPage() {
             <div>
             <h2>General Info</h2>
                 
-               
+
+             {/* test for reading an image, works, see path declaration on line 80 */}
+            <h3>Your Resume</h3>
+            <img src={resumePath} alt="" />
 
 
             {provider.map (() => {
