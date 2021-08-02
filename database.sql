@@ -26,7 +26,6 @@ CREATE TABLE "provider" (
 	"soloProvider" BOOLEAN default FALSE,
 	"verified" BOOLEAN default FALSE,
 	"recruiterOpt" BOOLEAN default FALSE,
-	"lastMission" DATE,
 	"yearsExperience" varchar(10),
 	"validPassport" BOOLEAN default FALSE,
 	"availability" DATE,
@@ -57,7 +56,6 @@ CREATE TABLE "work_experience" (
 	"referenceName" varchar (100),
 	"referencePhone" varchar (100),
 	"referenceEmail" varchar (100),
-	"resumeImageKey" varchar(100),
 	"user_id" int REFERENCES "user"
 );
 

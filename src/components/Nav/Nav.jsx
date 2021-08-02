@@ -2,7 +2,7 @@ import React from 'react';
 // import { Link } from 'react-router-dom';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
-import {useSelector, useDispatch} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
@@ -16,6 +16,12 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Drawer from '@material-ui/core/Drawer';
 import Link from '@material-ui/core/Link';
 import Divider from '@material-ui/core/Divider';
+import HomeIcon from '@material-ui/icons/Home';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import InfoIcon from '@material-ui/icons/Info';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import HealingIcon from '@material-ui/icons/Healing';
+import SupervisedUserCircleIcon from '@material-ui/icons/SupervisedUserCircle';
 
 function Nav() {
 
@@ -60,28 +66,23 @@ function Nav() {
       role="presentation"
     >
       <List>
-        <ListItem className="mouse">
-          <Link
-            className={classes.text}
-            component="button"
-            variant="body1"
-            onClick={() => { history.push('/home') }}
-          >
-            Home
-          </Link>
+        <ListItem onClick={() => { history.push('/home') }} className="mouse">
+          <HomeIcon />
+          Home
         </ListItem>
 
         <Divider />
 
-        <ListItem className="mouse">
-          <Link
-            className={classes.text}
-            component="button"
-            variant="body1"
-            onClick={() => { history.push('/about') }}
-          >
-            About
-          </Link>
+        <ListItem onClick={() => { history.push('/about') }} className="mouse">
+          <InfoIcon />
+          About
+        </ListItem>
+
+        <Divider />
+
+        <ListItem onClick={() => dispatch({ type: 'LOGOUT', pushToHome: pushToHome })} className="mouse">
+          <ExitToAppIcon />
+          Log Out
         </ListItem>
       </List>
     </div>
@@ -96,54 +97,36 @@ function Nav() {
         role="presentation">
 
         <List>
-          <ListItem className="mouse">
+          <ListItem className="mouse menu-welcome">
             Welcome, {user.username}!
           </ListItem>
 
           <Divider />
 
-          <ListItem className="mouse">
-            <Link
-              className={classes.text}
-              component="button"
-              variant="body1"
-              onClick={() => { history.push('/home') }}
-            >
-              Home
-            </Link>
-          </ListItem>
-
-          <Divider /> 
-
-          <ListItem className="mouse">
-            <Link
-              className={classes.text}
-              component="button"
-              variant="body1"
-              onClick={() => { history.push('/info') }}
-            >
-              Info Page
-            </Link>
+          <ListItem className="mouse" onClick={() => { history.push('/home') }} className="mouse">
+            <HomeIcon />
+            Home
           </ListItem>
 
           <Divider />
 
-          <ListItem className="mouse">
-            <Link
-              className={classes.text}
-              component="button"
-              variant="body1"
-              onClick={() => { history.push('/about') }}
-            >
-              About
-            </Link>
+          <ListItem className="mouse" onClick={() => { history.push('/missions') }} className="mouse">
+            <HealingIcon />
+            Missions
           </ListItem>
 
           <Divider />
 
-          <ListItem onClick={() => dispatch({ type: 'LOGOUT' })} className="mouse">
-            {/* <LogOutButton className="navLink" /> */}
-              Log Out
+          <ListItem className="mouse" onClick={() => { history.push('/about') }} className="mouse">
+            <InfoIcon />
+            About
+          </ListItem>
+
+          <Divider />
+
+          <ListItem onClick={() => dispatch({ type: 'LOGOUT', pushToHome: pushToHome })} className="mouse">
+            <ExitToAppIcon />
+            Log Out
           </ListItem>
         </List>
       </div>
@@ -152,59 +135,70 @@ function Nav() {
 
   else if (user.authorization === 100) {
     list = (
-      <List>
-        <ListItem onClick={() => { history.push('/adminlandingpage') }} className="mouse">
-          Admin Landing Page
-        </ListItem>
+      <div
+        className={classes.list}
+        onClick={toggleDrawer}
+        onKeyDown={toggleDrawer}
+        role="presentation">
 
-      <Divider />
+        <List>
+          <ListItem onClick={() => { history.push('/home') }} className="mouse">
+            <HomeIcon />
+            Home
+          </ListItem>
 
-        <ListItem onClick={() => dispatch({ type: 'LOGOUT' })} className="mouse">
-          Log Out
-        </ListItem>
-      </List>
+          <Divider />
+
+          <ListItem onClick={() => { history.push('/providermgmt') }} className="mouse">
+            <SupervisedUserCircleIcon />
+            Provider Management
+          </ListItem>
+
+          <Divider />
+
+          <ListItem onClick={() => { history.push('/missions') }} className="mouse">
+            <HealingIcon />
+            Missions
+          </ListItem>
+
+          <Divider />
+
+          <ListItem onClick={() => { history.push('/createmissionpage') }} className="mouse">
+            <AddCircleOutlineIcon />
+            Create Mission
+          </ListItem>
+
+          <Divider />
+
+          <ListItem onClick={() => dispatch({ type: 'LOGOUT', pushToHome: pushToHome })} className="mouse">
+            <ExitToAppIcon />
+            Log Out
+          </ListItem>
+        </List>
+      </div>
     )
+  }
+
+  function pushToHome() {
+
+    history.push('/');
   }
 
   return (
     <div className="nav">
-      <Link to="/home">
-        <h2 className="nav-title">EtherFrolics</h2>
-     </Link>
-      <IconButton onClick={toggleDrawer}>
-        <MenuIcon fontSize="large" className="leftside" />
-      </IconButton>
+      <div className="nav-title">
+        <h2 className="nav-title" onClick={() => { history.push('/home') }}>EtherFrolics</h2>
+      </div>
+      <div className="leftSide">
+        <IconButton onClick={toggleDrawer}>
+          <MenuIcon fontSize="large" />
+        </IconButton>
+      </div>
       <Drawer anchor="left" open={drawer} onClose={toggleDrawer}>
         {list}
       </Drawer>
     </div>
   );
-
-  // return (
-  //   <div className="nav">
-  //     <Link to="/home">
-  //       <h2 className="nav-title">EtherFrolics</h2>
-  //     </Link>
-  //     <div>
-  //       <Link className="navLink" to={loginLinkData.path}>
-  //         {loginLinkData.text}
-  //       </Link>
-
-  //       {user.id && (
-  //         <>
-  //           <Link className="navLink" to="/info">
-  //             Info Page
-  //           </Link>
-  //           <LogOutButton className="navLink" />
-  //         </>
-  //       )}
-
-  //       <Link className="navLink" to="/about">
-  //         About
-  //       </Link>
-  //     </div>
-  //   </div>
-  // );
 }
 
 export default Nav;

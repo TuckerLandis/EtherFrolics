@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router"
 import MissionHistoryMultiRow from "./FormComponents/MissionHistoryMultiRow"
 
@@ -8,6 +8,8 @@ function MissionHistory () {
 
     const dispatch = useDispatch();
     const history = useHistory();
+
+    const missionHistoryItems = useSelector(store => store.missionHistoryReducer)
 
     const [lastMission, setLastMission] = useState('')
 
@@ -29,19 +31,26 @@ function MissionHistory () {
 
     }
 
-    function handleChange(e) {
-        setLastMission(e.target.value)
-    }
+    // function handleChange(e) {
+    //     setLastMission(e.target.value)
+    // }
 
     function handleNext(e) {
         e.preventDefault
 
-        dispatch({
-            type: "PUT_LAST_MISSION",
-            payload: {
-                lastMission: lastMission
-            }
-        })
+        // dispatch({
+        //     type: "PUT_LAST_MISSION",
+        //     payload: {
+        //         lastMission: lastMission
+        //     }
+        // })
+        
+         dispatch({
+             type: 'POST_MISSION_HISTORY_ITEMS',
+             payload: missionHistoryItems
+
+         })
+       
 
         history.push('/education')
     }
@@ -50,15 +59,16 @@ function MissionHistory () {
 
     return(
         <div>
-            <label htmlFor="lastMissionInput">When was your last mission trip?</label>
+            {/* <label htmlFor="lastMissionInput">When was your last mission trip?</label>
             <select required name="lastMission" id="lastMissionInput" onChange={handleChange}>
+                
                 <option value="1">Within the last year</option>
                 <option value="2">Within the last 2 years</option>
                 <option value="3">Within the last 3 years</option>
                 <option value="4">Within the last 4 years</option>
                 <option value="5">Within the last 5 years</option>
                 <option value="6">More than 5 years ago</option>
-                </select>
+                </select> */}
 
                 <br></br>
                 <br></br>

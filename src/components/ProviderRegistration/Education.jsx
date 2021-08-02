@@ -3,11 +3,14 @@ import { useDispatch } from "react-redux"
 import { useHistory } from "react-router"
 import EducationMultiRow from "./FormComponents/EducationMultiRow";
 import ImageUploader from "../ImageComponents/ImageUploader";
+import { useSelector } from "react-redux";
 
 function Education() {
 
     const dispatch = useDispatch();
     const history = useHistory();
+
+    const educationHistoryItems = useSelector(store => store.educationHistoryReducer)
 
     // state array on which education history sub components are rendered
     const [amountOfEducationHistories, setAmountOfEducationHistories] = useState([1])
@@ -29,7 +32,14 @@ function Education() {
 
     function handleNext() {
         // submit last one? some sort of check
-        history.push('/medcred')
+
+        dispatch({
+            type: 'POST_EDUCATION_HISTORY_ITEMS',
+            payload: educationHistoryItems
+        })
+
+
+        // history.push('/medcred')
     }
 
    
@@ -39,9 +49,9 @@ function Education() {
             <p>Education</p>
 
             {/* maps a state array to render relevant number of education history forms */}
-            {amountOfEducationHistories.map(education => {
+            {amountOfEducationHistories.map((education, i )=> {
                 return (
-                    <EducationMultiRow addEducationHistoryItem={addEducationHistoryItem} />
+                    <EducationMultiRow key={i} addEducationHistoryItem={addEducationHistoryItem} />
                 )
             })}
 

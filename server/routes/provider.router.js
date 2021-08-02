@@ -15,16 +15,16 @@ router.get('/', rejectNonAdmin, (req, res) => {
   WHERE "user".authorization = 1;`;
 
   pool.query(queryText)
-  .then(result => {
-    console.log('prov mgmt get: ');
-    
-    res.send(result.rows)
-  })
-  .catch(error => {
-    console.log('error in prov mgmt get: ');
-    res.sendStatus(500)
-    
-  })
+    .then(result => {
+      console.log('prov mgmt get: ');
+
+      res.send(result.rows)
+    })
+    .catch(error => {
+      console.log('error in prov mgmt get: ');
+      res.sendStatus(500)
+
+    })
 })
 
 /**
@@ -90,13 +90,13 @@ router.get('/ind/:id', rejectNonAdmin, (req, res) => {
     GROUP BY "user".id, "user".username, "provider".provider_id
     ORDER BY "provider".verified;`;
 
-    pool.query(queryText, [req.params.id])
+  pool.query(queryText, [req.params.id])
     .then(result => {
+      console.log('Individual provider GET: ', result.rows);
       res.send(result.rows)
     })
     .catch(error => {
       console.log('error in individual provider get', error);
-      
     })
 })
 
@@ -105,10 +105,10 @@ router.get('/ind/:id', rejectNonAdmin, (req, res) => {
  * GETs a provider's data for rendering onprovider landing page
  * 
  */
- router.get('/landing', rejectUnauthenticated, (req, res) => {
+router.get('/landing', rejectUnauthenticated, (req, res) => {
 
   console.log('got to providerLanding GET');
-  
+
 
   const queryText = `SELECT 
   "user".id, "user".username, 
@@ -166,13 +166,13 @@ router.get('/ind/:id', rejectNonAdmin, (req, res) => {
     GROUP BY "user".id, "user".username, "provider".provider_id
     ORDER BY "provider".verified;`;
 
-    pool.query(queryText, [req.user.id])
+  pool.query(queryText, [req.user.id])
     .then(result => {
       res.send(result.rows)
     })
     .catch(error => {
       console.log('error in provider landing get', error);
-      
+
     })
 })
 
@@ -180,9 +180,9 @@ router.get('/ind/:id', rejectNonAdmin, (req, res) => {
  * POST route for initial provider post from /generalinfo
  */
 router.post('/', rejectUnauthenticated, (req, res) => {
-  
+
   console.log('Reached provider reg POST:', req.body);
-  
+
   let provider = req.body
 
   const queryText = `INSERT INTO "provider" (
@@ -210,14 +210,14 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     provider.providerEmail
 
   ])
-  .then( result => {
-    console.log('created new provider');
-    res.sendStatus(200)
-  })
-  .catch (error => {
-    console.log('Error in Provider POST', error);
-    res.sendStatus(500)
-  })
+    .then(result => {
+      console.log('created new provider');
+      res.sendStatus(200)
+    })
+    .catch(error => {
+      console.log('Error in Provider POST', error);
+      res.sendStatus(500)
+    })
 });
 
 router.post('/workhistoryitem', rejectUnauthenticated, (req, res) => {
@@ -226,8 +226,12 @@ router.post('/workhistoryitem', rejectUnauthenticated, (req, res) => {
   // res.sendStatus(200)
   // Tucker
 
-  const workHistoryItem = req.body
-  const queryText = `INSERT INTO "work_experience" 
+  let workHistoryItems = req.body
+
+  // loops over the sent array of work history objects, posts all
+  workHistoryItems.forEach(workHistoryItem => {
+
+    let queryText = `INSERT INTO "work_experience" 
   (
     "workplace",
     "jobTitle",
@@ -241,24 +245,28 @@ router.post('/workhistoryitem', rejectUnauthenticated, (req, res) => {
   VALUES ($1, $2, $3, $4, $5, $6, $7, $8);
   `;
 
-  pool.query(queryText, [
-    workHistoryItem.workplace,
-    workHistoryItem.jobTitle,
-    workHistoryItem.referenceName,
-    workHistoryItem.referencePhone,
-    workHistoryItem.referenceEmailAddress,
-    workHistoryItem.startDate,
-    workHistoryItem.endDate,
-    req.user.id
-  ])
-  .then(result => {
-    console.log('POSTED new work history');
-    res.sendStatus(200)
-  })
-  .catch (error => {
-    console.log('Error in WorkHistory POST', error);
-    res.sendStatus(500)
-  })
+    pool.query(queryText, [
+      workHistoryItem.workplace,
+      workHistoryItem.jobTitle,
+      workHistoryItem.referenceName,
+      workHistoryItem.referencePhone,
+      workHistoryItem.referenceEmailAddress,
+      workHistoryItem.startDate,
+      workHistoryItem.endDate,
+      req.user.id
+    ])
+      .then(result => {
+        console.log('POSTED new work histories');
+
+      })
+      .catch(error => {
+        console.log('Error in WorkHistory POST', error);
+        res.sendStatus(500)
+      })
+
+  }) // end loop
+  res.sendStatus(200)
+
 
 });
 
@@ -274,14 +282,14 @@ router.put('/workhistory', rejectUnauthenticated, (req, res) => {
   const queryText = `UPDATE "provider" SET "yearsExperience" = $1 WHERE "user_id" = $2; `;
 
   pool.query(queryText, [provider.yearsExperience, req.user.id])
-  .then( result => {
-    console.log('updated yearsExperience');
-    res.sendStatus(200)
-  })
-  .catch (error => {
-    console.log('Error in Provider PUT', error);
-    res.sendStatus(500)
-  })
+    .then(result => {
+      console.log('updated yearsExperience');
+      res.sendStatus(200)
+    })
+    .catch(error => {
+      console.log('Error in Provider PUT', error);
+      res.sendStatus(500)
+    })
 })
 
 // Put request to the database to update the address info of the provider
@@ -290,19 +298,19 @@ router.put('/address', rejectUnauthenticated, (req, res) => {
 
   console.log(req.user.id);
 
-  let updatedAddress = req.body; 
+  let updatedAddress = req.body;
   console.log('the updated address is', updatedAddress);
 
   let queryText = `UPDATE "provider" SET "streetAddress" = $1, "city" = $2, "state" = $3, "zipCode" = $4, "phoneNumber" = $5 WHERE "user_id" = $6;`;
 
-  pool.query(queryText, [updatedAddress.streetAddress, updatedAddress.city, updatedAddress.state, updatedAddress.zipCode, updatedAddress.phone, req.user.id])
-  .then(response => {
-    console.log(response.rowCount);
-    res.sendStatus(200)
-  }).catch(err => {
-    console.log('address put request error', err);
-    res.sendStatus(500);
-  })
+  pool.query(queryText, [updatedAddress.streetAddress, updatedAddress.city, updatedAddress.state, updatedAddress.zip, updatedAddress.phone, req.user.id])
+    .then(response => {
+      console.log(response.rowCount);
+      res.sendStatus(200)
+    }).catch(err => {
+      console.log('address put request error', err);
+      res.sendStatus(500);
+    })
 }) // End PUT Route
 
 /**
@@ -310,9 +318,10 @@ router.put('/address', rejectUnauthenticated, (req, res) => {
  */
 router.post('/educationhistoryitem', rejectUnauthenticated, (req, res) => {
   console.log('Reached provider reg POST: educationhistory', req.body);
-  const educationhistoryItem = req.body
+  const educationhistoryItems = req.body
 
-  const queryText = `INSERT INTO "education"
+  educationhistoryItems.forEach(educationhistoryItem => {
+    let queryText = `INSERT INTO "education"
   (
     "institution",
     "degree",
@@ -322,22 +331,26 @@ router.post('/educationhistoryitem', rejectUnauthenticated, (req, res) => {
   )
   VALUES ($1, $2, $3, $4, $5);
   `;
-    pool.query(queryText, [
-      educationhistoryItem.school,
-      educationhistoryItem.degree,
-      educationhistoryItem.startDate,
-      educationhistoryItem.endDate,
-      req.user.id
-    ])
+  pool.query(queryText, [
+    educationhistoryItem.school,
+    educationhistoryItem.degree,
+    educationhistoryItem.startDate,
+    educationhistoryItem.endDate,
+    req.user.id
+  ])
 
-    .then( result => {
+    .then(result => {
       console.log('created new education history item');
-      res.sendStatus(200)
+      
     })
-    .catch (error => {
+    .catch(error => {
       console.log('Error in Education Post', error);
       res.sendStatus(500)
     })
+  })
+
+ 
+    res.sendStatus(200)
 })
 
 router.put('/lastmission', rejectUnauthenticated, (req, res) => {
@@ -368,56 +381,91 @@ router.put('/lastmission', rejectUnauthenticated, (req, res) => {
 router.post('/missionhistoryitem', rejectUnauthenticated, async (req, res) => {
   console.log('Reached provider reg POST: missionHistory', req.body);
 
-  // make connection to pool client 
-  // to initiate transaction
-  const client = await pool.connect();
+  // // make connection to pool client 
+  // // to initiate transaction
+  // const client = await pool.connect();
 
-  // variable for the user id
-  const user_id = req.user.id;
+  // // variable for the user id
+  // const user_id = req.user.id;
 
-  // variable for the organization name
-  const organizationName = req.body.organization;
+  // // variable for the organization name
+  // const organizationName = req.body.organization;
 
-  // variable for mission location
-  const location = req.body.location;
+  // // variable for mission location
+  // const location = req.body.location;
 
-  // variable for the name of the reference
-  const referenceName = req.body.referenceName;
+  // // variable for the name of the reference
+  // const referenceName = req.body.referenceName;
 
-  // variable for phone number of reference
-  const referencePhone = req.body.referencePhone;
+  // // variable for phone number of reference
+  // const referencePhone = req.body.referencePhone;
 
-  // variable for mission start date
-  const startDate = req.body.startDate;
+  // // variable for mission start date
+  // const startDate = req.body.startDate;
 
-  // variable for mission end date
-  const endDate = req.body.endDate;
+  // // variable for mission end date
+  // const endDate = req.body.endDate;
 
-  // query text makes post of data from MissionHistoryMultiRow to mission_experience table
-  const queryText = `
-    INSERT INTO "mission_experience" ("organizationName", "location", "referenceName", "referencePhone", "startDate", "endDate", "user_id")
-    VALUES ($1, $2, $3, $4, $5, $6, $7);
-  `;
+  // {
+  //   organization: 'Organization ',
+  //   location: 'Location',
+  //   referenceName: 'Reference Name',
+  //   referencePhone: '6128596090',
+  //   startDate: '2021-08-19',
+  //   endDate: '2021-08-04'
+  // },
 
-  try {
+  let missionHistoryItems = req.body
 
-    await client.query('BEGIN;');
+  missionHistoryItems.forEach(missionHistory => {
 
-    await client.
-      query(queryText, [organizationName, location, referenceName, referencePhone, startDate, endDate, user_id])
-      await client.query('COMMIT;');
+    // query text makes post of data from MissionHistoryMultiRow to mission_experience table
+    let queryText = `
+  INSERT INTO "mission_experience" ("organizationName", "location", "referenceName", "referencePhone", "startDate", "endDate", "user_id")
+  VALUES ($1, $2, $3, $4, $5, $6, $7);
+`;
 
-      res.sendStatus(200)
+    pool.query(queryText, [
+      missionHistory.organization,
+      missionHistory.location,
+      missionHistory.referenceName,
+      missionHistory.referencePhone,
+      missionHistory.startDate,
+      missionHistory.endDate,
+      req.user.id
+    ])
+      .then(result => {
+        console.log('posted mission history item');
+      })
+      .catch(error => {
+        console.log('error posting mission history item', error);
 
-  } catch (error) {
+      })
+  })
 
-    await client.query('ROLLBACK')
-    console.error('Could not finish mission experience POST, /missionhistoryitem', error);
-  } finally {
 
-    client.release();
 
-  }
+  res.sendStatus(200)
+
+  // try {
+
+  //   await client.query('BEGIN;');
+
+  //   await client.
+  //     query(queryText, [organizationName, location, referenceName, referencePhone, startDate, endDate, user_id])
+  //     await client.query('COMMIT;');
+
+  //     res.sendStatus(200)
+
+  // } catch (error) {
+
+  //   await client.query('ROLLBACK')
+  //   console.error('Could not finish mission experience POST, /missionhistoryitem', error);
+  // } finally {
+
+  //   client.release();
+
+  // }
 })
 
 router.post('/insuranceitem', rejectUnauthenticated, (req, res) => {
@@ -431,55 +479,65 @@ router.post('/insuranceitem', rejectUnauthenticated, (req, res) => {
 
   pool.query(queryText, [ins.insuranceType, ins.insuranceProvider, ins.policyNumber, ins.state, ins.dateInitial,
   ins.dateRenewed, ins.dateExpiring, req.user.id])
-  .then( result => {
-    res.sendStatus(201);
-  })
-  .catch (err => {
-    console.log('error is', err);
-    res.sendStatus(500);
-  })
+    .then(result => {
+      res.sendStatus(201);
+    })
+    .catch(err => {
+      console.log('error is', err);
+      res.sendStatus(500);
+    })
 
 })
 
 
 router.post('/credentialhistory', rejectUnauthenticated, async (req, res) => {
   console.log('Credential History POST for provider', req.body);
-  
+
   // make a connection to pool client for transaction
   const client = await pool.connect();
 
   // req.body destructured by variables to post
-  const {
-    licensingBoard,
-    credentialTaxonomy,
-    licenseNumber,
-    dateReceived,
-    dateRenewed,
-    dateExpired } = req.body
+  const providerCredentialArray = req.body
 
   // variable for user ID
   const user_id = req.user.id;
 
   const credentialInsertStatement = `
-    INSERT INTO "credential" ("licensingBoard", "credentialName", "licenseNumber", "dateInitial", "dateRenewed", "dateExpiring", "user_id")
-    VALUES ($1, $2, $3, $4, $5, $6, $7);
+  INSERT INTO "credential" ("licensingBoard", "credentialName", "licenseNumber", "dateInitial", "dateRenewed", "dateExpiring", "user_id")
+  VALUES ($1, $2, $3, $4, $5, $6, $7);
   `;
 
   try {
 
     await client.query('BEGIN;');
 
-    await client.query(credentialInsertStatement, [licensingBoard, credentialTaxonomy, licenseNumber, dateReceived, dateRenewed, dateExpired, user_id]);
+    await Promise.all( 
+      providerCredentialArray.map( medicalCredential => {
+
+        const
+          {
+            licensingBoard,
+            credentialTaxonomy,
+            licenseNumber,
+            dateReceived,
+            dateRenewed,
+            dateExpired } = medicalCredential
+
+        return client.query(credentialInsertStatement, [licensingBoard, credentialTaxonomy, licenseNumber, dateReceived, dateRenewed, dateExpired, user_id]);
+
+    }) )
 
     await client.query('COMMIT;');
 
     res.sendStatus(200);
-    
+
   } catch (error) {
-    
+
     console.error(`Error in Credential POST, changes rolledback ${error}`);
 
     await client.query('ROLLBACK;');
+
+    res.sendStatus(500);
 
   } finally {
     console.log('End cred POST')
@@ -491,22 +549,22 @@ router.post('/credentialhistory', rejectUnauthenticated, async (req, res) => {
   // pesto/ben
 })
 
-  router.put('/completeregistration', rejectUnauthenticated, (req, res) => {
-    console.log('completing registration for: ', req.user.id);
+router.put('/completeregistration', rejectUnauthenticated, (req, res) => {
+  console.log('completing registration for: ', req.user.id);
 
-    const queryText = `UPDATE "provider" SET "registrationComplete" = true
+  const queryText = `UPDATE "provider" SET "registrationComplete" = true
     WHERE "provider".user_id = $1
     ;`;
 
-    pool.query(queryText, [req.user.id])
+  pool.query(queryText, [req.user.id])
     .then(result => {
       res.sendStatus(200)
     })
     .catch(error => {
       console.log('error completing registration', error);
-      
+
     })
-  })
+})
 
 
 module.exports = router;
