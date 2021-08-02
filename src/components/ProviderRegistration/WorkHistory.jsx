@@ -4,10 +4,15 @@ import { useHistory } from "react-router"
 import WorkHistoryMultiRow from './FormComponents/WorkHistoryMultiRow'
 import ImageUploader from "../ImageComponents/ImageUploader";
 import {Button} from '@material-ui/core'
+import { useSelector } from "react-redux";
 
 function WorkHistory() {
     const dispatch = useDispatch();
     const history = useHistory();
+
+    
+
+    const workHistoryItems = useSelector(store => store.workHistoryReducer)
 
     const [yearsExperience, setYearsExperience] = useState('');
 
@@ -61,7 +66,8 @@ function WorkHistory() {
 
         // send a dispatch to post all work histories
         await dispatch({
-            type: 'POST_WORK_HISTORY_ITEMS'
+            type: 'POST_WORK_HISTORY_ITEMS',
+            payload: workHistoryItems
         })
 
         history.push('/missionhistory')

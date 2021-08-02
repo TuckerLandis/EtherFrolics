@@ -227,6 +227,8 @@ router.post('/workhistoryitem', rejectUnauthenticated, (req, res) => {
   // Tucker
 
   const workHistoryItem = req.body
+
+  
   const queryText = `INSERT INTO "work_experience" 
   (
     "workplace",
