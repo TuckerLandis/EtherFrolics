@@ -264,7 +264,7 @@ router.post('/workhistoryitem', rejectUnauthenticated, (req, res) => {
     res.sendStatus(500)
   })
 
-  })
+  }) // end loop
   res.sendStatus(200)
   
 
@@ -303,7 +303,7 @@ router.put('/address', rejectUnauthenticated, (req, res) => {
 
   let queryText = `UPDATE "provider" SET "streetAddress" = $1, "city" = $2, "state" = $3, "zipCode" = $4, "phoneNumber" = $5 WHERE "user_id" = $6;`;
 
-  pool.query(queryText, [updatedAddress.streetAddress, updatedAddress.city, updatedAddress.state, updatedAddress.zipCode, updatedAddress.phone, req.user.id])
+  pool.query(queryText, [updatedAddress.streetAddress, updatedAddress.city, updatedAddress.state, updatedAddress.zip, updatedAddress.phone, req.user.id])
   .then(response => {
     console.log(response.rowCount);
     res.sendStatus(200)

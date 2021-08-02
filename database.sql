@@ -57,7 +57,6 @@ CREATE TABLE "work_experience" (
 	"referenceName" varchar (100),
 	"referencePhone" varchar (100),
 	"referenceEmail" varchar (100),
-	"resumeImageKey" varchar(100),
 	"user_id" int REFERENCES "user"
 );
 
