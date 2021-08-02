@@ -450,9 +450,9 @@ router.post('/credentialhistory', rejectUnauthenticated, async (req, res) => {
 
   // req.body destructured by variables to post
   const {
-    liscensingBoard,
+    licensingBoard,
     credentialTaxonomy,
-    liscenseNumber,
+    licenseNumber,
     dateReceived,
     dateRenewed,
     dateExpired } = req.body
@@ -461,7 +461,7 @@ router.post('/credentialhistory', rejectUnauthenticated, async (req, res) => {
   const user_id = req.user.id;
 
   const credentialInsertStatement = `
-    INSERT INTO "credential" ("liscensingBoard", "credentialName", "liscenseNumber", "dateInitial", "dateRenewed", "dateExpiring", "user_id")
+    INSERT INTO "credential" ("licensingBoard", "credentialName", "licenseNumber", "dateInitial", "dateRenewed", "dateExpiring", "user_id")
     VALUES ($1, $2, $3, $4, $5, $6, $7);
   `;
 
@@ -469,7 +469,7 @@ router.post('/credentialhistory', rejectUnauthenticated, async (req, res) => {
 
     await client.query('BEGIN;');
 
-    await client.query(credentialInsertStatement, [liscensingBoard, credentialTaxonomy, liscenseNumber, dateReceived, dateRenewed, dateExpired, user_id]);
+    await client.query(credentialInsertStatement, [licensingBoard, credentialTaxonomy, licenseNumber, dateReceived, dateRenewed, dateExpired, user_id]);
 
     await client.query('COMMIT;');
 

@@ -75,9 +75,9 @@ CREATE TABLE "mission_experience" (
 
 CREATE TABLE "credential" (
 	"credential_id" serial PRIMARY KEY,
-	"liscensingBoard" varchar(255),
+	"licensingBoard" varchar(255),
 	"credentialName" varchar(255),
-	"liscenseNumber" int,
+	"licenseNumber" int,
 	"dateInitial" DATE,
 	"dateRenewed" DATE,
 	"dateExpiring" DATE,
