@@ -5,11 +5,41 @@ import Button from '@material-ui/core/Button';
 
 import { useDispatch } from "react-redux"
 
-function TemplateFunction(props) {
+function MedCredMultiRow(props) {
 
   const dispatch = useDispatch();
 
   const [hasBeenSubmitted, setHasBeenSubmitted] = useState(false);
+
+  const credentialTextInputConfig = [
+    {
+      inputLabel: 'Licensing Board',
+      inputName: 'licensingBoard'
+    },
+    {
+      inputLabel: 'Credential Taxonomy',
+      inputName: 'credentialTaxonomy'
+    },
+    {
+      inputLabel: 'Liscense Number',
+      inputName: 'liscenseNumber'
+    }
+  ]
+
+  const credentialDateInputConfig = [
+    {
+      inputLabel: 'Date Recieved',
+      inputName: 'dateRecieved'
+    },
+    {
+      inputLabel: 'Date Renewed',
+      inputName: 'dateRenewed'
+    },
+    {
+      inputLabel: 'Date Expired',
+      inputName: 'dateExpired'
+    }
+  ];
   
   const [medCredValues, setMedCredValues] = useState({
       licensingBoard: '',
@@ -49,60 +79,20 @@ function TemplateFunction(props) {
 
   }
 
-  const setValue = (inputLabel) => {
-
-    const labelArray = inputLabel.split(' ');
-
-    if (labelArray.length === 2) {
-
-      const variableNamePartOne = labelArray[0].toLowerCase();
-
-      return medCredValues[variableNamePartOne + labelArray[1]];
-
-    } else {
-
-      const variableNamePartOne = labelArray[0].toLowerCase();
-      
-      return medCredValues[variableNamePartOne];
-      
-    };
-  };
-
-  const setName = (inputLabel) => {
-
-    const labelArray = inputLabel.split(' ');
-
-    if (labelArray.length === 2) {
-
-      const variableNamePartOne = labelArray[0].toLowerCase();
-
-      return variableNamePartOne + labelArray[1];
-
-    } else {
-
-      const variableNamePartOne = labelArray[0].toLowerCase();
-      
-      return variableNamePartOne;
-      
-    };
-  };
-
   console.log(medCredValues);
   return (
     <div>
       <form onSubmit={submitCredentialHistory}>
       
-        {['Licensing Board', 'Credential Taxonomy', 'Liscense Number']
-        .map((dataPoint, i) => {
+        {credentialTextInputConfig.map((textInputConfig, i) => {
           return (
-              <TextField key={i} required label={dataPoint} variant="outlined" name={setName(dataPoint)} value={setValue(dataPoint)} onChange={handleChange} />
+              <TextField key={i} required label={textInputConfig.inputLabel} variant="outlined" name={textInputConfig.inputName} value={medCredValues[textInputConfig.inputName]} onChange={handleChange} />
           )
         })}
 
-        {['Date Recieved', 'Date Renewed', 'Date Expired']
-        .map((dataPoint, i) => {
+        {credentialDateInputConfig.map((dateInputConfig, i) => {
           return (
-              <TextField key={i} required type="date" label={dataPoint} InputLabelProps={{ shrink: true }} variant="outlined" name={setName(dataPoint)} value={setValue(dataPoint)} onChange={handleChange} placeholder=" " />
+              <TextField key={i} required type="date" label={dateInputConfig.inputLabel} InputLabelProps={{ shrink: true }} variant="outlined" name={dateInputConfig.inputName} value={medCredValues[dateInputConfig.inputName]} onChange={handleChange} />
           )
         })}
         
