@@ -63,7 +63,7 @@ function ProviderManagementIndividual() {
     const soloProviderStatus = () => {
 
         // don't need ?
-        if (selectedProvider[0]?.soloProvider == true) {
+        if (selectedProvider?.soloProvider == true) {
             return(
                 <p>Yes</p>
             )
@@ -88,13 +88,9 @@ function ProviderManagementIndividual() {
 
     return (
 
-        <div>
-            {selectedProvider?.map((provider) => {
-                return (
+        <div>    
 
-                    
-
-                    <div key={provider?.provider_id}>
+                    <div key={selectedProvider?.provider_id}>
                         <div>
                             <h1>Provider General Information</h1>
                             <h2>Name: {provider?.firstName} {provider?.lastName}</h2>
@@ -149,8 +145,6 @@ function ProviderManagementIndividual() {
                         </div>
                     </div>
 
-                )
-            })}
         </div>
 
     )
