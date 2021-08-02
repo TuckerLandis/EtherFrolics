@@ -92,11 +92,11 @@ router.get('/ind/:id', rejectNonAdmin, (req, res) => {
 
     pool.query(queryText, [req.params.id])
     .then(result => {
+      console.log('Individual provider GET: ', result.rows);
       res.send(result.rows)
     })
     .catch(error => {
       console.log('error in individual provider get', error);
-      
     })
 })
 
