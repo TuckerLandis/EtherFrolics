@@ -35,7 +35,7 @@ function* putWorkHistory(action) {
   }
 }
 
-function* addEducationHistoryItem(action) {
+function* postEducationHistoryItems(action) {
   try {
     yield axios.post('/api/provider/educationhistoryitem', action.payload)
   } catch (error) {
@@ -60,7 +60,7 @@ function* postMissionHistoryItems(action){
   }
 }
 
-function* addInsuranceItem (action) {
+function* postInsuranceItems (action) {
   console.log(action.payload);
   try {
     yield axios.post('/api/provider/insuranceitem', action.payload)
@@ -112,12 +112,12 @@ function* providerRegistrationSaga() {
     yield takeLatest('PUT_PROVIDER_ADDRESS', putProviderAddress);
     yield takeLatest('POST_WORK_HISTORY_ITEMS', postWorkHistoryItems);
     yield takeLatest('PUT_WORK_HISTORY', putWorkHistory);
-    yield takeLatest('ADD_EDUCATION_HISTORY_ITEM', addEducationHistoryItem);
+    yield takeLatest('POST_EDUCATION_HISTORY_ITEMS', postEducationHistoryItems);
     yield takeLatest('PUT_LAST_MISSION', putLastMission);
     yield takeLatest('POST_MISSION_HISTORY_ITEMS', postMissionHistoryItems);
 
     yield takeLatest('ADD_CREDENTIAL_HISTORY_DATA', addCredentialHistoryData);
-    yield takeLatest('ADD_INSURANCE_ITEM', addInsuranceItem);
+    yield takeLatest('POST_INSURANCE_ITEMS', postInsuranceItems);
     yield takeLatest('COMPLETE_REGISTRATION', completeRegistration)
    
 
