@@ -26,7 +26,6 @@ CREATE TABLE "provider" (
 	"soloProvider" BOOLEAN default FALSE,
 	"verified" BOOLEAN default FALSE,
 	"recruiterOpt" BOOLEAN default FALSE,
-	"lastMission" DATE,
 	"yearsExperience" varchar(10),
 	"validPassport" BOOLEAN default FALSE,
 	"availability" DATE,
