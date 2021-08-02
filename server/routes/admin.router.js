@@ -1,8 +1,9 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
-router.get('/', (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
 
     const queryText = `
     SELECT "user".id, "user".username
@@ -22,7 +23,7 @@ router.get('/', (req, res) => {
 });
 
 // Get request for info in the Mission Table
-router.get('/mission', (req, res) => {
+router.get('/mission', rejectUnauthenticated, (req, res) => {
     const queryText = `SELECT "mission"."startDate", "mission".location, "mission".name FROM "mission"
 		ORDER BY "mission"."startDate" ASC;`
 
@@ -36,7 +37,7 @@ router.get('/mission', (req, res) => {
         })
 }) // End of Get route
 
-router.post('/mission', (req, res) => {
+router.post('/mission', rejectUnauthenticated, (req, res) => {
     console.log('req.body is', req.body);
     let mission = req.body;
     //define query text
