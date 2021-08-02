@@ -256,8 +256,8 @@ router.post('/workhistoryitem', rejectUnauthenticated, (req, res) => {
     req.user.id
   ])
   .then(result => {
-    console.log('POSTED new work history');
-    res.sendStatus(200)
+    console.log('POSTED new work histories');
+    
   })
   .catch (error => {
     console.log('Error in WorkHistory POST', error);
@@ -265,7 +265,7 @@ router.post('/workhistoryitem', rejectUnauthenticated, (req, res) => {
   })
 
   })
-
+  res.sendStatus(200)
   
 
 });
