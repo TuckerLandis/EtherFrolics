@@ -38,12 +38,12 @@ function MissionHistory () {
     function handleNext(e) {
         e.preventDefault
 
-        dispatch({
-            type: "PUT_LAST_MISSION",
-            payload: {
-                lastMission: lastMission
-            }
-        })
+        // dispatch({
+        //     type: "PUT_LAST_MISSION",
+        //     payload: {
+        //         lastMission: lastMission
+        //     }
+        // })
         
          dispatch({
              type: 'POST_MISSION_HISTORY_ITEMS',
