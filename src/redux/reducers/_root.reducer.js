@@ -10,6 +10,7 @@ import workHistoryReducer from './workHistory.reducer';
 import missionHistoryReducer from './missionHistory.reducer';
 import educationHistoryReducer from './educationHistory.reducer'
 import credentialHistoryReducer from './credentialHistory.reducer';
+import insuranceItemReducer from './insuranceItem.reducer';
 
 
 
@@ -35,7 +36,8 @@ const rootReducer = combineReducers({
   workHistoryReducer,
   missionHistoryReducer,
   educationHistoryReducer,
-  credentialHistoryReducer
+  credentialHistoryReducer,
+  insuranceItemReducer
 
   
 });
