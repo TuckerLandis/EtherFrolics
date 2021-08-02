@@ -28,12 +28,15 @@ router.post('/s3', upload.single('image'), rejectUnauthenticated, async (req, re
     const result = await uploadFile(file)
 
     // scrubs image from server /uploads
-    // await unlinkFile(file.path) // seems to work but throws an error, need to ask dane? - maybe just put it in the .then
+    // seems to work but throws an error, need to ask dane? - maybe just put it in the .then
 
 
         .then(result => {
             console.log('response from s3', result);
             res.send(result)
+        })
+        .then(() => {
+        unlinkFile(file.path)
         })
         .catch(error => {
             console.log('error in image post', error);
@@ -83,6 +86,7 @@ router.post('/db', rejectUnauthenticated, async (req, res) => {
         case 'resume':
             queryText = `UPDATE "provider" SET "resumeKey" = $1 WHERE "provider".user_id = $2`;
             break
+
         // put more cases here for the different types of images we need to accept [transcript, missionCompletionPDF, medical credentials, insurance info]
 
     }
