@@ -39,6 +39,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import ImageViewer from '../ImageComponents/ImageViewer';
 
 function ProviderManagementIndividual() {
 
@@ -114,7 +115,7 @@ function ProviderManagementIndividual() {
                         {/* test of image get from s3 */}
                         <h1>Provider Resume</h1>
                         {/* works! can make this a light box, also only works atm if a provider has a resume image key, will bug otherwise, need to require the resume submission */}
-                         <img src={resumePath} alt="" />
+                        <ImageViewer imagePath={resumePath} />
 
                         <div>
                             <h1>Provider Credentials</h1>
