@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {useHistory} from 'react-router-dom';
 import InsuranceMultiRow from './FormComponents/InsuranceMultiRow';
 import Button from '@material-ui/core/Button';
@@ -8,6 +8,8 @@ import Button from '@material-ui/core/Button';
 function Insurance () {
     const dispatch = useDispatch();
     const history = useHistory();
+
+    const insuranceItems = useSelector(store => store.insuranceItemReducer)
 
     // create an array that will render the insurance history subcomponents
     const [amountOfInsuranceHistories, setAmountOfInsuranceHistories] = useState([1]);
@@ -28,6 +30,11 @@ function Insurance () {
 
     //send user to the next page but it is peer review... so may want to send them elsewhere
     const nextPage = () => {
+
+        dispatch({
+            type: 'POST_INSURANCE_ITEMS',
+            payload: insuranceItems
+        })
         
         dispatch({
             type: 'COMPLETE_REGISTRATION'
@@ -42,8 +49,8 @@ function Insurance () {
         <div>
           <p>Insurance</p>
 
-            {amountOfInsuranceHistories.map( () => {
-                return (<InsuranceMultiRow addInsuranceItem={addInsuranceItem}/>)
+            {amountOfInsuranceHistories.map( (insurance, i) => {
+                return (<InsuranceMultiRow key={i} addInsuranceItem={addInsuranceItem}/>)
             })}
 
            
