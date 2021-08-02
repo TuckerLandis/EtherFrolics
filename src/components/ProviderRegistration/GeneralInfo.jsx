@@ -18,11 +18,18 @@ function GeneralInfo() {
     const [soleProvider, setSoleProvider] = useState(false)
     const [emailAddress, setEmailAddress] = useState('')
 
+    // state variable to track if all inputs
+    // have content
+    const [generalInfoFormComplete, setGeneralInfoFormComplete] = useState(false); 
+
     /**
      * Takes in an event from all inputs, changes their state variable
      * @param {*} e 
      */
     function handleChange(e) {
+
+        // function for validation
+        
 
         console.log(e.target.id);
 
@@ -55,6 +62,14 @@ function GeneralInfo() {
                 setEmailAddress(e.target.value)
                 break
         }
+
+        if (firstName != '' && lastName != '' && dob != '' && providerRole != '' && validPassport != '' && soleProvider != '' && emailAddress != ''){
+            console.log('in if');
+            setGeneralInfoFormComplete(true);
+        } else {
+            console.log('in else');
+            setGeneralInfoFormComplete(false);
+        }
     }
 
     /**
@@ -80,7 +95,10 @@ function GeneralInfo() {
         dispatch({
             type: 'POST_PROVIDER_GENERAL',
             payload: newProviderGeneralInfo
+            // saga, key oncomplete - do history.push
         })
+
+
 
         history.push('/generalinfoaddress')
     }
@@ -118,6 +136,7 @@ function GeneralInfo() {
 
                 <label htmlFor="providerRoleInput">Provider Role</label>
                 <select name="providerRole" id="providerRoleInput" value={providerRole} onChange={handleChange}>
+                <option value="-">-</option>
                     <option value="CRNA">CRNA</option>
 
                     {/* need more options here */}
@@ -145,7 +164,7 @@ function GeneralInfo() {
                 <TextField label="Email Address" required type="text" id="emailAddressInput" value={emailAddress}
                 onChange={handleChange} variant="outlined"/>
 
-                <button type="submit">Next</button>
+                <button disabled={!generalInfoFormComplete ? true : false} type="submit">Next</button>
             </form>
 
 

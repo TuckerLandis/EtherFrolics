@@ -1,5 +1,12 @@
-/*
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import Button from '@material-ui/core/Button';
+import ProviderGenItem from './ProviderGenItem';
+import ProviderCredItem from './ProviderCredItem';
+import ImageViewer from '../ImageComponents/ImageViewer';
 
+/*
 CHECKLIST
 
     [] UseEffect
@@ -31,17 +38,98 @@ CHECKLIST
 
 */
 
-import React, { useEffect } from 'react';
-
-import MissionTable from '../Mission/MissionTable';
 
 function ProviderLandingPage() {
-    return(
+    const dispatch = useDispatch();
+    const history = useHistory();
+
+    const user = useSelector(store => store.user);
+    //bring in the provider data from the reducer
+    // const provider = useSelector(store => store.selectedProvider)
+
+    const provider = useSelector(store => store.providerLandingReducer) // < ---- changed reducer to new provider landing reducer
+    //bring in the credential data from the reducer
+
+    // useEffect( () => {
+    //     dispatch({
+    //         type: 'SELECT_PROVIDER',
+    //         payload: user.id
+    //     })
+    // }, []);
+
+    // tl - new dispatch 
+    useEffect( () => {
+        dispatch({
+            type: 'GET_PROVIDER_LANDING'
+            // uses req.user.id
+        })
+    }, []);
+
+
+    //create a function so that the provider can view upcoming missions
+    const viewMissions = () => {
+        history.push('/missions')
+    }
+
+    //create a function so that the provider can register
+    const providerRegister = () => {
+        history.push('/generalInfo')
+    }
+
+
+    // test concat for image path
+    const resumePath = `/api/image/prov/${provider[0]?.resumeKey}`
+
+    return (
         <div>
-            <p>in Provider Landing Page</p>
+            <h2>Welcome,  {user.username} </h2>
+
+            {provider[0]?.registrationComplete ? (
+                <Button
+                    variant="contained"
+                    onClick={viewMissions}>View Missions</Button>
+            ) : (
+                <Button
+                    variant="contained"
+                    onClick={providerRegister}>Register</Button>
+            )}
+
+            {provider[0]?.registrationComplete ? (  // <------ even though the new reducer is an object, this [0] doesn't bug, i think we can remove this though?
             <div>
-                <MissionTable />
+            <h2>General Info</h2>
+                
+
+             {/* test for reading an image, works, see path declaration on line 80 */}
+            <h3>Your Resume</h3>
+            {/* <img src={resumePath} alt="" /> */}
+            <ImageViewer imagePath={resumePath} />
+
+
+            {provider.map (() => {
+                 return (<ProviderGenItem provider={provider}/>)
+            })}
+
+            <Button
+            variant="contained">Edit General Info</Button>
             </div>
+            ) : (
+                <h3>Please register to view upcoming missions</h3>
+            )}
+
+            {provider[0]?.registrationComplete ? (
+            <div>
+            <h2>Credential Info</h2>
+        
+            {provider.map (() => {
+                 return (<ProviderCredItem provider={provider}/>)
+            })}
+            <Button
+            variant="contained">Edit Credentials</Button>
+            </div>
+            ) : (
+            <p></p>
+
+            )}  
         </div>
     )
 }

@@ -70,6 +70,9 @@ function ProviderManagementGeneral() {
     // need to integrate icons into list for verified/unverified and flag icon for expiring credentials warning
     // need to add functionality to icons
 
+   const verifiedProviders = providers.filter(provider => provider.verified === true)
+   const unVerifiedProviders = providers.filter(provider => provider.verified === false)
+
     return (
 
         <List className={classes.root} subheader={<li />}>
@@ -77,9 +80,9 @@ function ProviderManagementGeneral() {
                     <ul className={classes.ul}>
                         <ListSubheader>Verified</ListSubheader>
                         {/* conditionally render in Verified section based on their verified status */}
-                        {providers?.map((provider) => (
+                        {verifiedProviders?.map((provider) => (
                             <ListItem key={provider?.provider_id}>
-                                <ListItemText onClick={() => handleSelect(provider?.user_id)}>{provider?.firstName}</ListItemText>
+                                <ListItemText onClick={() => handleSelect(provider?.user_id)}>{provider?.firstName} {provider.lastName}</ListItemText>
                             </ListItem>
                         ))}
                     </ul>
@@ -88,9 +91,9 @@ function ProviderManagementGeneral() {
                 <li className={classes.listSection}>
                     <ul className={classes.ul}>
                         <ListSubheader>Unverified</ListSubheader>
-                        {[0, 1, 2].map((item) => (
-                            <ListItem key={`item-${item}`}>
-                                <ListItemText>Ouch</ListItemText>
+                        {unVerifiedProviders?.map((provider) => (
+                            <ListItem key={provider?.provider_id}>
+                                <ListItemText onClick={() => handleSelect(provider?.user_id)}>{provider?.firstName} {provider.lastName}</ListItemText>
                             </ListItem>
                         ))}
                     </ul>

@@ -10,10 +10,17 @@ function MedCred () {
 
   const [credentialList, setCredentialList] = useState([1]);
 
+  // state variable to track if at least 1 section
+  // of credential data has been submitted to the DB
+  const [credentialSubmitted, setCredentialSubmitted] = useState(false);
+
   const addCredentialHistoryData = () => {
 
-    setCredentialList(amountOfWorkHistories =>
-      [...amountOfWorkHistories, amountOfWorkHistories.length + 1]);
+    setCredentialList(amountOfCredentials =>
+      [...amountOfCredentials, amountOfCredentials.length + 1]);
+
+      // credential submitted becoming true enables next button
+      setCredentialSubmitted(true);
 
   };
 
@@ -42,7 +49,7 @@ function MedCred () {
       })}
       
       {/* next button goes here */}
-      <Button onClick={handleNext} color="primary" variant="outlined">Next</Button>
+      <Button disabled={!credentialSubmitted ? true : false} onClick={handleNext} color="primary" variant="outlined">Next</Button>
       {/* stepper goes here with props of which page */}
 
       </div>
