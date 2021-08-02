@@ -19,7 +19,8 @@ function GeneralInfoAddress () {
     // have content
     const [addressFormComplete, setAddressFormComplete] = useState(false); 
 
-    function handleNext() {
+    function handleNext(e) {
+        e.preventDefault()
 
         dispatch({
             type: 'PUT_PROVIDER_ADDRESS',
@@ -28,6 +29,7 @@ function GeneralInfoAddress () {
                 city : city,
                 state : state,
                 zip : zip,
+                phone: phone
             }
         })
 

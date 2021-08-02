@@ -39,9 +39,9 @@ function Education() {
             <p>Education</p>
 
             {/* maps a state array to render relevant number of education history forms */}
-            {amountOfEducationHistories.map(education => {
+            {amountOfEducationHistories.map((education, i )=> {
                 return (
-                    <EducationMultiRow addEducationHistoryItem={addEducationHistoryItem} />
+                    <EducationMultiRow key={i} addEducationHistoryItem={addEducationHistoryItem} />
                 )
             })}
 
