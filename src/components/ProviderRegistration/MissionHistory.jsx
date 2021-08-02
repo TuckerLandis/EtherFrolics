@@ -31,9 +31,9 @@ function MissionHistory () {
 
     }
 
-    function handleChange(e) {
-        setLastMission(e.target.value)
-    }
+    // function handleChange(e) {
+    //     setLastMission(e.target.value)
+    // }
 
     function handleNext(e) {
         e.preventDefault
@@ -44,13 +44,13 @@ function MissionHistory () {
                 lastMission: lastMission
             }
         })
-        .then(
-            dispatch({
-                type: 'POST_MISSION_HISTORY_ITEMS',
-                payload: missionHistoryItems
+        
+         dispatch({
+             type: 'POST_MISSION_HISTORY_ITEMS',
+             payload: missionHistoryItems
 
-            })
-        )
+         })
+       
 
         history.push('/education')
     }
