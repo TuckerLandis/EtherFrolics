@@ -111,9 +111,9 @@ function ProviderManagementIndividual() {
                         {/* works! can make this a light box, also only works atm if a provider has a resume image key, will bug otherwise, need to require the resume submission */}
                         <ImageViewer imagePath={resumePath} />
 
-                        {/* <div>
+                        <div>
                             <h1>Provider Credentials</h1>
-                            {provider?.credential_array.map(credential => {
+                            {provider?.credential_array?.map(credential => {
                                 return <p>{credential?.credentialName}</p> // needs to be flesched out, but gets data back
                             })}
                         </div>
@@ -140,7 +140,7 @@ function ProviderManagementIndividual() {
                             {provider?.insurance_array?.map(insurance => {
                                 return <p>{insurance?.insuranceProvider}</p> // needs to be flesched out, but gets data back
                             })}
-                        </div> */}
+                        </div>
                     </div>
 
         </div>
