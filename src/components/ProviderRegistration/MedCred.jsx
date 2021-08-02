@@ -1,12 +1,17 @@
 import MedCredMultiRow from './FormComponents/MedCredMultiRow';
 import { useState } from "react";
 import { useHistory } from "react-router";
+import { useDispatch, useSelector } from 'react-redux';
 
 import Button from '@material-ui/core/Button';
 
 function MedCred () {
 
   const history = useHistory();
+
+  const providerCredentials = useSelector(store => store.credentialHistoryReducer)
+
+  const dispatch = useDispatch();
 
   const [credentialList, setCredentialList] = useState([1]);
 
@@ -27,12 +32,13 @@ function MedCred () {
   const handleNext = () => {
 
     console.log('handle next');
-    if (credentialList.length > 1) {
-      history.push('/insurance')  
-    } else {
-      return alert('Please enter in all valid credentials');
-    }
-      
+
+    dispatch({
+      type: 'ADD_CREDENTIAL_HISTORY_DATA',
+      payload: providerCredentials
+    });
+
+    history.push('/insurance') 
   };
 
   console.log(credentialList);
