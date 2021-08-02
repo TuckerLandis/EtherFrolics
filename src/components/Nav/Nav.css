@@ -41,3 +41,7 @@
 .navLink:hover {
   background-color: #008183;
 }
+
+.mouse {
+  cursor: pointer;
+}

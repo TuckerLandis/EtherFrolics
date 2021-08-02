@@ -51,7 +51,8 @@ function Nav() {
     loginLinkData.path = '/user';
     loginLinkData.text = 'Home';
   }
-  
+
+
   let list = (
     <div className={classes.list}
       onClick={toggleDrawer}
@@ -59,7 +60,7 @@ function Nav() {
       role="presentation"
     >
       <List>
-        <ListItem>
+        <ListItem className="mouse">
           <Link
             className={classes.text}
             component="button"
@@ -72,7 +73,7 @@ function Nav() {
 
         <Divider />
 
-        <ListItem>
+        <ListItem className="mouse">
           <Link
             className={classes.text}
             component="button"
@@ -86,7 +87,7 @@ function Nav() {
     </div>
   )
 
-  if (user.id != null) {
+  if (user.authorization === 1) {
     list = (
       <div
         className={classes.list}
@@ -95,13 +96,13 @@ function Nav() {
         role="presentation">
 
         <List>
-          <ListItem>
+          <ListItem className="mouse">
             Welcome, {user.username}!
           </ListItem>
 
           <Divider />
 
-          <ListItem>
+          <ListItem className="mouse">
             <Link
               className={classes.text}
               component="button"
@@ -114,7 +115,7 @@ function Nav() {
 
           <Divider /> 
 
-          <ListItem>
+          <ListItem className="mouse">
             <Link
               className={classes.text}
               component="button"
@@ -127,7 +128,7 @@ function Nav() {
 
           <Divider />
 
-          <ListItem>
+          <ListItem className="mouse">
             <Link
               className={classes.text}
               component="button"
@@ -140,7 +141,7 @@ function Nav() {
 
           <Divider />
 
-          <ListItem onClick={() => dispatch({ type: 'LOGOUT' })}>
+          <ListItem onClick={() => dispatch({ type: 'LOGOUT' })} className="mouse">
             {/* <LogOutButton className="navLink" /> */}
               Log Out
           </ListItem>
@@ -148,6 +149,23 @@ function Nav() {
       </div>
     )
   }
+
+  else if (user.authorization === 100) {
+    list = (
+      <List>
+        <ListItem onClick={() => { history.push('/adminlandingpage') }} className="mouse">
+          Admin Landing Page
+        </ListItem>
+
+      <Divider />
+
+        <ListItem onClick={() => dispatch({ type: 'LOGOUT' })} className="mouse">
+          Log Out
+        </ListItem>
+      </List>
+    )
+  }
+
   return (
     <div className="nav">
       <Link to="/home">
