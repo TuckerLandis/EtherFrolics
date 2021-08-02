@@ -107,4 +107,4 @@ function MedCredMultiRow(props) {
   );
 }
 
-export default TemplateFunction;
+export default MedCredMultiRow;
