@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { useHistory } from "react-router"
 import WorkHistoryMultiRow from './FormComponents/WorkHistoryMultiRow'
-import ImageUploader from "../ImageUploader/ImageUploader";
+import ImageUploader from "../ImageComponents/ImageUploader";
 import {Button} from '@material-ui/core'
 
 function WorkHistory() {
