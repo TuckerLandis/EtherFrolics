@@ -12,7 +12,8 @@ function EducationMultiRow(props) {
     const [hasBeenSubmitted, setHasBeenSubmitted] = useState(false)
 
 
-    function submitEducationHistoryItem() {
+    function submitEducationHistoryItem(e) {
+        e.preventDefault()
         setHasBeenSubmitted(true)
 
         dispatch({
@@ -42,33 +43,38 @@ function EducationMultiRow(props) {
             case 'endDateInput':
                 setEndDate(e.target.value)
                 break
-
         }
     }
 
     return (
         <div>
-            <label htmlFor="schoolInput">School</label>
-            <TextField id="schoolInput" value={school} onChange={handleChange} />
+            <form onSubmit={submitEducationHistoryItem}>
 
-            <label htmlFor="degreeInput">Job Title</label>
-            <TextField id="degreeInput" value={degree} onChange={handleChange} />
+            {/* <label htmlFor="schoolInput">School</label> */}
+            <TextField required label="School" id="schoolInput" value={school} onChange={handleChange} variant="outlined" />
+
+            {/* <label htmlFor="degreeInput">Job Title</label> */}
+            <TextField required label="Degree" id="degreeInput" value={degree} onChange={handleChange} variant="outlined" />
 
             <label htmlFor="startDateInput">Start Date</label>
-            <TextField type="date" id="startDateInput" value={startDate} onChange={handleChange} />
+            <TextField required type="date" id="startDateInput" value={startDate} onChange={handleChange} />
 
             <label htmlFor="endDateInput">End Date</label>
-            <TextField type="date" id="endDateInput" value={startDate} onChange={handleChange} />
+            <TextField required type="date" id="endDateInput" value={endDate} onChange={handleChange} />
 
             {hasBeenSubmitted ? (
                 <p>submitted</p>
             ) : (
 
-                <button onClick={submitEducationHistoryItem}>+</button>
+                <button type="submit" >+</button>
             )}
+
+
+            </form>
+            
 
         </div>
     )
 }
 
-export default EducationMultiRow
+export default EducationMultiRow;

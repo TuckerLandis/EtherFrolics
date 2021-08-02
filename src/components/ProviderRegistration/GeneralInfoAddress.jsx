@@ -8,10 +8,16 @@ function GeneralInfoAddress () {
     const dispatch = useDispatch();
     const history = useHistory()
 
+
+    const [phone, setPhone] = useState('')
     const [streetAddress, setStreetAddress] = useState('')
     const [city, setCity] = useState('')
     const [state, setState] = useState('')
     const [zip, setZip] = useState('')
+
+    // state variable to track if all inputs
+    // have content
+    const [addressFormComplete, setAddressFormComplete] = useState(false); 
 
     function handleNext() {
 
@@ -42,11 +48,24 @@ function GeneralInfoAddress () {
             case 'zipInput' : 
             setZip(e.target.value)
             break
+            case 'phoneInput' :
+            setPhone(e.target.value)
+        }
+        if (streetAddress != '' && city != '' && state != '' && zip != '' && phone !='') {
+            setAddressFormComplete(true);
+        } else {
+            setAddressFormComplete(false)
         }
     }
 
     return(
         <div>
+
+            <form onSubmit={handleNext}>
+
+            <label htmlFor="phoneInput">Phone Number</label>
+            <TextField type="text" name="phone" id="phoneInput" value={phone} onChange={handleChange}/>
+
             <label htmlFor="streetAddressInput">Street Address</label>
             <TextField type="text" name="streetAddress" id="streetAddressInput" value={streetAddress} onChange={handleChange} />
 
@@ -59,7 +78,10 @@ function GeneralInfoAddress () {
             <label htmlFor="zipInput">Zip Code</label>
             <TextField type="text" name="zip" id="zipInput" value={zip} onChange={handleChange}/>
 
-            <button onClick={handleNext}>Next</button>
+            <button disabled={!addressFormComplete ? true : false} type="submit">Next</button>
+
+            </form>
+            
 
             {/* stepper goes here with props of which page */}
 

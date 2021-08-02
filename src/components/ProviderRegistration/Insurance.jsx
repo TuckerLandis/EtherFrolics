@@ -1,20 +1,66 @@
+import {useState} from 'react';
+import {useDispatch} from 'react-redux';
+import {useHistory} from 'react-router-dom';
+import InsuranceMultiRow from './FormComponents/InsuranceMultiRow';
+import Button from '@material-ui/core/Button';
+
+
 function Insurance () {
+    const dispatch = useDispatch();
+    const history = useHistory();
+
+    // create an array that will render the insurance history subcomponents
+    const [amountOfInsuranceHistories, setAmountOfInsuranceHistories] = useState([1]);
+
+    // state variable to track if at least 1 section
+    // of insurance data has been submitted to the DB
+    const [insuranceSubmitted, setInsuranceSubmitted] = useState(false);
+
+    // create a function that will increase the amount of insurance histories
+    function addInsuranceItem () {
+        setAmountOfInsuranceHistories(amountOfInsuranceHistories => 
+            [...amountOfInsuranceHistories, amountOfInsuranceHistories.length + 1]
+        )
+
+        // insuranceSubmitted being true enables next button
+        setInsuranceSubmitted(true)
+    }
+
+    //send user to the next page but it is peer review... so may want to send them elsewhere
+    const nextPage = () => {
+        
+        dispatch({
+            type: 'COMPLETE_REGISTRATION'
+
+        })
+
+        history.push('/providerlandingpage');
+
+    }
+
     return(
         <div>
           <p>Insurance</p>
 
-           {/* insurance multi row form component goes here, along with submit button, included in that component */}
+            {amountOfInsuranceHistories.map( () => {
+                return (<InsuranceMultiRow addInsuranceItem={addInsuranceItem}/>)
+            })}
 
-           {/* next button goes here */}
-
+           
+            <Button
+            disabled={!insuranceSubmitted ? true : false}
+            variant="contained"
+            color="primary"
+            onClick={nextPage}>NEXT</Button>
+            
             {/* stepper goes here with props of which page */}
-
+            
         </div>
     )
 }
 
 
-export default Insurance
+export default Insurance;
 
 
 // ## Checklist

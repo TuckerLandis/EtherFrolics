@@ -2,6 +2,8 @@ import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { useHistory } from "react-router"
 import WorkHistoryMultiRow from './FormComponents/WorkHistoryMultiRow'
+import ImageUploader from "../ImageComponents/ImageUploader";
+import {Button} from '@material-ui/core'
 
 function WorkHistory() {
     const dispatch = useDispatch();
@@ -13,12 +15,28 @@ function WorkHistory() {
     const [amountOfWorkHistories, setAmountOfWorkHistories] = useState([1])
     // let keyForWorkHistoryMultiRow = 1
 
+    // state variable to track if at least 1 section
+    // of work history data has been submitted to the DB
+    const [workHistorySubmitted, setWorkHistorySubmitted] = useState(false);
+ 
+    // state variable to be flipped upon resume submission
+    const [resumeSubmitted, setResumeSubmitted] = useState(false)
+
+    // this function is passed down as props to the imageUploader component, so that it can flip this boolean for render usage on this page
+    function resumeSubmitFunction () {
+        setResumeSubmitted(true)
+        console.log('resume submitted');
+    }
+
     // increases the amount of work history elements in the array above
     function addWorkHistoryItem() {
 
         // keyForWorkHistoryMultiRow++
         setAmountOfWorkHistories(amountOfWorkHistories =>
             [...amountOfWorkHistories, amountOfWorkHistories.length + 1])
+
+        // workHistorySubmitted becoming true enables the next button
+        setWorkHistorySubmitted(true);
 
     }
 
@@ -29,6 +47,10 @@ function WorkHistory() {
     }
 
     function handleNext() {
+
+        if(yearsExperience === 0) {
+            return alert('Please enter years of experience')
+        }
         // send dispatch with just years of experience, also post resume to s3
         dispatch({
             type: 'PUT_WORK_HISTORY',
@@ -38,6 +60,12 @@ function WorkHistory() {
         })
         history.push('/missionhistory')
     }
+
+
+    // props for imageUploader. only declaring these here for visibility
+    const resume = 'resume'
+    const dispatchText = 'POST_RESUME'
+    const DBdispatchText = 'POST_RESUME_TO_DB'
 
     return (
         <div>
@@ -53,7 +81,6 @@ function WorkHistory() {
             </select>
 
 
-            <button>Resume Upload (Dummy) </button>
 
             {/* spacers, to be removed */}
             <br></br>
@@ -62,15 +89,17 @@ function WorkHistory() {
             <br></br>
 
             {/* maps a state array to render relevant number of work history forms */}
-            {amountOfWorkHistories.map(history => {
+            {amountOfWorkHistories.map((history, i )=> {
                 return (
-                    <WorkHistoryMultiRow addWorkHistoryItem={addWorkHistoryItem} /> // key={keyForWorkHistoryMultiRow} https://reactjs.org/docs/lists-and-keys.html
+                    <WorkHistoryMultiRow key={i} addWorkHistoryItem={addWorkHistoryItem} /> // key={keyForWorkHistoryMultiRow} https://reactjs.org/docs/lists-and-keys.html
                 )
             })}
 
-
-
-            <button onClick={handleNext}> Next </button>
+            {/* takes in props above the return, and the submitResumeFunction */}
+            <ImageUploader imageType={resume} dispatchText={dispatchText} DBdispatchText={DBdispatchText} submitFunction={resumeSubmitFunction} imageSubmitted={resumeSubmitted}/>
+            
+            
+            <Button variant="contained" color="primary" disabled={!workHistorySubmitted ? true : false} onClick={handleNext}> Next </Button>
 
             {/* stepper goes here with props of which page */}
 

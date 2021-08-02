@@ -13,11 +13,19 @@ function MissionHistory () {
 
     const [amountOfMissionHistories, setAmountOfMissionHistories] = useState([1])
 
+    // state variable to track if at least 1 section
+    // of mission history data has been submitted to the DB
+    const [missionHistorySubmitted, setMissionHistorySubmitted] = useState(false);
+
     // increases the amount of mission history elements in the array above
     function addMissionHistoryItem() {
 
         setAmountOfMissionHistories(amountOfMissionHistories =>
             [...amountOfMissionHistories, amountOfMissionHistories.length + 1])
+
+        // missionHistorySubmitted set to true enables
+        // NEXT button to navigate to the next page
+        setMissionHistorySubmitted(true);
 
     }
 
@@ -25,7 +33,8 @@ function MissionHistory () {
         setLastMission(e.target.value)
     }
 
-    function handleNext() {
+    function handleNext(e) {
+        e.preventDefault
 
         dispatch({
             type: "PUT_LAST_MISSION",
@@ -42,7 +51,7 @@ function MissionHistory () {
     return(
         <div>
             <label htmlFor="lastMissionInput">When was your last mission trip?</label>
-            <select name="lastMission" id="lastMissionInput" onChange={handleChange}>
+            <select required name="lastMission" id="lastMissionInput" onChange={handleChange}>
                 <option value="1">Within the last year</option>
                 <option value="2">Within the last 2 years</option>
                 <option value="3">Within the last 3 years</option>
@@ -51,14 +60,18 @@ function MissionHistory () {
                 <option value="6">More than 5 years ago</option>
                 </select>
 
+                <br></br>
+                <br></br>
+                <br></br>
+
             {/* maps a state array to render relevant number of work history forms */}
-            {amountOfMissionHistories.map(education => {
+            {amountOfMissionHistories.map((education, i) => {
                 return (
-                    <MissionHistoryMultiRow addMissionHistoryItem={addMissionHistoryItem} />
+                    <MissionHistoryMultiRow key={i} addMissionHistoryItem={addMissionHistoryItem} />
                 )
             })}
 
-<button onClick={handleNext}>Next</button>
+        <button disabled={!missionHistorySubmitted ? true : false} onClick={handleNext}>Next</button>
 
             {/* stepper goes here with props of which page */}
 
