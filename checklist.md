@@ -162,13 +162,13 @@ links to create mission
 
 -- GENERAL INFO (ADDRESS)
 
-[ ] Checklist
-    [ ]  Input fields
-        [ ]  street address
-        [ ]  city
-        [ ]  state
-        [ ]  zip
-    [ ]  next button → work history
+[x] Checklist
+    [x]  Input fields
+        [x]  street address
+        [x]  city
+        [x]  state
+        [x]  zip
+    [x]  next button → work history
 
 [ ] Components
     [ ]  bringing in stepper
@@ -363,11 +363,11 @@ links to create mission
 
 Generalinfo > 
 generalinfoaddress >
-workhistory >
-missionhistory >
-education >
-medCred >
-insurance > 
+workhistory > - image - resume [x]
+missionhistory > - image per row - mssion completion PDF []
+education > transcripts, required? []
+medCred > image per row - cred PDF[]
+insurance > image per row - insurance PDF
 
 
   "streetAddress",

@@ -39,7 +39,7 @@ function Education() {
         })
 
 
-        // history.push('/medcred')
+        history.push('/medcred')
     }
 
    
