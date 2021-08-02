@@ -33,7 +33,7 @@ function GeneralInfoAddress () {
             }
         })
 
-        // history.push('/workhistory')
+        history.push('/workhistory')
     }
 
     function handleChange(e) {
