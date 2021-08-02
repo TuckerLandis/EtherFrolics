@@ -1,6 +1,7 @@
 import { takeLatest } from "@redux-saga/core/effects";
 import axios from "axios";
 
+
 function* postProvider(action) {
     try {
       yield axios.post('/api/provider', action.payload);
@@ -18,7 +19,7 @@ function* putProviderAddress(action) {
   }
 }
 
-function* addWorkHistoryItem(action) {
+function* postWorkHistoryItems(action) {
   try {
     yield axios.post('/api/provider/workhistoryitem', action.payload)
   } catch (error) {
@@ -50,7 +51,7 @@ function* putLastMission(action) {
   }
 }
 
-function* addMissionHistoryItem(action){
+function* postMissionHistoryItems(action){
   try{
     yield axios.post('/api/provider/missionhistoryitem', action.payload)
   } catch (error) {
@@ -109,11 +110,11 @@ function* postImageDB(action) {
 function* providerRegistrationSaga() {
     yield takeLatest('POST_PROVIDER_GENERAL', postProvider);
     yield takeLatest('PUT_PROVIDER_ADDRESS', putProviderAddress);
-    yield takeLatest('ADD_WORK_HISTORY_ITEM', addWorkHistoryItem);
+    yield takeLatest('POST_WORK_HISTORY_ITEMS', postWorkHistoryItems);
     yield takeLatest('PUT_WORK_HISTORY', putWorkHistory);
     yield takeLatest('ADD_EDUCATION_HISTORY_ITEM', addEducationHistoryItem);
     yield takeLatest('PUT_LAST_MISSION', putLastMission);
-    yield takeLatest('ADD_MISSION_HISTORY_ITEM', addMissionHistoryItem);
+    yield takeLatest('POST_MISSION_HISTORY_ITEMS', postMissionHistoryItems);
 
     yield takeLatest('ADD_CREDENTIAL_HISTORY_DATA', addCredentialHistoryData);
     yield takeLatest('ADD_INSURANCE_ITEM', addInsuranceItem);

@@ -4,10 +4,15 @@ import { useHistory } from "react-router"
 import WorkHistoryMultiRow from './FormComponents/WorkHistoryMultiRow'
 import ImageUploader from "../ImageComponents/ImageUploader";
 import {Button} from '@material-ui/core'
+import { useSelector } from "react-redux";
 
 function WorkHistory() {
     const dispatch = useDispatch();
     const history = useHistory();
+
+    
+
+    const workHistoryItems = useSelector(store => store.workHistoryReducer)
 
     const [yearsExperience, setYearsExperience] = useState('');
 
@@ -46,18 +51,25 @@ function WorkHistory() {
 
     }
 
-    function handleNext() {
+    async function handleNext() {
 
-        if(yearsExperience === 0) {
+        if(yearsExperience === '-') {
             return alert('Please enter years of experience')
         }
-        // send dispatch with just years of experience, also post resume to s3
-        dispatch({
+        // send dispatch with just years of experience
+        await dispatch({
             type: 'PUT_WORK_HISTORY',
             payload: {
                 yearsExperience: yearsExperience,
             }
         })
+
+        // send a dispatch to post all work histories
+        await dispatch({
+            type: 'POST_WORK_HISTORY_ITEMS',
+            payload: workHistoryItems
+        })
+
         history.push('/missionhistory')
     }
 
@@ -71,6 +83,7 @@ function WorkHistory() {
         <div>
             <label htmlFor="yearsExperienceInput">Years of experience</label>
             <select name="yearsExperience" id="yearsExperienceInput" onChange={handleChange}>
+                <option value="-">-</option>
                 <option value="1-2">1-2</option>
                 <option value="2-3">2-3</option>
                 <option value="3-5">3-5</option>
@@ -85,9 +98,15 @@ function WorkHistory() {
             {/* spacers, to be removed */}
             <br></br>
             <br></br>
+
+            <h3>Submit Your Resume</h3>
+            {/* takes in props above the return, and the submitResumeFunction */}
+            <ImageUploader imageType={resume} dispatchText={dispatchText} DBdispatchText={DBdispatchText} submitFunction={resumeSubmitFunction} imageSubmitted={resumeSubmitted}/>
+
             <br></br>
             <br></br>
 
+            <h3>Add Work History</h3>
             {/* maps a state array to render relevant number of work history forms */}
             {amountOfWorkHistories.map((history, i )=> {
                 return (
@@ -95,8 +114,7 @@ function WorkHistory() {
                 )
             })}
 
-            {/* takes in props above the return, and the submitResumeFunction */}
-            <ImageUploader imageType={resume} dispatchText={dispatchText} DBdispatchText={DBdispatchText} submitFunction={resumeSubmitFunction} imageSubmitted={resumeSubmitted}/>
+            
             
             
             <Button variant="contained" color="primary" disabled={!workHistorySubmitted ? true : false} onClick={handleNext}> Next </Button>
