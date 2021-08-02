@@ -2,7 +2,7 @@ import React from 'react';
 // import { Link } from 'react-router-dom';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
-import {useSelector, useDispatch} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
@@ -113,7 +113,7 @@ function Nav() {
             </Link>
           </ListItem>
 
-          <Divider /> 
+          <Divider />
 
           <ListItem className="mouse">
             <Link
@@ -143,7 +143,7 @@ function Nav() {
 
           <ListItem onClick={() => dispatch({ type: 'LOGOUT' })} className="mouse">
             {/* <LogOutButton className="navLink" /> */}
-              Log Out
+            Log Out
           </ListItem>
         </List>
       </div>
@@ -157,7 +157,7 @@ function Nav() {
           Admin Landing Page
         </ListItem>
 
-      <Divider />
+        <Divider />
 
         <ListItem onClick={() => dispatch({ type: 'LOGOUT' })} className="mouse">
           Log Out
@@ -168,12 +168,14 @@ function Nav() {
 
   return (
     <div className="nav">
-      <Link to="/home">
-        <h2 className="nav-title">EtherFrolics</h2>
-     </Link>
-      <IconButton onClick={toggleDrawer}>
-        <MenuIcon fontSize="large" className="leftside" />
-      </IconButton>
+      <div className="nav-title">
+        <h2 className="nav-title" onClick={() => {history.push('/home')}}>EtherFrolics</h2>
+      </div>
+      <div className="leftSide">
+        <IconButton onClick={toggleDrawer}>
+          <MenuIcon fontSize="large" />
+        </IconButton>
+      </div>
       <Drawer anchor="left" open={drawer} onClose={toggleDrawer}>
         {list}
       </Drawer>
