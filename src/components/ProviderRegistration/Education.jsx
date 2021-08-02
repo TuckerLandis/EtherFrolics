@@ -2,6 +2,7 @@ import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { useHistory } from "react-router"
 import EducationMultiRow from "./FormComponents/EducationMultiRow";
+import ImageUploader from "../ImageComponents/ImageUploader";
 
 function Education() {
 
@@ -31,6 +32,8 @@ function Education() {
         history.push('/medcred')
     }
 
+   
+
     return (
         <div>
             <p>Education</p>
@@ -41,6 +44,9 @@ function Education() {
                     <EducationMultiRow addEducationHistoryItem={addEducationHistoryItem} />
                 )
             })}
+
+            
+            
 
             <button disabled={!educationSubmitted ? true : false} onClick={handleNext}>Next</button>
 

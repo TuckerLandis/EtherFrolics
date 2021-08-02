@@ -33,7 +33,8 @@ CREATE TABLE "provider" (
 	"peerReviews" TEXT [],
 	"missionReviews" TEXT [],
 	"publications" TEXT [],
-	"registrationComplete" BOOLEAN default FALSE
+	"registrationComplete" BOOLEAN default FALSE,
+	"resumeKey" varchar(200)
 );
 
 
@@ -118,6 +119,8 @@ CREATE TABLE "mission" (
 	"organization_id" int REFERENCES "organization"
 );
 
+-- Get request for an idividual provider
+
 SELECT 
 "user".id, "user".username, 
 "provider".provider_id, 
@@ -139,10 +142,11 @@ SELECT
 "provider".availability, 
 "provider"."peerReviews", 
 "provider"."missionReviews", 
-"provider".publications, 
+"provider".publications,
+"provider"."registrationComplete", 
 (SELECT JSON_AGG(providerCredentials)
 	FROM
-		(SELECT "credential_id", "licensingBoard", "credentialName", "liscenseNumber", "dateInitial", "dateRenewed", "dateExpiring", "credentialImageKey" 
+		(SELECT "credential_id", "licensingBoard", "credentialName", "licenseNumber", "dateInitial", "dateRenewed", "dateExpiring", "credentialImageKey" 
 		FROM "credential"
 		WHERE "credential".user_id = "user".id) AS providerCredentials) AS credential_array, 
 (SELECT JSON_AGG(providerEducation)

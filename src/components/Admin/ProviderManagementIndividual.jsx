@@ -39,6 +39,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import ImageViewer from '../ImageComponents/ImageViewer';
 
 function ProviderManagementIndividual() {
 
@@ -54,11 +55,14 @@ function ProviderManagementIndividual() {
             type: 'SELECT_PROVIDER',
             payload: params.id
         })
-    }, [])
+    }, [params.id])
+    // params.id in this array so that when it changes, the page refreshes^
 
     console.log('Selected provider: ', selectedProvider);
 
     const soloProviderStatus = () => {
+
+        // don't need ?
         if (selectedProvider[0]?.soloProvider == true) {
             return(
                 <p>Yes</p>
@@ -79,11 +83,16 @@ function ProviderManagementIndividual() {
     // need to set up dispatch for put routes to update provider object
     // need DISABLE functionality for admin - which db column will this change and how?
 
+    // test concat for image path
+    const resumePath = `/api/image/ind/${selectedProvider[0]?.resumeKey}`
+
     return (
 
         <div>
             {selectedProvider?.map((provider) => {
                 return (
+
+                    
 
                     <div key={provider?.provider_id}>
                         <div>
@@ -102,6 +111,12 @@ function ProviderManagementIndividual() {
                             {soloProviderStatus()}
                             
                         </div>
+
+                        {/* test of image get from s3 */}
+                        <h1>Provider Resume</h1>
+                        {/* works! can make this a light box, also only works atm if a provider has a resume image key, will bug otherwise, need to require the resume submission */}
+                        <ImageViewer imagePath={resumePath} />
+
                         <div>
                             <h1>Provider Credentials</h1>
                             {provider.credential_array.map(credential => {

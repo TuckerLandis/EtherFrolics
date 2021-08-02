@@ -56,6 +56,11 @@ function* logoutUser(action) {
   } catch (error) {
     console.log('Error with user logout:', error);
   }
+  finally {
+    console.log('pushing to home');
+    
+    yield action.pushToHome()
+  }
 }
 
 function* loginSaga() {

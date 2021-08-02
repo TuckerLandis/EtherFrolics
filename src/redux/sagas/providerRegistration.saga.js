@@ -70,7 +70,17 @@ function* addInsuranceItem (action) {
 
 
 
+function* completeRegistration (action) {
+  console.log('completing registration');
 
+  try {
+    yield axios.put('/api/provider/completeregistration')
+  } catch (error) {
+    console.log('error completing registration', error);
+    
+  }
+  
+}
 
 
 
@@ -88,6 +98,14 @@ function* addCredentialHistoryData(action){
   }
 }
 
+function* postImageDB(action) {
+  try {
+    yield axios.post('/api/image/db', action)
+  } catch (error) {
+    console.log('error in postImageSaga',error)
+  }
+}
+
 function* providerRegistrationSaga() {
     yield takeLatest('POST_PROVIDER_GENERAL', postProvider);
     yield takeLatest('PUT_PROVIDER_ADDRESS', putProviderAddress);
@@ -99,7 +117,10 @@ function* providerRegistrationSaga() {
 
     yield takeLatest('ADD_CREDENTIAL_HISTORY_DATA', addCredentialHistoryData);
     yield takeLatest('ADD_INSURANCE_ITEM', addInsuranceItem);
+    yield takeLatest('COMPLETE_REGISTRATION', completeRegistration)
    
+
+    yield takeLatest('POST_IMAGE_TO_DB', postImageDB)
   }
   
   export default providerRegistrationSaga;

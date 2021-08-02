@@ -1,12 +1,13 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const { rejectUnauthenticated, rejectNonAdmin } = require('../modules/authentication-middleware');
 
 
 /**
  * GETs all providers for render on provider management general page
  */
-router.get('/', async (req, res) => {
+router.get('/', rejectNonAdmin, (req, res) => {
 
   const queryText = `SELECT "provider".* FROM "provider"
   JOIN "user" 
@@ -27,10 +28,11 @@ router.get('/', async (req, res) => {
 })
 
 /**
- * GETs a provider's data for rendering on provider management individual and provider landing page
+ * GETs a provider's data for rendering on provider management individual
+ * rejects non admins
  * 
  */
-router.get('/:id', (req, res) => {
+router.get('/ind/:id', rejectNonAdmin, (req, res) => {
 
   const queryText = `SELECT 
   "user".id, "user".username, 
@@ -53,7 +55,9 @@ router.get('/:id', (req, res) => {
   "provider".availability, 
   "provider"."peerReviews", 
   "provider"."missionReviews", 
-  "provider".publications, 
+  "provider".publications,
+  "provider"."registrationComplete",
+  "provider"."resumeKey",
   (SELECT JSON_AGG(providerCredentials)
     FROM
       (SELECT "credential_id", "licensingBoard", "credentialName", "licenseNumber", "dateInitial", "dateRenewed", "dateExpiring", "credentialImageKey" 
@@ -91,7 +95,83 @@ router.get('/:id', (req, res) => {
       res.send(result.rows)
     })
     .catch(error => {
-      console.log('error in individual provider get');
+      console.log('error in individual provider get', error);
+      
+    })
+})
+
+
+/**
+ * GETs a provider's data for rendering onprovider landing page
+ * 
+ */
+ router.get('/landing', rejectUnauthenticated, (req, res) => {
+
+  console.log('got to providerLanding GET');
+  
+
+  const queryText = `SELECT 
+  "user".id, "user".username, 
+  "provider".provider_id, 
+  "provider"."firstName", 
+  "provider"."lastName", 
+  "provider"."DOB", 
+  "provider"."emailAddress", 
+  "provider"."providerRole", 
+  "provider"."streetAddress", 
+  "provider".city, 
+  "provider".state, 
+  "provider"."zipCode", 
+  "provider"."soloProvider", 
+  "provider".verified, 
+  "provider"."recruiterOpt", 
+  "provider"."lastMission", 
+  "provider"."yearsExperience", 
+  "provider"."validPassport", 
+  "provider".availability, 
+  "provider"."peerReviews", 
+  "provider"."missionReviews", 
+  "provider".publications,
+  "provider"."registrationComplete",
+  "provider"."resumeKey",
+  (SELECT JSON_AGG(providerCredentials)
+    FROM
+      (SELECT "credential_id", "licensingBoard", "credentialName", "licenseNumber", "dateInitial", "dateRenewed", "dateExpiring", "credentialImageKey" 
+      FROM "credential"
+      WHERE "credential".user_id = "user".id) AS providerCredentials) AS credential_array, 
+  (SELECT JSON_AGG(providerEducation)
+    FROM 
+      (SELECT "education_id", "institution", "startDate", "endDate", "degree", "degreeImageKey"
+      FROM "education"
+      WHERE "education".user_id = "user".id) AS providerEducation) AS education_array, 
+  (SELECT JSON_AGG(providerInsurance)
+    FROM
+      (SELECT "insurance_id", "insuranceType", "insuranceProvider", "state", "dateInitial", "dateRenewed", "dateExpiring", "policyNumber", 		"insuranceImageKey"
+      FROM "insurance"
+      WHERE "insurance".user_id = "user".id) AS providerInsurance) AS insurance_array, 
+  (SELECT JSON_AGG(providerMissionExperience)
+    FROM
+      (SELECT "missionExperience_id", "organizationName", "location", "startDate", "endDate", "referenceName", "referencePhone", "missionExperienceImageKey"
+      FROM "mission_experience"
+      WHERE "mission_experience".user_id = "user".id) AS providerMissionExperience) AS mission_experience_array, 
+  (SELECT JSON_AGG(providerWorkExperience)
+    FROM
+      (SELECT "workplace", "jobTitle", "startDate", "endDate", "referenceName", "referencePhone", "referenceEmail", "resumeImageKey"
+      FROM "work_experience"
+      WHERE "work_experience".user_id = "user".id) AS providerWorkExperience) AS work_experience_array
+    FROM "user"
+    JOIN "provider" 
+    ON "user".id = "provider".user_id
+    WHERE "user".id = $1
+    GROUP BY "user".id, "user".username, "provider".provider_id
+    ORDER BY "provider".verified;`;
+
+    pool.query(queryText, [req.user.id])
+    .then(result => {
+      res.send(result.rows)
+    })
+    .catch(error => {
+      console.log('error in provider landing get', error);
       
     })
 })
@@ -99,7 +179,7 @@ router.get('/:id', (req, res) => {
 /**
  * POST route for initial provider post from /generalinfo
  */
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
   
   console.log('Reached provider reg POST:', req.body);
   
@@ -140,7 +220,7 @@ router.post('/', (req, res) => {
   })
 });
 
-router.post('/workhistoryitem', (req, res) => {
+router.post('/workhistoryitem', rejectUnauthenticated, (req, res) => {
   // POST route code here
   console.log('Reached provider reg POST /workhistoryitem', req.body);
   // res.sendStatus(200)
@@ -186,7 +266,7 @@ router.post('/workhistoryitem', (req, res) => {
 /**
  * Takes a years of experience value from /workhistory and updates wthe relevant column in the provider table
  */
-router.put('/workhistory', (req, res) => {
+router.put('/workhistory', rejectUnauthenticated, (req, res) => {
   console.log('Reached provider PUT /workhistory', req.body);
 
   const provider = req.body
@@ -205,7 +285,7 @@ router.put('/workhistory', (req, res) => {
 })
 
 // Put request to the database to update the address info of the provider
-router.put('/address', (req, res) => {
+router.put('/address', rejectUnauthenticated, (req, res) => {
   console.log('Reached provider reg PUT /address', req.body);
 
   console.log(req.user.id);
@@ -213,9 +293,9 @@ router.put('/address', (req, res) => {
   let updatedAddress = req.body; 
   console.log('the updated address is', updatedAddress);
 
-  let queryText = `UPDATE "provider" SET "streetAddress" = $1, "city" = $2, "state" = $3, "zipCode" = $4 WHERE "user_id" = $5;`;
+  let queryText = `UPDATE "provider" SET "streetAddress" = $1, "city" = $2, "state" = $3, "zipCode" = $4, "phoneNumber" = $5 WHERE "user_id" = $6;`;
 
-  pool.query(queryText, [updatedAddress.streetAddress, updatedAddress.city, updatedAddress.state, updatedAddress.zipCode, req.user.id])
+  pool.query(queryText, [updatedAddress.streetAddress, updatedAddress.city, updatedAddress.state, updatedAddress.zipCode, updatedAddress.phone, req.user.id])
   .then(response => {
     console.log(response.rowCount);
     res.sendStatus(200)
@@ -228,7 +308,7 @@ router.put('/address', (req, res) => {
 /**
  * Takes an object from /education and posts it to the education table
  */
-router.post('/educationhistoryitem', (req, res) => {
+router.post('/educationhistoryitem', rejectUnauthenticated, (req, res) => {
   console.log('Reached provider reg POST: educationhistory', req.body);
   const educationhistoryItem = req.body
 
@@ -260,7 +340,7 @@ router.post('/educationhistoryitem', (req, res) => {
     })
 })
 
-router.put('/lastmission', (req, res) => {
+router.put('/lastmission', rejectUnauthenticated, (req, res) => {
   console.log('reached provider reg PUT: lastmission', req.body);
   console.log(req);
 
@@ -285,7 +365,7 @@ router.put('/lastmission', (req, res) => {
     })
 })
 
-router.post('/missionhistoryitem', async (req, res) => {
+router.post('/missionhistoryitem', rejectUnauthenticated, async (req, res) => {
   console.log('Reached provider reg POST: missionHistory', req.body);
 
   // make connection to pool client 
@@ -340,7 +420,7 @@ router.post('/missionhistoryitem', async (req, res) => {
   }
 })
 
-router.post('/insuranceitem', (req, res) => {
+router.post('/insuranceitem', rejectUnauthenticated, (req, res) => {
   console.log('Reg.body in /insurance item is', req.body);
   console.log('user id is', req.user.id);
   let ins = req.body;
@@ -362,7 +442,7 @@ router.post('/insuranceitem', (req, res) => {
 })
 
 
-router.post('/credentialhistory', async (req, res) => {
+router.post('/credentialhistory', rejectUnauthenticated, async (req, res) => {
   console.log('Credential History POST for provider', req.body);
   
   // make a connection to pool client for transaction
@@ -419,5 +499,23 @@ router.post('/credentialhistory', async (req, res) => {
 
   // pesto/ben
 })
+
+  router.put('/completeregistration', rejectUnauthenticated, (req, res) => {
+    console.log('completing registration for: ', req.user.id);
+
+    const queryText = `UPDATE "provider" SET "registrationComplete" = true
+    WHERE "provider".user_id = $1
+    ;`;
+
+    pool.query(queryText, [req.user.id])
+    .then(result => {
+      res.sendStatus(200)
+    })
+    .catch(error => {
+      console.log('error completing registration', error);
+      
+    })
+  })
+
 
 module.exports = router;

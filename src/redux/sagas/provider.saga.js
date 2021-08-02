@@ -18,7 +18,8 @@ function* getProviders() {
 
 function* selectProvider(action){
     try{
-        const response = yield axios.get(`/api/provider/${action.payload}`);
+        console.log(action.payload);
+        const response = yield axios.get(`/api/provider/ind/${action.payload}`);
 
         yield put({
             type: 'SEND_PROVIDER',
@@ -32,9 +33,29 @@ function* selectProvider(action){
     }
 } // end selectProvider fn*
 
+function* getProviderLanding(action){
+
+    try{
+        console.log('in providerLanding function');
+    
+    const response = yield axios.get('/api/provider/landing')
+
+    yield put({
+        type: 'SET_PROVIDER_LANDING',
+        payload: response.data
+    });
+
+    }
+     catch (error) {
+        console.log('error in getProviderLanding Function', error);
+        
+    }
+}
+
 function* providerSaga() {
     yield takeLatest('GET_PROVIDERS', getProviders);
     yield takeLatest('SELECT_PROVIDER', selectProvider);
+    yield takeLatest('GET_PROVIDER_LANDING', getProviderLanding);
 }
 
 export default providerSaga;

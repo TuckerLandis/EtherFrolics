@@ -65,9 +65,9 @@ function MissionHistory () {
                 <br></br>
 
             {/* maps a state array to render relevant number of work history forms */}
-            {amountOfMissionHistories.map(education => {
+            {amountOfMissionHistories.map((education, i) => {
                 return (
-                    <MissionHistoryMultiRow addMissionHistoryItem={addMissionHistoryItem} />
+                    <MissionHistoryMultiRow key={i} addMissionHistoryItem={addMissionHistoryItem} />
                 )
             })}
 

@@ -28,6 +28,9 @@ function GeneralInfo() {
      */
     function handleChange(e) {
 
+        // function for validation
+        
+
         console.log(e.target.id);
 
         switch (e.target.id) {
@@ -60,7 +63,7 @@ function GeneralInfo() {
                 break
         }
 
-        if (firstName != '' && lastName != '' && dob != '' /*&& providerRole != ''*/ && validPassport != '' && soleProvider != '' && emailAddress != ''){
+        if (firstName != '' && lastName != '' && dob != '' && providerRole != '' && validPassport != '' && soleProvider != '' && emailAddress != ''){
             console.log('in if');
             setGeneralInfoFormComplete(true);
         } else {
@@ -92,7 +95,10 @@ function GeneralInfo() {
         dispatch({
             type: 'POST_PROVIDER_GENERAL',
             payload: newProviderGeneralInfo
+            // saga, key oncomplete - do history.push
         })
+
+
 
         history.push('/generalinfoaddress')
     }
@@ -130,6 +136,7 @@ function GeneralInfo() {
 
                 <label htmlFor="providerRoleInput">Provider Role</label>
                 <select name="providerRole" id="providerRoleInput" value={providerRole} onChange={handleChange}>
+                <option value="-">-</option>
                     <option value="CRNA">CRNA</option>
 
                     {/* need more options here */}
