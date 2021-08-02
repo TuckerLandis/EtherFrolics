@@ -18,13 +18,13 @@ function* putProviderAddress(action) {
   }
 }
 
-function* addWorkHistoryItem(action) {
-  try {
-    yield axios.post('/api/provider/workhistoryitem', action.payload)
-  } catch (error) {
-    console.log('Error in providerRegistration saga, addWorkHistoryItem', error);
-  }
-}
+// function* addWorkHistoryItem(action) {
+//   try {
+//     yield axios.post('/api/provider/workhistoryitem', action.payload)
+//   } catch (error) {
+//     console.log('Error in providerRegistration saga, addWorkHistoryItem', error);
+//   }
+// }
 
 function* putWorkHistory(action) {
   try {
@@ -109,7 +109,7 @@ function* postImageDB(action) {
 function* providerRegistrationSaga() {
     yield takeLatest('POST_PROVIDER_GENERAL', postProvider);
     yield takeLatest('PUT_PROVIDER_ADDRESS', putProviderAddress);
-    yield takeLatest('ADD_WORK_HISTORY_ITEM', addWorkHistoryItem);
+    // yield takeLatest('ADD_WORK_HISTORY_ITEM', addWorkHistoryItem);
     yield takeLatest('PUT_WORK_HISTORY', putWorkHistory);
     yield takeLatest('ADD_EDUCATION_HISTORY_ITEM', addEducationHistoryItem);
     yield takeLatest('PUT_LAST_MISSION', putLastMission);

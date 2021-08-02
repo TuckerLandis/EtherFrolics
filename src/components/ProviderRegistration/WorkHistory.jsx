@@ -46,18 +46,24 @@ function WorkHistory() {
 
     }
 
-    function handleNext() {
+    async function handleNext() {
 
         if(yearsExperience === 0) {
             return alert('Please enter years of experience')
         }
-        // send dispatch with just years of experience, also post resume to s3
-        dispatch({
+        // send dispatch with just years of experience
+        await dispatch({
             type: 'PUT_WORK_HISTORY',
             payload: {
                 yearsExperience: yearsExperience,
             }
         })
+
+        // send a dispatch to post all work histories
+        await dispatch({
+            type: 'POST_WORK_HISTORY_ITEMS'
+        })
+
         history.push('/missionhistory')
     }
 
@@ -85,9 +91,15 @@ function WorkHistory() {
             {/* spacers, to be removed */}
             <br></br>
             <br></br>
+
+            <h3>Submit Your Resume</h3>
+            {/* takes in props above the return, and the submitResumeFunction */}
+            <ImageUploader imageType={resume} dispatchText={dispatchText} DBdispatchText={DBdispatchText} submitFunction={resumeSubmitFunction} imageSubmitted={resumeSubmitted}/>
+
             <br></br>
             <br></br>
 
+            <h3>Add Work History</h3>
             {/* maps a state array to render relevant number of work history forms */}
             {amountOfWorkHistories.map((history, i )=> {
                 return (
@@ -95,8 +107,7 @@ function WorkHistory() {
                 )
             })}
 
-            {/* takes in props above the return, and the submitResumeFunction */}
-            <ImageUploader imageType={resume} dispatchText={dispatchText} DBdispatchText={DBdispatchText} submitFunction={resumeSubmitFunction} imageSubmitted={resumeSubmitted}/>
+            
             
             
             <Button variant="contained" color="primary" disabled={!workHistorySubmitted ? true : false} onClick={handleNext}> Next </Button>

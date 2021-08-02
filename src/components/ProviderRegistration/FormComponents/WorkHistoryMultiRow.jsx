@@ -24,6 +24,7 @@ function WorkHistoryMultiRow (props) {
         
         setHasBeenSubmitted(true)
 
+        // sends to a reducer for later posting
         dispatch({
             type: 'ADD_WORK_HISTORY_ITEM',
             payload : {

@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { useHistory } from "react-router"
 import EducationMultiRow from "./FormComponents/EducationMultiRow";
-import ImageUploader from "../ImageUploader/ImageUploader";
+import ImageUploader from "../ImageComponents/ImageUploader";
 
 function Education() {
 
