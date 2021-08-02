@@ -53,7 +53,7 @@ function WorkHistory() {
 
     async function handleNext() {
 
-        if(yearsExperience === 0) {
+        if(yearsExperience === '-') {
             return alert('Please enter years of experience')
         }
         // send dispatch with just years of experience
@@ -83,6 +83,7 @@ function WorkHistory() {
         <div>
             <label htmlFor="yearsExperienceInput">Years of experience</label>
             <select name="yearsExperience" id="yearsExperienceInput" onChange={handleChange}>
+                <option value="-">-</option>
                 <option value="1-2">1-2</option>
                 <option value="2-3">2-3</option>
                 <option value="3-5">3-5</option>
