@@ -226,10 +226,12 @@ router.post('/workhistoryitem', rejectUnauthenticated, (req, res) => {
   // res.sendStatus(200)
   // Tucker
 
-  const workHistoryItem = req.body
+  let workHistoryItems = req.body
 
-  
-  const queryText = `INSERT INTO "work_experience" 
+  // loops over the sent array of work history objects, posts all
+  workHistoryItems.forEach(workHistoryItem => {
+
+    let queryText = `INSERT INTO "work_experience" 
   (
     "workplace",
     "jobTitle",
@@ -261,6 +263,10 @@ router.post('/workhistoryitem', rejectUnauthenticated, (req, res) => {
     console.log('Error in WorkHistory POST', error);
     res.sendStatus(500)
   })
+
+  })
+
+  
 
 });
 
