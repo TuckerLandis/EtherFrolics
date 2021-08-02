@@ -26,7 +26,7 @@ function* selectProvider(action){
             payload: response.data
         });
 
-        yield put({ type: 'GET_PROVIDERS' });
+        // yield put({ type: 'GET_PROVIDERS' });
     }
     catch (err) {
         console.log('Error selecting individual provider', err);
