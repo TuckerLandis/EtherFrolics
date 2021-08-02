@@ -2,7 +2,7 @@ import React from 'react';
 // import { Link } from 'react-router-dom';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
@@ -15,6 +15,7 @@ import ListItem from '@material-ui/core/ListItem';
 import MenuIcon from '@material-ui/icons/Menu';
 import Drawer from '@material-ui/core/Drawer';
 import Link from '@material-ui/core/Link';
+import Divider from '@material-ui/core/Divider';
 
 function Nav() {
 
@@ -38,6 +39,7 @@ function Nav() {
   // // End Material UI
 
   const history = useHistory();
+  const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
 
   let loginLinkData = {
@@ -67,6 +69,9 @@ function Nav() {
             Home
           </Link>
         </ListItem>
+
+        <Divider />
+
         <ListItem>
           <Link
             className={classes.text}
@@ -94,6 +99,8 @@ function Nav() {
             Welcome, {user.username}!
           </ListItem>
 
+          <Divider />
+
           <ListItem>
             <Link
               className={classes.text}
@@ -104,6 +111,8 @@ function Nav() {
               Home
             </Link>
           </ListItem>
+
+          <Divider /> 
 
           <ListItem>
             <Link
@@ -116,6 +125,8 @@ function Nav() {
             </Link>
           </ListItem>
 
+          <Divider />
+
           <ListItem>
             <Link
               className={classes.text}
@@ -127,8 +138,11 @@ function Nav() {
             </Link>
           </ListItem>
 
-          <ListItem>
-            <LogOutButton className="navLink" />
+          <Divider />
+
+          <ListItem onClick={() => dispatch({ type: 'LOGOUT' })}>
+            {/* <LogOutButton className="navLink" /> */}
+              Log Out
           </ListItem>
         </List>
       </div>
