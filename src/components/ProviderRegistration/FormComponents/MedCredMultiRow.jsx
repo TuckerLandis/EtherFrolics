@@ -44,7 +44,7 @@ function MedCredMultiRow(props) {
   const [medCredValues, setMedCredValues] = useState({
       licensingBoard: '',
       credentialTaxonomy: '',
-      liscenseNumber: '',
+      licenseNumber: '',
       dateReceived: '',
       dateRenewed: '',
       dateExpired: '',
