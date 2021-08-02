@@ -318,9 +318,10 @@ router.put('/address', rejectUnauthenticated, (req, res) => {
  */
 router.post('/educationhistoryitem', rejectUnauthenticated, (req, res) => {
   console.log('Reached provider reg POST: educationhistory', req.body);
-  const educationhistoryItem = req.body
+  const educationhistoryItems = req.body
 
-  const queryText = `INSERT INTO "education"
+  educationhistoryItems.forEach(educationhistoryItem => {
+    let queryText = `INSERT INTO "education"
   (
     "institution",
     "degree",
@@ -340,12 +341,16 @@ router.post('/educationhistoryitem', rejectUnauthenticated, (req, res) => {
 
     .then(result => {
       console.log('created new education history item');
-      res.sendStatus(200)
+      
     })
     .catch(error => {
       console.log('Error in Education Post', error);
       res.sendStatus(500)
     })
+  })
+
+ 
+    res.sendStatus(200)
 })
 
 router.put('/lastmission', rejectUnauthenticated, (req, res) => {
@@ -492,27 +497,35 @@ router.post('/credentialhistory', rejectUnauthenticated, async (req, res) => {
   const client = await pool.connect();
 
   // req.body destructured by variables to post
-  const {
-    licensingBoard,
-    credentialTaxonomy,
-    licenseNumber,
-    dateReceived,
-    dateRenewed,
-    dateExpired } = req.body
+  const providerCredentialArray = req.body
 
   // variable for user ID
   const user_id = req.user.id;
 
   const credentialInsertStatement = `
-    INSERT INTO "credential" ("licensingBoard", "credentialName", "licenseNumber", "dateInitial", "dateRenewed", "dateExpiring", "user_id")
-    VALUES ($1, $2, $3, $4, $5, $6, $7);
+  INSERT INTO "credential" ("licensingBoard", "credentialName", "licenseNumber", "dateInitial", "dateRenewed", "dateExpiring", "user_id")
+  VALUES ($1, $2, $3, $4, $5, $6, $7);
   `;
 
   try {
 
     await client.query('BEGIN;');
 
-    await client.query(credentialInsertStatement, [licensingBoard, credentialTaxonomy, licenseNumber, dateReceived, dateRenewed, dateExpired, user_id]);
+    await Promise.all( 
+      providerCredentialArray.map( medicalCredential => {
+
+        const
+          {
+            licensingBoard,
+            credentialTaxonomy,
+            licenseNumber,
+            dateReceived,
+            dateRenewed,
+            dateExpired } = medicalCredential
+
+        return client.query(credentialInsertStatement, [licensingBoard, credentialTaxonomy, licenseNumber, dateReceived, dateRenewed, dateExpired, user_id]);
+
+    }) )
 
     await client.query('COMMIT;');
 
@@ -523,6 +536,8 @@ router.post('/credentialhistory', rejectUnauthenticated, async (req, res) => {
     console.error(`Error in Credential POST, changes rolledback ${error}`);
 
     await client.query('ROLLBACK;');
+
+    res.sendStatus(500);
 
   } finally {
     console.log('End cred POST')

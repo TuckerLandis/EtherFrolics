@@ -59,7 +59,7 @@ function MedCredMultiRow(props) {
     setHasBeenSubmitted(true);
 
     dispatch({
-      type: 'ADD_CREDENTIAL_HISTORY_DATA',
+      type: 'ADD_CREDENTIAL_OBJECT',
       payload: medCredValues  
     });
 
