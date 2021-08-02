@@ -471,22 +471,28 @@ router.post('/missionhistoryitem', rejectUnauthenticated, async (req, res) => {
 router.post('/insuranceitem', rejectUnauthenticated, (req, res) => {
   console.log('Reg.body in /insurance item is', req.body);
   console.log('user id is', req.user.id);
-  let ins = req.body;
-  //define the query text of where you want to post in the database
-  const queryText = `INSERT INTO "insurance" ("insuranceType", "insuranceProvider", "policyNumber", 
+  const insuranceItems = req.body;
+
+  insuranceItems.forEach(ins => {
+    //define the query text of where you want to post in the database
+  let queryText = `INSERT INTO "insurance" ("insuranceType", "insuranceProvider", "policyNumber", 
   "state", "dateInitial", "dateRenewed", "dateExpiring", "user_id")
   VALUES ($1, $2, $3, $4, $5, $6, $7, $8);`;
 
   pool.query(queryText, [ins.insuranceType, ins.insuranceProvider, ins.policyNumber, ins.state, ins.dateInitial,
   ins.dateRenewed, ins.dateExpiring, req.user.id])
     .then(result => {
-      res.sendStatus(201);
+      
     })
     .catch(err => {
       console.log('error is', err);
       res.sendStatus(500);
     })
+  })
 
+
+  
+    res.sendStatus(201);
 })
 
 

@@ -60,7 +60,7 @@ function* postMissionHistoryItems(action){
   }
 }
 
-function* addInsuranceItem (action) {
+function* postInsuranceItems (action) {
   console.log(action.payload);
   try {
     yield axios.post('/api/provider/insuranceitem', action.payload)
@@ -117,7 +117,7 @@ function* providerRegistrationSaga() {
     yield takeLatest('POST_MISSION_HISTORY_ITEMS', postMissionHistoryItems);
 
     yield takeLatest('ADD_CREDENTIAL_HISTORY_DATA', addCredentialHistoryData);
-    yield takeLatest('ADD_INSURANCE_ITEM', addInsuranceItem);
+    yield takeLatest('POST_INSURANCE_ITEMS', postInsuranceItems);
     yield takeLatest('COMPLETE_REGISTRATION', completeRegistration)
    
 
