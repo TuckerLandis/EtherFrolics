@@ -353,31 +353,6 @@ router.post('/educationhistoryitem', rejectUnauthenticated, (req, res) => {
     res.sendStatus(200)
 })
 
-router.put('/lastmission', rejectUnauthenticated, (req, res) => {
-  console.log('reached provider reg PUT: lastmission', req.body);
-  console.log(req);
-
-  // variable for user ID
-  const user_id = req.user.id;
-
-  // variable for number of years since last mission
-  const lastMission = req.body.lastMission + ' ' + 'years ago';
-
-  const queryText = `
-    UPDATE "provider" SET "lastMission" = $1
-    WHERE "provider".user_id = $2;
-  `
-
-  pool.query(queryText, [lastMission, user_id])
-    .then(result => {
-      console.log('lastMission UPDATE success');
-      res.sendStatus(200);
-    })
-    .catch(error => {
-      console.log('UPDATE lastMission unsuccessful', error);
-    })
-})
-
 router.post('/missionhistoryitem', rejectUnauthenticated, async (req, res) => {
   console.log('Reached provider reg POST: missionHistory', req.body);
 
