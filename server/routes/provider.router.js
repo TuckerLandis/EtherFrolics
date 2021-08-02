@@ -448,26 +448,17 @@ router.post('/credentialhistory', rejectUnauthenticated, async (req, res) => {
   // make a connection to pool client for transaction
   const client = await pool.connect();
 
+  // req.body destructured by variables to post
+  const {
+    licensingBoard,
+    credentialTaxonomy,
+    licenseNumber,
+    dateReceived,
+    dateRenewed,
+    dateExpired } = req.body
+
   // variable for user ID
   const user_id = req.user.id;
-
-  // variable for licensingBoard
-  const licensingBoard = req.body.licensingBoard;
-
-  // variable for credentialName
-  const credentialName = req.body.credentialTaxonomy;
-
-  // variable for licenseNumber
-  const licenseNumber = req.body.licenseNumber;
-
-  // variable for dateInitial
-  const dateInitial = req.body.dateReceived;
-
-  // variable for dateRenewed
-  const dateRenewed = req.body.dateRenewed;
-
-  // variable for dateExpiring
-  const dateExpiring = req.body.dateExpired;
 
   const credentialInsertStatement = `
     INSERT INTO "credential" ("licensingBoard", "credentialName", "licenseNumber", "dateInitial", "dateRenewed", "dateExpiring", "user_id")
@@ -478,7 +469,7 @@ router.post('/credentialhistory', rejectUnauthenticated, async (req, res) => {
 
     await client.query('BEGIN;');
 
-    await client.query(credentialInsertStatement, [licensingBoard, credentialName, licenseNumber, dateInitial, dateRenewed, dateExpiring, user_id]);
+    await client.query(credentialInsertStatement, [licensingBoard, credentialTaxonomy, licenseNumber, dateReceived, dateRenewed, dateExpired, user_id]);
 
     await client.query('COMMIT;');
 
