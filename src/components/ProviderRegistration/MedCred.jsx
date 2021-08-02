@@ -16,8 +16,8 @@ function MedCred () {
 
   const addCredentialHistoryData = () => {
 
-    setCredentialList(amountOfWorkHistories =>
-      [...amountOfWorkHistories, amountOfWorkHistories.length + 1]);
+    setCredentialList(amountOfCredentials =>
+      [...amountOfCredentials, amountOfCredentials.length + 1]);
 
       // credential submitted becoming true enables next button
       setCredentialSubmitted(true);
