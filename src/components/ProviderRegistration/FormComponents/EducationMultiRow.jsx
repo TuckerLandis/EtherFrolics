@@ -68,14 +68,14 @@ function EducationMultiRow(props) {
             <div className="text-field-wrapper">
                 {/* <label htmlFor="startDateInput">Start Date</label> */}
                     <TextField type="date" name="startDate" id="startDateInput"
-                        label="Start Date" InputLabelProps={{ shrink: true }}
+                        label="Start Date" InputLabelProps={{ shrink: true }} variant="outlined"
                         value={startDate} onChange={handleChange} />
             </div>
 
             <div className="text-field-wrapper">
                 {/* <label htmlFor="endDateInput">End Date</label> */}
                     <TextField type="date" name="endDate" id="endDateInput"
-                        label="End Date" InputLabelProps={{ shrink: true }}
+                        label="End Date" InputLabelProps={{ shrink: true }} variant="outlined"
                         value={endDate} onChange={handleChange} />
             </div>
 

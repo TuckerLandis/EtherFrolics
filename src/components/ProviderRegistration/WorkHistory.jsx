@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux"
 import { useHistory } from "react-router"
 import WorkHistoryMultiRow from './FormComponents/WorkHistoryMultiRow'
 import ImageUploader from "../ImageComponents/ImageUploader";
-import {Button, Select, MenuItem} from '@material-ui/core'
+import {Button, Select, MenuItem, Typography} from '@material-ui/core'
 import { useSelector } from "react-redux";
 import RegistrationStepper from './Stepper'
 
@@ -85,18 +85,19 @@ function WorkHistory() {
 
     return (
         <div>
-            <h1 className="registration-title">Work History</h1>
+            <Typography variant="h4" className="registration-title">Work History</Typography>
+            
         
             
 
-            <h3 className="registration-title-subheading">Submit Your Resume</h3>
+            <Typography variant="subtitle1" className="registration-title-subheading">Submit Your Resume</Typography>
             {/* takes in props above the return, and the submitResumeFunction */}
             <ImageUploader imageType={resume} dispatchText={dispatchText} DBdispatchText={DBdispatchText} submitFunction={resumeSubmitFunction} imageSubmitted={resumeSubmitted}/>
             <br></br>
             
             <div className="text-field-wrapper">
 
-            <label htmlFor="yearsExperienceInput">Years of experience</label>
+            <Typography variant="body1" htmlFor="yearsExperienceInput">Years of experience</Typography>
             <Select variant="outlined" value={yearsExperience} name="yearsExperience" id="yearsExperienceInput" onChange={handleChange}>
                 <MenuItem value="-">-</MenuItem>
                 <MenuItem value="1-2">1-2</MenuItem>
@@ -111,7 +112,7 @@ function WorkHistory() {
             </div>
             
 
-            <h3 className="registration-title-subheading">Add Work History</h3>
+            <Typography variant="h5" className="registration-title-subheading">Add Work History</Typography>
             {/* maps a state array to render relevant number of work history forms */}
             {amountOfWorkHistories.map((history, i )=> {
                 return (
