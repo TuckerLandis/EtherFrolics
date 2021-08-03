@@ -13,11 +13,11 @@ function ProviderGenItem({ provider }) {
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                 >
-                    <Typography>Name</Typography>
+                    <Typography variant="h6">Name</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        {provider[0]?.firstName} {provider[0]?.lastName}
+                        {provider?.firstName} {provider?.lastName}
                     </Typography>
                 </AccordionDetails>
             </Accordion>
@@ -26,11 +26,11 @@ function ProviderGenItem({ provider }) {
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                 >
-                    <Typography>Provider Role</Typography>
+                    <Typography variant="h6">Provider Role</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        {provider[0]?.providerRole}
+                        {provider?.providerRole}
                     </Typography>
                 </AccordionDetails>
             </Accordion>
@@ -39,11 +39,11 @@ function ProviderGenItem({ provider }) {
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                 >
-                    <Typography>Phone Number</Typography>
+                    <Typography variant="h6">Phone Number</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        {provider[0]?.phoneNumber}
+                        {provider?.phoneNumber}
                     </Typography>
                 </AccordionDetails>
             </Accordion>
@@ -52,11 +52,11 @@ function ProviderGenItem({ provider }) {
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                 >
-                    <Typography>Email</Typography>
+                    <Typography variant="h6">Email</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        {provider[0]?.emailAddress}
+                        {provider?.emailAddress}
                     </Typography>
                 </AccordionDetails>
             </Accordion>
@@ -65,11 +65,11 @@ function ProviderGenItem({ provider }) {
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                 >
-                    <Typography>Valid Passport</Typography>
+                    <Typography variant="h6">Valid Passport</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        {provider[0]?.validPassport}
+                        {provider?.validPassport ? "Yes" : "No"}
                     </Typography>
                 </AccordionDetails>
             </Accordion>
