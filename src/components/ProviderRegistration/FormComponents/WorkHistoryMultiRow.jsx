@@ -120,8 +120,11 @@ function WorkHistoryMultiRow(props) {
                 {hasBeenSubmitted ? (
                     <p>submitted</p>
                 ) : (
-
-                    <Button variant="contained" color="secondary" type="submit">Add Work History Entry+</Button>
+                
+                    <div className="text-field-wrapper">
+                        <Button variant="contained" color="secondary" type="submit">Add Work History Entry+</Button>
+                    </div>
+                    
                 )}
 
             </form>

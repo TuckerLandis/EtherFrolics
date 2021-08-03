@@ -136,6 +136,10 @@ input {
   text-align: center;
 }
 
+.registration-title-subheading{
+  text-align: center;
+}
+
 input[type=text]{
-  width: 300px
+  width: 275px;
 }
