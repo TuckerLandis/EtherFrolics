@@ -1,60 +1,82 @@
 import { useState } from 'react';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import { useDispatch, useSelector } from 'react-redux';
+import {Button, MenuItem, Select, TextField} from '@material-ui/core';
 
 
 function EditGenInfo ( {provider} ) {
 
+    const dispatch = useDispatch();
+
+    const user = useSelector(store => store.user);
+
     const [editObj, setEditObj] = useState({
-        firstname: provider.firstName,
+        firstName: provider.firstName,
         lastName: provider.lastName,
         providerRole: provider.providerRole,
         phoneNumber: provider.phoneNumber,
         emailAddress: provider.emailAddress,
-        validPassport: provider.validPassport
+        validPassport: provider.validPassport,
     })
 
     const handleChange = (evt) => {
         evt.preventDefault();
 
-        setEditObj({firstName: evt.target.value,
-        lastName: evt.target.value})
-        console.log(editObj.firstName);
+        setEditObj({...editObj, [evt.target.name]: evt.target.value})
     }
+
+    const handleSubmit = (evt) => {
+        evt.preventDefault();
+    }
+console.log(editObj);
+console.log('provider is', provider);
+console.log('user is', user);
 
     return (
         <div>
-            <form>
+            <form onSubmit={handleSubmit}>
             <TextField
             type="text"
+            name="firstName"
             value={editObj.firstName}
-            onChange={(evt) => handleChange(evt)}
+            onChange={handleChange}
             />
             <TextField
             type="text"
+            name="lastName"
             value={editObj.lastName}
             onChange={handleChange}
             />
             <TextField
             type="text"
+            name="providerRole"
             value={editObj.providerRole}
-            onChange={(evt) => handleChange(evt)}
+            onChange={handleChange}
             />
             <TextField
             type="text"
+            name="phoneNumber"
             value={editObj.phoneNumber}
-            onChange={(evt) => handleChange(evt)}
+            onChange={handleChange}
             />
             <TextField
             type="text"
+            name="emailAddress"
             value={editObj.emailAddress}
             onChange={handleChange}
             />
-            <TextField
-            type="text"
+            <Select
+            name="validPassport"
             value={editObj.validPassport}
-            onChange={handleChange}
-            />
+            displayEmpty
+            onChange={handleChange}>
+                <MenuItem value="" disabled>Valid Passport</MenuItem>
+                <MenuItem value={true}>True</MenuItem>
+                <MenuItem value={false}>False</MenuItem>
+            </Select>
+            <Button
+            variant="contained"
+            type="submit"
+            >Submit</Button>
             </form>
         </div>
     )

@@ -50,18 +50,9 @@ function ProviderLandingPage() {
     const provider = useSelector(store => store.providerLandingReducer) // < ---- changed reducer to new provider landing reducer
     //bring in the credential data from the reducer
 
-    // useEffect( () => {
-    //     dispatch({
-    //         type: 'SELECT_PROVIDER',
-    //         payload: user.id
-    //     })
-    // }, []);
-
-    // tl - new dispatch 
     useEffect( () => {
         dispatch({
             type: 'GET_PROVIDER_LANDING'
-            // uses req.user.id
         })
     }, []);
 
@@ -99,11 +90,8 @@ function ProviderLandingPage() {
             <h2>General Info</h2>
                 
              <h3>Your Resume</h3>
-            {/* <img src={resumePath} alt="" /> */}
             <ImageViewer imagePath={resumePath} />
             <ProviderGenItem provider={provider}/>
-            {/* <Button
-            variant="contained">Edit General Info</Button> */}
             </div>
             ) : (
                 <h3>Please register to view upcoming missions</h3>
