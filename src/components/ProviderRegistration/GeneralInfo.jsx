@@ -102,7 +102,7 @@ function GeneralInfo() {
         history.push('/generalinfoaddress')
     }
 
-    const activeStep = 4
+    const activeStep = 0
 
 
     return (
@@ -174,14 +174,14 @@ function GeneralInfo() {
 
                 <p>Do you have a valid passport?</p>
                 <label htmlFor="yes">Yes</label>
-                <input type="radio" name="validPassport" id="validPassportRadioTrue" value="true" onChange={handleChange} />
+                <input required type="radio" name="validPassport" id="validPassportRadioTrue" value="true" onChange={handleChange} />
                 <label htmlFor="no">No</label>
                 <input type="radio" name="validPassport" id="validPassportRadioFalse" value="false" onChange={handleChange} />
 
 
                 <p>Are you comfortable working as a sole provider?</p>
                 <label htmlFor="yes">Yes</label>
-                <input type="radio" name="soleProvider" id="soleProviderRadioTrue" value="true" onChange={handleChange} />
+                <input required type="radio" name="soleProvider" id="soleProviderRadioTrue" value="true" onChange={handleChange} />
                 <label htmlFor="no">No</label>
                 <input type="radio" name="soleProvider" id="soleProviderRadioFalse" value="false" onChange={handleChange} />
 
@@ -191,10 +191,10 @@ function GeneralInfo() {
                 {/* <label htmlFor="emailAdressInput">Email Address</label> */}
                 
 
-                <button disabled={!generalInfoFormComplete ? true : false} type="submit">Next</button>
+                {/* <button disabled={!generalInfoFormComplete ? true : false} type="submit">Next</button> */}
 
                 <div>
-                <RegistrationStepper activeStep={activeStep}/>
+                <RegistrationStepper activeStep={activeStep} submitFunction={handleNext} />
                 </div>
                 
             </form>
@@ -211,6 +211,7 @@ function GeneralInfo() {
 
 export default GeneralInfo
 
+// submitFunction={handleNext}
 
 
 // ## Checklist

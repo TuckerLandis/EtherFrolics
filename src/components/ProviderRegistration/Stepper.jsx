@@ -15,19 +15,21 @@ const styles = {
 
 class ProgressMobileStepper extends React.Component {
   state = {
-    activeStep: 0,
+    activeStep: this.props.activeStep,
   };
 
   handleNext = () => {
-    this.setState(state => ({
-      activeStep: state.activeStep + 1,
-    }));
+    // this.setState(state => ({
+    //   activeStep: state.activeStep + 1,
+    // }));
+
+    // this.props.submitFunction(event)
   };
 
   handleBack = () => {
-    this.setState(state => ({
-      activeStep: state.activeStep - 1,
-    }));
+    // this.setState(state => ({
+    //   activeStep: state.activeStep - 1,
+    // }));
   };
 
   render() {
@@ -36,12 +38,12 @@ class ProgressMobileStepper extends React.Component {
     return (
       <MobileStepper
         variant="progress"
-        steps={6}
+        steps={7}
         position="static"
         activeStep={this.state.activeStep}
         className={classes.root}
         nextButton={
-          <Button size="small" onClick={this.handleNext} disabled={this.state.activeStep === 5}>
+          <Button size="small" type="submit" onClick={this.handleNext} disabled={this.state.activeStep === 5}>
             Next
             {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
           </Button>
