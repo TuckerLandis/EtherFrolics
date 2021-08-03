@@ -113,7 +113,7 @@ function MedCredMultiRow(props) {
             <p>submitted</p>
           ) : (
             <div className="text-field-wrapper">
-              <Button variant="contained" color="secondary" type="submit">Add Medical Credentials +</Button>
+              <Button variant="contained" color="secondary" type="submit">Add Medical Credentials Entry+</Button>
             </div>
           )}
       </form>
