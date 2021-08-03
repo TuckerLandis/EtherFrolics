@@ -12,11 +12,16 @@ function EducationMultiRow(props) {
     const [startDate, setStartDate] = useState('')
     const [endDate, setEndDate] = useState('')
     const [hasBeenSubmitted, setHasBeenSubmitted] = useState(false)
-    const [imageSubmit, setImageSubmit] = useState(false)
+    const [degreeImageKey, setDegreeImageKey] = useState('')
 
 
     function submitEducationHistoryItem(event, awsKey) {
         event.preventDefault()
+
+        if(degreeImageKey === '') {
+            return alert('Please attach a transcript')
+        }
+
         setHasBeenSubmitted(true)
 
         dispatch({
@@ -26,11 +31,16 @@ function EducationMultiRow(props) {
                 degree: degree,
                 startDate: startDate,
                 endDate: endDate,
-                degreeImageKey: awsKey
+                degreeImageKey: degreeImageKey
             }
         })
 
         props.addEducationHistoryItem()
+    }
+
+    function handleImageAttach(awsKey) {
+        
+        setDegreeImageKey(awsKey)
     }
 
     function handleChange(e) {
@@ -80,8 +90,9 @@ function EducationMultiRow(props) {
                         value={endDate} onChange={handleChange} />
             </div>
 
-            <Typography variant="body1">Attacha a Transcript</Typography>
-            <ImageUploader imageType={imageType} submitFunction={submitEducationHistoryItem} />
+            <Typography variant="body1">Attach a Transcript</Typography>
+
+            <ImageUploader imageType={imageType} attachImageFunction={handleImageAttach} />
 
             {hasBeenSubmitted ? (
                 <p>submitted</p>
