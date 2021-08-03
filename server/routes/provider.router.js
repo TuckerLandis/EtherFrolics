@@ -391,7 +391,7 @@ router.post('/educationhistoryitem', rejectUnauthenticated, (req, res) => {
           endDate
         } = educationHistoryItem;
 
-        return client.query(queryText, [school, degree, startDate, endDate]);
+        return client.query(queryText, [school, degree, startDate, endDate, user_id]);
       }) // end loop
     ) // end Promise
 
@@ -437,8 +437,6 @@ router.post('/missionhistoryitem', rejectUnauthenticated, async (req, res) => {
     INSERT INTO "mission_experience" ("organizationName", "location", "referenceName", "referencePhone", "startDate", "endDate", "user_id")
     VALUES ($1, $2, $3, $4, $5, $6, $7);
   `;
-
-  let missionHistoryItems = req.body;
 
   try {
 
@@ -491,28 +489,69 @@ router.post('/missionhistoryitem', rejectUnauthenticated, async (req, res) => {
 router.post('/insuranceitem', rejectUnauthenticated, (req, res) => {
   console.log('Reg.body in /insurance item is', req.body);
   console.log('user id is', req.user.id);
+
+  // make connection to pool client 
+  // to initiate transaction
+  const client = await pool.connect();
+
+  // variable for the user id
+  const user_id = req.user.id;
+
+  // make req.body available as insuranceItems
   const insuranceItems = req.body;
 
-  insuranceItems.forEach(ins => {
-    //define the query text of where you want to post in the database
+  //define the query text of where you want to post in the database
   let queryText = `INSERT INTO "insurance" ("insuranceType", "insuranceProvider", "policyNumber", 
-  "state", "dateInitial", "dateRenewed", "dateExpiring", "user_id")
-  VALUES ($1, $2, $3, $4, $5, $6, $7, $8);`;
+    "state", "dateInitial", "dateRenewed", "dateExpiring", "user_id")
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8);`;
 
-  pool.query(queryText, [ins.insuranceType, ins.insuranceProvider, ins.policyNumber, ins.state, ins.dateInitial,
-  ins.dateRenewed, ins.dateExpiring, req.user.id])
-    .then(result => {
-      
-    })
-    .catch(err => {
-      console.log('error is', err);
-      res.sendStatus(500);
-    })
-  })
+  try {
 
+    // begin the transaction block
+    await client.query('BEGIN;');
 
-  
-    res.sendStatus(201);
+    // Promise.all aggregates multiple promises into
+    // one and returns an array of results
+    await Promise.all(
+      // .map statement loops through insuranceItems array
+      insuranceItems.forEach(insuranceItem => {
+
+        // destructure objects in the array
+      const {
+        insuranceType,
+        insuranceProvider,
+        policyNumber,
+        state,
+        dateInitial,
+        dateRenewed,
+        dateExpiring } = insuranceItem;
+
+      return client.query(queryText, [insuranceType, insuranceProvider, policyNumber, state, dateInitial, dateRenewed, dateExpiring, user_id]);
+      }) // end loop
+    ) // end Promise
+
+    // commit changes to DB
+    await client.query('COMMIT;');
+
+    // send good response
+    res.sendStatus(200);
+
+  } catch (error) {
+
+    console.error(`Error in insuranceItems POST, changes rollback ${error}`);
+
+    // erase any changes made that havent been commited
+    await client.query('ROLLBACK;');
+
+    // send bad response
+    res.sendStatus(500);
+
+  } finally {
+    console.log('End insurance item POST');
+
+    // release the pool connection
+    await client.release();
+  }
 })
 
 
