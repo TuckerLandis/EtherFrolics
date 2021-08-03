@@ -15,7 +15,7 @@ function WorkHistory() {
 
     const workHistoryItems = useSelector(store => store.workHistoryReducer)
 
-    const [yearsExperience, setYearsExperience] = useState('');
+    const [yearsExperience, setYearsExperience] = useState('-');
 
     // state array on which work history sub components are rendered
     const [amountOfWorkHistories, setAmountOfWorkHistories] = useState([1])
@@ -83,6 +83,7 @@ function WorkHistory() {
 
     return (
         <div>
+            <h1>Work History</h1>
             <label htmlFor="yearsExperienceInput">Years of experience</label>
             <select name="yearsExperience" id="yearsExperienceInput" onChange={handleChange}>
                 <option value="-">-</option>
@@ -104,8 +105,6 @@ function WorkHistory() {
             <h3>Submit Your Resume</h3>
             {/* takes in props above the return, and the submitResumeFunction */}
             <ImageUploader imageType={resume} dispatchText={dispatchText} DBdispatchText={DBdispatchText} submitFunction={resumeSubmitFunction} imageSubmitted={resumeSubmitted}/>
-
-            <br></br>
             <br></br>
 
             <h3>Add Work History</h3>
