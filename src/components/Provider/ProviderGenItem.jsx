@@ -13,7 +13,7 @@ function ProviderGenItem({ provider }) {
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                 >
-                    <Typography>Name</Typography>
+                    <Typography variant="h6">Name</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
@@ -26,7 +26,7 @@ function ProviderGenItem({ provider }) {
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                 >
-                    <Typography>Provider Role</Typography>
+                    <Typography variant="h6">Provider Role</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
@@ -39,7 +39,7 @@ function ProviderGenItem({ provider }) {
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                 >
-                    <Typography>Phone Number</Typography>
+                    <Typography variant="h6">Phone Number</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
@@ -52,7 +52,7 @@ function ProviderGenItem({ provider }) {
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                 >
-                    <Typography>Email</Typography>
+                    <Typography variant="h6">Email</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
@@ -65,11 +65,11 @@ function ProviderGenItem({ provider }) {
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                 >
-                    <Typography>Valid Passport</Typography>
+                    <Typography variant="h6">Valid Passport</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        {provider?.validPassport}
+                        {provider?.validPassport ? "Yes" : "No"}
                     </Typography>
                 </AccordionDetails>
             </Accordion>

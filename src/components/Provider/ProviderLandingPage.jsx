@@ -68,14 +68,12 @@ function ProviderLandingPage() {
 
     //create a function so that the provider can view upcoming missions
     const viewMissions = () => {
-        // history.push('/missions')
-        console.log(provider);
+        history.push('/missions')
     }
 
     //create a function so that the provider can register
     const providerRegister = () => {
-        // history.push('/generalInfo')
-        console.log(provider);
+        history.push('/generalInfo')
     }
 
 
