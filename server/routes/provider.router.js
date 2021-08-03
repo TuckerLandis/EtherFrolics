@@ -221,18 +221,24 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     })
 });
 
-router.post('/workhistoryitem', rejectUnauthenticated, (req, res) => {
+router.post('/workhistoryitem', rejectUnauthenticated, async (req, res) => {
   // POST route code here
   console.log('Reached provider reg POST /workhistoryitem', req.body);
   // res.sendStatus(200)
   // Tucker
 
-  let workHistoryItems = req.body
+  // make a connection to pool client for transaction
+  const client = await pool.connect();
 
-  // loops over the sent array of work history objects, posts all
-  workHistoryItems.forEach(workHistoryItem => {
+  // make req.body available as workHistoryItems
+  let workHistoryItems = req.body;
 
-    let queryText = `INSERT INTO "work_experience" 
+  // make variable for the user id
+  const user_id = req.user.id;
+
+  // queryText makes an insert statement to the work 
+  // experience table
+  const queryText = `INSERT INTO "work_experience" 
   (
     "workplace",
     "jobTitle",
@@ -246,29 +252,53 @@ router.post('/workhistoryitem', rejectUnauthenticated, (req, res) => {
   VALUES ($1, $2, $3, $4, $5, $6, $7, $8);
   `;
 
-    pool.query(queryText, [
-      workHistoryItem.workplace,
-      workHistoryItem.jobTitle,
-      workHistoryItem.referenceName,
-      workHistoryItem.referencePhone,
-      workHistoryItem.referenceEmailAddress,
-      workHistoryItem.startDate,
-      workHistoryItem.endDate,
-      req.user.id
-    ])
-      .then(result => {
-        console.log('POSTED new work histories');
+  try {
 
-      })
-      .catch(error => {
-        console.log('Error in WorkHistory POST', error);
-        res.sendStatus(500)
-      })
+    // begin the transaction block
+    await client.query('BEGIN;');
 
-  }) // end loop
-  res.sendStatus(200)
+    // Promise.all aggregates multiple promises into
+    // one and returns an array of results
+    await Promise.all(
+      // forEach statement loops through req.body array
+      workHistoryItems.map(workHistoryItem => {
 
+        // destructure objects in the array
+        const {
+          workplace,
+          jobTitle,
+          referenceName,
+          referencePhone,
+          referenceEmailAddress,
+          startDate,
+          endDate
+        } = workHistoryItem;
 
+        return client.query(queryText, [workplace, jobTitle, referenceName, referencePhone, referenceEmailAddress, startDate, endDate, user_id])
+      }) // end loop
+    ) // end Promise
+
+    // commit changes to DB
+    await client.query('COMMIT;');
+
+    // send good response
+    res.sendStatus(200)
+    
+  } catch (error) {
+
+    console.error(`Error in workHistoryItems POST, changes rollback ${error}`);
+
+    // erase any changes made that havent been commited
+    await client.query('ROLLBACK;');
+
+    res.sendStatus(500);
+    
+  } finally {
+    console.log('End work history item POST')
+
+    // release the pool connection
+    await client.release();
+  }
 });
 
 
