@@ -2,6 +2,7 @@ import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { useHistory } from "react-router"
 import { TextField } from "@material-ui/core"
+import RegistrationStepper from './Stepper'
 
 
 function GeneralInfo() {
@@ -101,6 +102,7 @@ function GeneralInfo() {
         history.push('/generalinfoaddress')
     }
 
+    const activeStep = 4
 
 
     return (
@@ -190,6 +192,11 @@ function GeneralInfo() {
                 
 
                 <button disabled={!generalInfoFormComplete ? true : false} type="submit">Next</button>
+
+                <div>
+                <RegistrationStepper activeStep={activeStep}/>
+                </div>
+                
             </form>
 
 
