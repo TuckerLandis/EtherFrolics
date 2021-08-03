@@ -83,7 +83,7 @@ function WorkHistory() {
 
     return (
         <div>
-            <h1>Work History</h1>
+            <h1 className="registration-title">Work History</h1>
             <label htmlFor="yearsExperienceInput">Years of experience</label>
             <select name="yearsExperience" id="yearsExperienceInput" onChange={handleChange}>
                 <option value="-">-</option>
