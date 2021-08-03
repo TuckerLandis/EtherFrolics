@@ -19,7 +19,7 @@ function GeneralInfo() {
 
     // state variable to track if all inputs
     // have content
-    const [generalInfoFormComplete, setGeneralInfoFormComplete] = useState(false); 
+    const [generalInfoFormComplete, setGeneralInfoFormComplete] = useState(false);
 
     /**
      * Takes in an event from all inputs, changes their state variable
@@ -28,7 +28,7 @@ function GeneralInfo() {
     function handleChange(e) {
 
         // function for validation
-        
+
 
         console.log(e.target.id);
 
@@ -62,7 +62,7 @@ function GeneralInfo() {
                 break
         }
 
-        if (firstName != '' && lastName != '' && dob != '' && providerRole != '' && validPassport != '' && soleProvider != '' && emailAddress != ''){
+        if (firstName != '' && lastName != '' && dob != '' && providerRole != '' && validPassport != '' && soleProvider != '' && emailAddress != '') {
             console.log('in if');
             setGeneralInfoFormComplete(true);
         } else {
@@ -106,50 +106,58 @@ function GeneralInfo() {
 
 
     return (
-        <div className="general-form-display">
-            
-            
-            {/* wrapped in form tag for error validation, there is a much prettier way to do this in mui */}
-            <form onSubmit={handleNext}>
-                {/* <label htmlFor="firstNameInput">First Name</label> */}
-                <div className="general-form-sub-display">
+        <div>
+            <h1 className="registration-title">General Info</h1>
 
-                <div className="text-field-wrapper">
-                <TextField label="First Name" required type="text" name="firstName" id="firstNameInput"
-                    value={firstName} onChange={handleChange} variant="outlined" />
+            <RegistrationStepper activeStep={activeStep} submitFunction={handleNext} />
 
-                </div>
-                
-
-                <div className="text-field-wrapper">
-                    {/* <label htmlFor="lastNameInput">Last Name</label> */}
-                <TextField label="Last Name" required type="text" name="lastName" id="lastNameInput"
-                    value={lastName} onChange={handleChange} variant="outlined" />
+            <div className="general-form-display">
 
 
-                </div>
-                
 
-                <div className="text-field-wrapper">
-                <TextField required type="date" name="dateOfBirth" id="dateOfBirthInput"
-                label="Date Of Birth" InputLabelProps={{ shrink: true }}
-                    value={dob} onChange={handleChange} variant="outlined" />
+                {/* wrapped in form tag for error validation, there is a much prettier way to do this in mui */}
+                <form onSubmit={handleNext}>
+                    {/* <label htmlFor="firstNameInput">First Name</label> */}
 
 
-                </div>
-                {/* <label htmlFor="dateOfBirthInput">Date of Birth</label> */}
-                
-                <div className="text-field-wrapper">
-                <TextField label="Email Address" required type="text" id="emailAddressInput" value={emailAddress}
-                onChange={handleChange} variant="outlined"/>
-                </div>
-                
+                    <div className="general-form-sub-display">
+
+                        <div className="text-field-wrapper">
+                            <TextField label="First Name" required type="text" name="firstName" id="firstNameInput"
+                                value={firstName} onChange={handleChange} variant="outlined" />
+
+                        </div>
 
 
-                </div>
-                
+                        <div className="text-field-wrapper">
+                            {/* <label htmlFor="lastNameInput">Last Name</label> */}
+                            <TextField label="Last Name" required type="text" name="lastName" id="lastNameInput"
+                                value={lastName} onChange={handleChange} variant="outlined" />
 
-                {/* <KeyboardDatePicker
+
+                        </div>
+
+
+                        <div className="text-field-wrapper">
+                            <TextField required type="date" name="dateOfBirth" id="dateOfBirthInput"
+                                label="Date Of Birth" InputLabelProps={{ shrink: true }}
+                                value={dob} onChange={handleChange} variant="outlined" />
+
+
+                        </div>
+                        {/* <label htmlFor="dateOfBirthInput">Date of Birth</label> */}
+
+                        <div className="text-field-wrapper">
+                            <TextField label="Email Address" required type="text" id="emailAddressInput" value={emailAddress}
+                                onChange={handleChange} variant="outlined" />
+                        </div>
+
+
+
+                    </div>
+
+
+                    {/* <KeyboardDatePicker
                     margin="normal"
                     id="dateOfBirthInput"
                     label="Date of Birth"
@@ -162,49 +170,51 @@ function GeneralInfo() {
                 /> */}
 
 
-                <label htmlFor="providerRoleInput">Provider Role</label>
-                <select name="providerRole" id="providerRoleInput" value={providerRole} onChange={handleChange}>
-                <option value="-">-</option>
-                    <option value="CRNA">CRNA</option>
+                    <label htmlFor="providerRoleInput">Provider Role</label>
+                    <select name="providerRole" id="providerRoleInput" value={providerRole} onChange={handleChange}>
+                        <option value="-">-</option>
+                        <option value="CRNA">CRNA</option>
 
-                    {/* need more options here */}
-                </select>
-
-
-
-                <p>Do you have a valid passport?</p>
-                <label htmlFor="yes">Yes</label>
-                <input required type="radio" name="validPassport" id="validPassportRadioTrue" value="true" onChange={handleChange} />
-                <label htmlFor="no">No</label>
-                <input type="radio" name="validPassport" id="validPassportRadioFalse" value="false" onChange={handleChange} />
-
-
-                <p>Are you comfortable working as a sole provider?</p>
-                <label htmlFor="yes">Yes</label>
-                <input required type="radio" name="soleProvider" id="soleProviderRadioTrue" value="true" onChange={handleChange} />
-                <label htmlFor="no">No</label>
-                <input type="radio" name="soleProvider" id="soleProviderRadioFalse" value="false" onChange={handleChange} />
+                        {/* need more options here */}
+                    </select>
 
 
 
-
-                {/* <label htmlFor="emailAdressInput">Email Address</label> */}
-                
-
-                {/* <button disabled={!generalInfoFormComplete ? true : false} type="submit">Next</button> */}
-
-                <div>
-                <RegistrationStepper activeStep={activeStep} />
-                </div>
-                
-            </form>
+                    <p>Do you have a valid passport?</p>
+                    <label htmlFor="yes">Yes</label>
+                    <input required type="radio" name="validPassport" id="validPassportRadioTrue" value="true" onChange={handleChange} />
+                    <label htmlFor="no">No</label>
+                    <input type="radio" name="validPassport" id="validPassportRadioFalse" value="false" onChange={handleChange} />
 
 
-            
-           
-            
+                    <p>Are you comfortable working as a sole provider?</p>
+                    <label htmlFor="yes">Yes</label>
+                    <input required type="radio" name="soleProvider" id="soleProviderRadioTrue" value="true" onChange={handleChange} />
+                    <label htmlFor="no">No</label>
+                    <input type="radio" name="soleProvider" id="soleProviderRadioFalse" value="false" onChange={handleChange} />
+
+
+
+
+                    {/* <label htmlFor="emailAdressInput">Email Address</label> */}
+
+
+                    {/* <button disabled={!generalInfoFormComplete ? true : false} type="submit">Next</button> */}
+
+
+
+                </form>
+
+
+
+
+
+
+            </div>
+
 
         </div>
+
     )
 }
 

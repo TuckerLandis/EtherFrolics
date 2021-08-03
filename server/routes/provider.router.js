@@ -630,5 +630,74 @@ router.put('/completeregistration', rejectUnauthenticated, (req, res) => {
     })
 })
 
+router.put('/update/:userId/:providerId', rejectUnauthenticated, async (req, res) => {
+  console.log('Updating provider table at ' + req.params.providerId + ' as ' + req.user.id );
+
+  console.log(req.params);
+
+  // destructure query params
+  const {
+    userId,
+    providerId
+  } = req.params;
+
+  // destructure request body
+  const {
+    firstName,
+    lastName,
+    providerRole,
+    phoneNumber,
+    emailAddress,
+    validPassport
+  } = req.body;
+
+  const updateQuery = 
+    `UPDATE "provider" 
+    SET "firstName" = $1,
+    "lastName" = $2,
+    "providerRole" = $3, 
+    "phoneNumber" = $4,
+    "emailAddress" = $5,
+    "validPassport" = $6 
+    WHERE provider_id = $7;`;
+
+  if (userId == req.user.id) {
+
+    // make a connection to pool client for transaction
+    const client = await pool.connect();
+
+    try {
+
+      // start transaction block
+      await client.query('BEGIN;');
+
+      await client.query(updateQuery, [firstName, lastName, providerRole, phoneNumber, emailAddress, validPassport, providerId]);
+
+      // commit changes to the DB
+      await client.query('COMMIT;');
+
+      // send good response
+      res.sendStatus(204);
+      
+    } catch (error) {
+
+      console.error(`Error in Provider PUT, changes rolledback ${error}`);
+
+      await client.query('ROLLBACK;');
+  
+      res.sendStatus(500);
+      
+    } finally {
+      console.log('End provider PUT')
+
+      await client.release();
+    }
+  } else {
+
+    res.sendStatus(401);
+
+  }
+})
+
 
 module.exports = router;

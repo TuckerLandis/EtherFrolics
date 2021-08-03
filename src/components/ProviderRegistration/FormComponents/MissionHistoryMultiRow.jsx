@@ -2,6 +2,7 @@ import { useState } from "react"
 import { TextField } from "@material-ui/core"
 import { useDispatch } from "react-redux"
 import ImageUploader from '../../ImageComponents/ImageUploader'
+import { Button } from '@material-ui/core'
 
 function MissionHistoryMultiRow(props) {
     const dispatch = useDispatch();
@@ -19,16 +20,22 @@ function MissionHistoryMultiRow(props) {
     function submitMissionHistoryItem(event, awsKey) {
 
         event.preventDefault();
-        
+
+        if(organization === '' || location === '' || referenceName === '' || referencePhone === '' ||
+         referenceEmail === '' || startDate === '' || endDate === '' ) 
+         {
+             return alert('Please complete all required fields')
+         }
+
         setHasBeenSubmitted(true)
 
         dispatch({
             type: 'ADD_MISSION_HISTORY_ITEM',
             payload: {
-                organization : organization,
+                organization: organization,
                 location: location,
-                referenceName : referenceName,
-                referencePhone : referencePhone,
+                referenceName: referenceName,
+                referencePhone: referencePhone,
                 startDate: startDate,
                 endDate: endDate,
                 missionExperienceImageKey: awsKey
@@ -69,51 +76,59 @@ function MissionHistoryMultiRow(props) {
     // const dispatchText = 'UPLOAD_MISSION_HISTORY'
 
     return (
-        <div>
+        <div className="general-form-display">
 
             <form onSubmit={submitMissionHistoryItem}>
 
-            {/* <label htmlFor="organtizationInput">Organization</label> */}
-            <TextField required label="Organization" variant="outlined" id="organizationInput" value={organization} onChange={handleChange} />
+                <div className="text-field-wrapper">
+                    {/* <label htmlFor="organtizationInput">Organization</label> */}
+                    <TextField required label="Organization" variant="outlined" id="organizationInput" value={organization} onChange={handleChange} />
+                </div>
+                <div className="text-field-wrapper">
+                    {/* <label htmlFor="locationInput">Location</label> */}
+                    <TextField required label="Location" variant="outlined" id="locationInput" value={location} onChange={handleChange} />
+                </div>
+                <div className="text-field-wrapper">
+                    {/* <label htmlFor="referenceNameInput">Reference Name</label> */}
+                    <TextField required label="Reference Name" variant="outlined" id="referenceNameInput" value={referenceName} onChange={handleChange} />
+                </div>
+                <div className="text-field-wrapper">
+                    {/* <label htmlFor="referencePhoneInput">Reference Phone #</label> */}
+                    <TextField required label="Reference's Phone #" variant="outlined" id="referencePhoneInput" value={referencePhone} onChange={handleChange} />
+                </div>
+                <div className="text-field-wrapper">
+                    {/* <label htmlFor="referenceEmailInput">Reference Email Address</label> */}
+                    <TextField required label="Reference's Email" variant="outlined" id="referenceEmailInput" value={referenceEmail} onChange={handleChange} />
+                </div>
+                <div className="text-field-wrapper">
+                    {/* <label htmlFor="startDateInput">Start Date</label> */}
+                    <TextField required variant="outlined" type="date" 
+                    label="Start Date" InputLabelProps={{ shrink: true }}
+                    id="startDateInput" value={startDate} onChange={handleChange} />
+                </div>
+                <div className="text-field-wrapper">
+                    {/* <label htmlFor="endDateInput">End Date</label> */}
+                    <TextField required variant="outlined" type="date" 
+                    label="End Date" InputLabelProps={{ shrink: true }}
+                    id="endDateInput" value={endDate} onChange={handleChange} />
+                </div>
+                <br></br>
+                <br></br>
 
-            {/* <label htmlFor="locationInput">Location</label> */}
-            <TextField required label="Location" variant="outlined" id="locationInput" value={location} onChange={handleChange} />
+                <ImageUploader imageType={imageType} submitFunction={submitMissionHistoryItem} />
 
-            {/* <label htmlFor="referenceNameInput">Reference Name</label> */}
-            <TextField required label="Reference Name" variant="outlined" id="referenceNameInput" value={referenceName} onChange={handleChange} />
+                <div className="text-field-wrapper">
+                    {hasBeenSubmitted ? (
+                        <p>submitted</p>
+                    ) : (
+                        <Button variant="contained" color="secondary" type="submit">Submit Mission History+</Button>
+                    )}
 
-            {/* <label htmlFor="referencePhoneInput">Reference Phone #</label> */}
-            <TextField required label="Reference's Phone #" variant="outlined" id="referencePhoneInput" value={referencePhone} onChange={handleChange} />
+                </div>
 
-            {/* <label htmlFor="referenceEmailInput">Reference Email Address</label> */}
-            <TextField required label="Reference's Email" variant="outlined" id="referenceEmailInput" value={referenceEmail} onChange={handleChange} />
-
-            <label htmlFor="startDateInput">Start Date</label>
-            <TextField required variant="outlined" type="date" id="startDateInput" value={startDate} onChange={handleChange} />
-
-            <label htmlFor="endDateInput">End Date</label>
-            <TextField required variant="outlined" type="date" id="endDateInput" value={endDate} onChange={handleChange} />
-
-            <br></br>
-            <br></br>
-            
-            <ImageUploader imageType={imageType} submitFunction={submitMissionHistoryItem}/>
-
-            <br></br>
-            <br></br>
-
-            {hasBeenSubmitted ? (
-                <p>submitted</p>
-            ) : (
-                <button type="submit">+</button>
-            )}
-            
-            <br></br>
-            <br></br>
-            <br></br>
 
             </form>
-            
+
 
         </div>
     )

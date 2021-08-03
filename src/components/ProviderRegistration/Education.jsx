@@ -4,6 +4,7 @@ import { useHistory } from "react-router"
 import EducationMultiRow from "./FormComponents/EducationMultiRow";
 import ImageUploader from "../ImageComponents/ImageUploader";
 import { useSelector } from "react-redux";
+import RegistrationStepper from './Stepper'
 
 function Education() {
 
@@ -42,7 +43,7 @@ function Education() {
         history.push('/medcred')
     }
 
-   
+   const activeStep= 4
 
     return (
         <div>
@@ -61,6 +62,7 @@ function Education() {
             <button disabled={!educationSubmitted ? true : false} onClick={handleNext}>Next</button>
 
             {/* stepper goes here with props of which page */}
+            <RegistrationStepper activeStep={activeStep} submitFunction={handleNext}/>
 
         </div>
     )

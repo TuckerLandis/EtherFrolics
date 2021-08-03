@@ -23,6 +23,8 @@ function WorkHistoryMultiRow(props) {
     function submitWorkHistoryItem(e) {
         e.preventDefault()
 
+        
+
         setHasBeenSubmitted(true)
 
         // sends to a reducer for later posting
@@ -120,8 +122,11 @@ function WorkHistoryMultiRow(props) {
                 {hasBeenSubmitted ? (
                     <p>submitted</p>
                 ) : (
-
-                    <Button variant="contained" color="secondary" type="submit">Add Work History Entry+</Button>
+                
+                    <div className="text-field-wrapper">
+                        <Button variant="contained" color="secondary" type="submit">Add Work History Entry+</Button>
+                    </div>
+                    
                 )}
 
             </form>
