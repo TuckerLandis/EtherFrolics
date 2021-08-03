@@ -5,6 +5,7 @@ import EducationMultiRow from "./FormComponents/EducationMultiRow";
 import ImageUploader from "../ImageComponents/ImageUploader";
 import { useSelector } from "react-redux";
 import RegistrationStepper from './Stepper'
+import { Typography } from "@material-ui/core";
 
 function Education() {
 
@@ -47,7 +48,7 @@ function Education() {
 
     return (
         <div>
-            <p>Education</p>
+            <Typography variant="h4" className="registration-title">Education</Typography>
 
             {/* maps a state array to render relevant number of education history forms */}
             {amountOfEducationHistories.map((education, i )=> {
@@ -59,7 +60,7 @@ function Education() {
             
             
 
-            <button disabled={!educationSubmitted ? true : false} onClick={handleNext}>Next</button>
+            {/* <button disabled={!educationSubmitted ? true : false} onClick={handleNext}>Next</button> */}
 
             {/* stepper goes here with props of which page */}
             <RegistrationStepper activeStep={activeStep} submitFunction={handleNext}/>

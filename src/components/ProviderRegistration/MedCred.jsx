@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useHistory } from "react-router";
 import { useDispatch, useSelector } from 'react-redux';
 import RegistrationStepper from './Stepper'
+import { Typography } from '@material-ui/core';
 
 import Button from '@material-ui/core/Button';
 
@@ -48,6 +49,7 @@ function MedCred () {
 
   return(
       <div>
+        <Typography variant="h4" className="registration-title">Medical Credentials</Typography>
           
 
       {/* medCred multi row form component goes here, along with submit button, included in that component */}
@@ -58,7 +60,7 @@ function MedCred () {
       })}
       
       {/* next button goes here */}
-      <Button disabled={!credentialSubmitted ? true : false} onClick={handleNext} color="primary" variant="outlined">Next</Button>
+      {/* <Button disabled={!credentialSubmitted ? true : false} onClick={handleNext} color="primary" variant="outlined">Next</Button> */}
       {/* stepper goes here with props of which page */}
 
       < RegistrationStepper activeStep={activeStep} submitFunction={handleNext}/>

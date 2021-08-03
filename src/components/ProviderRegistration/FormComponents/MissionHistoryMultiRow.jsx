@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { TextField } from "@material-ui/core"
+import { TextField, Typography } from "@material-ui/core"
 import { useDispatch } from "react-redux"
 import ImageUploader from '../../ImageComponents/ImageUploader'
 import { Button } from '@material-ui/core'
@@ -115,13 +115,16 @@ function MissionHistoryMultiRow(props) {
                 <br></br>
                 <br></br>
 
+                <Typography className="registration-title" variant="body1">Mission Completion Certificate</Typography>
+                <br></br>
+
                 <ImageUploader imageType={imageType} submitFunction={submitMissionHistoryItem} />
 
                 <div className="text-field-wrapper">
                     {hasBeenSubmitted ? (
                         <p>submitted</p>
                     ) : (
-                        <Button variant="contained" color="secondary" type="submit">Submit Mission History+</Button>
+                        <Button variant="contained" color="secondary" type="submit">Add Mission History Entry+</Button>
                     )}
 
                 </div>

@@ -1,3 +1,4 @@
+import { Typography } from "@material-ui/core"
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router"
@@ -63,7 +64,7 @@ function MissionHistory () {
     return(
         <div>
 
-            <h1 className="registration-title">Mission History</h1>
+            <Typography variant="h4" className="registration-title">Mission History</Typography>
  
             {/* maps a state array to render relevant number of work history forms */}
             {amountOfMissionHistories.map((education, i) => {

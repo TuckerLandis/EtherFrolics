@@ -4,6 +4,7 @@ import {useHistory} from 'react-router-dom';
 import InsuranceMultiRow from './FormComponents/InsuranceMultiRow';
 import Button from '@material-ui/core/Button';
 import RegistrationStepper from './Stepper'
+import { Typography } from '@material-ui/core';
 
 
 function Insurance () {
@@ -50,7 +51,7 @@ function Insurance () {
 
     return(
         <div>
-          <p>Insurance</p>
+          <Typography className="registration-title" variant="h4">Insurance</Typography>
 
             {amountOfInsuranceHistories.map( (insurance, i) => {
                 return (<InsuranceMultiRow key={i} addInsuranceItem={addInsuranceItem}/>)

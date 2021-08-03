@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { useHistory } from "react-router"
-import { TextField } from "@material-ui/core";
+import { TextField, Typography } from "@material-ui/core";
 import RegistrationStepper from './Stepper'
 
 function GeneralInfoAddress() {
@@ -65,7 +65,7 @@ function GeneralInfoAddress() {
 
     return (
         <div>
-            <h1 className="registration-title">Contact Info</h1>
+            <Typography variant="h4" className="registration-title">Contact Info</Typography>
             <div className="general-form-display">
 
                 <form onSubmit={handleNext}>
