@@ -15,7 +15,7 @@ function MissionHistoryMultiRow(props) {
     const [endDate, setEndDate] = useState('')
     const [hasBeenSubmitted, setHasBeenSubmitted] = useState(false)
 
-    
+
     function submitMissionHistoryItem(event, awsKey) {
 
         event.preventDefault();
@@ -107,6 +107,7 @@ function MissionHistoryMultiRow(props) {
             ) : (
                 <button type="submit">+</button>
             )}
+            
             <br></br>
             <br></br>
             <br></br>

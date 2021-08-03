@@ -69,12 +69,12 @@ function EducationMultiRow(props) {
 
             <ImageUploader imageType={imageType} submitFunction={submitEducationHistoryItem} />
 
-            {hasBeenSubmitted ? (
+            {/* {hasBeenSubmitted ? (
                 <p>submitted</p>
             ) : (
 
                 <button type="submit" >+</button>
-            )}
+            )} */}
 
 
             </form>

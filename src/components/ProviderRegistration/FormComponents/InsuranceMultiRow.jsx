@@ -151,13 +151,13 @@ function InsuranceMultiRow (props) {
 
                 <ImageUploader imageType={imageType} submitFunction={submitInsurance} />
 
-            {submitted ? (
+            {/* {submitted ? (
                 <p>Information Submitted!</p>
             ) : (
                 <Button
                 variant="contained"
                 type="submit">+</Button>  
-            )}
+            )} */}
             </form>
         </div>
     )

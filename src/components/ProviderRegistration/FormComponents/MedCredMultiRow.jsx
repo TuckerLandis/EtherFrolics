@@ -101,14 +101,14 @@ function MedCredMultiRow(props) {
 
         <ImageUploader imageType={imageType} submitFunction={submitCredentialHistory}/>
         
-        {hasBeenSubmitted ? (
+        {/* {hasBeenSubmitted ? (
             <p>submitted</p>
           ) : (
                 
             
 
             <Button type="submit" size="small" color="secondary" variant="contained">+</Button>
-          )}
+          )} */}
       </form>
     </div>
   );
