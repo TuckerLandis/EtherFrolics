@@ -64,10 +64,12 @@ function GeneralInfoAddress() {
     const activeStep = 1
 
     return (
-        <div className="general-form-display">
+        <div>
+            <h1 className="registration-title">Contact Info</h1>
+            <div className="general-form-display">
 
-            <form onSubmit={handleNext}>
-                {/* <div className="general-form-sub-display"> */}
+                <form onSubmit={handleNext}>
+                    {/* <div className="general-form-sub-display"> */}
 
                     <div className="text-field-wrapper">
                         {/* <label htmlFor="phoneInput">Phone Number</label> */}
@@ -87,24 +89,27 @@ function GeneralInfoAddress() {
 
                     </div>
                     <div className="text-field-wrapper">
-                    {/* <label htmlFor="zipInput">Zip Code</label> */}
-                    <TextField label="Zip Code" variant="outlined" required type="text" name="zip" id="zipInput" value={zip} onChange={handleChange} />
+                        {/* <label htmlFor="zipInput">Zip Code</label> */}
+                        <TextField label="Zip Code" variant="outlined" required type="text" name="zip" id="zipInput" value={zip} onChange={handleChange} />
                     </div>
                     {/* <button disabled={!addressFormComplete ? true : false} type="submit">Next</button> */}
 
 
-                {/* </div> */}
+                    {/* </div> */}
 
 
 
-                <RegistrationStepper activeStep={activeStep} />
+                    <RegistrationStepper activeStep={activeStep} />
 
-            </form>
+                </form>
 
 
-            {/* stepper goes here with props of which page */}
+                {/* stepper goes here with props of which page */}
+
+            </div>
 
         </div>
+
     )
 }
 

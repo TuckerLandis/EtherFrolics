@@ -135,3 +135,11 @@ input {
 .registration-title{
   text-align: center;
 }
+
+.registration-title-subheading{
+  text-align: center;
+}
+
+input[type=text]{
+  width: 275px;
+}
