@@ -107,7 +107,7 @@ function InsuranceMultiRow (props) {
     return (
         <div className="general-form-display">
             <form onSubmit={submitInsurance}>
-                
+
             <div className="text-field-wrapper">
             <TextField
                 required
@@ -145,44 +145,51 @@ function InsuranceMultiRow (props) {
             </div>
 
             <div className="text-field-wrapper">
-            <FormLabel>Date Issued:</FormLabel>
+            {/* <FormLabel>Date Issued:</FormLabel> */}
             <TextField
                 required
                 type="date"
                 id="issued"
+                label="Date Issued"
+                InputLabelProps={{ shrink: true }}
                 value={dateInitial}
                 onChange={handleChange}/>
             </div>
 
             <div className="text-field-wrapper">
-           <FormLabel>Date Renewed:</FormLabel>
+           {/* <FormLabel>Date Renewed:</FormLabel> */}
             <TextField 
                 required
                 type="date"
                 id="renewed"
+                label="Date Renewed"
+                InputLabelProps={{ shrink: true }}
                 value={dateRenewed}
                 onChange={handleChange}/>            
             </div>
 
             <div className="text-field-wrapper">
-            <FormLabel>Date Expired:</FormLabel>
+            {/* <FormLabel>Date Expired:</FormLabel> */}
             <TextField
                 required
                 type="date"
                 id="expired"
+                label="Date Expired"
+                InputLabelProps={{ shrink: true }}
                 value={dateExpiring}
                 onChange={handleChange}/>
             </div>
 
                 <ImageUploader imageType={imageType} submitFunction={submitInsurance} />
 
-            {/* {submitted ? (
+            {submitted ? (
                 <p>Information Submitted!</p>
             ) : (
-                <Button
-                variant="contained"
-                type="submit">+</Button>  
-            )} */}
+    
+                    <div className="text-field-wrapper">
+                        <Button variant="contained" color="secondary" type="submit">Add Insurance Entry+</Button>
+                    </div>
+            )}
             </form>
         </div>
     )
