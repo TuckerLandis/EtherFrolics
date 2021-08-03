@@ -97,7 +97,7 @@ function WorkHistory() {
             <div className="text-field-wrapper">
 
             <label htmlFor="yearsExperienceInput">Years of experience</label>
-            <Select variant="outlined" name="yearsExperience" id="yearsExperienceInput" onChange={handleChange}>
+            <Select variant="outlined" value={yearsExperience} name="yearsExperience" id="yearsExperienceInput" onChange={handleChange}>
                 <MenuItem value="-">-</MenuItem>
                 <MenuItem value="1-2">1-2</MenuItem>
                 <MenuItem value="2-3">2-3</MenuItem>
