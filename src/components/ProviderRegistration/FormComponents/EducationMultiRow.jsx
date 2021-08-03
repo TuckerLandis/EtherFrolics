@@ -64,11 +64,15 @@ function EducationMultiRow(props) {
                 <TextField required label="Degree" id="degreeInput" value={degree} onChange={handleChange} variant="outlined" />
             </div>
 
-            <label htmlFor="startDateInput">Start Date</label>
-            <TextField required type="date" id="startDateInput" value={startDate} onChange={handleChange} />
+            <div className="text-field-wrapper">
+                {/* <label htmlFor="startDateInput">Start Date</label> */}
+                <TextField required type="date" id="startDateInput" value={startDate} onChange={handleChange} />
+            </div>
 
-            <label htmlFor="endDateInput">End Date</label>
-            <TextField required type="date" id="endDateInput" value={endDate} onChange={handleChange} />
+            <div className="text-field-wrapper">
+                {/* <label htmlFor="endDateInput">End Date</label> */}
+                <TextField required type="date" id="endDateInput" value={endDate} onChange={handleChange} />
+            </div>
 
 
             <ImageUploader imageType={imageType} submitFunction={submitEducationHistoryItem} />
