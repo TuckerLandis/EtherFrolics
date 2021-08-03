@@ -12,6 +12,7 @@ function EducationMultiRow(props) {
     const [startDate, setStartDate] = useState('')
     const [endDate, setEndDate] = useState('')
     const [hasBeenSubmitted, setHasBeenSubmitted] = useState(false)
+    const [imageSubmit, setImageSubmit] = useState(false)
 
 
     function submitEducationHistoryItem(event, awsKey) {

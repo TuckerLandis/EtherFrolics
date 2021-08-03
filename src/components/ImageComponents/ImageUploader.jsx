@@ -68,7 +68,8 @@ function ImageUploader(props) {
 
     // calls whichever submitFunction is passed down as props. this simply flips a boolena on the parent page, 
     // but will fail if there isn't a function being passed down, see work history imageUploader 
-    props.submitFunction(event, result.Key)
+    // props.submitFunction(event, result.Key)
+    props.attachImageFunction(result.Key)
   }
 
 

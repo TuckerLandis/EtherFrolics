@@ -58,6 +58,15 @@ function WorkHistory() {
         if(yearsExperience === '-') {
             return alert('Please enter years of experience')
         }
+
+        if (resumeSubmitted === false) {
+            return alert('Please attach your resume')
+        }
+
+        if (amountOfWorkHistories.length === 1) {
+            return alert('Please add at least one work history item')
+        }
+
         // send dispatch with just years of experience
         await dispatch({
             type: 'PUT_WORK_HISTORY',
@@ -120,9 +129,6 @@ function WorkHistory() {
                 )
             })}
 
-            
-            
-            
             {/* <Button variant="contained" color="primary" disabled={!workHistorySubmitted ? true : false} onClick={handleNext}> Next </Button> */}
             <div>
                 <RegistrationStepper activeStep={activeStep} submitFunction={handleNext} />
