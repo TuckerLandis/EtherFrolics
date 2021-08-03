@@ -89,7 +89,7 @@ function WorkHistory() {
         
             
 
-            <h3>Submit Your Resume</h3>
+            <h3 className="registration-title-subheading">Submit Your Resume</h3>
             {/* takes in props above the return, and the submitResumeFunction */}
             <ImageUploader imageType={resume} dispatchText={dispatchText} DBdispatchText={DBdispatchText} submitFunction={resumeSubmitFunction} imageSubmitted={resumeSubmitted}/>
             <br></br>
