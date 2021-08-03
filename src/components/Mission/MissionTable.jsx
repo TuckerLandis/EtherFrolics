@@ -21,15 +21,6 @@ const useStyles = makeStyles({
     },
 });
 
-function createData(Date, Location, Organization ) {
-    return { Date, Location, Organization };
-}
-
-// const rows = [
-//     createData( '9/4', 'Sangolqui,Ecuador', 'Medical Ministry International', 'Apply'),
-//     createData( '9/11', 'Rio San Juan, Dominican Republic', 'Medical Ministry International', 'Apply'),
-//     createData( '9/11', 'Quevado, Ecuador', 'Medical Ministry International', 'Apply'),
-// ]
 
 
 function MissionTable() {
@@ -50,14 +41,6 @@ function MissionTable() {
     }, []);
 
 
-    // This function handles the apply button
-    const handleApplyButton = () => {
-        console.log('apply button clicked')
-        // Sends the user to Apply on MMI
-        window.location.assign('https://www.mmi.org/projects-usd');
-
-    }
-
     return (
         <div>
             <h2>Upcoming Missions</h2>
@@ -71,32 +54,19 @@ function MissionTable() {
                         <TableCell align="right">Organization</TableCell>
                     </TableRow>
                 </TableHead>
-                {/* Dummy Data to see how table shows up */}
-                {/* <TableBody>
-                    {rows.map((row) => (
-                        <TableRow key={row.name}>
-                            <TableCell component="th" scope="row">
-                                {row.Date}
-                            </TableCell>
-                            <TableCell align="right">{row.Location}</TableCell>
-                            <TableCell align="right">{row.Organization}</TableCell>
-                            <TableCell align="right"><Button onClick={handleApplyButton} color="primary" variant="outlined">Apply</Button></TableCell>
-                        </TableRow>
-                    ))}
-                </TableBody> */}
-                {/*The Real Table will take Mission Data from the Reducer */}
+             
+                {/*Takes the Mission Data from the Reducer */}
                 <TableBody>
                     {mission.map((mission) => (
                         <TableRow key={mission.name}>
                             <TableCell>{mission.startDate}</TableCell>
                             <TableCell align="right">{mission.location}</TableCell>
                             <TableCell align="right">{mission.name}</TableCell>
-                            <TableCell>
+                            <TableCell align="right">
                                 <a href={mission.missionLink}
                                     target="_blank"
                                     >
-                                        Apply</a> </TableCell>
-                            {/* <TableCell align="right"><Button onClick={handleApplyButton} color="primary" variant="outlined">Apply</Button></TableCell> */}
+                                    Apply</a></TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
@@ -117,7 +87,7 @@ export default MissionTable;
 // - [ ]  Table Columns
 //     - [x]  Date
 //     - [x]  Location
-//         - [ ]  Location links to information on the location (travel info, possible wikipedia link? maybe something else that looks cleaner)
+//         - [x]  Location links to information on the location (travel info, possible wikipedia link? maybe something else that looks cleaner)
 //     - [x]  Organization
 //     - [x]  Pseudo column that will have the apply button
 
