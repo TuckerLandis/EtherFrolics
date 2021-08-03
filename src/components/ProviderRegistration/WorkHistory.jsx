@@ -5,6 +5,7 @@ import WorkHistoryMultiRow from './FormComponents/WorkHistoryMultiRow'
 import ImageUploader from "../ImageComponents/ImageUploader";
 import {Button} from '@material-ui/core'
 import { useSelector } from "react-redux";
+import RegistrationStepper from './Stepper'
 
 function WorkHistory() {
     const dispatch = useDispatch();
@@ -14,7 +15,7 @@ function WorkHistory() {
 
     const workHistoryItems = useSelector(store => store.workHistoryReducer)
 
-    const [yearsExperience, setYearsExperience] = useState('');
+    const [yearsExperience, setYearsExperience] = useState('-');
 
     // state array on which work history sub components are rendered
     const [amountOfWorkHistories, setAmountOfWorkHistories] = useState([1])
@@ -78,9 +79,11 @@ function WorkHistory() {
     const resume = 'resume'
     const dispatchText = 'POST_RESUME'
     const DBdispatchText = 'POST_RESUME_TO_DB'
+    const activeStep = 2
 
     return (
         <div>
+            <h1 className="registration-title">Work History</h1>
             <label htmlFor="yearsExperienceInput">Years of experience</label>
             <select name="yearsExperience" id="yearsExperienceInput" onChange={handleChange}>
                 <option value="-">-</option>
@@ -102,8 +105,6 @@ function WorkHistory() {
             <h3>Submit Your Resume</h3>
             {/* takes in props above the return, and the submitResumeFunction */}
             <ImageUploader imageType={resume} dispatchText={dispatchText} DBdispatchText={DBdispatchText} submitFunction={resumeSubmitFunction} imageSubmitted={resumeSubmitted}/>
-
-            <br></br>
             <br></br>
 
             <h3>Add Work History</h3>
@@ -117,8 +118,10 @@ function WorkHistory() {
             
             
             
-            <Button variant="contained" color="primary" disabled={!workHistorySubmitted ? true : false} onClick={handleNext}> Next </Button>
-
+            {/* <Button variant="contained" color="primary" disabled={!workHistorySubmitted ? true : false} onClick={handleNext}> Next </Button> */}
+            <div>
+                <RegistrationStepper activeStep={activeStep} submitFunction={handleNext} />
+            </div>
             {/* stepper goes here with props of which page */}
 
         </div>

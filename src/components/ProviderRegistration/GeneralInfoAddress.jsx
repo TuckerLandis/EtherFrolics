@@ -2,8 +2,9 @@ import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { useHistory } from "react-router"
 import { TextField } from "@material-ui/core";
+import RegistrationStepper from './Stepper'
 
-function GeneralInfoAddress () {
+function GeneralInfoAddress() {
 
     const dispatch = useDispatch();
     const history = useHistory()
@@ -17,18 +18,18 @@ function GeneralInfoAddress () {
 
     // state variable to track if all inputs
     // have content
-    const [addressFormComplete, setAddressFormComplete] = useState(false); 
+    const [addressFormComplete, setAddressFormComplete] = useState(false);
 
     function handleNext(e) {
         e.preventDefault()
 
         dispatch({
             type: 'PUT_PROVIDER_ADDRESS',
-            payload : {
-                streetAddress : streetAddress,
-                city : city,
-                state : state,
-                zip : zip,
+            payload: {
+                streetAddress: streetAddress,
+                city: city,
+                state: state,
+                zip: zip,
                 phone: phone
             }
         })
@@ -37,53 +38,69 @@ function GeneralInfoAddress () {
     }
 
     function handleChange(e) {
-        switch(e.target.id){
-            case 'streetAddressInput' : 
-            setStreetAddress(e.target.value)
-            break
-            case 'cityInput' : 
-            setCity(e.target.value)
-            break
-            case 'stateInput' : 
-            setState(e.target.value)
-            break
-            case 'zipInput' : 
-            setZip(e.target.value)
-            break
-            case 'phoneInput' :
-            setPhone(e.target.value)
+        switch (e.target.id) {
+            case 'streetAddressInput':
+                setStreetAddress(e.target.value)
+                break
+            case 'cityInput':
+                setCity(e.target.value)
+                break
+            case 'stateInput':
+                setState(e.target.value)
+                break
+            case 'zipInput':
+                setZip(e.target.value)
+                break
+            case 'phoneInput':
+                setPhone(e.target.value)
         }
-        if (streetAddress != '' && city != '' && state != '' && zip != '' && phone !='') {
+        if (streetAddress != '' && city != '' && state != '' && zip != '' && phone != '') {
             setAddressFormComplete(true);
         } else {
             setAddressFormComplete(false)
         }
     }
 
-    return(
-        <div>
+    const activeStep = 1
+
+    return (
+        <div className="general-form-display">
 
             <form onSubmit={handleNext}>
+                {/* <div className="general-form-sub-display"> */}
 
-            <label htmlFor="phoneInput">Phone Number</label>
-            <TextField type="text" name="phone" id="phoneInput" value={phone} onChange={handleChange}/>
+                    <div className="text-field-wrapper">
+                        {/* <label htmlFor="phoneInput">Phone Number</label> */}
+                        <TextField label="Phone Number" variant="outlined" required type="text" name="phone" id="phoneInput" value={phone} onChange={handleChange} />
+                    </div>
+                    <div className="text-field-wrapper">
+                        {/* <label htmlFor="streetAddressInput">Street Address</label> */}
+                        <TextField label="Street Address" variant="outlined" required type="text" name="streetAddress" id="streetAddressInput" value={streetAddress} onChange={handleChange} />
+                    </div>
+                    <div className="text-field-wrapper">
+                        {/* <label htmlFor="cityInput">City</label> */}
+                        <TextField label="City" variant="outlined" required type="text" name="city" id="cityInput" value={city} onChange={handleChange} />
+                    </div>
+                    <div className="text-field-wrapper">
+                        {/* <label htmlFor="stateInput">State</label> */}
+                        <TextField label="State" variant="outlined" required type="text" name="state" id="stateInput" value={state} onChange={handleChange} />
 
-            <label htmlFor="streetAddressInput">Street Address</label>
-            <TextField type="text" name="streetAddress" id="streetAddressInput" value={streetAddress} onChange={handleChange} />
+                    </div>
+                    <div className="text-field-wrapper">
+                    {/* <label htmlFor="zipInput">Zip Code</label> */}
+                    <TextField label="Zip Code" variant="outlined" required type="text" name="zip" id="zipInput" value={zip} onChange={handleChange} />
+                    </div>
+                    {/* <button disabled={!addressFormComplete ? true : false} type="submit">Next</button> */}
 
-            <label htmlFor="cityInput">City</label>
-            <TextField type="text" name="city" id="cityInput" value={city} onChange={handleChange}/>
 
-            <label htmlFor="stateInput">State</label>
-            <TextField type="text" name="state" id="stateInput" value={state} onChange={handleChange} />
+                {/* </div> */}
 
-            <label htmlFor="zipInput">Zip Code</label>
-            <TextField type="text" name="zip" id="zipInput" value={zip} onChange={handleChange}/>
 
-            <button disabled={!addressFormComplete ? true : false} type="submit">Next</button>
+
+                <RegistrationStepper activeStep={activeStep} />
 
             </form>
-            
+
 
             {/* stepper goes here with props of which page */}
 
@@ -99,7 +116,7 @@ export default GeneralInfoAddress
 // ## Checklist
 
 // NEXT - finish saga > route
- 
+
 // - [x ]  Input fields
 //     - [ x]  street address
 //     - [ x]  city
