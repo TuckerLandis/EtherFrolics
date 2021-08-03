@@ -631,7 +631,7 @@ router.put('/completeregistration', rejectUnauthenticated, (req, res) => {
     })
 })
 
-
+router.put('/update/:userId/:providerId')
 
 
 module.exports = router;
