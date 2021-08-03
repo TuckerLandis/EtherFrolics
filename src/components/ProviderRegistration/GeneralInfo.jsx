@@ -4,8 +4,6 @@ import { useHistory } from "react-router"
 import { TextField } from "@material-ui/core"
 
 
-
-
 function GeneralInfo() {
     const dispatch = useDispatch()
     const history = useHistory()
@@ -106,20 +104,48 @@ function GeneralInfo() {
 
 
     return (
-        <div>
+        <div className="general-form-display">
+            
+            
             {/* wrapped in form tag for error validation, there is a much prettier way to do this in mui */}
             <form onSubmit={handleNext}>
                 {/* <label htmlFor="firstNameInput">First Name</label> */}
+                <div className="general-form-sub-display">
+
+                <div className="text-field-wrapper">
                 <TextField label="First Name" required type="text" name="firstName" id="firstNameInput"
                     value={firstName} onChange={handleChange} variant="outlined" />
 
-                {/* <label htmlFor="lastNameInput">Last Name</label> */}
+                </div>
+                
+
+                <div className="text-field-wrapper">
+                    {/* <label htmlFor="lastNameInput">Last Name</label> */}
                 <TextField label="Last Name" required type="text" name="lastName" id="lastNameInput"
                     value={lastName} onChange={handleChange} variant="outlined" />
 
-                <label htmlFor="dateOfBirthInput">Date of Birth</label>
+
+                </div>
+                
+
+                <div className="text-field-wrapper">
                 <TextField required type="date" name="dateOfBirth" id="dateOfBirthInput"
+                label="Date Of Birth" InputLabelProps={{ shrink: true }}
                     value={dob} onChange={handleChange} variant="outlined" />
+
+
+                </div>
+                {/* <label htmlFor="dateOfBirthInput">Date of Birth</label> */}
+                
+                <div className="text-field-wrapper">
+                <TextField label="Email Address" required type="text" id="emailAddressInput" value={emailAddress}
+                onChange={handleChange} variant="outlined"/>
+                </div>
+                
+
+
+                </div>
+                
 
                 {/* <KeyboardDatePicker
                     margin="normal"
@@ -161,14 +187,15 @@ function GeneralInfo() {
 
 
                 {/* <label htmlFor="emailAdressInput">Email Address</label> */}
-                <TextField label="Email Address" required type="text" id="emailAddressInput" value={emailAddress}
-                onChange={handleChange} variant="outlined"/>
+                
 
                 <button disabled={!generalInfoFormComplete ? true : false} type="submit">Next</button>
             </form>
 
 
-            {/* stepper goes here with props of which page */}
+            
+           
+            
 
         </div>
     )
