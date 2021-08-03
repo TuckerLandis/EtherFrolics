@@ -2,6 +2,7 @@ import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import axios from 'axios';
 import { Button } from '@material-ui/core'
+import AttachmentIcon from '@material-ui/icons/Attachment';
 
 
 function ImageUploader(props) {
@@ -80,7 +81,7 @@ function ImageUploader(props) {
       <input onChange={fileSelected} type="file" accept="image/*"></input>
 
       {/* can conditionally render this button based on props.imageSubmitted if we want */}
-      <Button variant="contained" color="primary" onClick={handleSubmitImage}>Submit</Button>
+      <Button variant="contained" color="primary" onClick={handleSubmitImage}><AttachmentIcon/></Button>
     </div>
 
     // </form>
