@@ -79,6 +79,7 @@ function WorkHistory() {
     const resume = 'resume'
     const dispatchText = 'POST_RESUME'
     const DBdispatchText = 'POST_RESUME_TO_DB'
+    // props for stepper
     const activeStep = 2
 
     return (
