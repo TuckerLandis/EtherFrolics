@@ -3,6 +3,7 @@ import { TextField } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import FormLabel from '@material-ui/core/FormLabel';
 import Button from '@material-ui/core/Button';
+import ImageUploader from "../../ImageComponents/ImageUploader";
 
 // ## Checklist
 
@@ -73,8 +74,8 @@ function InsuranceMultiRow (props) {
     }
     
     //need a function to dispatch the information
-    const submitInsurance = (evt) => {
-        evt.preventDefault();
+    const submitInsurance = (event, awsKey) => {
+        event.preventDefault();
         //set submitted state to true
         setSubmitted(true);
         //create an object that captures the form data
@@ -86,6 +87,7 @@ function InsuranceMultiRow (props) {
             dateInitial: dateInitial,
             dateRenewed: dateRenewed,
             dateExpiring: dateExpiring,
+            insuranceImageKey: awsKey
             //possibly need a pdf upload here
         }
         console.log(insuranceObj);
@@ -99,6 +101,8 @@ function InsuranceMultiRow (props) {
         props.addInsuranceItem();
 
     }
+
+    const imageType = 'insurance'
 
     return (
         <div>
@@ -144,6 +148,8 @@ function InsuranceMultiRow (props) {
                 id="expired"
                 value={dateExpiring}
                 onChange={handleChange}/>
+
+                <ImageUploader imageType={imageType} submitFunction={submitInsurance} />
 
             {submitted ? (
                 <p>Information Submitted!</p>
