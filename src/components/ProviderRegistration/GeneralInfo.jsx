@@ -194,7 +194,7 @@ function GeneralInfo() {
                 {/* <button disabled={!generalInfoFormComplete ? true : false} type="submit">Next</button> */}
 
                 <div>
-                <RegistrationStepper activeStep={activeStep} submitFunction={handleNext} />
+                <RegistrationStepper activeStep={activeStep} />
                 </div>
                 
             </form>

@@ -97,7 +97,7 @@ function GeneralInfoAddress() {
 
 
 
-                <RegistrationStepper activeStep={activeStep} submitFunction={handleNext} />
+                <RegistrationStepper activeStep={activeStep} />
 
             </form>
 
