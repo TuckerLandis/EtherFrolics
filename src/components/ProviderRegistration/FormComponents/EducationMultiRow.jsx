@@ -2,6 +2,7 @@ import { useState } from "react"
 import { TextField } from "@material-ui/core"
 import { useDispatch } from "react-redux"
 import ImageUploader from "../../ImageComponents/ImageUploader";
+import { Button } from '@material-ui/core';
 
 function EducationMultiRow(props) {
     const dispatch = useDispatch();
@@ -51,30 +52,44 @@ function EducationMultiRow(props) {
     const imageType='education'
 
     return (
-        <div>
+        <div className="general-form-display">
             <form onSubmit={submitEducationHistoryItem}>
 
-            {/* <label htmlFor="schoolInput">School</label> */}
-            <TextField required label="School" id="schoolInput" value={school} onChange={handleChange} variant="outlined" />
+            <div className="text-field-wrapper">
+                {/* <label htmlFor="schoolInput">School</label> */}
+                <TextField required label="School" id="schoolInput" value={school} onChange={handleChange} variant="outlined" />
+            </div>
 
-            {/* <label htmlFor="degreeInput">Job Title</label> */}
-            <TextField required label="Degree" id="degreeInput" value={degree} onChange={handleChange} variant="outlined" />
+            <div className="text-field-wrapper">
+                {/* <label htmlFor="degreeInput">Job Title</label> */}
+                <TextField required label="Degree" id="degreeInput" value={degree} onChange={handleChange} variant="outlined" />
+            </div>
 
-            <label htmlFor="startDateInput">Start Date</label>
-            <TextField required type="date" id="startDateInput" value={startDate} onChange={handleChange} />
+            <div className="text-field-wrapper">
+                {/* <label htmlFor="startDateInput">Start Date</label> */}
+                    <TextField type="date" name="startDate" id="startDateInput"
+                        label="Start Date" InputLabelProps={{ shrink: true }}
+                        value={startDate} onChange={handleChange} />
+            </div>
 
-            <label htmlFor="endDateInput">End Date</label>
-            <TextField required type="date" id="endDateInput" value={endDate} onChange={handleChange} />
+            <div className="text-field-wrapper">
+                {/* <label htmlFor="endDateInput">End Date</label> */}
+                    <TextField type="date" name="endDate" id="endDateInput"
+                        label="End Date" InputLabelProps={{ shrink: true }}
+                        value={endDate} onChange={handleChange} />
+            </div>
 
 
             <ImageUploader imageType={imageType} submitFunction={submitEducationHistoryItem} />
 
-            {/* {hasBeenSubmitted ? (
+            {hasBeenSubmitted ? (
                 <p>submitted</p>
             ) : (
 
-                <button type="submit" >+</button>
-            )} */}
+                <div className="text-field-wrapper">
+                    <Button variant="contained" color="secondary" type="submit">Add Education Entry+</Button>
+                </div>
+            )}
 
 
             </form>
