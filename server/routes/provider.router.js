@@ -514,7 +514,7 @@ router.post('/insuranceitem', rejectUnauthenticated, async (req, res) => {
     // one and returns an array of results
     await Promise.all(
       // .map statement loops through insuranceItems array
-      insuranceItems.forEach(insuranceItem => {
+      insuranceItems.map(insuranceItem => {
 
         // destructure objects in the array
       const {
