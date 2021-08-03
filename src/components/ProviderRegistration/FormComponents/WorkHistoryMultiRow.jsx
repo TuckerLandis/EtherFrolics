@@ -23,6 +23,8 @@ function WorkHistoryMultiRow(props) {
     function submitWorkHistoryItem(e) {
         e.preventDefault()
 
+        
+
         setHasBeenSubmitted(true)
 
         // sends to a reducer for later posting
