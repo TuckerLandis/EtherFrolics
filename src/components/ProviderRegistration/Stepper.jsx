@@ -8,6 +8,7 @@ import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 
 const styles = {
   root: {
+    minWidth: 300,
     maxWidth: 400,
     flexGrow: 1,
   },
@@ -37,6 +38,7 @@ class ProgressMobileStepper extends React.Component {
 
     return (
       <MobileStepper
+      
         variant="progress"
         steps={7}
         position="static"
