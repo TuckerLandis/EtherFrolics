@@ -3,9 +3,10 @@ import { useDispatch } from "react-redux"
 import { useHistory } from "react-router"
 import WorkHistoryMultiRow from './FormComponents/WorkHistoryMultiRow'
 import ImageUploader from "../ImageComponents/ImageUploader";
-import {Button} from '@material-ui/core'
+import {Button, Select, MenuItem} from '@material-ui/core'
 import { useSelector } from "react-redux";
 import RegistrationStepper from './Stepper'
+
 
 function WorkHistory() {
     const dispatch = useDispatch();
@@ -79,35 +80,38 @@ function WorkHistory() {
     const resume = 'resume'
     const dispatchText = 'POST_RESUME'
     const DBdispatchText = 'POST_RESUME_TO_DB'
+    // props for stepper
     const activeStep = 2
 
     return (
         <div>
             <h1 className="registration-title">Work History</h1>
-            <label htmlFor="yearsExperienceInput">Years of experience</label>
-            <select name="yearsExperience" id="yearsExperienceInput" onChange={handleChange}>
-                <option value="-">-</option>
-                <option value="1-2">1-2</option>
-                <option value="2-3">2-3</option>
-                <option value="3-5">3-5</option>
-                <option value="5-10">5-10</option>
-                <option value="10-15">10-15</option>
-                <option value="15-20">15-20</option>
-                <option value="20+">20+</option>
-            </select>
+        
+            
 
-
-
-            {/* spacers, to be removed */}
-            <br></br>
-            <br></br>
-
-            <h3>Submit Your Resume</h3>
+            <h3 className="registration-title-subheading">Submit Your Resume</h3>
             {/* takes in props above the return, and the submitResumeFunction */}
             <ImageUploader imageType={resume} dispatchText={dispatchText} DBdispatchText={DBdispatchText} submitFunction={resumeSubmitFunction} imageSubmitted={resumeSubmitted}/>
             <br></br>
+            
+            <div className="text-field-wrapper">
 
-            <h3>Add Work History</h3>
+            <label htmlFor="yearsExperienceInput">Years of experience</label>
+            <Select variant="outlined" value={yearsExperience} name="yearsExperience" id="yearsExperienceInput" onChange={handleChange}>
+                <MenuItem value="-">-</MenuItem>
+                <MenuItem value="1-2">1-2</MenuItem>
+                <MenuItem value="2-3">2-3</MenuItem>
+                <MenuItem value="3-5">3-5</MenuItem>
+                <MenuItem value="5-10">5-10</MenuItem>
+                <MenuItem value="10-15">10-15</MenuItem>
+                <MenuItem value="15-20">15-20</MenuItem>
+                <MenuItem value="20+">20+</MenuItem>
+            </Select>
+
+            </div>
+            
+
+            <h3 className="registration-title-subheading">Add Work History</h3>
             {/* maps a state array to render relevant number of work history forms */}
             {amountOfWorkHistories.map((history, i )=> {
                 return (

@@ -39,7 +39,7 @@ function ImageUploader(props) {
   }
 
   // awaits the post image function above, validates an image has been selected
-  const handleSubmit = async event => {
+  const handleSubmitImage = async event => {
     event.preventDefault()
 
     // if no file, alert
@@ -80,7 +80,7 @@ function ImageUploader(props) {
       <input onChange={fileSelected} type="file" accept="image/*"></input>
 
       {/* can conditionally render this button based on props.imageSubmitted if we want */}
-      <Button variant="contained" color="primary" onClick={handleSubmit}>Submit</Button>
+      <Button variant="contained" color="primary" onClick={handleSubmitImage}>Submit</Button>
     </div>
 
     // </form>
