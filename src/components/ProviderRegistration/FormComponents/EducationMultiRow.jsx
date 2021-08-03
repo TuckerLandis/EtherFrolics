@@ -2,6 +2,7 @@ import { useState } from "react"
 import { TextField } from "@material-ui/core"
 import { useDispatch } from "react-redux"
 import ImageUploader from "../../ImageComponents/ImageUploader";
+import { Button } from '@material-ui/core';
 
 function EducationMultiRow(props) {
     const dispatch = useDispatch();
@@ -85,7 +86,9 @@ function EducationMultiRow(props) {
                 <p>submitted</p>
             ) : (
 
-                        <Button variant="contained" color="secondary" type="submit">Add Education Entry+</Button>
+                <div className="text-field-wrapper">
+                    <Button variant="contained" color="secondary" type="submit">Add Education Entry+</Button>
+                </div>
             )}
 
 
