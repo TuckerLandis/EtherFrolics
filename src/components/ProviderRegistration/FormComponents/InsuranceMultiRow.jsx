@@ -105,33 +105,46 @@ function InsuranceMultiRow (props) {
     const imageType = 'insurance'
 
     return (
-        <div>
+        <div className="general-form-display">
             <form onSubmit={submitInsurance}>
+                
+            <div className="text-field-wrapper">
             <TextField
                 required
                 label="Type of Insurance"
                 id="type"
                 value={insuranceType}
                 onChange={handleChange} />
+            </div>
+            
+            <div className="text-field-wrapper">
             <TextField 
                 required
                 label="Provider"
                 id="provider"
                 value={insuranceProvider}
                 onChange={handleChange}/>
+            </div>
+
+            <div className="text-field-wrapper">
             <TextField 
                 required
                 label="Policy #"
                 id="number"
                 value={policyNumber}
                 onChange={handleChange}/>
+            </div>
+
+            <div className="text-field-wrapper">
             <TextField 
                 required
                 label="State Initials"
                 id="state"
                 value={state}
                 onChange={handleChange}/>
+            </div>
 
+            <div className="text-field-wrapper">
             <FormLabel>Date Issued:</FormLabel>
             <TextField
                 required
@@ -139,7 +152,9 @@ function InsuranceMultiRow (props) {
                 id="issued"
                 value={dateInitial}
                 onChange={handleChange}/>
-           
+            </div>
+
+            <div className="text-field-wrapper">
            <FormLabel>Date Renewed:</FormLabel>
             <TextField 
                 required
@@ -147,7 +162,9 @@ function InsuranceMultiRow (props) {
                 id="renewed"
                 value={dateRenewed}
                 onChange={handleChange}/>            
-            
+            </div>
+
+            <div className="text-field-wrapper">
             <FormLabel>Date Expired:</FormLabel>
             <TextField
                 required
@@ -155,6 +172,7 @@ function InsuranceMultiRow (props) {
                 id="expired"
                 value={dateExpiring}
                 onChange={handleChange}/>
+            </div>
 
                 <ImageUploader imageType={imageType} submitFunction={submitInsurance} />
 
