@@ -24,7 +24,10 @@ class ProgressMobileStepper extends React.Component {
     //   activeStep: state.activeStep + 1,
     // }));
 
-    // this.props.submitFunction(event)
+    if (this.props.submitFunction) {
+        this.props.submitFunction(event)
+    }
+   
   };
 
   handleBack = () => {

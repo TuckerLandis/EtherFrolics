@@ -5,6 +5,7 @@ import WorkHistoryMultiRow from './FormComponents/WorkHistoryMultiRow'
 import ImageUploader from "../ImageComponents/ImageUploader";
 import {Button} from '@material-ui/core'
 import { useSelector } from "react-redux";
+import RegistrationStepper from './Stepper'
 
 function WorkHistory() {
     const dispatch = useDispatch();
@@ -78,6 +79,7 @@ function WorkHistory() {
     const resume = 'resume'
     const dispatchText = 'POST_RESUME'
     const DBdispatchText = 'POST_RESUME_TO_DB'
+    const activeStep = 2
 
     return (
         <div>
@@ -117,8 +119,10 @@ function WorkHistory() {
             
             
             
-            <Button variant="contained" color="primary" disabled={!workHistorySubmitted ? true : false} onClick={handleNext}> Next </Button>
-
+            {/* <Button variant="contained" color="primary" disabled={!workHistorySubmitted ? true : false} onClick={handleNext}> Next </Button> */}
+            <div>
+                <RegistrationStepper activeStep={activeStep} submitFunction={handleNext} />
+            </div>
             {/* stepper goes here with props of which page */}
 
         </div>
