@@ -107,13 +107,14 @@ function MedCredMultiRow(props) {
           )
         })}
 
-        <ImageUploader imageType={imageType} submitFunction={submitCredentialHistory}/>
+          <ImageUploader imageType={imageType} submitFunction={submitCredentialHistory}/>
         
         {hasBeenSubmitted ? (
             <p>submitted</p>
           ) : (
-
-            <Button variant="contained" color="secondary" type="submit">Add Medical Credentials +</Button>
+            <div className="text-field-wrapper">
+              <Button variant="contained" color="secondary" type="submit">Add Medical Credentials +</Button>
+            </div>
           )}
       </form>
     </div>
