@@ -84,31 +84,38 @@ function MedCredMultiRow(props) {
 
   console.log(medCredValues);
   return (
-    <div>
+    <div className="general-form-display">
       <form onSubmit={submitCredentialHistory}>
+
       
         {credentialTextInputConfig.map((textInputConfig, i) => {
           return (
+
+            <div className="text-field-wrapper">
               <TextField key={i} required label={textInputConfig.inputLabel} variant="outlined" name={textInputConfig.inputName} value={medCredValues[textInputConfig.inputName]} onChange={handleChange} />
+            </div>
           )
         })}
-
+      
+      
         {credentialDateInputConfig.map((dateInputConfig, i) => {
           return (
+
+            <div className="text-field-wrapper">
               <TextField key={i} required type="date" label={dateInputConfig.inputLabel} InputLabelProps={{ shrink: true }} variant="outlined" name={dateInputConfig.inputName} value={medCredValues[dateInputConfig.inputName]} onChange={handleChange} />
+            </div>
           )
         })}
 
-        <ImageUploader imageType={imageType} submitFunction={submitCredentialHistory}/>
+          <ImageUploader imageType={imageType} submitFunction={submitCredentialHistory}/>
         
-        {/* {hasBeenSubmitted ? (
+        {hasBeenSubmitted ? (
             <p>submitted</p>
           ) : (
-                
-            
-
-            <Button type="submit" size="small" color="secondary" variant="contained">+</Button>
-          )} */}
+            <div className="text-field-wrapper">
+              <Button variant="contained" color="secondary" type="submit">Add Medical Credentials Entry+</Button>
+            </div>
+          )}
       </form>
     </div>
   );
