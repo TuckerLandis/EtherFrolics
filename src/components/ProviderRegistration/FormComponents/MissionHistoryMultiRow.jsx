@@ -21,8 +21,8 @@ function MissionHistoryMultiRow(props) {
 
         event.preventDefault();
 
-        if(organization === '' | location === '' | referenceName === '' | referencePhone === '' |
-         referenceEmail === '' | startDate === '' | endDate === '' ) 
+        if(organization === '' || location === '' || referenceName === '' || referencePhone === '' ||
+         referenceEmail === '' || startDate === '' || endDate === '' ) 
          {
              return alert('Please complete all required fields')
          }

@@ -2,6 +2,7 @@ import MedCredMultiRow from './FormComponents/MedCredMultiRow';
 import { useState } from "react";
 import { useHistory } from "react-router";
 import { useDispatch, useSelector } from 'react-redux';
+import RegistrationStepper from './Stepper'
 
 import Button from '@material-ui/core/Button';
 
@@ -43,6 +44,8 @@ function MedCred () {
 
   console.log(credentialList);
 
+  const activeStep = 6
+
   return(
       <div>
           
@@ -57,6 +60,8 @@ function MedCred () {
       {/* next button goes here */}
       <Button disabled={!credentialSubmitted ? true : false} onClick={handleNext} color="primary" variant="outlined">Next</Button>
       {/* stepper goes here with props of which page */}
+
+      < RegistrationStepper activeStep={activeStep} submitFunction={handleNext}/>
 
       </div>
     )

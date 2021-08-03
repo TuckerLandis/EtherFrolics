@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {useHistory} from 'react-router-dom';
 import InsuranceMultiRow from './FormComponents/InsuranceMultiRow';
 import Button from '@material-ui/core/Button';
+import RegistrationStepper from './Stepper'
 
 
 function Insurance () {
@@ -45,6 +46,8 @@ function Insurance () {
 
     }
 
+    const activeStep = 8
+
     return(
         <div>
           <p>Insurance</p>
@@ -54,13 +57,14 @@ function Insurance () {
             })}
 
            
-            <Button
+            {/* <Button
             disabled={!insuranceSubmitted ? true : false}
             variant="contained"
             color="primary"
-            onClick={nextPage}>NEXT</Button>
+            onClick={nextPage}>NEXT</Button> */}
             
             {/* stepper goes here with props of which page */}
+            < RegistrationStepper activeStep={activeStep} submitFunction={nextPage}/>
             
         </div>
     )
