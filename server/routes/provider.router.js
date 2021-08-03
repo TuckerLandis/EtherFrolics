@@ -348,7 +348,7 @@ router.put('/address', rejectUnauthenticated, (req, res) => {
 /**
  * Takes an object from /education and posts it to the education table
  */
-router.post('/educationhistoryitem', rejectUnauthenticated, (req, res) => {
+router.post('/educationhistoryitem', rejectUnauthenticated, async (req, res) => {
   console.log('Reached provider reg POST: educationhistory', req.body);
 
   // make a connection to pool client for transaction
@@ -486,7 +486,7 @@ router.post('/missionhistoryitem', rejectUnauthenticated, async (req, res) => {
   }
 })
 
-router.post('/insuranceitem', rejectUnauthenticated, (req, res) => {
+router.post('/insuranceitem', rejectUnauthenticated, async (req, res) => {
   console.log('Reg.body in /insurance item is', req.body);
   console.log('user id is', req.user.id);
 
