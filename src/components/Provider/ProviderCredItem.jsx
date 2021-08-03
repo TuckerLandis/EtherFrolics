@@ -3,6 +3,7 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { ListItem, ListItemText } from '@material-ui/core';
 
 function ProviderCredItem({ provider }) {
 
@@ -12,11 +13,13 @@ function ProviderCredItem({ provider }) {
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                 >
-                    <Typography>Credential Name</Typography>
+                    <Typography variant="h6">Credential Name</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        {provider[0]?.credential_array[0]?.credentialName}
+                        {provider?.credential_array.map( (credential, i) => {
+                            return (<ListItem key={i}><ListItemText>{credential.credentialName}</ListItemText></ListItem>)
+                        })}
                     </Typography>
                 </AccordionDetails>
             </Accordion>
@@ -25,11 +28,13 @@ function ProviderCredItem({ provider }) {
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                 >
-                    <Typography>Licensing Board</Typography>
+                    <Typography variant="h6">Licensing Board</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        {provider[0]?.credential_array[0]?.licensingBoard}
+                    {provider?.credential_array.map( (credential, i) => {
+                            return (<ListItem key={i}><ListItemText>{credential.licensingBoard}</ListItemText></ListItem>)
+                    })}
                     </Typography>
                 </AccordionDetails>
             </Accordion>
@@ -38,11 +43,13 @@ function ProviderCredItem({ provider }) {
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                 >
-                    <Typography>License Number</Typography>
+                    <Typography variant="h6">License Number</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        {provider[0]?.credential_array[0]?.licenseNumber}
+                    {provider?.credential_array.map( (credential, i) => {
+                            return (<ListItem key={i}><ListItemText>{credential.licenseNumber}</ListItemText></ListItem>)
+                    })}
                     </Typography>
                 </AccordionDetails>
             </Accordion>
@@ -51,11 +58,13 @@ function ProviderCredItem({ provider }) {
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                 >
-                    <Typography>Issued Date</Typography>
+                    <Typography variant="h6">Issued Date</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        {provider[0]?.credential_array[0]?.dateInitial}
+                    {provider?.credential_array.map( (credential, i) => {
+                            return (<ListItem key={i}><ListItemText>{credential.dateInitial}</ListItemText></ListItem>)
+                    })}
                     </Typography>
                 </AccordionDetails>
             </Accordion>
@@ -64,11 +73,13 @@ function ProviderCredItem({ provider }) {
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                 >
-                    <Typography>Date Renewed</Typography>
+                    <Typography variant="h6">Date Renewed</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        {provider[0]?.credential_array[0]?.dateRenewed}
+                    {provider?.credential_array.map( (credential, i) => {
+                            return (<ListItem key={i}><ListItemText>{credential.dateRenewed}</ListItemText></ListItem>)
+                    })}
                     </Typography>
                 </AccordionDetails>
             </Accordion>
@@ -77,11 +88,13 @@ function ProviderCredItem({ provider }) {
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                 >
-                    <Typography>Expiration Date</Typography>
+                    <Typography variant="h6">Expiration Date</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        {provider[0]?.credential_array[0]?.dateExpiring}
+                    {provider?.credential_array.map( (credential, i) => {
+                            return (<ListItem key={i}><ListItemText>{credential.dateExpiring}</ListItemText></ListItem>)
+                    })}
                     </Typography>
                 </AccordionDetails>
             </Accordion>
