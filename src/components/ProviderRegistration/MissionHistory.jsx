@@ -73,7 +73,7 @@ function MissionHistory () {
         {/* <button disabled={!missionHistorySubmitted ? true : false} onClick={handleNext}>Next</button> */}
 
             {/* stepper goes here with props of which page */}
-           < RegistrationStepper activeStep={activeStep} submitFunction={handleNext}/>
+            < RegistrationStepper activeStep={activeStep} submitFunction={handleNext}/>
 
         </div>
     )
