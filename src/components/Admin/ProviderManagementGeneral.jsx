@@ -9,42 +9,33 @@ import './ProviderManagementGeneral.css';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
-import Divider from '@material-ui/core/Divider';
-import InboxIcon from '@material-ui/icons/Inbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
+import Avatar from '@material-ui/core/Avatar';
+import IconButton from '@material-ui/core/IconButton';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import FolderIcon from '@material-ui/icons/Folder';
+import DeleteIcon from '@material-ui/icons/Delete';
 import StarIcon from '@material-ui/icons/Star';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        width: '100%',
-        maxWidth: 360,
+        flexGrow: 1,
+        maxWidth: 752,
+    },
+    demo: {
         backgroundColor: theme.palette.background.paper,
     },
+    title: {
+        margin: theme.spacing(4, 0, 2),
+    },
 }));
-
-function ListItemLink(props) {
-    return <ListItem button component="a" {...props} />;
-}
-
-// const useStyles = makeStyles((theme) => ({
-//     root: {
-//         width: '100%',
-//         maxWidth: 360,
-//         backgroundColor: theme.palette.background.paper,
-//         position: 'relative',
-//         overflow: 'auto',
-//         maxHeight: 300,
-//     },
-//     listSection: {
-//         backgroundColor: 'inherit',
-//     },
-//     ul: {
-//         backgroundColor: 'inherit',
-//         padding: 0,
-//     },
-// }));
 
 function ProviderManagementGeneral() {
 
@@ -55,6 +46,16 @@ function ProviderManagementGeneral() {
 
     // material-ui
     const classes = useStyles();
+    const [dense, setDense] = React.useState(false);
+    const [secondary, setSecondary] = React.useState(false);
+
+    function generate(element) {
+        return providers?.map((provider) =>
+            React.cloneElement(element, {
+                key: provider?.provider_id,
+            }),
+        );
+    }
 
     useEffect(() => {
         dispatch({ type: 'GET_PROVIDERS' });
@@ -73,24 +74,12 @@ function ProviderManagementGeneral() {
         history.push(`/providermgmt/${providerId}`);
     } // end handleSelect
 
-    // dispatch to get all provider info, line 43
-    // bring it back with useSelector, save to variable providers, line 39
-    // map over array of provider objects to append them to material-ui list, line 80
-    // handleSelect fn takes in clicked provider's user_id, line 82
-    // dispatches with user_id as payload to get all info for selected provider, line 54
-    // handleSelect fn pushes user to individual provider's page, line 58
-    // copied and pasted another <li below line 86 to get second subheader 'Unverified'
-    // ^ honestly probably don't need this. i forgot we're doing the icon thing (wireframe 2.4.1a), line 88
-    // possibly conditionally render providers in either verified or unverified list based on provider.verified boolean value?
-    // need to integrate icons into list for verified/unverified and flag icon for expiring credentials warning
-    // need to add functionality to icons
-
     const verifiedProviders = providers.filter(provider => provider.verified === true)
     const unVerifiedProviders = providers.filter(provider => provider.verified === false)
 
     //    onClick={() => handleSelect(provider?.user_id)}
 
-    let star;
+    let star = (<StarIcon />);
 
     if (providers?.verified === 'true') {
         star = (<StarIcon />);
@@ -102,25 +91,35 @@ function ProviderManagementGeneral() {
 
             <h1 className="providerMgmtListTitle">PROVIDERS</h1>
 
-
             <div className={classes.root}>
-                <List component="nav" aria-label="main mailbox folders">
-                    <ListItem button>
-                        {providers?.map(provider => {
-                            return (
-                                <div key={provider?.provider_id}>
-                                    <ListItemText primary={provider?.firstName} onClick={() => handleSelect(provider?.user_id)} />
-                                    <div>
-                                        {star}
-                                    </div>
+
+                <Grid item xs={12} md={6}>
+                    <div className={classes.demo}>
+                        <List dense={dense}>
+                            {generate(
+                                <div>
+                                    {providers?.map(provider => {
+                                        return(
+                                            <ListItem key={provider?.provider_id}>
+                                    <ListItemIcon>
+                                        <StarIcon />
+                                    </ListItemIcon>
+                                    <ListItemText
+                                        primary={provider?.firstName}
+                                    >
+                                    </ListItemText>
+                                </ListItem>
+                                        )
+                                    })}
                                 </div>
-                            )
-                        })}
-                    </ListItem>
-                </List>
+                            )}
+                        </List>
+                    </div>
+                </Grid>
+
             </div>
 
-        </div>
+        </div >
 
     )
 
