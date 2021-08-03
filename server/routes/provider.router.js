@@ -260,7 +260,7 @@ router.post('/workhistoryitem', rejectUnauthenticated, async (req, res) => {
     // Promise.all aggregates multiple promises into
     // one and returns an array of results
     await Promise.all(
-      // forEach statement loops through req.body array
+      // .map statement loops through workHistoryItems array
       workHistoryItems.map(workHistoryItem => {
 
         // destructure objects in the array
@@ -274,7 +274,7 @@ router.post('/workhistoryitem', rejectUnauthenticated, async (req, res) => {
           endDate
         } = workHistoryItem;
 
-        return client.query(queryText, [workplace, jobTitle, referenceName, referencePhone, referenceEmailAddress, startDate, endDate, user_id])
+        return client.query(queryText, [workplace, jobTitle, referenceName, referencePhone, referenceEmailAddress, startDate, endDate, user_id]);
       }) // end loop
     ) // end Promise
 
@@ -291,6 +291,7 @@ router.post('/workhistoryitem', rejectUnauthenticated, async (req, res) => {
     // erase any changes made that havent been commited
     await client.query('ROLLBACK;');
 
+    // send bad response
     res.sendStatus(500);
     
   } finally {
@@ -349,10 +350,18 @@ router.put('/address', rejectUnauthenticated, (req, res) => {
  */
 router.post('/educationhistoryitem', rejectUnauthenticated, (req, res) => {
   console.log('Reached provider reg POST: educationhistory', req.body);
-  const educationhistoryItems = req.body
 
-  educationhistoryItems.forEach(educationhistoryItem => {
-    let queryText = `INSERT INTO "education"
+  // make a connection to pool client for transaction
+  const client = await pool.connect();
+
+  // make req.body available as educationhistoryItems
+  const educationHistoryItems = req.body
+
+  // make variable for the user id
+  const user_id = req.user.id;
+
+  // queryText runs insert statement to education table
+  let queryText = `INSERT INTO "education"
   (
     "institution",
     "degree",
@@ -362,26 +371,52 @@ router.post('/educationhistoryitem', rejectUnauthenticated, (req, res) => {
   )
   VALUES ($1, $2, $3, $4, $5);
   `;
-  pool.query(queryText, [
-    educationhistoryItem.school,
-    educationhistoryItem.degree,
-    educationhistoryItem.startDate,
-    educationhistoryItem.endDate,
-    req.user.id
-  ])
 
-    .then(result => {
-      console.log('created new education history item');
-      
-    })
-    .catch(error => {
-      console.log('Error in Education Post', error);
-      res.sendStatus(500)
-    })
-  })
+  try {
 
- 
-    res.sendStatus(200)
+    // begin the transaction block
+    await client.query('BEGIN;');
+
+    // Promise.all aggregates multiple promises into
+    // one and returns an array of results
+    await Promise.all(
+      // .map statement loops through educationHistoryItems array
+      educationHistoryItems.map(educationHistoryItem => {
+
+        // destructure objects in the array
+        const {
+          school,
+          degree,
+          startDate,
+          endDate
+        } = educationHistoryItem;
+
+        return client.query(queryText, [school, degree, startDate, endDate]);
+      }) // end loop
+    ) // end Promise
+
+    // commit changes to DB
+    await client.query('COMMIT;');
+
+    // send good response
+    res.sendStatus(200);
+
+  } catch (error) {
+
+    console.error(`Error in educationHistoryItems POST, changes rollback ${error}`);
+
+    // erase any changes made that havent been commited
+    await client.query('ROLLBACK;');
+
+    // send bad response
+    res.sendStatus(500);
+
+  } finally {
+    console.log('End education history item POST')
+
+    // release the pool connection
+    await client.release();
+  }
 })
 
 router.post('/missionhistoryitem', rejectUnauthenticated, async (req, res) => {
