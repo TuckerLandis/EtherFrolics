@@ -52,10 +52,39 @@ function* getProviderLanding(action){
     }
 }
 
+function* updateProvider(action) {
+
+    try {
+        console.log('Sending provider data update');
+
+        if (action.payload.table === credential) {
+
+            yield axios.put('/api/provider/update/credential');
+
+        } else {
+
+            yield axios.put('/api/provider/update');
+
+        }
+
+        yield put({
+            type: 'GET_PROVIDER_LANDING'
+        })
+        
+    } 
+    
+    catch (error) {
+        
+        console.error(`Error in editProvider saga ${error}`);
+
+    }
+}
+
 function* providerSaga() {
     yield takeLatest('GET_PROVIDERS', getProviders);
     yield takeLatest('SELECT_PROVIDER', selectProvider);
     yield takeLatest('GET_PROVIDER_LANDING', getProviderLanding);
+    yield takeLatest('UPDATE_PROVIDER', updateProvider)
 }
 
 export default providerSaga;
