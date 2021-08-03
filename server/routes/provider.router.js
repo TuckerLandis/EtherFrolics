@@ -664,10 +664,10 @@ router.put('/update/:userId/:providerId', rejectUnauthenticated, async (req, res
 
   if (userId == req.user.id) {
 
-    try {
+    // make a connection to pool client for transaction
+    const client = await pool.connect();
 
-      // make a connection to pool client for transaction
-      const client = await pool.connect();
+    try {
 
       // start transaction block
       await client.query('BEGIN;');
