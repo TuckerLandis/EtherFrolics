@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { useHistory } from "react-router"
-import { TextField } from "@material-ui/core"
+import { TextField, Typography, Select, MenuItem } from "@material-ui/core"
 import RegistrationStepper from './Stepper'
 
 
@@ -107,7 +107,7 @@ function GeneralInfo() {
 
     return (
         <div>
-            <h1 className="registration-title">General Info</h1>
+            <Typography variant="h4" className="registration-title">General Info</Typography>
 
             <RegistrationStepper activeStep={activeStep} submitFunction={handleNext} />
 
@@ -170,24 +170,24 @@ function GeneralInfo() {
                 /> */}
 
 
-                    <label htmlFor="providerRoleInput">Provider Role</label>
-                    <select name="providerRole" id="providerRoleInput" value={providerRole} onChange={handleChange}>
-                        <option value="-">-</option>
-                        <option value="CRNA">CRNA</option>
+                    <Typography htmlFor="providerRoleInput">Provider Role</Typography>
+                    <Select variant="outlined" name="providerRole" id="providerRoleInput" value={providerRole} onChange={handleChange}>
+                        <MenuItem value="-">-</MenuItem>
+                        <MenuItem value="CRNA">CRNA</MenuItem>
 
                         {/* need more options here */}
-                    </select>
+                    </Select>
 
 
 
-                    <p>Do you have a valid passport?</p>
+                    <Typography variant="body1">Do you have a valid passport?</Typography>
                     <label htmlFor="yes">Yes</label>
                     <input required type="radio" name="validPassport" id="validPassportRadioTrue" value="true" onChange={handleChange} />
                     <label htmlFor="no">No</label>
                     <input type="radio" name="validPassport" id="validPassportRadioFalse" value="false" onChange={handleChange} />
 
 
-                    <p>Are you comfortable working as a sole provider?</p>
+                    <Typography variant="body1">Are you comfortable working as a sole provider?</Typography>
                     <label htmlFor="yes">Yes</label>
                     <input required type="radio" name="soleProvider" id="soleProviderRadioTrue" value="true" onChange={handleChange} />
                     <label htmlFor="no">No</label>
