@@ -14,6 +14,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import InboxIcon from '@material-ui/icons/Inbox';
 import DraftsIcon from '@material-ui/icons/Drafts';
+import StarIcon from '@material-ui/icons/Star';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -88,26 +89,33 @@ function ProviderManagementGeneral() {
     const unVerifiedProviders = providers.filter(provider => provider.verified === false)
 
     //    onClick={() => handleSelect(provider?.user_id)}
-    //    onClick={() => handleSelect(provider?.user_id)}
+
+    let star;
+
+    if (providers?.verified === 'true') {
+        star = (<StarIcon />);
+    }
 
     return (
 
         <div>
 
+            <h1 className="providerMgmtListTitle">PROVIDERS</h1>
+
+
             <div className={classes.root}>
                 <List component="nav" aria-label="main mailbox folders">
                     <ListItem button>
-                        <ListItemIcon>
-                            <InboxIcon />
-                        </ListItemIcon>
-                        {providers?.map(provider)}
-                        <ListItemText primary={provider?.firstName} />
-                    </ListItem>
-                    <ListItem button>
-                        <ListItemIcon>
-                            <DraftsIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Drafts" />
+                        {providers?.map(provider => {
+                            return (
+                                <div key={provider?.provider_id}>
+                                    <ListItemText primary={provider?.firstName} onClick={() => handleSelect(provider?.user_id)} />
+                                    <div>
+                                        {star}
+                                    </div>
+                                </div>
+                            )
+                        })}
                     </ListItem>
                 </List>
             </div>

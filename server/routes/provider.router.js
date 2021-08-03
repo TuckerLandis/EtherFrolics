@@ -49,7 +49,6 @@ router.get('/ind/:id', rejectNonAdmin, (req, res) => {
   "provider"."soloProvider", 
   "provider".verified, 
   "provider"."recruiterOpt", 
-  "provider"."lastMission", 
   "provider"."yearsExperience", 
   "provider"."validPassport", 
   "provider".availability, 
@@ -80,7 +79,7 @@ router.get('/ind/:id', rejectNonAdmin, (req, res) => {
       WHERE "mission_experience".user_id = "user".id) AS providerMissionExperience) AS mission_experience_array, 
   (SELECT JSON_AGG(providerWorkExperience)
     FROM
-      (SELECT "workplace", "jobTitle", "startDate", "endDate", "referenceName", "referencePhone", "referenceEmail", "resumeImageKey"
+      (SELECT "workplace", "jobTitle", "startDate", "endDate", "referenceName", "referencePhone", "referenceEmail"
       FROM "work_experience"
       WHERE "work_experience".user_id = "user".id) AS providerWorkExperience) AS work_experience_array
     FROM "user"
@@ -354,30 +353,30 @@ router.post('/educationhistoryitem', rejectUnauthenticated, (req, res) => {
     res.sendStatus(200)
 })
 
-router.put('/lastmission', rejectUnauthenticated, (req, res) => {
-  console.log('reached provider reg PUT: lastmission', req.body);
-  console.log(req);
+// router.put('/lastmission', rejectUnauthenticated, (req, res) => {
+//   console.log('reached provider reg PUT: lastmission', req.body);
+//   console.log(req);
 
-  // variable for user ID
-  const user_id = req.user.id;
+//   // variable for user ID
+//   const user_id = req.user.id;
 
-  // variable for number of years since last mission
-  const lastMission = req.body.lastMission + ' ' + 'years ago';
+//   // variable for number of years since last mission
+//   const lastMission = req.body.lastMission + ' ' + 'years ago';
 
-  const queryText = `
-    UPDATE "provider" SET "lastMission" = $1
-    WHERE "provider".user_id = $2;
-  `
+//   const queryText = `
+//     UPDATE "provider" SET "lastMission" = $1
+//     WHERE "provider".user_id = $2;
+//   `
 
-  pool.query(queryText, [lastMission, user_id])
-    .then(result => {
-      console.log('lastMission UPDATE success');
-      res.sendStatus(200);
-    })
-    .catch(error => {
-      console.log('UPDATE lastMission unsuccessful', error);
-    })
-})
+//   pool.query(queryText, [lastMission, user_id])
+//     .then(result => {
+//       console.log('lastMission UPDATE success');
+//       res.sendStatus(200);
+//     })
+//     .catch(error => {
+//       console.log('UPDATE lastMission unsuccessful', error);
+//     })
+// })
 
 router.post('/missionhistoryitem', rejectUnauthenticated, async (req, res) => {
   console.log('Reached provider reg POST: missionHistory', req.body);

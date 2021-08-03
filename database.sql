@@ -134,7 +134,6 @@ SELECT
 "provider"."soloProvider", 
 "provider".verified, 
 "provider"."recruiterOpt", 
-"provider"."lastMission", 
 "provider"."yearsExperience", 
 "provider"."validPassport", 
 "provider".availability, 
@@ -164,7 +163,7 @@ SELECT
 		WHERE "mission_experience".user_id = "user".id) AS providerMissionExperience) AS mission_experience_array, 
 (SELECT JSON_AGG(providerWorkExperience)
 	FROM
-		(SELECT "workplace", "jobTitle", "startDate", "endDate", "referenceName", "referencePhone", "referenceEmail", "resumeImageKey"
+		(SELECT "workplace", "jobTitle", "startDate", "endDate", "referenceName", "referencePhone", "referenceEmail"
 		FROM "work_experience"
 		WHERE "work_experience".user_id = "user".id) AS providerWorkExperience) AS work_experience_array
 	FROM "user"
