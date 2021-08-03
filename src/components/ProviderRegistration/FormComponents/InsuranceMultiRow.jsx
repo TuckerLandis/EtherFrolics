@@ -105,59 +105,91 @@ function InsuranceMultiRow (props) {
     const imageType = 'insurance'
 
     return (
-        <div>
+        <div className="general-form-display">
             <form onSubmit={submitInsurance}>
+
+            <div className="text-field-wrapper">
             <TextField
+                required
                 label="Type of Insurance"
                 id="type"
                 value={insuranceType}
                 onChange={handleChange} />
+            </div>
+            
+            <div className="text-field-wrapper">
             <TextField 
+                required
                 label="Provider"
                 id="provider"
                 value={insuranceProvider}
                 onChange={handleChange}/>
+            </div>
+
+            <div className="text-field-wrapper">
             <TextField 
+                required
                 label="Policy #"
                 id="number"
                 value={policyNumber}
                 onChange={handleChange}/>
+            </div>
+
+            <div className="text-field-wrapper">
             <TextField 
+                required
                 label="State Initials"
                 id="state"
                 value={state}
                 onChange={handleChange}/>
+            </div>
 
-            <FormLabel>Date Issued:</FormLabel>
+            <div className="text-field-wrapper">
+            {/* <FormLabel>Date Issued:</FormLabel> */}
             <TextField
+                required
                 type="date"
                 id="issued"
+                label="Date Issued"
+                InputLabelProps={{ shrink: true }}
                 value={dateInitial}
                 onChange={handleChange}/>
-           
-           <FormLabel>Date Renewed:</FormLabel>
+            </div>
+
+            <div className="text-field-wrapper">
+           {/* <FormLabel>Date Renewed:</FormLabel> */}
             <TextField 
+                required
                 type="date"
                 id="renewed"
+                label="Date Renewed"
+                InputLabelProps={{ shrink: true }}
                 value={dateRenewed}
                 onChange={handleChange}/>            
-            
-            <FormLabel>Date Expired:</FormLabel>
+            </div>
+
+            <div className="text-field-wrapper">
+            {/* <FormLabel>Date Expired:</FormLabel> */}
             <TextField
+                required
                 type="date"
                 id="expired"
+                label="Date Expired"
+                InputLabelProps={{ shrink: true }}
                 value={dateExpiring}
                 onChange={handleChange}/>
+            </div>
 
                 <ImageUploader imageType={imageType} submitFunction={submitInsurance} />
 
-            {/* {submitted ? (
+            {submitted ? (
                 <p>Information Submitted!</p>
             ) : (
-                <Button
-                variant="contained"
-                type="submit">+</Button>  
-            )} */}
+    
+                    <div className="text-field-wrapper">
+                        <Button variant="contained" color="secondary" type="submit">Add Insurance Entry+</Button>
+                    </div>
+            )}
             </form>
         </div>
     )

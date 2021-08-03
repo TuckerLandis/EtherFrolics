@@ -1,8 +1,9 @@
 import { useState } from "react"
 import { TextField } from "@material-ui/core"
 import { useDispatch } from "react-redux"
+import {Button} from '@material-ui/core'
 
-function WorkHistoryMultiRow (props) {
+function WorkHistoryMultiRow(props) {
 
     const dispatch = useDispatch()
 
@@ -19,101 +20,112 @@ function WorkHistoryMultiRow (props) {
     /**
      * on clicking the add button, flip boolean for this item, send dispatch, call function that lives in WorkHistory to render new item
      */
-    function submitWorkHistoryItem (e) {
+    function submitWorkHistoryItem(e) {
         e.preventDefault()
-        
+
         setHasBeenSubmitted(true)
 
         // sends to a reducer for later posting
         dispatch({
             type: 'ADD_WORK_HISTORY_ITEM',
-            payload : {
-                workplace : workplace,
-                jobTitle : jobTitle,
-                referenceName : referenceName,
-                referencePhone : referencePhone,
-                referenceEmailAddress :referenceEmailAddress,
-                startDate : startDate,
-                endDate : endDate,
+            payload: {
+                workplace: workplace,
+                jobTitle: jobTitle,
+                referenceName: referenceName,
+                referencePhone: referencePhone,
+                referenceEmailAddress: referenceEmailAddress,
+                startDate: startDate,
+                endDate: endDate,
             }
         })
 
         props.addWorkHistoryItem()
 
     }
-    
+
 
     /**
      * Takes in an event from all inputs, conditonally changes the related state variable
      * @param {*} e 
      */
-    function handleChange (e) {
-        switch(e.target.id){
-            case 'workplaceInput' : 
-            setWorkplace(e.target.value)
-            break
-            case 'jobTitleInput' : 
-            setJobTitle(e.target.value)
-            break
-            case 'referenceNameInput' : 
-            setReferenceName(e.target.value)
-            break
-            case 'referencePhoneInput' : 
-            setReferencePhone(e.target.value)
-            break
-            case 'referenceEmailInput' : 
-            setReferenceEmailAddress(e.target.value)
-            break
-            case 'startDateInput' : 
-            setStartDate(e.target.value)
-            break
-            case 'endDateInput' : 
-            setEndDate(e.target.value)
-            break
+    function handleChange(e) {
+        switch (e.target.id) {
+            case 'workplaceInput':
+                setWorkplace(e.target.value)
+                break
+            case 'jobTitleInput':
+                setJobTitle(e.target.value)
+                break
+            case 'referenceNameInput':
+                setReferenceName(e.target.value)
+                break
+            case 'referencePhoneInput':
+                setReferencePhone(e.target.value)
+                break
+            case 'referenceEmailInput':
+                setReferenceEmailAddress(e.target.value)
+                break
+            case 'startDateInput':
+                setStartDate(e.target.value)
+                break
+            case 'endDateInput':
+                setEndDate(e.target.value)
+                break
         }
     }
 
 
-    return(
-        <div>
+    return (
+        <div className="general-form-display">
             <form onSubmit={submitWorkHistoryItem}>
-            {/* <label htmlFor="workPlaceInput">Work Place</label> */}
-            <TextField required label="Work Place" type="text" name="workplace" id="workplaceInput" 
-            value={workplace} onChange={handleChange} variant="outlined" />
+                <div className="text-field-wrapper">
+                    {/* <label htmlFor="workPlaceInput">Work Place</label> */}
+                    <TextField required label="Work Place" type="text" name="workplace" id="workplaceInput"
+                        value={workplace} onChange={handleChange} variant="outlined" />
+                </div>
 
-            {/* <label htmlFor="jobTitleInput">Job Title</label> */}
-            <TextField required label="Job Title" type="text" name="city" id="jobTitleInput" 
-            value={jobTitle} onChange={handleChange} variant="outlined" />
+                <div className="text-field-wrapper">
+                    {/* <label htmlFor="jobTitleInput">Job Title</label> */}
+                    <TextField required label="Job Title" type="text" name="city" id="jobTitleInput"
+                        value={jobTitle} onChange={handleChange} variant="outlined" />
+                </div>
 
-            {/* <label htmlFor="referenceNameInput">Reference Name</label> */}
-            <TextField required label="Reference Name" type="text" name="referenceName" id="referenceNameInput" 
-            value={referenceName} onChange={handleChange} variant="outlined" />
+                <div className="text-field-wrapper">
+                    {/* <label htmlFor="referenceNameInput">Reference Name</label> */}
+                    <TextField required label="Reference Name" type="text" name="referenceName" id="referenceNameInput"
+                        value={referenceName} onChange={handleChange} variant="outlined" />
+                </div>
+                <div className="text-field-wrapper">
+                    {/* <label htmlFor="referencePhoneInput">Reference Contact #</label> */}
+                    <TextField required label="Reference's Phone #" type="text" name="referencePhone" id="referencePhoneInput"
+                        value={referencePhone} onChange={handleChange} variant="outlined" />
+                </div>
+                <div className="text-field-wrapper">
+                    {/* <label htmlFor="referenceEmailInput">Reference Email Address</label> */}
+                    <TextField required label="Reference's Email" type="text" name="referenceEmail" id="referenceEmailInput"
+                        value={referenceEmailAddress} onChange={handleChange} variant="outlined" />
+                </div>
+                <div className="text-field-wrapper">
+                    {/* <label htmlFor="startDateInput">Start Date</label> */}
+                    <TextField type="date" name="startDate" id="startDateInput"
+                        label="Start Date" InputLabelProps={{ shrink: true }}
+                        value={startDate} onChange={handleChange} variant="outlined" />
+                </div>
+                <div className="text-field-wrapper">
+                    {/* <label htmlFor="endDateInput">End Date</label> */}
+                    <TextField type="date" name="endDate" id="endDateInput"
+                        label="End Date" InputLabelProps={{ shrink: true }}
+                        value={endDate} onChange={handleChange} variant="outlined" />
+                </div>
+                {hasBeenSubmitted ? (
+                    <p>submitted</p>
+                ) : (
 
-            {/* <label htmlFor="referencePhoneInput">Reference Contact #</label> */}
-            <TextField required label="Reference's Phone #" type="text" name="referencePhone" id="referencePhoneInput" 
-            value={referencePhone} onChange={handleChange} variant="outlined" />
-
-            {/* <label htmlFor="referenceEmailInput">Reference Email Address</label> */}
-            <TextField required label="Reference's Email" type="text" name="referenceEmail" id="referenceEmailInput" 
-            value={referenceEmailAddress} onChange={handleChange} variant="outlined" />
-
-            <label htmlFor="startDateInput">Start Date</label>
-            <TextField type="date" name="startDate" id="startDateInput" 
-            value={startDate} onChange={handleChange} variant="outlined" />
-
-            <label htmlFor="endDateInput">End Date</label>
-            <TextField type="date" name="endDate" id="endDateInput" 
-            value={endDate} onChange={handleChange} variant="outlined" />
-
-            {hasBeenSubmitted ? (
-                <p>submitted</p>
-            ) : (
-                
-                <button type="submit">+</button>
-            )}
+                    <Button variant="contained" color="secondary" type="submit">Add Work History Entry+</Button>
+                )}
 
             </form>
-            
+
 
 
         </div>

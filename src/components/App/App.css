@@ -122,6 +122,7 @@ input {
   border-radius: 25px;
   padding-bottom: 1em;
   padding-top: 0.5em;
+  box-shadow: 4px 4px 4px #7fbf7f;
 }
 
 .text-field-wrapper{
@@ -129,4 +130,8 @@ input {
   margin-top: 1em;
   display: flex;
   justify-content: center;
+}
+
+.registration-title{
+  text-align: center;
 }
