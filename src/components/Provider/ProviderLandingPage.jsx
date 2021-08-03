@@ -102,8 +102,8 @@ function ProviderLandingPage() {
             {/* <img src={resumePath} alt="" /> */}
             <ImageViewer imagePath={resumePath} />
             <ProviderGenItem provider={provider}/>
-            <Button
-            variant="contained">Edit General Info</Button>
+            {/* <Button
+            variant="contained">Edit General Info</Button> */}
             </div>
             ) : (
                 <h3>Please register to view upcoming missions</h3>
