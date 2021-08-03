@@ -108,21 +108,25 @@ function InsuranceMultiRow (props) {
         <div>
             <form onSubmit={submitInsurance}>
             <TextField
+                required
                 label="Type of Insurance"
                 id="type"
                 value={insuranceType}
                 onChange={handleChange} />
             <TextField 
+                required
                 label="Provider"
                 id="provider"
                 value={insuranceProvider}
                 onChange={handleChange}/>
             <TextField 
+                required
                 label="Policy #"
                 id="number"
                 value={policyNumber}
                 onChange={handleChange}/>
             <TextField 
+                required
                 label="State Initials"
                 id="state"
                 value={state}
@@ -130,6 +134,7 @@ function InsuranceMultiRow (props) {
 
             <FormLabel>Date Issued:</FormLabel>
             <TextField
+                required
                 type="date"
                 id="issued"
                 value={dateInitial}
@@ -137,6 +142,7 @@ function InsuranceMultiRow (props) {
            
            <FormLabel>Date Renewed:</FormLabel>
             <TextField 
+                required
                 type="date"
                 id="renewed"
                 value={dateRenewed}
@@ -144,6 +150,7 @@ function InsuranceMultiRow (props) {
             
             <FormLabel>Date Expired:</FormLabel>
             <TextField
+                required
                 type="date"
                 id="expired"
                 value={dateExpiring}
