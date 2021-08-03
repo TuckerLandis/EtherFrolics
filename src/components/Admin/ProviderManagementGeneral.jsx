@@ -9,27 +9,41 @@ import './ProviderManagementGeneral.css';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import ListSubheader from '@material-ui/core/ListSubheader';
-import { Info } from '@material-ui/icons';
+import Divider from '@material-ui/core/Divider';
+import InboxIcon from '@material-ui/icons/Inbox';
+import DraftsIcon from '@material-ui/icons/Drafts';
 
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
         maxWidth: 360,
         backgroundColor: theme.palette.background.paper,
-        position: 'relative',
-        overflow: 'auto',
-        maxHeight: 300,
-    },
-    listSection: {
-        backgroundColor: 'inherit',
-    },
-    ul: {
-        backgroundColor: 'inherit',
-        padding: 0,
     },
 }));
+
+function ListItemLink(props) {
+    return <ListItem button component="a" {...props} />;
+}
+
+// const useStyles = makeStyles((theme) => ({
+//     root: {
+//         width: '100%',
+//         maxWidth: 360,
+//         backgroundColor: theme.palette.background.paper,
+//         position: 'relative',
+//         overflow: 'auto',
+//         maxHeight: 300,
+//     },
+//     listSection: {
+//         backgroundColor: 'inherit',
+//     },
+//     ul: {
+//         backgroundColor: 'inherit',
+//         padding: 0,
+//     },
+// }));
 
 function ProviderManagementGeneral() {
 
@@ -70,35 +84,35 @@ function ProviderManagementGeneral() {
     // need to integrate icons into list for verified/unverified and flag icon for expiring credentials warning
     // need to add functionality to icons
 
-   const verifiedProviders = providers.filter(provider => provider.verified === true)
-   const unVerifiedProviders = providers.filter(provider => provider.verified === false)
+    const verifiedProviders = providers.filter(provider => provider.verified === true)
+    const unVerifiedProviders = providers.filter(provider => provider.verified === false)
+
+    //    onClick={() => handleSelect(provider?.user_id)}
+    //    onClick={() => handleSelect(provider?.user_id)}
 
     return (
 
-        <List className={classes.root} subheader={<li />}>
-                <li className={classes.listSection}>
-                    <ul className={classes.ul}>
-                        <ListSubheader>Verified</ListSubheader>
-                        {/* conditionally render in Verified section based on their verified status */}
-                        {verifiedProviders?.map((provider) => (
-                            <ListItem key={provider?.provider_id}>
-                                <ListItemText onClick={() => handleSelect(provider?.user_id)}>{provider?.firstName} {provider.lastName}</ListItemText>
-                            </ListItem>
-                        ))}
-                    </ul>
-                </li>
+        <div>
 
-                <li className={classes.listSection}>
-                    <ul className={classes.ul}>
-                        <ListSubheader>Unverified</ListSubheader>
-                        {unVerifiedProviders?.map((provider) => (
-                            <ListItem key={provider?.provider_id}>
-                                <ListItemText onClick={() => handleSelect(provider?.user_id)}>{provider?.firstName} {provider.lastName}</ListItemText>
-                            </ListItem>
-                        ))}
-                    </ul>
-                </li>
-        </List>
+            <div className={classes.root}>
+                <List component="nav" aria-label="main mailbox folders">
+                    <ListItem button>
+                        <ListItemIcon>
+                            <InboxIcon />
+                        </ListItemIcon>
+                        {providers?.map(provider)}
+                        <ListItemText primary={provider?.firstName} />
+                    </ListItem>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <DraftsIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Drafts" />
+                    </ListItem>
+                </List>
+            </div>
+
+        </div>
 
     )
 
