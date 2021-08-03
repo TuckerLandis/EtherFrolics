@@ -15,7 +15,7 @@ function MissionHistoryMultiRow(props) {
     const [endDate, setEndDate] = useState('')
     const [hasBeenSubmitted, setHasBeenSubmitted] = useState(false)
 
-
+    
     function submitMissionHistoryItem(event, awsKey) {
 
         event.preventDefault();
