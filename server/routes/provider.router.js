@@ -116,7 +116,8 @@ router.get('/landing', rejectUnauthenticated, (req, res) => {
   "provider"."firstName", 
   "provider"."lastName", 
   "provider"."DOB", 
-  "provider"."emailAddress", 
+  "provider"."emailAddress",
+  "provider"."phoneNumber", 
   "provider"."providerRole", 
   "provider"."streetAddress", 
   "provider".city, 
@@ -124,8 +125,7 @@ router.get('/landing', rejectUnauthenticated, (req, res) => {
   "provider"."zipCode", 
   "provider"."soloProvider", 
   "provider".verified, 
-  "provider"."recruiterOpt", 
-  "provider"."lastMission", 
+  "provider"."recruiterOpt",  
   "provider"."yearsExperience", 
   "provider"."validPassport", 
   "provider".availability, 
@@ -146,7 +146,7 @@ router.get('/landing', rejectUnauthenticated, (req, res) => {
       WHERE "education".user_id = "user".id) AS providerEducation) AS education_array, 
   (SELECT JSON_AGG(providerInsurance)
     FROM
-      (SELECT "insurance_id", "insuranceType", "insuranceProvider", "state", "dateInitial", "dateRenewed", "dateExpiring", "policyNumber", 		"insuranceImageKey"
+      (SELECT "insurance_id", "insuranceType", "insuranceProvider", "state", "dateInitial", "dateRenewed", "dateExpiring", "policyNumber", "insuranceImageKey"
       FROM "insurance"
       WHERE "insurance".user_id = "user".id) AS providerInsurance) AS insurance_array, 
   (SELECT JSON_AGG(providerMissionExperience)
@@ -156,7 +156,7 @@ router.get('/landing', rejectUnauthenticated, (req, res) => {
       WHERE "mission_experience".user_id = "user".id) AS providerMissionExperience) AS mission_experience_array, 
   (SELECT JSON_AGG(providerWorkExperience)
     FROM
-      (SELECT "workplace", "jobTitle", "startDate", "endDate", "referenceName", "referencePhone", "referenceEmail", "resumeImageKey"
+      (SELECT "workplace", "jobTitle", "startDate", "endDate", "referenceName", "referencePhone", "referenceEmail" 
       FROM "work_experience"
       WHERE "work_experience".user_id = "user".id) AS providerWorkExperience) AS work_experience_array
     FROM "user"
@@ -168,6 +168,7 @@ router.get('/landing', rejectUnauthenticated, (req, res) => {
 
   pool.query(queryText, [req.user.id])
     .then(result => {
+      console.log(result.rows);
       res.send(result.rows)
     })
     .catch(error => {

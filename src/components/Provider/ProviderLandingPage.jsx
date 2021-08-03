@@ -78,13 +78,13 @@ function ProviderLandingPage() {
 
 
     // test concat for image path
-    const resumePath = `/api/image/prov/${provider[0]?.resumeKey}`
+    const resumePath = `/api/image/prov/${provider?.resumeKey}`
 
     return (
         <div>
             <h2>Welcome,  {user.username} </h2>
 
-            {provider[0]?.registrationComplete ? (
+            {provider?.registrationComplete ? (
                 <Button
                     variant="contained"
                     onClick={viewMissions}>View Missions</Button>
@@ -94,21 +94,16 @@ function ProviderLandingPage() {
                     onClick={providerRegister}>Register</Button>
             )}
 
-            {provider[0]?.registrationComplete ? (  // <------ even though the new reducer is an object, this [0] doesn't bug, i think we can remove this though?
+            {provider?.registrationComplete ? (  // <------ even though the new reducer is an object, this [0] doesn't bug, i think we can remove this though?
             <div>
             <h2>General Info</h2>
                 
 
              {/* test for reading an image, works, see path declaration on line 80 */}
-            <h3>Your Resume</h3>
+             <h3>Your Resume</h3>
             {/* <img src={resumePath} alt="" /> */}
             <ImageViewer imagePath={resumePath} />
-
-
-            {provider.map (() => {
-                 return (<ProviderGenItem provider={provider}/>)
-            })}
-
+            <ProviderGenItem provider={provider}/>
             <Button
             variant="contained">Edit General Info</Button>
             </div>
@@ -116,19 +111,15 @@ function ProviderLandingPage() {
                 <h3>Please register to view upcoming missions</h3>
             )}
 
-            {provider[0]?.registrationComplete ? (
+            {provider?.registrationComplete ? (
             <div>
             <h2>Credential Info</h2>
-        
-            {provider.map (() => {
-                 return (<ProviderCredItem provider={provider}/>)
-            })}
+            <ProviderCredItem provider={provider}/>
             <Button
             variant="contained">Edit Credentials</Button>
             </div>
             ) : (
             <p></p>
-
             )}  
         </div>
     )

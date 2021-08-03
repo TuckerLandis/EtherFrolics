@@ -87,7 +87,7 @@ CREATE TABLE "insurance" (
 	"insurance_id" serial PRIMARY KEY,
 	"insuranceType" varchar(255),
 	"insuranceProvider" varchar(255),
-	"state" varchar(2),
+	"state" varchar(255),
 	"dateInitial" DATE,
 	"dateRenewed" DATE,
 	"dateExpiring" DATE,
