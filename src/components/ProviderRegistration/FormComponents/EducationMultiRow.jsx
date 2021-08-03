@@ -51,14 +51,18 @@ function EducationMultiRow(props) {
     const imageType='education'
 
     return (
-        <div>
+        <div className="general-form-display">
             <form onSubmit={submitEducationHistoryItem}>
 
-            {/* <label htmlFor="schoolInput">School</label> */}
-            <TextField required label="School" id="schoolInput" value={school} onChange={handleChange} variant="outlined" />
+            <div className="text-field-wrapper">
+                {/* <label htmlFor="schoolInput">School</label> */}
+                <TextField required label="School" id="schoolInput" value={school} onChange={handleChange} variant="outlined" />
+            </div>
 
-            {/* <label htmlFor="degreeInput">Job Title</label> */}
-            <TextField required label="Degree" id="degreeInput" value={degree} onChange={handleChange} variant="outlined" />
+            <div className="text-field-wrapper">
+                {/* <label htmlFor="degreeInput">Job Title</label> */}
+                <TextField required label="Degree" id="degreeInput" value={degree} onChange={handleChange} variant="outlined" />
+            </div>
 
             <label htmlFor="startDateInput">Start Date</label>
             <TextField required type="date" id="startDateInput" value={startDate} onChange={handleChange} />
@@ -69,12 +73,12 @@ function EducationMultiRow(props) {
 
             <ImageUploader imageType={imageType} submitFunction={submitEducationHistoryItem} />
 
-            {/* {hasBeenSubmitted ? (
+            {hasBeenSubmitted ? (
                 <p>submitted</p>
             ) : (
 
-                <button type="submit" >+</button>
-            )} */}
+                        <Button variant="contained" color="secondary" type="submit">Add Education Entry+</Button>
+            )}
 
 
             </form>
