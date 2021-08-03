@@ -82,7 +82,7 @@ function ProviderLandingPage() {
 
     return (
         <div>
-            <h2>Welcome,  {user.username} </h2>
+            <h2>Welcome, {user.username} </h2>
 
             {provider?.registrationComplete ? (
                 <Button
@@ -94,12 +94,10 @@ function ProviderLandingPage() {
                     onClick={providerRegister}>Register</Button>
             )}
 
-            {provider?.registrationComplete ? (  // <------ even though the new reducer is an object, this [0] doesn't bug, i think we can remove this though?
+            {provider?.registrationComplete ? ( 
             <div>
             <h2>General Info</h2>
                 
-
-             {/* test for reading an image, works, see path declaration on line 80 */}
              <h3>Your Resume</h3>
             {/* <img src={resumePath} alt="" /> */}
             <ImageViewer imagePath={resumePath} />
