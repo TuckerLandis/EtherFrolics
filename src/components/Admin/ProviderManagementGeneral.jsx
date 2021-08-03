@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
         maxWidth: 752,
+        height: 1
     },
     demo: {
         backgroundColor: theme.palette.background.paper,
@@ -77,14 +78,15 @@ function ProviderManagementGeneral() {
     const verifiedProviders = providers.filter(provider => provider.verified === true)
     const unVerifiedProviders = providers.filter(provider => provider.verified === false)
 
-    //    onClick={() => handleSelect(provider?.user_id)}
-
-    let star = (<StarIcon />);
-
-    if (providers?.verified === 'true') {
-        star = (<StarIcon />);
+    const starIcon = (provider) => {
+        if (provider.verified == true) {
+            return (
+                <StarIcon />
+            )
+        } else {
+            return;
+        }
     }
-
     return (
 
         <div>
@@ -99,16 +101,18 @@ function ProviderManagementGeneral() {
                             {generate(
                                 <div>
                                     {providers?.map(provider => {
-                                        return(
+                                        return (
                                             <ListItem key={provider?.provider_id}>
-                                    <ListItemIcon>
-                                        <StarIcon />
-                                    </ListItemIcon>
-                                    <ListItemText
-                                        primary={provider?.firstName}
-                                    >
-                                    </ListItemText>
-                                </ListItem>
+                                                <ListItemIcon>
+                                                    {starIcon(provider)}
+                                                </ListItemIcon>
+                                                <ListItemText
+                                                    primary={provider?.firstName}
+                                                    onClick={() => handleSelect(provider?.user_id)}
+                                                    className="mouse"
+                                                >
+                                                </ListItemText>
+                                            </ListItem>
                                         )
                                     })}
                                 </div>
