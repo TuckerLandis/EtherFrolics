@@ -282,7 +282,7 @@ router.post('/workhistoryitem', rejectUnauthenticated, async (req, res) => {
     await client.query('COMMIT;');
 
     // send good response
-    res.sendStatus(200)
+    res.sendStatus(200);
     
   } catch (error) {
 
@@ -422,91 +422,70 @@ router.post('/educationhistoryitem', rejectUnauthenticated, (req, res) => {
 router.post('/missionhistoryitem', rejectUnauthenticated, async (req, res) => {
   console.log('Reached provider reg POST: missionHistory', req.body);
 
-  // // make connection to pool client 
-  // // to initiate transaction
-  // const client = await pool.connect();
+  // make connection to pool client 
+  // to initiate transaction
+  const client = await pool.connect();
 
-  // // variable for the user id
-  // const user_id = req.user.id;
+  // variable for the user id
+  const user_id = req.user.id;
 
-  // // variable for the organization name
-  // const organizationName = req.body.organization;
+  // make req.body available as missionHistoryItems
+  let missionHistoryItems = req.body;
 
-  // // variable for mission location
-  // const location = req.body.location;
+  // queryText is an insert statement for mission experience table
+  const queryText = `
+    INSERT INTO "mission_experience" ("organizationName", "location", "referenceName", "referencePhone", "startDate", "endDate", "user_id")
+    VALUES ($1, $2, $3, $4, $5, $6, $7);
+  `;
 
-  // // variable for the name of the reference
-  // const referenceName = req.body.referenceName;
+  let missionHistoryItems = req.body;
 
-  // // variable for phone number of reference
-  // const referencePhone = req.body.referencePhone;
+  try {
 
-  // // variable for mission start date
-  // const startDate = req.body.startDate;
+    // begin the transaction block
+    await client.query('BEGIN;');
 
-  // // variable for mission end date
-  // const endDate = req.body.endDate;
+    // Promise.all aggregates multiple promises into
+    // one and returns an array of results
+    await Promise.all(
+      // .map statement loops through workHistoryItems array
+      missionHistoryItems.map(missionHistoryItem => {
 
-  // {
-  //   organization: 'Organization ',
-  //   location: 'Location',
-  //   referenceName: 'Reference Name',
-  //   referencePhone: '6128596090',
-  //   startDate: '2021-08-19',
-  //   endDate: '2021-08-04'
-  // },
+      // destructure objects in the array
+      const {
+        organization,
+        location,
+        referenceName,
+        referencePhone,
+        startDate,
+        endDate } = missionHistoryItem;
 
-  let missionHistoryItems = req.body
+        return client.query(queryText, [organization, location, referenceName, referencePhone, startDate, endDate, user_id]);
+      }) // end loop
+    ) // end Promise
 
-  missionHistoryItems.forEach(missionHistory => {
+    // commit changes to DB
+    await client.query('COMMIT;');
 
-    // query text makes post of data from MissionHistoryMultiRow to mission_experience table
-    let queryText = `
-  INSERT INTO "mission_experience" ("organizationName", "location", "referenceName", "referencePhone", "startDate", "endDate", "user_id")
-  VALUES ($1, $2, $3, $4, $5, $6, $7);
-`;
+    // send good response
+    res.sendStatus(200);
 
-    pool.query(queryText, [
-      missionHistory.organization,
-      missionHistory.location,
-      missionHistory.referenceName,
-      missionHistory.referencePhone,
-      missionHistory.startDate,
-      missionHistory.endDate,
-      req.user.id
-    ])
-      .then(result => {
-        console.log('posted mission history item');
-      })
-      .catch(error => {
-        console.log('error posting mission history item', error);
+  } catch (error) {
 
-      })
-  })
+    console.error(`Error in missionHistoryItems POST, changes rollback ${error}`);
 
+    // erase any changes made that havent been commited
+    await client.query('ROLLBACK;');
 
+    // send bad response
+    res.sendStatus(500);
 
-  res.sendStatus(200)
+  } finally {
+    console.log('End mission history item POST')
 
-  // try {
-
-  //   await client.query('BEGIN;');
-
-  //   await client.
-  //     query(queryText, [organizationName, location, referenceName, referencePhone, startDate, endDate, user_id])
-  //     await client.query('COMMIT;');
-
-  //     res.sendStatus(200)
-
-  // } catch (error) {
-
-  //   await client.query('ROLLBACK')
-  //   console.error('Could not finish mission experience POST, /missionhistoryitem', error);
-  // } finally {
-
-  //   client.release();
-
-  // }
+    // release the pool connection
+    await client.release();
+  }
 })
 
 router.post('/insuranceitem', rejectUnauthenticated, (req, res) => {
