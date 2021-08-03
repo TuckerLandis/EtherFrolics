@@ -4,6 +4,7 @@ import { TextField } from "@material-ui/core"
 import Button from '@material-ui/core/Button';
 
 import { useDispatch } from "react-redux"
+import ImageUploader from '../../ImageComponents/ImageUploader';
 
 function MedCredMultiRow(props) {
 
@@ -50,9 +51,9 @@ function MedCredMultiRow(props) {
       dateExpired: '',
   });
 
-  const submitCredentialHistory = e => {
+  const submitCredentialHistory = (e, awsKey) => {
 
-    e.preventDefault();
+    event.preventDefault();
 
     console.log('submitting history');
 
@@ -60,7 +61,7 @@ function MedCredMultiRow(props) {
 
     dispatch({
       type: 'ADD_CREDENTIAL_OBJECT',
-      payload: medCredValues  
+      payload: {...medCredValues, credentialImageKey: awsKey }
     });
 
     props.addCredentialHistoryData();
@@ -79,6 +80,8 @@ function MedCredMultiRow(props) {
 
   }
 
+  const imageType = 'credential'
+
   console.log(medCredValues);
   return (
     <div>
@@ -95,11 +98,15 @@ function MedCredMultiRow(props) {
               <TextField key={i} required type="date" label={dateInputConfig.inputLabel} InputLabelProps={{ shrink: true }} variant="outlined" name={dateInputConfig.inputName} value={medCredValues[dateInputConfig.inputName]} onChange={handleChange} />
           )
         })}
+
+        <ImageUploader imageType={imageType} submitFunction={submitCredentialHistory}/>
         
         {hasBeenSubmitted ? (
             <p>submitted</p>
           ) : (
                 
+            
+
             <Button type="submit" size="small" color="secondary" variant="contained">+</Button>
           )}
       </form>
