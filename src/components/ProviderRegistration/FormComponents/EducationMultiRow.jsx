@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { TextField } from "@material-ui/core"
 import { useDispatch } from "react-redux"
+import ImageUploader from "../../ImageComponents/ImageUploader";
 
 function EducationMultiRow(props) {
     const dispatch = useDispatch();
@@ -12,8 +13,8 @@ function EducationMultiRow(props) {
     const [hasBeenSubmitted, setHasBeenSubmitted] = useState(false)
 
 
-    function submitEducationHistoryItem(e) {
-        e.preventDefault()
+    function submitEducationHistoryItem(event, awsKey) {
+        event.preventDefault()
         setHasBeenSubmitted(true)
 
         dispatch({
@@ -23,6 +24,7 @@ function EducationMultiRow(props) {
                 degree: degree,
                 startDate: startDate,
                 endDate: endDate,
+                degreeImageKey: awsKey
             }
         })
 
@@ -46,6 +48,8 @@ function EducationMultiRow(props) {
         }
     }
 
+    const imageType='education'
+
     return (
         <div>
             <form onSubmit={submitEducationHistoryItem}>
@@ -62,12 +66,15 @@ function EducationMultiRow(props) {
             <label htmlFor="endDateInput">End Date</label>
             <TextField required type="date" id="endDateInput" value={endDate} onChange={handleChange} />
 
-            {hasBeenSubmitted ? (
+
+            <ImageUploader imageType={imageType} submitFunction={submitEducationHistoryItem} />
+
+            {/* {hasBeenSubmitted ? (
                 <p>submitted</p>
             ) : (
 
                 <button type="submit" >+</button>
-            )}
+            )} */}
 
 
             </form>

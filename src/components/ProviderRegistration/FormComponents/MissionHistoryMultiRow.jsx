@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { TextField } from "@material-ui/core"
 import { useDispatch } from "react-redux"
+import ImageUploader from '../../ImageComponents/ImageUploader'
 
 function MissionHistoryMultiRow(props) {
     const dispatch = useDispatch();
@@ -15,9 +16,9 @@ function MissionHistoryMultiRow(props) {
     const [hasBeenSubmitted, setHasBeenSubmitted] = useState(false)
 
 
-    function submitMissionHistoryItem(e) {
+    function submitMissionHistoryItem(event, awsKey) {
 
-        e.preventDefault();
+        event.preventDefault();
         
         setHasBeenSubmitted(true)
 
@@ -30,6 +31,7 @@ function MissionHistoryMultiRow(props) {
                 referencePhone : referencePhone,
                 startDate: startDate,
                 endDate: endDate,
+                missionExperienceImageKey: awsKey
             }
         })
 
@@ -63,6 +65,9 @@ function MissionHistoryMultiRow(props) {
         }
     }
 
+    const imageType = 'mission'
+    // const dispatchText = 'UPLOAD_MISSION_HISTORY'
+
     return (
         <div>
 
@@ -89,11 +94,23 @@ function MissionHistoryMultiRow(props) {
             <label htmlFor="endDateInput">End Date</label>
             <TextField required variant="outlined" type="date" id="endDateInput" value={endDate} onChange={handleChange} />
 
+            <br></br>
+            <br></br>
+            
+            <ImageUploader imageType={imageType} submitFunction={submitMissionHistoryItem}/>
+
+            <br></br>
+            <br></br>
+
             {hasBeenSubmitted ? (
                 <p>submitted</p>
             ) : (
                 <button type="submit">+</button>
             )}
+            
+            <br></br>
+            <br></br>
+            <br></br>
 
             </form>
             
