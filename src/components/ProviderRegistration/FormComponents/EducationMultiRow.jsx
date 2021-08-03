@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { TextField } from "@material-ui/core"
+import { TextField, Typography } from "@material-ui/core"
 import { useDispatch } from "react-redux"
 import ImageUploader from "../../ImageComponents/ImageUploader";
 import { Button } from '@material-ui/core';
@@ -79,7 +79,7 @@ function EducationMultiRow(props) {
                         value={endDate} onChange={handleChange} />
             </div>
 
-
+            <Typography variant="body1">Attacha a Transcript</Typography>
             <ImageUploader imageType={imageType} submitFunction={submitEducationHistoryItem} />
 
             {hasBeenSubmitted ? (
