@@ -91,7 +91,12 @@ function MissionTable() {
                             <TableCell>{mission.startDate}</TableCell>
                             <TableCell align="right">{mission.location}</TableCell>
                             <TableCell align="right">{mission.name}</TableCell>
-                            <TableCell align="right"><Button onClick={handleApplyButton} color="primary" variant="outlined">Apply</Button></TableCell>
+                            <TableCell>
+                                <a href={mission.missionLink}
+                                    target="_blank"
+                                    >
+                                        Apply</a> </TableCell>
+                            {/* <TableCell align="right"><Button onClick={handleApplyButton} color="primary" variant="outlined">Apply</Button></TableCell> */}
                         </TableRow>
                     ))}
                 </TableBody>
