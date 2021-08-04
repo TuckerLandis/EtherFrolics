@@ -9,11 +9,14 @@ const credentialEntry =
         credentialImageKey: ''
     }, action) => {
 
-    switch (action.payload) {
+    switch (action.type) {
         case 'SET_CREDENTIAL_ENTRY_UPDATE':
             
             return action.payload;
-    
+
+        case 'RESET_CREDENTIAL_ENTRY':
+            
+            return action.payload;   
         default:
             return state;
     }

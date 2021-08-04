@@ -4,14 +4,15 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import { List, ListItem, ListItemText, ListItemSecondaryAction, ListItemIcon, IconButton} from '@material-ui/core';
 import { useHistory, useRouteMatch } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
-function ProviderCredItem({ provider, setCredentialDataRow, ImageViewer }) {
+function ProviderCredItem({ provider, credentialEntry, ImageViewer }) {
 
     const history = useHistory();
+    const dispatch = useDispatch();
     const { url } = useRouteMatch();
 
     const [hasBeenClicked, setHasBeenClicked] = useState({});
@@ -20,15 +21,18 @@ function ProviderCredItem({ provider, setCredentialDataRow, ImageViewer }) {
         e.preventDefault();
 
         console.log(credential);
-        setCredentialDataRow({
-            credential_id: credential.credential_id,
-            credentialName: credential.credentialName,
-            licensingBoard: credential.licensingBoard,
-            licenseNumber: credential.licenseNumber,
-            dateInitial: credential.dateInitial,
-            dateRenewed: credential.dateRenewed,
-            dateExpiring: credential.dateExpiring,
-            credentialImageKey: credential.credentialImageKey
+        dispatch({
+            type: 'SET_CREDENTIAL_ENTRY_UPDATE',
+            payload: {
+                credential_id: credential.credential_id,
+                credentialName: credential.credentialName,
+                licensingBoard: credential.licensingBoard,
+                licenseNumber: credential.licenseNumber,
+                dateInitial: credential.dateInitial,
+                dateRenewed: credential.dateRenewed,
+                dateExpiring: credential.dateExpiring,
+                credentialImageKey: credential.credentialImageKey
+            }
         })
 
         setHasBeenClicked({
@@ -40,15 +44,17 @@ function ProviderCredItem({ provider, setCredentialDataRow, ImageViewer }) {
     const handleCloseOptions = e => {
         e.preventDefault();
 
-        setCredentialDataRow({
-            credential_id: '',
-            credentialName: '',
-            licensingBoard: '',
-            licenseNumber: '',
-            dateInitial: '',
-            dateRenewed: '',
-            dateExpiring: '',
-            credentialImageKey: ''
+        dispatch({
+            type: 'RESET_CREDENTIAL_ENTRY',
+            payload: {
+                credentialName: '',
+                licensingBoard: '',
+                licenseNumber: '',
+                dateInitial: '',
+                dateRenewed: '',
+                dateExpiring: '',
+                credentialImageKey: ''
+            }
         })
 
         setHasBeenClicked({})
@@ -61,6 +67,7 @@ function ProviderCredItem({ provider, setCredentialDataRow, ImageViewer }) {
         history.push(`${url}/edit`)
     }
 
+    console.log(credentialEntry);
     return (
         <div>
             <Accordion>
@@ -79,7 +86,7 @@ function ProviderCredItem({ provider, setCredentialDataRow, ImageViewer }) {
                                     <ListItem key={i} button >
                                         <ListItemIcon>
                                             <IconButton edge="start" >
-                                                <ImageViewer imagePath={credentialImagePath} />
+                                                {/* <ImageViewer imagePath={credentialImagePath} /> */}
                                             </IconButton>
                                         </ListItemIcon>
                                         <ListItemText primary={`${credential.credentialName}`} onClick={handleCloseOptions} secondary={`Expiration: ${credential.dateExpiring}`} />
