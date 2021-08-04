@@ -31,6 +31,7 @@ function GeneralInfo() {
 
 
         console.log(e.target.id);
+        console.log(e.target.parentNode)
 
         switch (e.target.id) {
             case 'firstNameInput':
@@ -41,9 +42,6 @@ function GeneralInfo() {
                 break
             case 'dateOfBirthInput':
                 setDob(e.target.value)
-                break
-            case 'providerRoleInput':
-                setProviderRole(e.target.value)
                 break
             case "validPassportRadioTrue":
                 setValidPassport(true)
@@ -101,6 +99,11 @@ function GeneralInfo() {
 
         history.push('/generalinfoaddress')
     }
+
+    function handleProviderRole (e) {
+        setProviderRole(e.target.value);
+    }
+
 
     const activeStep = 0
 
@@ -171,13 +174,17 @@ function GeneralInfo() {
 
 
                     <Typography htmlFor="providerRoleInput">Provider Role</Typography>
-                    <Select variant="outlined" name="providerRole" id="providerRoleInput" value={providerRole} onChange={handleChange}>
+                    <Select variant="outlined" name="providerRole" id="providerRoleInput" value={providerRole} onChange={handleProviderRole}>
                         <MenuItem value="-">-</MenuItem>
-                        <MenuItem value="CRNA">CRNA</MenuItem>
-
-                        {/* need more options here */}
+                        <MenuItem value="CRNA">cRNA</MenuItem>
+                        <MenuItem value="RN">RN</MenuItem>
+                        <MenuItem value="CNP">CNP</MenuItem>
+                        <MenuItem value="CNS">CNS</MenuItem>
+                        <MenuItem value="PA-C">PA-C</MenuItem>
+                        <MenuItem value="MD">MD</MenuItem>
+                        <MenuItem value="DO">DO</MenuItem>
+                        <MenuItem value="Other">Other</MenuItem>
                     </Select>
-
 
 
                     <Typography variant="body1">Do you have a valid passport?</Typography>
