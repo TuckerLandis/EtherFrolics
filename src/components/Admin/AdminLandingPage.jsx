@@ -8,6 +8,7 @@ import './AdminLandingPage.css';
 // material-ui
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -38,9 +39,14 @@ function AdminLandingPage() {
         <div className={classes.root}>
 
                     <div key={admin?.id}>
-                        <h1>Welcome, {admin?.username}!</h1>
+                        <Typography
+                            variant='h3'
+                        >
+                            Welcome, {admin?.username}!
+                        </Typography>
                     </div>
 
+            <div></div>
             <Button variant="contained" onClick={() => history.push('/providermgmt')}>Provider Management</Button>
             <Button variant="contained" onClick={() => history.push('/missions')}>Mission Management</Button>
 
