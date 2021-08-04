@@ -1,14 +1,16 @@
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import axios from 'axios';
-import { Button } from '@material-ui/core'
+import { Button, Typography } from '@material-ui/core'
 import AttachmentIcon from '@material-ui/icons/Attachment';
+import FileCopyIcon from '@material-ui/icons/FileCopy';
 
 
 function ImageUploader(props) {
   const dispatch = useDispatch();
   //state variable for the file being uploaded
   const [file, setFile] = useState('')
+  const [fileName, setFileName] = useState('Select a file')
 
   // this comes down from where the imageUploader is called, see workhistory for example
   const imageType = props.imageType
@@ -37,6 +39,7 @@ function ImageUploader(props) {
     console.log(event.target.files[0]);
     const file = event.target.files[0]
     setFile(file)
+    setFileName(file.name)
   }
 
   // awaits the post image function above, validates an image has been selected
@@ -66,9 +69,7 @@ function ImageUploader(props) {
     }
 
 
-    // calls whichever submitFunction is passed down as props. this simply flips a boolena on the parent page, 
-    // but will fail if there isn't a function being passed down, see work history imageUploader 
-    // props.submitFunction(event, result.Key)
+    // attaches the image key from s3 to the row to be submitted to the db
     props.attachImageFunction(result.Key)
   }
 
@@ -77,15 +78,21 @@ function ImageUploader(props) {
 
 
   return (
-    // <form onSubmit={handleSubmit}>
+    
     <div>
-      <input onChange={fileSelected} type="file" accept="image/*"></input>
+      <div>
+      <label htmlFor="file" className="inputfile-label"><Typography><FileCopyIcon/>{fileName}</Typography></label>
+      <input name="file" id="file" className="inputfile" onChange={fileSelected} type="file" accept="image/*"></input>
+
+      </div>
+      
+      
 
       {/* can conditionally render this button based on props.imageSubmitted if we want */}
-      <Button variant="contained" color="primary" onClick={handleSubmitImage}><AttachmentIcon/></Button>
+      <Button variant="contained" color="primary" onClick={handleSubmitImage}><AttachmentIcon/>Attach</Button>
     </div>
 
-    // </form>
+ 
   )
 }
 
