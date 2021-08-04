@@ -365,11 +365,12 @@ router.post('/educationhistoryitem', rejectUnauthenticated, async (req, res) => 
   (
     "institution",
     "degree",
+    "degreeImageKey",
     "startDate",
     "endDate",
     "user_id"
   )
-  VALUES ($1, $2, $3, $4, $5);
+  VALUES ($1, $2, $3, $4, $5, $6);
   `;
 
   try {
@@ -387,11 +388,12 @@ router.post('/educationhistoryitem', rejectUnauthenticated, async (req, res) => 
         const {
           school,
           degree,
+          degreeImageKey,
           startDate,
           endDate
         } = educationHistoryItem;
 
-        return client.query(queryText, [school, degree, startDate, endDate, user_id]);
+        return client.query(queryText, [school, degree, degreeImageKey, startDate, endDate, user_id]);
       }) // end loop
     ) // end Promise
 
