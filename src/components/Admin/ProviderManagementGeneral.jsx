@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -27,12 +27,16 @@ import StarIcon from '@material-ui/icons/Star';
 import Paper from "@material-ui/core/Paper";
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
         maxWidth: 752,
-        height: 1
+        height: 1,
+        '& > *': {
+            margin: theme.spacing(1),
+        },
     },
     demo: {
         backgroundColor: theme.palette.background.paper,
@@ -48,6 +52,8 @@ function ProviderManagementGeneral() {
     const history = useHistory();
 
     const providers = useSelector(store => store.providers);
+
+    const [searchQuery, setSearchQuery] = useState('');
 
     // material-ui
     const classes = useStyles();
@@ -79,8 +85,8 @@ function ProviderManagementGeneral() {
         history.push(`/providermgmt/${providerId}`);
     } // end handleSelect
 
-    const verifiedProviders = providers.filter(provider => provider.verified === true)
-    const unVerifiedProviders = providers.filter(provider => provider.verified === false)
+    // const verifiedProviders = providers.filter(provider => provider.verified === true)
+    // const unVerifiedProviders = providers.filter(provider => provider.verified === false)
 
     const starIcon = (provider) => {
         if (provider.verified == true) {
@@ -91,6 +97,18 @@ function ProviderManagementGeneral() {
             return;
         }
     }
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+    } // end handleSubmit
+
+    // const handleChange = (event) => {
+    //     event.preventDefault();
+    //     console.log(event.target.value);
+    //     setSearchQuery(event.target.value);
+    //     providers.filter(provider );
+    // }
+
     return (
 
         <div>
@@ -106,10 +124,19 @@ function ProviderManagementGeneral() {
                         onCancelSearch={() => cancelSearch()}
                     /> */}
                     <div>
-                        <InputBase 
-                            
-                        />
-                        <SearchIcon />
+                        <form onSubmit={handleSubmit}>
+                            <InputBase
+                                onChange={event => setSearchQuery(event.target.value)}
+                            />
+                            <SearchIcon />
+                            <Button
+                                variant="contained"
+                                color="secondary"
+                                type="submit"
+                            >
+                                Search
+                            </Button>
+                        </form>
                     </div>
 
                     <Grid item xs={12} md={6}>
@@ -117,7 +144,13 @@ function ProviderManagementGeneral() {
                             <List dense={dense}>
                                 {generate(
                                     <div>
-                                        {providers?.map(provider => {
+                                        {providers?.filter(provider => {
+                                            if (searchQuery == '') {
+                                                return provider
+                                            } else if (provider?.firstName.toLowerCase().includes(searchQuery.toLowerCase())){
+                                                return provider
+                                            }
+                                        }).map(provider => {
                                             return (
                                                 <ListItem key={provider?.provider_id}>
                                                     <ListItemIcon>
