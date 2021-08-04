@@ -143,3 +143,44 @@ input {
 input[type=text]{
   width: 275px;
 }
+
+.inputfile {
+	width: 0.1px;
+	height: 0.1px; 
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1; 
+}
+ 
+
+
+.inputfile-label {
+  padding: 3px 8px;
+  font-size: 0.875rem;
+  min-width: 64px;
+  box-sizing: border-box;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  font-family: Alegreya-Sans,Arial,Georgia,system-ui;
+  line-height: 1.75;
+  border-radius: 4px;
+  
+
+
+  margin-bottom: 0.5em;
+  color: black;
+  background-color: #7fbf7f;
+  display: inline-block;
+}
+
+.inputfile-label:focus,
+.inputfile + label:hover {
+  background-color: red;
+}
+
+.button-div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}

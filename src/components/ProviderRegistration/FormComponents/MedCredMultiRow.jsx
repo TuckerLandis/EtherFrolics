@@ -10,7 +10,16 @@ function MedCredMultiRow(props) {
 
   const dispatch = useDispatch();
 
-  const [hasBeenSubmitted, setHasBeenSubmitted] = useState(false);
+  const [itemSubmit, setItemSubmit] = useState(false);
+  const [imageSubmit, setImageSubmit] = useState(false)
+  const [credImageKey, setCredImageKey] = useState('')
+
+  function handleImageAttach(awsKey) {
+    setImageSubmit(true)
+    setMedCredValues(
+      { ...medCredValues , credImageKey: awsKey }
+      )
+}
 
   const credentialTextInputConfig = [
     {
@@ -49,19 +58,20 @@ function MedCredMultiRow(props) {
       dateReceived: '',
       dateRenewed: '',
       dateExpired: '',
+      credImageKey: ''
   });
 
-  const submitCredentialHistory = (e, awsKey) => {
+  const submitCredentialHistory = (e) => {
 
     event.preventDefault();
 
     console.log('submitting history');
 
-    setHasBeenSubmitted(true);
+    setItemSubmit(true);
 
     dispatch({
       type: 'ADD_CREDENTIAL_OBJECT',
-      payload: {...medCredValues, credentialImageKey: awsKey }
+      payload: medCredValues
     });
 
     props.addCredentialHistoryData();
@@ -107,9 +117,9 @@ function MedCredMultiRow(props) {
           )
         })}
 
-          <ImageUploader imageType={imageType} submitFunction={submitCredentialHistory}/>
+          <ImageUploader imageType={imageType} attachImageFunction={handleImageAttach}/>
         
-        {hasBeenSubmitted ? (
+        {itemSubmit ? (
             <p>submitted</p>
           ) : (
             <div className="text-field-wrapper">
