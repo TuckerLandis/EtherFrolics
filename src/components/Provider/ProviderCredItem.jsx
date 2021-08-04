@@ -1,19 +1,63 @@
+import React, { useState } from 'react';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { List, ListItem, ListItemText } from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
+import { List, ListItem, ListItemText, ListItemSecondaryAction, ListItemIcon, IconButton} from '@material-ui/core';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 
-function ProviderCredItem({ provider }) {
+function ProviderCredItem({ provider, setCredentialDataRow, ImageViewer }) {
 
     const history = useHistory();
     const { url } = useRouteMatch();
 
-    const handleClick = (e, credential)  => {
-        console.log(e.target.parentNode.parentNode.id)
+    const [hasBeenClicked, setHasBeenClicked] = useState({});
+
+    const handleDisplayOptions = (e, credential)  => {
+        e.preventDefault();
+
         console.log(credential);
+        setCredentialDataRow({
+            credential_id: credential.credential_id,
+            credentialName: credential.credentialName,
+            licensingBoard: credential.licensingBoard,
+            licenseNumber: credential.licenseNumber,
+            dateInitial: credential.dateInitial,
+            dateRenewed: credential.dateRenewed,
+            dateExpiring: credential.dateExpiring,
+            credentialImageKey: credential.credentialImageKey
+        })
+
+        setHasBeenClicked({
+            [credential.credentialName]: true
+        })
+    
+    }
+
+    const handleCloseOptions = e => {
+        e.preventDefault();
+
+        setCredentialDataRow({
+            credential_id: '',
+            credentialName: '',
+            licensingBoard: '',
+            licenseNumber: '',
+            dateInitial: '',
+            dateRenewed: '',
+            dateExpiring: '',
+            credentialImageKey: ''
+        })
+
+        setHasBeenClicked({})
+    }
+
+    const editCredential = e => {
+
+        e.preventDefault();
+
         history.push(`${url}/edit`)
     }
 
@@ -28,11 +72,29 @@ function ProviderCredItem({ provider }) {
                 <AccordionDetails>
                     <List component="nav">
                         {provider.credential_array.map( (credential, i) => {
+                            const credentialImagePath = `/api/image/prov/${credential.credentialImageKey}`
                             console.log(credential);
                             return (
-                                <ListItem key={i} id={credential.credential_id} button >
-                                    <ListItemText primary={`${credential.credentialName}`} onClick={ e => handleClick(e, credential)} secondary={`Expiration: ${credential.dateExpiring}`} />
+                                hasBeenClicked?.[credential.credentialName] ?
+                                    <ListItem key={i} button >
+                                        <ListItemIcon>
+                                            <IconButton edge="start" >
+                                                <ImageViewer imagePath={credentialImagePath} />
+                                            </IconButton>
+                                        </ListItemIcon>
+                                        <ListItemText primary={`${credential.credentialName}`} onClick={handleCloseOptions} secondary={`Expiration: ${credential.dateExpiring}`} />
+                                        <ListItemSecondaryAction>
+                                            <IconButton edge="end" onClick={editCredential}>
+                                                <EditIcon />
+                                            </IconButton>
+                                        </ListItemSecondaryAction>
+                                    </ListItem>
+                                :
+
+                                <ListItem key={i} button >
+                                    <ListItemText primary={`${credential.credentialName}`} onClick={ e => handleDisplayOptions(e, credential)} secondary={`Expiration: ${credential.dateExpiring}`} />
                                 </ListItem>
+                                
                             )
                         })}
                     </List>

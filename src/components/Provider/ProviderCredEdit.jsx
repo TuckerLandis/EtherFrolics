@@ -2,8 +2,9 @@ import React, { useEffect } from 'react';
 import Typography from '@material-ui/core/Typography';
 import { useSelector } from 'react-redux';
 
-function ProviderCredEdit({ provider }) {
+function ProviderCredEdit({ provider, credentialDataRow, setCredentialDataRow }) {
 
+  console.log(credentialDataRow);
   return (
     <div className="general-form-display" >
       <Typography variant="h4">

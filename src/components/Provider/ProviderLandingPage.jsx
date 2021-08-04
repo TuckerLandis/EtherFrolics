@@ -67,6 +67,17 @@ function ProviderLandingPage() {
         })
     }, []);
 
+    // object to hold values for editing and adding credentials
+    const [credentialDataRow, setCredentialDataRow] = useState({
+        licensingBoard: '',
+        credentialName: '',
+        licenseNumber: '',
+        dateInitial: '',
+        dateRenewed: '',
+        dateExpiring: '',
+        credentialImageKey: ''
+    })
+
 
     //create a function so that the provider can view upcoming missions
     const viewMissions = () => {
@@ -107,7 +118,7 @@ function ProviderLandingPage() {
                     <h3>Your Resume</h3>
                     {/* <img src={resumePath} alt="" /> */}
                     <ImageViewer imagePath={resumePath} />
-                    <ProviderGenItem provider={provider}/>
+                    <ProviderGenItem provider={provider} />
                     <Button
                     variant="contained">Edit General Info</Button>
                     </div>
@@ -118,7 +129,7 @@ function ProviderLandingPage() {
                     {provider?.registrationComplete ? (
                     <div>
                     <h2>Credential Info</h2>
-                    <ProviderCredItem provider={provider}/>
+                    <ProviderCredItem ImageViewer={ImageViewer} provider={provider} setCredentialDataRow={setCredentialDataRow}/>
                     <Button
                     variant="contained">Edit Credentials</Button>
                     </div>
@@ -128,7 +139,7 @@ function ProviderLandingPage() {
                 </Route>
                         
                 <Route exact path={`${path}/edit`}>
-                    <ProviderCredEdit provider={ provider } />
+                    <ProviderCredEdit provider={ provider } credentialDataRow={ credentialDataRow } setCredentialDataRow={ setCredentialDataRow } />
                 </Route> 
             </Switch>
         </div>
