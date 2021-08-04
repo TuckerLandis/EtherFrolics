@@ -24,7 +24,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
 // Get request for info in the Mission Table
 router.get('/mission', rejectUnauthenticated, (req, res) => {
-    const queryText = `SELECT "mission"."startDate", "mission".location, "mission".name, "mission"."missionLink" FROM "mission"
+    const queryText = `SELECT "mission"."startDate", "mission"."endDate", "mission".location, "mission".name, "mission"."missionLink" FROM "mission"
 		ORDER BY "mission"."startDate" ASC;`
 
     pool.query(queryText)

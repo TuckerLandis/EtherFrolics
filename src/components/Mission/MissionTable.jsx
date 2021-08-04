@@ -37,10 +37,9 @@ function MissionTable() {
     // Upon page load, this function dispatches "fetch missions" command to the generator function 
     useEffect(() => {
         dispatch({ type: 'FETCH_MISSIONS' })
-
     }, []);
 
-
+console.log(mission);
     return (
         <div>
             <h2>Upcoming Missions</h2>
@@ -49,9 +48,11 @@ function MissionTable() {
             <Table className={classes.table}>
                 <TableHead>
                     <TableRow>
-                        <TableCell>Date</TableCell>
-                        <TableCell align="right">Location</TableCell>
-                        <TableCell align="right">Organization</TableCell>
+                        <TableCell>Location</TableCell>
+                        <TableCell>Start Date</TableCell>
+                        <TableCell>End Date</TableCell>
+                        <TableCell>Organization</TableCell>
+                        <TableCell></TableCell>
                     </TableRow>
                 </TableHead>
              
@@ -59,10 +60,11 @@ function MissionTable() {
                 <TableBody>
                     {mission.map((mission) => (
                         <TableRow key={mission.name}>
+                            <TableCell>{mission.location}</TableCell>
                             <TableCell>{mission.startDate}</TableCell>
-                            <TableCell align="right">{mission.location}</TableCell>
-                            <TableCell align="right">{mission.name}</TableCell>
-                            <TableCell align="right">
+                            <TableCell>{mission.endDate}</TableCell>
+                            <TableCell>{mission.name}</TableCell>
+                            <TableCell>
                                 <a href={mission.missionLink}
                                     target="_blank"
                                     >
