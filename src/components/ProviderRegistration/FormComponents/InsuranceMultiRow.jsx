@@ -46,7 +46,10 @@ function InsuranceMultiRow (props) {
     const [dateRenewed, setDateRenewed] = useState('');
     const [dateExpiring, setDateExpiring] = useState('');
     const [submitted, setSubmitted] = useState(false);
-    //Still need PDF upload
+  
+
+    const [imageSubmit, setImageSubmit] = useState(false)
+    const [insuranceImageKey, setInsuranceImageKey] = useState('')
 
     const handleChange = (evt) => {
         switch (evt.target.id) {
@@ -72,9 +75,14 @@ function InsuranceMultiRow (props) {
                 setDateExpiring(evt.target.value);
         }
     }
+
+    function handleImageAttach(awsKey) {
+        setImageSubmit(true)
+        setInsuranceImageKey(awsKey)
+    }
     
     //need a function to dispatch the information
-    const submitInsurance = (event, awsKey) => {
+    const submitInsurance = (event) => {
         event.preventDefault();
         //set submitted state to true
         setSubmitted(true);
@@ -87,8 +95,8 @@ function InsuranceMultiRow (props) {
             dateInitial: dateInitial,
             dateRenewed: dateRenewed,
             dateExpiring: dateExpiring,
-            insuranceImageKey: awsKey
-            //possibly need a pdf upload here
+            insuranceImageKey: insuranceImageKey
+           
         }
         console.log(insuranceObj);
 
@@ -180,7 +188,7 @@ function InsuranceMultiRow (props) {
                 onChange={handleChange}/>
             </div>
 
-                <ImageUploader imageType={imageType} submitFunction={submitInsurance} />
+                <ImageUploader imageType={imageType} attachImageFunction={handleImageAttach} />
 
             {submitted ? (
                 <p>Information Submitted!</p>
