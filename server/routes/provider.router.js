@@ -713,7 +713,7 @@ router.put('/verify/:id', rejectUnauthenticated, (req, res) => {
   let verifyQuery = `
   UPDATE "provider"
   SET "verified" = TRUE
-  WHERE "provider_id" = $1;
+  WHERE "user_id" = $1;
   `;
 
   pool
@@ -736,7 +736,7 @@ router.put('/disable/:id', rejectUnauthenticated, (req, res) => {
   let disableQuery = `
   UPDATE "provider"
   SET "verified" = FALSE
-  WHERE "provider_id" = $1;
+  WHERE "user_id" = $1;
   `;
 
   pool
