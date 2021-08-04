@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Button, Typography } from '@material-ui/core'
 import AttachmentIcon from '@material-ui/icons/Attachment';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
+import ImageViewer from './ImageViewer'
 
 
 function ImageUploader(props) {
@@ -80,16 +81,22 @@ function ImageUploader(props) {
   return (
     
     <div>
-      <div>
-      <label htmlFor="file" className="inputfile-label"><Typography><FileCopyIcon/>{fileName}</Typography></label>
+      <div className="button-div">
+        <div>
+        <label htmlFor="file" className="inputfile-label"><Typography variant="button"><FileCopyIcon/>{fileName}</Typography></label>
       <input name="file" id="file" className="inputfile" onChange={fileSelected} type="file" accept="image/*"></input>
+        </div>
+    
 
-      </div>
       
       
-
-      {/* can conditionally render this button based on props.imageSubmitted if we want */}
+      
+      <div>
       <Button variant="contained" color="primary" onClick={handleSubmitImage}><AttachmentIcon/>Attach</Button>
+      </div>
+      </div>
+      {/* can conditionally render this button based on props.imageSubmitted if we want */}
+      
     </div>
 
  
