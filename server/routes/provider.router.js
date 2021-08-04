@@ -504,8 +504,8 @@ router.post('/insuranceitem', rejectUnauthenticated, async (req, res) => {
 
   //define the query text of where you want to post in the database
   let queryText = `INSERT INTO "insurance" ("insuranceType", "insuranceProvider", "policyNumber", 
-    "state", "dateInitial", "dateRenewed", "dateExpiring", "user_id")
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8);`;
+    "state", "insuranceImageKey", "dateInitial", "dateRenewed", "dateExpiring", "user_id")
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);`;
 
   try {
 
@@ -524,11 +524,12 @@ router.post('/insuranceitem', rejectUnauthenticated, async (req, res) => {
         insuranceProvider,
         policyNumber,
         state,
+        insuranceImageKey,
         dateInitial,
         dateRenewed,
         dateExpiring } = insuranceItem;
 
-      return client.query(queryText, [insuranceType, insuranceProvider, policyNumber, state, dateInitial, dateRenewed, dateExpiring, user_id]);
+      return client.query(queryText, [insuranceType, insuranceProvider, policyNumber, state, insuranceImageKey, dateInitial, dateRenewed, dateExpiring, user_id]);
       }) // end loop
     ) // end Promise
 
