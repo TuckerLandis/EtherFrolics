@@ -41,7 +41,7 @@ function ProviderManagementIndividual() {
     } // end soloProviderStatus
 
     // test concat for image path
-    const resumePath = `/api/image/prov/${provider?.resumeKey}`
+    const resumePath = provider.resumeKey && `/api/image/prov/${provider.resumeKey}`
 
     // verifies provider using provider.provider_id
     const verify = (provider_id) => {
@@ -98,7 +98,7 @@ function ProviderManagementIndividual() {
                 {/* test of image get from s3 */}
                 <h1>Provider Resume</h1>
                 {/* works! can make this a light box, also only works atm if a provider has a resume image key, will bug otherwise, need to require the resume submission */}
-                <ImageViewer imagePath={resumePath} />
+                { resumePath && <ImageViewer imagePath={resumePath} />}
 
                 <div>
                     <h1>Provider Credentials</h1>
