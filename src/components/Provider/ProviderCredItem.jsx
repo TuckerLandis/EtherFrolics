@@ -17,8 +17,8 @@ function ProviderCredItem({ provider }) {
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                        {provider?.credential_array.map( (credential, i) => {
-                            return (<ListItem key={i}><ListItemText>{credential.credentialName}</ListItemText></ListItem>)
+                        {provider?.credential_array?.map( (credential, i) => {
+                            return (<ListItem key={i}><ListItemText>{credential?.credentialName}</ListItemText></ListItem>)
                         })}
                     </Typography>
                 </AccordionDetails>
@@ -32,8 +32,8 @@ function ProviderCredItem({ provider }) {
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                    {provider?.credential_array.map( (credential, i) => {
-                            return (<ListItem key={i}><ListItemText>{credential.licensingBoard}</ListItemText></ListItem>)
+                    {provider?.credential_array?.map( (credential, i) => {
+                            return (<ListItem key={i}><ListItemText>{credential?.licensingBoard}</ListItemText></ListItem>)
                     })}
                     </Typography>
                 </AccordionDetails>
@@ -47,8 +47,8 @@ function ProviderCredItem({ provider }) {
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                    {provider?.credential_array.map( (credential, i) => {
-                            return (<ListItem key={i}><ListItemText>{credential.licenseNumber}</ListItemText></ListItem>)
+                    {provider?.credential_array?.map( (credential, i) => {
+                            return (<ListItem key={i}><ListItemText>{credential?.licenseNumber}</ListItemText></ListItem>)
                     })}
                     </Typography>
                 </AccordionDetails>
@@ -62,8 +62,8 @@ function ProviderCredItem({ provider }) {
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                    {provider?.credential_array.map( (credential, i) => {
-                            return (<ListItem key={i}><ListItemText>{credential.dateInitial}</ListItemText></ListItem>)
+                    {provider?.credential_array?.map( (credential, i) => {
+                            return (<ListItem key={i}><ListItemText>{credential?.dateInitial}</ListItemText></ListItem>)
                     })}
                     </Typography>
                 </AccordionDetails>
@@ -77,8 +77,8 @@ function ProviderCredItem({ provider }) {
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                    {provider?.credential_array.map( (credential, i) => {
-                            return (<ListItem key={i}><ListItemText>{credential.dateRenewed}</ListItemText></ListItem>)
+                    {provider?.credential_array?.map( (credential, i) => {
+                            return (<ListItem key={i}><ListItemText>{credential?.dateRenewed}</ListItemText></ListItem>)
                     })}
                     </Typography>
                 </AccordionDetails>
@@ -92,8 +92,8 @@ function ProviderCredItem({ provider }) {
                 </AccordionSummary>
                 <AccordionDetails>
                     <Typography>
-                    {provider?.credential_array.map( (credential, i) => {
-                            return (<ListItem key={i}><ListItemText>{credential.dateExpiring}</ListItemText></ListItem>)
+                    {provider?.credential_array?.map( (credential, i) => {
+                            return (<ListItem key={i}><ListItemText>{credential?.dateExpiring}</ListItemText></ListItem>)
                     })}
                     </Typography>
                 </AccordionDetails>

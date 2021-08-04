@@ -41,7 +41,7 @@ function ProviderManagementIndividual() {
     } // end soloProviderStatus
 
     // test concat for image path
-    const resumePath = `/api/image/ind/${provider?.resumeKey}`
+    const resumePath = `/api/image/prov/${provider?.resumeKey}`
 
     // verifies provider using provider.provider_id
     const verify = (provider_id) => {
