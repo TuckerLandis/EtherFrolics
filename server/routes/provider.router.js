@@ -634,6 +634,7 @@ router.put('/completeregistration', rejectUnauthenticated, (req, res) => {
     })
 })
 
+// PUT Route to update provider table
 router.put('/update/:userId/:providerId', rejectUnauthenticated, async (req, res) => {
   console.log('Updating provider table at ' + req.params.providerId + ' as ' + req.user.id );
 
@@ -702,7 +703,77 @@ router.put('/update/:userId/:providerId', rejectUnauthenticated, async (req, res
     res.sendStatus(401);
 
   }
-})
+}) // end provider table PUT
+
+// PUT Route to update credential table
+router.put('/update/credential/:userId/:credentialId', rejectUnauthenticated, async (req, res) => {
+console.log('Updating the credential table at ' + req.params.credentialId + ' as ' + req.user.id);
+
+  // destructure query params
+  const {
+    userId,
+    credentialId
+  } = req.params;
+
+  // destructure request body
+  const {
+    credentialTaxonomy,
+    licensingBoard,
+    licenseNumber,
+    dateReceived,
+    dateRenewed,
+    dateExpired
+  } = req.body;
+
+  const updateQuery = 
+    `UPDATE "credential"
+    SET "credentialName" = $1,
+    "licensingBoard" = $2,
+    "licenseNumber" = $3,
+    "dateInitial" = $4,
+    "dateRenewed" = $5,
+    "dateExpiring" = $6
+    WHERE credential_id = $7;
+    `;
+
+    if (userId == req.user.id) {
+
+      // make a connection to pool client for transaction
+      const client = await pool.connect();
+
+      try {
+
+        // start transaction block
+        await client.query('BEGIN;');
+
+        await client.query(updateQuery, [credentialTaxonomy, licensingBoard, licenseNumber, dateReceived, dateRenewed, dateExpired, credentialId]);
+
+        // commit changes to the DB
+        await client.query('COMMIT;');
+
+        // send good response
+        res.sendStatus(204);
+        
+      } catch (error) {
+
+        console.error(`Error in Provider PUT, changes rolledback ${error}`);
+
+        await client.query('ROLLBACK;');
+    
+        res.sendStatus(500);
+        
+      } finally {
+        console.log('End provider PUT')
+
+        await client.release();
+      }
+
+    } else {
+
+      res.sendStatus(401);
+      
+    }
+  })
 
 router.put('/verify/:id', rejectUnauthenticated, (req, res) => {
 
