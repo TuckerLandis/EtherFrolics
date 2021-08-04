@@ -81,6 +81,17 @@ function AdminLandingPage() {
                 >
                     Mission Management
                 </Button>
+                <Button
+                    className="adminBtn"
+                    variant="contained"
+                    classes={{
+                        root: classes.root, // class name, e.g. `classes-nesting-root-x`
+                        label: classes.label, // class name, e.g. `classes-nesting-label-x`
+                    }}
+                    onClick={() => history.push('/createmissionpage')}
+                >
+                    Create Mission
+                </Button>
             </div>
 
         </div>
