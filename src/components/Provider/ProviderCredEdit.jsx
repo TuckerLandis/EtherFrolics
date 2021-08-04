@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
-import { TextField, Typography } from "@material-ui/core"
+import { TextField, Typography, Button } from "@material-ui/core"
+import { useDispatch } from 'react-redux';
 
 function ProviderCredEdit({ provider, credentialEntry, inputConfig }) {
+
+  const dispatch = useDispatch();
 
   const [credUpdate, setCredUpdate] = useState({
     credentialTaxonomy: credentialEntry.credentialName,
@@ -9,7 +12,8 @@ function ProviderCredEdit({ provider, credentialEntry, inputConfig }) {
     licenseNumber: credentialEntry.licenseNumber,
     dateReceived: credentialEntry.dateInitial,
     dateRenewed: credentialEntry.dateRenewed, 
-    dateExpired: credentialEntry.dateExpiring
+    dateExpired: credentialEntry.dateExpiring,
+    user_id: provider.user_id
   })
 
   const handleChange = e => {
@@ -22,6 +26,16 @@ function ProviderCredEdit({ provider, credentialEntry, inputConfig }) {
     });
   }
 
+  const sendUpdate = e => {
+
+    e.preventDefault();
+
+    dispatch({
+      type: 'SUBMIT_CREDENTIAL_UPDATE',
+      payload: credUpdate
+    })
+  }
+
   console.log(credUpdate);
   return (
     <div>
@@ -29,7 +43,7 @@ function ProviderCredEdit({ provider, credentialEntry, inputConfig }) {
        Update Credential: {credentialEntry.credentialName}
       </Typography>
       <div className="general-form-display" >
-        <form>
+        <form onSubmit={sendUpdate} >
           {inputConfig.map((config, i) => {
             return(
               <div key={i} className="text-field-wrapper">
@@ -38,6 +52,9 @@ function ProviderCredEdit({ provider, credentialEntry, inputConfig }) {
             )
             
           })}
+          <div className="text-field-wrapper">
+            <Button type="submit" color="primary" >Save</Button>
+          </div>
         </form>
       </div>
     </div>
