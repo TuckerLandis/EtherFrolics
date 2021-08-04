@@ -60,14 +60,6 @@ function ProviderManagementGeneral() {
     const [dense, setDense] = React.useState(false);
     const [secondary, setSecondary] = React.useState(false);
 
-    function generate(element) {
-        return providers?.map((provider) =>
-            React.cloneElement(element, {
-                key: provider?.provider_id,
-            }),
-        );
-    }
-
     useEffect(() => {
         dispatch({ type: 'GET_PROVIDERS' });
     }, []);
@@ -101,13 +93,6 @@ function ProviderManagementGeneral() {
     const handleSubmit = (event) => {
         event.preventDefault();
     } // end handleSubmit
-
-    // const handleChange = (event) => {
-    //     event.preventDefault();
-    //     console.log(event.target.value);
-    //     setSearchQuery(event.target.value);
-    //     providers.filter(provider );
-    // }
 
     return (
 
