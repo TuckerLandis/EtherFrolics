@@ -15,9 +15,11 @@ function MissionHistoryMultiRow(props) {
     const [startDate, setStartDate] = useState('')
     const [endDate, setEndDate] = useState('')
     const [hasBeenSubmitted, setHasBeenSubmitted] = useState(false)
+    const [imageSubmit, setImageSubmit] = useState(false)
+    const [missionImageKey, setMissionImageKey] = useState('')
 
 
-    function submitMissionHistoryItem(event, awsKey) {
+    function submitMissionHistoryItem(event) {
 
         event.preventDefault();
 
@@ -38,12 +40,18 @@ function MissionHistoryMultiRow(props) {
                 referencePhone: referencePhone,
                 startDate: startDate,
                 endDate: endDate,
-                missionExperienceImageKey: awsKey
+                missionExperienceImageKey: missionImageKey
             }
         })
 
         props.addMissionHistoryItem()
     }
+
+    function handleImageAttach(awsKey) {
+        setImageSubmit(true)
+        setMissionImageKey(awsKey)
+    }
+
 
     function handleChange(e) {
         switch (e.target.id) {
@@ -118,7 +126,7 @@ function MissionHistoryMultiRow(props) {
                 <Typography className="registration-title" variant="body1">Mission Completion Certificate</Typography>
                 <br></br>
 
-                <ImageUploader imageType={imageType} submitFunction={submitMissionHistoryItem} />
+                <ImageUploader imageType={imageType} attachImageFunction={handleImageAttach} />
 
                 <div className="text-field-wrapper">
                     {hasBeenSubmitted ? (

@@ -54,11 +54,7 @@ function GeneralInfoAddress() {
             case 'phoneInput':
                 setPhone(e.target.value)
         }
-        if (streetAddress != '' && city != '' && state != '' && zip != '' && phone != '') {
-            setAddressFormComplete(true);
-        } else {
-            setAddressFormComplete(false)
-        }
+      
     }
 
     const activeStep = 1

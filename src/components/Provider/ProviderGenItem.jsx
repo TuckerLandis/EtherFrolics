@@ -1,14 +1,22 @@
+import { useState } from 'react';
+import Button from '@material-ui/core/Button';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import EditGenInfo from './ProviderEditGenInfo';
 
 function ProviderGenItem({ provider }) {
 
+    const [editState, setEditState] = useState(false);
 
     return (
         <div>
+            {editState ? (
+                <EditGenInfo provider={provider} editState={editState}/>
+            ) : (
+            <div> 
             <Accordion>
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
@@ -73,8 +81,13 @@ function ProviderGenItem({ provider }) {
                     </Typography>
                 </AccordionDetails>
             </Accordion>
+            </div>
+            )}
 
-
+            <Button 
+            variant="contained"
+            onClick={ () => {setEditState(!editState)}}>Edit General Info</Button>
+        
         </div>
     )
 }

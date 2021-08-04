@@ -12,14 +12,10 @@ function GeneralInfo() {
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [dob, setDob] = useState('')
-    const [providerRole, setProviderRole] = useState('')
+    const [providerRole, setProviderRole] = useState('-')
     const [validPassport, setValidPassport] = useState(false)
     const [soleProvider, setSoleProvider] = useState(false)
     const [emailAddress, setEmailAddress] = useState('')
-
-    // state variable to track if all inputs
-    // have content
-    const [generalInfoFormComplete, setGeneralInfoFormComplete] = useState(false);
 
     /**
      * Takes in an event from all inputs, changes their state variable
@@ -27,10 +23,8 @@ function GeneralInfo() {
      */
     function handleChange(e) {
 
-        // function for validation
-
-
         console.log(e.target.id);
+        console.log(e.target.parentNode)
 
         switch (e.target.id) {
             case 'firstNameInput':
@@ -41,9 +35,6 @@ function GeneralInfo() {
                 break
             case 'dateOfBirthInput':
                 setDob(e.target.value)
-                break
-            case 'providerRoleInput':
-                setProviderRole(e.target.value)
                 break
             case "validPassportRadioTrue":
                 setValidPassport(true)
@@ -62,13 +53,6 @@ function GeneralInfo() {
                 break
         }
 
-        if (firstName != '' && lastName != '' && dob != '' && providerRole != '' && validPassport != '' && soleProvider != '' && emailAddress != '') {
-            console.log('in if');
-            setGeneralInfoFormComplete(true);
-        } else {
-            console.log('in else');
-            setGeneralInfoFormComplete(false);
-        }
     }
 
     /**
@@ -77,7 +61,9 @@ function GeneralInfo() {
     function handleNext(e) {
         e.preventDefault()
 
-        // TODO - form validation goes here
+        if (firstName === '' || lastName === '' || dob === '' || providerRole === '' || validPassport === '' || soleProvider === '' || emailAddress === '') {
+        return alert('Please complete all required fields')
+        }
 
         console.log('next clicked');
 
@@ -102,6 +88,11 @@ function GeneralInfo() {
         history.push('/generalinfoaddress')
     }
 
+    function handleProviderRole (e) {
+        setProviderRole(e.target.value);
+    }
+
+
     const activeStep = 0
 
 
@@ -109,16 +100,13 @@ function GeneralInfo() {
         <div>
             <Typography variant="h4" className="registration-title">General Info</Typography>
 
-            <RegistrationStepper activeStep={activeStep} submitFunction={handleNext} />
 
             <div className="general-form-display">
 
 
 
-                {/* wrapped in form tag for error validation, there is a much prettier way to do this in mui */}
-                <form onSubmit={handleNext}>
-                    {/* <label htmlFor="firstNameInput">First Name</label> */}
 
+                <form onSubmit={handleNext}>
 
                     <div className="general-form-sub-display">
 
@@ -157,27 +145,18 @@ function GeneralInfo() {
                     </div>
 
 
-                    {/* <KeyboardDatePicker
-                    margin="normal"
-                    id="dateOfBirthInput"
-                    label="Date of Birth"
-                    format="MM/dd/yyyy"
-                    value={selectedDate}
-                    onChange={handleDateChange}
-                    KeyboardButtonProps={{
-                        'aria-label': 'change date',
-                    }}
-                /> */}
-
-
                     <Typography htmlFor="providerRoleInput">Provider Role</Typography>
-                    <Select variant="outlined" name="providerRole" id="providerRoleInput" value={providerRole} onChange={handleChange}>
+                    <Select variant="outlined" name="providerRole" id="providerRoleInput" value={providerRole} onChange={handleProviderRole}>
                         <MenuItem value="-">-</MenuItem>
-                        <MenuItem value="CRNA">CRNA</MenuItem>
-
-                        {/* need more options here */}
+                        <MenuItem value="CRNA">cRNA</MenuItem>
+                        <MenuItem value="RN">RN</MenuItem>
+                        <MenuItem value="CNP">CNP</MenuItem>
+                        <MenuItem value="CNS">CNS</MenuItem>
+                        <MenuItem value="PA-C">PA-C</MenuItem>
+                        <MenuItem value="MD">MD</MenuItem>
+                        <MenuItem value="DO">DO</MenuItem>
+                        <MenuItem value="Other">Other</MenuItem>
                     </Select>
-
 
 
                     <Typography variant="body1">Do you have a valid passport?</Typography>
@@ -193,22 +172,10 @@ function GeneralInfo() {
                     <label htmlFor="no">No</label>
                     <input type="radio" name="soleProvider" id="soleProviderRadioFalse" value="false" onChange={handleChange} />
 
-
-
-
-                    {/* <label htmlFor="emailAdressInput">Email Address</label> */}
-
-
-                    {/* <button disabled={!generalInfoFormComplete ? true : false} type="submit">Next</button> */}
-
+                    <RegistrationStepper activeStep={activeStep} submitFunction={handleNext} />
 
 
                 </form>
-
-
-
-
-
 
             </div>
 

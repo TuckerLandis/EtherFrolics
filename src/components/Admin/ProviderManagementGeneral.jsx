@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -9,25 +9,40 @@ import './ProviderManagementGeneral.css';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
-import ListSubheader from '@material-ui/core/ListSubheader';
-import { Info } from '@material-ui/icons';
+import Avatar from '@material-ui/core/Avatar';
+import IconButton from '@material-ui/core/IconButton';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import FolderIcon from '@material-ui/icons/Folder';
+import DeleteIcon from '@material-ui/icons/Delete';
+import StarIcon from '@material-ui/icons/Star';
+
+import Paper from "@material-ui/core/Paper";
+import InputBase from '@material-ui/core/InputBase';
+import SearchIcon from '@material-ui/icons/Search';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        width: '100%',
-        maxWidth: 360,
+        flexGrow: 1,
+        maxWidth: 752,
+        height: 1,
+        '& > *': {
+            margin: theme.spacing(1),
+        },
+    },
+    demo: {
         backgroundColor: theme.palette.background.paper,
-        position: 'relative',
-        overflow: 'auto',
-        maxHeight: 300,
     },
-    listSection: {
-        backgroundColor: 'inherit',
-    },
-    ul: {
-        backgroundColor: 'inherit',
-        padding: 0,
+    title: {
+        margin: theme.spacing(4, 0, 2),
     },
 }));
 
@@ -38,8 +53,12 @@ function ProviderManagementGeneral() {
 
     const providers = useSelector(store => store.providers);
 
+    const [searchQuery, setSearchQuery] = useState('');
+
     // material-ui
     const classes = useStyles();
+    const [dense, setDense] = React.useState(false);
+    const [secondary, setSecondary] = React.useState(false);
 
     useEffect(() => {
         dispatch({ type: 'GET_PROVIDERS' });
@@ -58,47 +77,89 @@ function ProviderManagementGeneral() {
         history.push(`/providermgmt/${providerId}`);
     } // end handleSelect
 
-    // dispatch to get all provider info, line 43
-    // bring it back with useSelector, save to variable providers, line 39
-    // map over array of provider objects to append them to material-ui list, line 80
-    // handleSelect fn takes in clicked provider's user_id, line 82
-    // dispatches with user_id as payload to get all info for selected provider, line 54
-    // handleSelect fn pushes user to individual provider's page, line 58
-    // copied and pasted another <li below line 86 to get second subheader 'Unverified'
-    // ^ honestly probably don't need this. i forgot we're doing the icon thing (wireframe 2.4.1a), line 88
-    // possibly conditionally render providers in either verified or unverified list based on provider.verified boolean value?
-    // need to integrate icons into list for verified/unverified and flag icon for expiring credentials warning
-    // need to add functionality to icons
+    // const verifiedProviders = providers.filter(provider => provider.verified === true)
+    // const unVerifiedProviders = providers.filter(provider => provider.verified === false)
 
-   const verifiedProviders = providers.filter(provider => provider.verified === true)
-   const unVerifiedProviders = providers.filter(provider => provider.verified === false)
+    const starIcon = (provider) => {
+        if (provider.verified == true) {
+            return (
+                <StarIcon />
+            )
+        } else {
+            return;
+        }
+    }
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+    } // end handleSubmit
 
     return (
 
-        <List className={classes.root} subheader={<li />}>
-                <li className={classes.listSection}>
-                    <ul className={classes.ul}>
-                        <ListSubheader>Verified</ListSubheader>
-                        {/* conditionally render in Verified section based on their verified status */}
-                        {verifiedProviders?.map((provider) => (
-                            <ListItem key={provider?.provider_id}>
-                                <ListItemText onClick={() => handleSelect(provider?.user_id)}>{provider?.firstName} {provider.lastName}</ListItemText>
-                            </ListItem>
-                        ))}
-                    </ul>
-                </li>
+        <div>
 
-                <li className={classes.listSection}>
-                    <ul className={classes.ul}>
-                        <ListSubheader>Unverified</ListSubheader>
-                        {unVerifiedProviders?.map((provider) => (
-                            <ListItem key={provider?.provider_id}>
-                                <ListItemText onClick={() => handleSelect(provider?.user_id)}>{provider?.firstName} {provider.lastName}</ListItemText>
-                            </ListItem>
-                        ))}
-                    </ul>
-                </li>
-        </List>
+            <h1 className="providerMgmtListTitle">PROVIDERS</h1>
+
+            <div className={classes.root}>
+
+                <Paper>
+                    {/* <SearchBar
+                        value={searched}
+                        onChange={(searchVal) => requestSearch(searchVal)}
+                        onCancelSearch={() => cancelSearch()}
+                    /> */}
+                    <div>
+                        <form onSubmit={handleSubmit}>
+                            <InputBase
+                                onChange={event => setSearchQuery(event.target.value)}
+                            />
+                            <SearchIcon />
+                            <Button
+                                variant="contained"
+                                color="secondary"
+                                type="submit"
+                            >
+                                Search
+                            </Button>
+                        </form>
+                    </div>
+
+                    {providers?.filter(provider => {
+                        if (searchQuery == '') {
+                            return provider
+                        } else if (provider?.firstName.toLowerCase().includes(searchQuery.toLowerCase())) {
+                            return provider
+                        }
+                    }).map(provider => {
+                        return (
+                            <div key={provider?.provider_id}>
+                                <Grid item xs={12} md={6}>
+                                    <div className={classes.demo}>
+                                        <List dense={dense}>
+                                            <div>
+                                                <ListItem>
+                                                    <ListItemIcon>
+                                                        {starIcon(provider)}
+                                                    </ListItemIcon>
+                                                    <ListItemText
+                                                        primary={provider?.firstName}
+                                                        onClick={() => handleSelect(provider?.user_id)}
+                                                        className="mouse"
+                                                    >
+                                                    </ListItemText>
+                                                </ListItem>
+                                            </div>
+                                        </List>
+                                    </div>
+                                </Grid>
+                            </div>
+                        )
+                    })}
+                </Paper>
+
+            </div>
+
+        </div >
 
     )
 

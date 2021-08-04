@@ -52,20 +52,9 @@ function ProviderLandingPage() {
     const provider = useSelector(store => store.providerLandingReducer) // < ---- changed reducer to new provider landing reducer
     //bring in the credential data from the reducer
 
-    const credentialEntry = useSelector(store => store.credentialEntry)
-
-    // useEffect( () => {
-    //     dispatch({
-    //         type: 'SELECT_PROVIDER',
-    //         payload: user.id
-    //     })
-    // }, []);
-
-    // tl - new dispatch 
     useEffect( () => {
         dispatch({
             type: 'GET_PROVIDER_LANDING'
-            // uses req.user.id
         })
     }, []);
 
@@ -121,7 +110,7 @@ function ProviderLandingPage() {
     console.log(url + '/edit');
     return (
         <div>
-            <h2>Welcome,  {user.username} </h2>
+            <h2>Welcome, {user.username} </h2>
 
             {provider?.registrationComplete ? (
                 <Button
@@ -134,18 +123,13 @@ function ProviderLandingPage() {
             )}
             <Switch>
                 <Route exact path={path}>
-                    {provider?.registrationComplete ? (  // <------ even though the new reducer is an object, this [0] doesn't bug, i think we can remove this though?
+                    {provider?.registrationComplete ? ( 
                     <div>
                     <h2>General Info</h2>
                         
-
-                    {/* test for reading an image, works, see path declaration on line 80 */}
                     <h3>Your Resume</h3>
-                    {/* <img src={resumePath} alt="" /> */}
                     <ImageViewer imagePath={resumePath} />
-                    <ProviderGenItem provider={provider} />
-                    <Button
-                    variant="contained">Edit General Info</Button>
+                    <ProviderGenItem provider={provider}/>
                     </div>
                     ) : (
                         <h3>Please register to view upcoming missions</h3>
@@ -154,13 +138,13 @@ function ProviderLandingPage() {
                     {provider?.registrationComplete ? (
                     <div>
                     <h2>Credential Info</h2>
-                    <ProviderCredItem ImageViewer={ImageViewer} provider={provider} credentialEntry={credentialEntry} />
+                    <ProviderCredItem provider={provider}/>
                     <Button
                     variant="contained">Edit Credentials</Button>
                     </div>
                     ) : (
                     <p></p>
-                    )} 
+                    )}  
                 </Route>
                         
                 <Route exact path={`${path}/edit`}>
