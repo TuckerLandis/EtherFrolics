@@ -75,7 +75,7 @@ function ProviderManagementIndividual() {
             )
         } else {
             return (
-                'unverified'
+                'disabled'
             )
         }
     } // end verificationStatus
