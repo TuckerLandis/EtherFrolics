@@ -58,9 +58,8 @@ function ImageUploader(props) {
     // logs the s3 info to show a succesful post, possible render somewhere if we pass down a callback
     console.log(result);
 
-    // sends the s3 information and image "type" to the endpoint that posts the key to the database, the imageType is interpreted by the switch statement there.
-    // this whole action is sent as req.body to that endpoint, see the providerRegistration saga
-
+    
+    // if resume, just post to DB, can change this in the put work history dispatch
     if (props.imageType === 'resume') {
       dispatch({
         type: 'POST_IMAGE_TO_DB',
