@@ -7,11 +7,15 @@ import FileCopyIcon from '@material-ui/icons/FileCopy';
 import ImageViewer from './ImageViewer'
 
 
+
 function ImageUploader(props) {
   const dispatch = useDispatch();
   //state variable for the file being uploaded
   const [file, setFile] = useState('')
   const [fileName, setFileName] = useState('Select a file')
+
+  const [attachButtonText, setAttachButtonText] = useState('Attach')
+  const [attachButtonColor, setAttachButtonColor] = useState('secondary')
 
   // this comes down from where the imageUploader is called, see workhistory for example
   const imageType = props.imageType
@@ -71,6 +75,9 @@ function ImageUploader(props) {
 
     // attaches the image key from s3 to the row to be submitted to the db
     props.attachImageFunction(result.Key)
+
+    setAttachButtonText('Attached')
+    setAttachButtonColor('primary')
   }
 
 
@@ -93,7 +100,7 @@ function ImageUploader(props) {
       
       
       <div>
-      <Button variant="contained" color="primary" onClick={handleSubmitImage}><AttachmentIcon/>Attach</Button>
+      <Button variant="contained" color={attachButtonColor} onClick={handleSubmitImage}><AttachmentIcon/>{attachButtonText}</Button>
       </div>
       </div>
       {/* can conditionally render this button based on props.imageSubmitted if we want */}
