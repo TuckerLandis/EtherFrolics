@@ -9,7 +9,9 @@ import { List, ListItem, ListItemText, ListItemSecondaryAction, ListItemIcon, Ic
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-function ProviderCredItem({ provider, credentialEntry, ImageViewer }) {
+import ImageViewer from '../ImageComponents/ImageViewer';
+
+function ProviderCredItem({ provider }) {
 
     const history = useHistory();
     const dispatch = useDispatch();
@@ -67,7 +69,7 @@ function ProviderCredItem({ provider, credentialEntry, ImageViewer }) {
         history.push(`${url}/edit`)
     }
 
-    console.log(credentialEntry);
+    console.log(ImageViewer);
     return (
         <div>
             <Accordion>

@@ -16,7 +16,8 @@ function ProviderCredEdit({ provider, credentialEntry, inputConfig }) {
     dateRenewed: credentialEntry.dateRenewed, 
     dateExpired: credentialEntry.dateExpiring,
     table: 'credential',
-    user_id: provider.user_id
+    credentialId: credentialEntry?.credential_id,
+    userId: provider.id
   })
 
   const handleChange = e => {

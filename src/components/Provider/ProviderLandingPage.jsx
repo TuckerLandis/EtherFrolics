@@ -52,6 +52,8 @@ function ProviderLandingPage() {
     const provider = useSelector(store => store.providerLandingReducer) // < ---- changed reducer to new provider landing reducer
     //bring in the credential data from the reducer
 
+    const credentialEntry = useSelector(store => store.credentialEntry);
+
     useEffect( () => {
         dispatch({
             type: 'GET_PROVIDER_LANDING'

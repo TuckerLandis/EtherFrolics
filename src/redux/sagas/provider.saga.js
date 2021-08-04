@@ -59,7 +59,7 @@ function* updateProvider(action) {
 
         if (action.payload.table === 'credential') {
 
-            yield axios.put(`/api/provider/update/${action.payload.userId}/${action.payload.credentialId}`, action.payload);
+           yield axios.put(`/api/provider/update/${action.payload.userId}/${action.payload.credentialId}`, action.payload);
 
         } else {
 
