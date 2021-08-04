@@ -83,7 +83,7 @@ function ImageUploader(props) {
       <div className="button-div">
         <div>
         <label htmlFor="file" className="inputfile-label"><Typography variant="button"><FileCopyIcon/>{fileName}</Typography></label>
-      <input name="file" id="file" className="inputfile" onChange={fileSelected} type="file" accept="image/*"></input>
+      <input name="file" className="inputfile" onChange={fileSelected} type="file" accept="image/*"></input>
         </div>
     
 
