@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Route, Switch, useRouteMatch } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import ProviderGenItem from './ProviderGenItem';
 import ProviderCredItem from './ProviderCredItem';
 import ImageViewer from '../ImageComponents/ImageViewer';
+import ProviderCredEdit from '../Provider/ProviderCredEdit';
 
 /*
 CHECKLIST
@@ -42,6 +43,7 @@ CHECKLIST
 function ProviderLandingPage() {
     const dispatch = useDispatch();
     const history = useHistory();
+    const { path, url } = useRouteMatch();
 
     const user = useSelector(store => store.user);
     //bring in the provider data from the reducer
@@ -80,6 +82,7 @@ function ProviderLandingPage() {
     // test concat for image path
     const resumePath = `/api/image/prov/${provider?.resumeKey}`
 
+    console.log(url + '/edit');
     return (
         <div>
             <h2>Welcome,  {user.username} </h2>
@@ -93,34 +96,41 @@ function ProviderLandingPage() {
                     variant="contained"
                     onClick={providerRegister}>Register</Button>
             )}
+            <Switch>
+                <Route exact path={path}>
+                    {provider?.registrationComplete ? (  // <------ even though the new reducer is an object, this [0] doesn't bug, i think we can remove this though?
+                    <div>
+                    <h2>General Info</h2>
+                        
 
-            {provider?.registrationComplete ? (  // <------ even though the new reducer is an object, this [0] doesn't bug, i think we can remove this though?
-            <div>
-            <h2>General Info</h2>
-                
+                    {/* test for reading an image, works, see path declaration on line 80 */}
+                    <h3>Your Resume</h3>
+                    {/* <img src={resumePath} alt="" /> */}
+                    <ImageViewer imagePath={resumePath} />
+                    <ProviderGenItem provider={provider}/>
+                    <Button
+                    variant="contained">Edit General Info</Button>
+                    </div>
+                    ) : (
+                        <h3>Please register to view upcoming missions</h3>
+                    )}
 
-             {/* test for reading an image, works, see path declaration on line 80 */}
-             <h3>Your Resume</h3>
-            {/* <img src={resumePath} alt="" /> */}
-            <ImageViewer imagePath={resumePath} />
-            <ProviderGenItem provider={provider}/>
-            <Button
-            variant="contained">Edit General Info</Button>
-            </div>
-            ) : (
-                <h3>Please register to view upcoming missions</h3>
-            )}
-
-            {provider?.registrationComplete ? (
-            <div>
-            <h2>Credential Info</h2>
-            <ProviderCredItem provider={provider}/>
-            <Button
-            variant="contained">Edit Credentials</Button>
-            </div>
-            ) : (
-            <p></p>
-            )}  
+                    {provider?.registrationComplete ? (
+                    <div>
+                    <h2>Credential Info</h2>
+                    <ProviderCredItem provider={provider}/>
+                    <Button
+                    variant="contained">Edit Credentials</Button>
+                    </div>
+                    ) : (
+                    <p></p>
+                    )} 
+                </Route>
+                        
+                <Route exact path={`${path}/edit`}>
+                    <ProviderCredEdit provider={ provider } />
+                </Route> 
+            </Switch>
         </div>
     )
 }
