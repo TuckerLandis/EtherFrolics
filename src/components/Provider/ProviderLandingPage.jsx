@@ -166,6 +166,9 @@ function ProviderLandingPage() {
                 <Route exact path={`${path}/edit`}>
                     <ProviderCredEdit provider={ provider } inputConfig={updateInputConfig.credentialUpdate} credentialEntry={credentialEntry} />
                 </Route> 
+                <Route exact path={`${path}/add`}>
+                    <p>add Mission here</p>
+                </Route>
             </Switch>
         </div>
     )

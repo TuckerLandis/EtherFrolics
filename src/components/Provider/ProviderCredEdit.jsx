@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { TextField, Typography, Button } from "@material-ui/core"
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 function ProviderCredEdit({ provider, credentialEntry, inputConfig }) {
 
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const [credUpdate, setCredUpdate] = useState({
     credentialTaxonomy: credentialEntry.credentialName,
@@ -36,11 +38,19 @@ function ProviderCredEdit({ provider, credentialEntry, inputConfig }) {
     })
   }
 
+  const validateProps = credentialEntry => {
+    if (credentialEntry.credential_id) {
+      return credentialEntry.credentialName
+    } else {
+      return history.push('/providerlandingpage/add')
+    }
+  }
+
   console.log(credUpdate);
   return (
     <div>
       <Typography variant="h6" className="registration-title">
-       Update Credential: {credentialEntry.credentialName}
+       Update Credential: {validateProps(credentialEntry)}
       </Typography>
       <div className="general-form-display" >
         <form onSubmit={sendUpdate} >
