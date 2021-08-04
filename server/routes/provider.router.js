@@ -570,8 +570,8 @@ router.post('/credentialhistory', rejectUnauthenticated, async (req, res) => {
   const user_id = req.user.id;
 
   const credentialInsertStatement = `
-  INSERT INTO "credential" ("licensingBoard", "credentialName", "licenseNumber", "dateInitial", "dateRenewed", "dateExpiring", "user_id")
-  VALUES ($1, $2, $3, $4, $5, $6, $7);
+  INSERT INTO "credential" ("licensingBoard", "credentialName", "licenseNumber", "credentialImageKey", "dateInitial", "dateRenewed", "dateExpiring", "user_id")
+  VALUES ($1, $2, $3, $4, $5, $6, $7, $8);
   `;
 
   try {
@@ -586,11 +586,12 @@ router.post('/credentialhistory', rejectUnauthenticated, async (req, res) => {
             licensingBoard,
             credentialTaxonomy,
             licenseNumber,
+            credentialImageKey,
             dateReceived,
             dateRenewed,
             dateExpired } = medicalCredential
 
-        return client.query(credentialInsertStatement, [licensingBoard, credentialTaxonomy, licenseNumber, dateReceived, dateRenewed, dateExpired, user_id]);
+        return client.query(credentialInsertStatement, [licensingBoard, credentialTaxonomy, licenseNumber, credentialImageKey, dateReceived, dateRenewed, dateExpired, user_id]);
 
     }) )
 
