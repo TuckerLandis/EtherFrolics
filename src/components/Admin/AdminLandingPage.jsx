@@ -22,7 +22,7 @@ function AdminLandingPage() {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const administrators = useSelector(store => store.administrators);
+    const admin = useSelector(store => store.administrators);
 
     // material-ui
     const classes = useStyles();
@@ -31,19 +31,15 @@ function AdminLandingPage() {
         dispatch({ type: 'GET_ADMIN' });
     }, []);
 
-    console.log('Admin Landing Page administrators:', administrators);
+    console.log('Admin Landing Page administrator:', admin);
 
     return (
 
         <div className={classes.root}>
 
-            {administrators?.map(admin => {
-                return (
                     <div key={admin?.id}>
                         <h1>Welcome, {admin?.username}!</h1>
                     </div>
-                )
-            })}
 
             <Button variant="contained" onClick={() => history.push('/providermgmt')}>Provider Management</Button>
             <Button variant="contained" onClick={() => history.push('/missions')}>Mission Management</Button>

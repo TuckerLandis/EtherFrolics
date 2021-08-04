@@ -16,11 +16,16 @@ function ProviderManagementIndividual() {
 
     const params = useParams();
 
-    useEffect(() => {
+    const selectProvider = () => {
         dispatch({
             type: 'SELECT_PROVIDER',
             payload: params.id
         })
+    } // end selectProvider
+
+    useEffect(() => {
+        console.log('individual provider params.id: ', params.id);
+        selectProvider();
     }, [params.id])
     // params.id in this array so that when it changes, the page refreshes^
 
@@ -42,6 +47,8 @@ function ProviderManagementIndividual() {
 
     // test concat for image path
     const resumePath = `/api/image/prov/${provider?.resumeKey}`
+    // 'ind' throwing 'access denied'
+    // const resumePath = `/api/image/ind/${provider?.resumeKey}`
 
     // verifies provider using provider.provider_id
     const verify = (provider_id) => {
@@ -50,6 +57,7 @@ function ProviderManagementIndividual() {
             type: 'VERIFY_PROVIDER',
             payload: provider_id
         })
+        selectProvider();
     } // end verify
     
     const disable = (provider_id) => {
@@ -58,6 +66,7 @@ function ProviderManagementIndividual() {
             type: 'DISABLE_PROVIDER',
             payload: provider_id
         })
+        selectProvider();
     } // end disable
 
     // displays whether a user has been verified or not by admin
