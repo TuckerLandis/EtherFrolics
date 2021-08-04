@@ -145,18 +145,6 @@ function GeneralInfo() {
                     </div>
 
 
-                    {/* <KeyboardDatePicker
-                    margin="normal"
-                    id="dateOfBirthInput"
-                    label="Date of Birth"
-                    format="MM/dd/yyyy"
-                    value={selectedDate}
-                    onChange={handleDateChange}
-                    KeyboardButtonProps={{
-                        'aria-label': 'change date',
-                    }}
-                /> */}
-
                     <Typography htmlFor="providerRoleInput">Provider Role</Typography>
                     <Select variant="outlined" name="providerRole" id="providerRoleInput" value={providerRole} onChange={handleProviderRole}>
                         <MenuItem value="-">-</MenuItem>
