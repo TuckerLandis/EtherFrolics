@@ -34,6 +34,8 @@ router.get('/', rejectNonAdmin, (req, res) => {
  */
 router.get('/ind/:id', rejectNonAdmin, (req, res) => {
 
+  console.log('Arrived at individual provider GET: ', req.params);
+  
   const queryText = `SELECT 
   "user".id, "user".username, 
   "provider".provider_id, 
@@ -92,6 +94,7 @@ router.get('/ind/:id', rejectNonAdmin, (req, res) => {
   pool.query(queryText, [req.params.id])
     .then(result => {
       console.log('Individual provider GET: ', result.rows);
+      res.send(result.rows);
     })
     .catch(error => {
       console.log('error in individual provider get', error);
@@ -106,7 +109,6 @@ router.get('/ind/:id', rejectNonAdmin, (req, res) => {
 router.get('/landing', rejectUnauthenticated, (req, res) => {
 
   console.log('got to providerLanding GET');
-
 
   const queryText = `SELECT 
   "user".id, "user".username, 
