@@ -15,6 +15,7 @@ function ProviderCredEdit({ provider, credentialEntry, inputConfig }) {
     dateReceived: credentialEntry.dateInitial,
     dateRenewed: credentialEntry.dateRenewed, 
     dateExpired: credentialEntry.dateExpiring,
+    table: 'credential',
     user_id: provider.user_id
   })
 
@@ -33,7 +34,7 @@ function ProviderCredEdit({ provider, credentialEntry, inputConfig }) {
     e.preventDefault();
 
     dispatch({
-      type: 'SUBMIT_CREDENTIAL_UPDATE',
+      type: 'UPDATE_PROVIDER',
       payload: credUpdate
     })
   }
