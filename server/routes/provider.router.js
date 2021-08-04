@@ -436,8 +436,8 @@ router.post('/missionhistoryitem', rejectUnauthenticated, async (req, res) => {
 
   // queryText is an insert statement for mission experience table
   const queryText = `
-    INSERT INTO "mission_experience" ("organizationName", "location", "referenceName", "referencePhone", "startDate", "endDate", "user_id")
-    VALUES ($1, $2, $3, $4, $5, $6, $7);
+    INSERT INTO "mission_experience" ("organizationName", "location", "referenceName", "referencePhone", "missionExperienceImageKey", "startDate", "endDate", "user_id")
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8);
   `;
 
   try {
@@ -457,10 +457,11 @@ router.post('/missionhistoryitem', rejectUnauthenticated, async (req, res) => {
         location,
         referenceName,
         referencePhone,
+        missionExperienceImageKey,
         startDate,
         endDate } = missionHistoryItem;
 
-        return client.query(queryText, [organization, location, referenceName, referencePhone, startDate, endDate, user_id]);
+        return client.query(queryText, [organization, location, referenceName, referencePhone, missionExperienceImageKey, startDate, endDate, user_id]);
       }) // end loop
     ) // end Promise
 
