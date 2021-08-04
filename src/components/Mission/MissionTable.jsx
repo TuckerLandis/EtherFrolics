@@ -60,12 +60,12 @@ console.log(mission);
                 <TableBody>
                     {mission.map((mission) => (
                         <TableRow key={mission.name}>
-                            <TableCell>{mission.location}</TableCell>
+                            <TableCell><a href={mission.missionLink} target="_blank">{mission.location}</a></TableCell>
                             <TableCell>{mission.startDate}</TableCell>
                             <TableCell>{mission.endDate}</TableCell>
                             <TableCell>{mission.name}</TableCell>
                             <TableCell>
-                                <a href={mission.missionLink}
+                                <a href={mission.applyLink}
                                     target="_blank"
                                     >
                                     Apply</a></TableCell>
