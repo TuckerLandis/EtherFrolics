@@ -93,7 +93,6 @@ router.get('/ind/:id', rejectNonAdmin, (req, res) => {
   pool.query(queryText, [req.params.id])
     .then(result => {
       console.log('Individual provider GET: ', result.rows);
-      res.send(result.rows)
     })
     .catch(error => {
       console.log('error in individual provider get', error);
@@ -640,6 +639,7 @@ router.put('/update/:userId/:providerId', rejectUnauthenticated, async (req, res
   console.log('Updating provider table at ' + req.params.providerId + ' as ' + req.user.id );
 
   console.log(req.params);
+  console.log('req.body is ', req.body);
 
   // destructure query params
   const {
