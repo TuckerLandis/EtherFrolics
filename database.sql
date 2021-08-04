@@ -113,6 +113,7 @@ CREATE TABLE "mission" (
 	"startDate" DATE,
 	"endDate" DATE,
 	"missionLink" TEXT,
+	"applyLink" TEXT,
 	"providerReviews" varchar (10000)[],
 	"organization_id" int REFERENCES "organization"
 );
