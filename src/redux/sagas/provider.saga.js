@@ -88,7 +88,7 @@ function* verifyProvider(action) {
 
         yield axios.put(`api/provider/verify/${action.payload}`);
 
-        yield put({ type: 'SELECT_PROVIDER' });
+        // yield put({ type: 'SELECT_PROVIDER' });
 
     }
     catch (error) {
@@ -106,7 +106,7 @@ function* disableProvider(action) {
 
         yield axios.put(`api/provider/disable/${action.payload}`);
 
-        yield put ({ type: 'SELECT_PROVIDER' });
+        // yield put ({ type: 'SELECT_PROVIDER' });
 
     }
     catch (error) {
