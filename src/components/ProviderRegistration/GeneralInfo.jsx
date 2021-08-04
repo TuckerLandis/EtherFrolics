@@ -144,7 +144,7 @@ function GeneralInfo() {
 
                     </div>
 
-
+                    <div className="provider-role-wrapper">
                     <Typography htmlFor="providerRoleInput">Provider Role</Typography>
                     <Select variant="outlined" name="providerRole" id="providerRoleInput" value={providerRole} onChange={handleProviderRole}>
                         <MenuItem value="-">-</MenuItem>
@@ -158,19 +158,38 @@ function GeneralInfo() {
                         <MenuItem value="Other">Other</MenuItem>
                     </Select>
 
+                    </div>
 
+                    
+
+                    <div className="text-field-wrapper">
                     <Typography variant="body1">Do you have a valid passport?</Typography>
+                        
+                    </div>
+                    <div className="text-field-wrapper">
                     <label htmlFor="yes">Yes</label>
                     <input required type="radio" name="validPassport" id="validPassportRadioTrue" value="true" onChange={handleChange} />
                     <label htmlFor="no">No</label>
                     <input type="radio" name="validPassport" id="validPassportRadioFalse" value="false" onChange={handleChange} />
 
+                    </div>
+                    
 
+                    
+                    <div className="text-field-wrapper">
                     <Typography variant="body1">Are you comfortable working as a sole provider?</Typography>
+
+
+                    </div>
+                    
+                    <div className="text-field-wrapper">
                     <label htmlFor="yes">Yes</label>
                     <input required type="radio" name="soleProvider" id="soleProviderRadioTrue" value="true" onChange={handleChange} />
                     <label htmlFor="no">No</label>
                     <input type="radio" name="soleProvider" id="soleProviderRadioFalse" value="false" onChange={handleChange} />
+
+                    </div>
+                    
 
                     <RegistrationStepper activeStep={activeStep} submitFunction={handleNext} />
 
