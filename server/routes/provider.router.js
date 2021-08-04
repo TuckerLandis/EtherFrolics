@@ -699,5 +699,50 @@ router.put('/update/:userId/:providerId', rejectUnauthenticated, async (req, res
   }
 })
 
+router.put('/verify/:id', rejectUnauthenticated, (req, res) => {
+
+  console.log('In verify put route');
+
+  let verifyQuery = `
+  UPDATE "provider"
+  SET "verified" = TRUE
+  WHERE "provider_id" = $1;
+  `;
+
+  pool
+  .query(verifyQuery, [req.params.id])
+  .then(result => {
+    console.log('Provider verification successful!');
+    res.sendStatus(200);
+  })
+  .catch(err => {
+    console.error('Error verifying provider: ', err);
+    res.sendStatus(500);
+  })
+  
+})
+
+router.put('/disable/:id', rejectUnauthenticated, (req, res) => {
+
+  console.log('In disable put route');
+
+  let disableQuery = `
+  UPDATE "provider"
+  SET "verified" = FALSE
+  WHERE "provider_id" = $1;
+  `;
+
+  pool
+  .query(disableQuery, [req.params.id])
+  .then(result => {
+    console.log('Provider disable successful!');
+    res.sendStatus(200);
+  })
+  .catch(err => {
+    console.error('Error disabling provider: ', err);
+    res.sendStatus(500);
+  })
+
+})
 
 module.exports = router;

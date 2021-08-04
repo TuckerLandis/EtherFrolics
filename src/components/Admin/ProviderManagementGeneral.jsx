@@ -139,20 +139,20 @@ function ProviderManagementGeneral() {
                         </form>
                     </div>
 
-                    <Grid item xs={12} md={6}>
-                        <div className={classes.demo}>
-                            <List dense={dense}>
-                                {generate(
-                                    <div>
-                                        {providers?.filter(provider => {
-                                            if (searchQuery == '') {
-                                                return provider
-                                            } else if (provider?.firstName.toLowerCase().includes(searchQuery.toLowerCase())){
-                                                return provider
-                                            }
-                                        }).map(provider => {
-                                            return (
-                                                <ListItem key={provider?.provider_id}>
+                    {providers?.filter(provider => {
+                        if (searchQuery == '') {
+                            return provider
+                        } else if (provider?.firstName.toLowerCase().includes(searchQuery.toLowerCase())) {
+                            return provider
+                        }
+                    }).map(provider => {
+                        return (
+                            <div key={provider?.provider_id}>
+                                <Grid item xs={12} md={6}>
+                                    <div className={classes.demo}>
+                                        <List dense={dense}>
+                                            <div>
+                                                <ListItem>
                                                     <ListItemIcon>
                                                         {starIcon(provider)}
                                                     </ListItemIcon>
@@ -163,14 +163,13 @@ function ProviderManagementGeneral() {
                                                     >
                                                     </ListItemText>
                                                 </ListItem>
-                                            )
-                                        })}
+                                            </div>
+                                        </List>
                                     </div>
-                                )}
-                            </List>
-                        </div>
-                    </Grid>
-
+                                </Grid>
+                            </div>
+                        )
+                    })}
                 </Paper>
 
             </div>

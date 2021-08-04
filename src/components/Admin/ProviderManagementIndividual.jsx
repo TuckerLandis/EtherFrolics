@@ -51,6 +51,14 @@ function ProviderManagementIndividual() {
             payload: provider_id
         })
     } // end verify
+    
+    const disable = (provider_id) => {
+        console.log('individual provider to disable: ', provider_id);
+        dispatch({
+            type: 'DISABLE_PROVIDER',
+            payload: provider_id
+        })
+    } // end disable
 
     // displays whether a user has been verified or not by admin
     const verificationStatus = () => {
@@ -126,13 +134,20 @@ function ProviderManagementIndividual() {
 
             <div>
                 <h1>Verification Status</h1>
-                <h2>{provider?.firstName} is currently {verificationStatus()}</h2>
+                <p>{provider?.firstName} is currently {verificationStatus()}</p>
                 <Button
                     variant="contained"
                     color="primary"
-                    onClick={() => verify(provider?.provider_id)}
+                    onClick={() => verify(provider?.id)}
                 >
                     Verify
+                </Button>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => disable(provider?.id)}
+                >
+                    Disable
                 </Button>
             </div>
 
