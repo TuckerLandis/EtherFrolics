@@ -52,6 +52,8 @@ function ProviderLandingPage() {
     const provider = useSelector(store => store.providerLandingReducer) // < ---- changed reducer to new provider landing reducer
     //bring in the credential data from the reducer
 
+    const credentialEntry = useSelector(store => store.credentialEntry)
+
     // useEffect( () => {
     //     dispatch({
     //         type: 'SELECT_PROVIDER',
@@ -66,18 +68,6 @@ function ProviderLandingPage() {
             // uses req.user.id
         })
     }, []);
-
-    // object to hold values for editing and adding credentials
-    const [credentialDataRow, setCredentialDataRow] = useState({
-        licensingBoard: '',
-        credentialName: '',
-        licenseNumber: '',
-        dateInitial: '',
-        dateRenewed: '',
-        dateExpiring: '',
-        credentialImageKey: ''
-    })
-
 
     //create a function so that the provider can view upcoming missions
     const viewMissions = () => {
@@ -129,7 +119,7 @@ function ProviderLandingPage() {
                     {provider?.registrationComplete ? (
                     <div>
                     <h2>Credential Info</h2>
-                    <ProviderCredItem ImageViewer={ImageViewer} provider={provider} setCredentialDataRow={setCredentialDataRow}/>
+                    <ProviderCredItem ImageViewer={ImageViewer} provider={provider} credentialEntry={credentialEntry} />
                     <Button
                     variant="contained">Edit Credentials</Button>
                     </div>
@@ -139,7 +129,7 @@ function ProviderLandingPage() {
                 </Route>
                         
                 <Route exact path={`${path}/edit`}>
-                    <ProviderCredEdit provider={ provider } credentialDataRow={ credentialDataRow } setCredentialDataRow={ setCredentialDataRow } />
+                    <ProviderCredEdit provider={ provider } credentialEntry={credentialEntry} />
                 </Route> 
             </Switch>
         </div>
