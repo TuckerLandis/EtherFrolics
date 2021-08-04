@@ -172,7 +172,6 @@ function GeneralInfo() {
                     }}
                 /> */}
 
-
                     <Typography htmlFor="providerRoleInput">Provider Role</Typography>
                     <Select variant="outlined" name="providerRole" id="providerRoleInput" value={providerRole} onChange={handleProviderRole}>
                         <MenuItem value="-">-</MenuItem>
