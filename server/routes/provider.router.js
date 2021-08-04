@@ -92,7 +92,6 @@ router.get('/ind/:id', rejectNonAdmin, (req, res) => {
   pool.query(queryText, [req.params.id])
     .then(result => {
       console.log('Individual provider GET: ', result.rows);
-      res.send(result.rows)
     })
     .catch(error => {
       console.log('error in individual provider get', error);
@@ -364,11 +363,12 @@ router.post('/educationhistoryitem', rejectUnauthenticated, async (req, res) => 
   (
     "institution",
     "degree",
+    "degreeImageKey",
     "startDate",
     "endDate",
     "user_id"
   )
-  VALUES ($1, $2, $3, $4, $5);
+  VALUES ($1, $2, $3, $4, $5, $6);
   `;
 
   try {
@@ -386,11 +386,12 @@ router.post('/educationhistoryitem', rejectUnauthenticated, async (req, res) => 
         const {
           school,
           degree,
+          degreeImageKey,
           startDate,
           endDate
         } = educationHistoryItem;
 
-        return client.query(queryText, [school, degree, startDate, endDate, user_id]);
+        return client.query(queryText, [school, degree, degreeImageKey, startDate, endDate, user_id]);
       }) // end loop
     ) // end Promise
 
@@ -433,8 +434,8 @@ router.post('/missionhistoryitem', rejectUnauthenticated, async (req, res) => {
 
   // queryText is an insert statement for mission experience table
   const queryText = `
-    INSERT INTO "mission_experience" ("organizationName", "location", "referenceName", "referencePhone", "startDate", "endDate", "user_id")
-    VALUES ($1, $2, $3, $4, $5, $6, $7);
+    INSERT INTO "mission_experience" ("organizationName", "location", "referenceName", "referencePhone", "missionExperienceImageKey", "startDate", "endDate", "user_id")
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8);
   `;
 
   try {
@@ -454,10 +455,11 @@ router.post('/missionhistoryitem', rejectUnauthenticated, async (req, res) => {
         location,
         referenceName,
         referencePhone,
+        missionExperienceImageKey,
         startDate,
         endDate } = missionHistoryItem;
 
-        return client.query(queryText, [organization, location, referenceName, referencePhone, startDate, endDate, user_id]);
+        return client.query(queryText, [organization, location, referenceName, referencePhone, missionExperienceImageKey, startDate, endDate, user_id]);
       }) // end loop
     ) // end Promise
 
@@ -501,8 +503,8 @@ router.post('/insuranceitem', rejectUnauthenticated, async (req, res) => {
 
   //define the query text of where you want to post in the database
   let queryText = `INSERT INTO "insurance" ("insuranceType", "insuranceProvider", "policyNumber", 
-    "state", "dateInitial", "dateRenewed", "dateExpiring", "user_id")
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8);`;
+    "state", "insuranceImageKey", "dateInitial", "dateRenewed", "dateExpiring", "user_id")
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);`;
 
   try {
 
@@ -521,11 +523,12 @@ router.post('/insuranceitem', rejectUnauthenticated, async (req, res) => {
         insuranceProvider,
         policyNumber,
         state,
+        insuranceImageKey,
         dateInitial,
         dateRenewed,
         dateExpiring } = insuranceItem;
 
-      return client.query(queryText, [insuranceType, insuranceProvider, policyNumber, state, dateInitial, dateRenewed, dateExpiring, user_id]);
+      return client.query(queryText, [insuranceType, insuranceProvider, policyNumber, state, insuranceImageKey, dateInitial, dateRenewed, dateExpiring, user_id]);
       }) // end loop
     ) // end Promise
 
@@ -567,8 +570,8 @@ router.post('/credentialhistory', rejectUnauthenticated, async (req, res) => {
   const user_id = req.user.id;
 
   const credentialInsertStatement = `
-  INSERT INTO "credential" ("licensingBoard", "credentialName", "licenseNumber", "dateInitial", "dateRenewed", "dateExpiring", "user_id")
-  VALUES ($1, $2, $3, $4, $5, $6, $7);
+  INSERT INTO "credential" ("licensingBoard", "credentialName", "licenseNumber", "credentialImageKey", "dateInitial", "dateRenewed", "dateExpiring", "user_id")
+  VALUES ($1, $2, $3, $4, $5, $6, $7, $8);
   `;
 
   try {
@@ -583,11 +586,12 @@ router.post('/credentialhistory', rejectUnauthenticated, async (req, res) => {
             licensingBoard,
             credentialTaxonomy,
             licenseNumber,
+            credentialImageKey,
             dateReceived,
             dateRenewed,
             dateExpired } = medicalCredential
 
-        return client.query(credentialInsertStatement, [licensingBoard, credentialTaxonomy, licenseNumber, dateReceived, dateRenewed, dateExpired, user_id]);
+        return client.query(credentialInsertStatement, [licensingBoard, credentialTaxonomy, licenseNumber, credentialImageKey, dateReceived, dateRenewed, dateExpired, user_id]);
 
     }) )
 
@@ -634,6 +638,7 @@ router.put('/update/:userId/:providerId', rejectUnauthenticated, async (req, res
   console.log('Updating provider table at ' + req.params.providerId + ' as ' + req.user.id );
 
   console.log(req.params);
+  console.log('req.body is ', req.body);
 
   // destructure query params
   const {
