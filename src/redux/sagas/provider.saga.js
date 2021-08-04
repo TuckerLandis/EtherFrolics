@@ -80,11 +80,49 @@ function* updateProvider(action) {
     }
 }
 
+function* verifyProvider(action) {
+
+    try {
+
+        console.log('verifying provider with provider_id: ', action.payload);
+
+        yield axios.put(`api/provider/verify/${action.payload}`);
+
+        yield put({ type: 'SELECT_PROVIDER' });
+
+    }
+    catch (error) {
+
+        console.error('Error verifying provider: ', error);
+
+    }
+}
+
+function* disableProvider(action) {
+
+    try {
+
+        console.log('disabling provider with provider_id: ', action.payload);
+
+        yield axios.put(`api/provider/disable/${action.payload}`);
+
+        yield put ({ type: 'SELECT_PROVIDER' });
+
+    }
+    catch (error) {
+
+        console.error('Error disabling provider: ', error);
+
+    }
+}
+
 function* providerSaga() {
     yield takeLatest('GET_PROVIDERS', getProviders);
     yield takeLatest('SELECT_PROVIDER', selectProvider);
     yield takeLatest('GET_PROVIDER_LANDING', getProviderLanding);
-    yield takeLatest('UPDATE_PROVIDER', updateProvider)
+    yield takeLatest('UPDATE_PROVIDER', updateProvider);
+    yield takeLatest('VERIFY_PROVIDER', verifyProvider);
+    yield takeLatest('DISABLE_PROVIDER', disableProvider);
 }
 
 export default providerSaga;
