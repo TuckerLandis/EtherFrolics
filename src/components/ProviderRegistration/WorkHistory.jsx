@@ -12,6 +12,9 @@ function WorkHistory() {
     const dispatch = useDispatch();
     const history = useHistory();
 
+    const [resumeSubmitted, setResumeSubmitted] = useState(false)
+    const [resumeImageKey, setResumeImageKey] = useState('')
+
     
 
     const workHistoryItems = useSelector(store => store.workHistoryReducer)
@@ -26,14 +29,7 @@ function WorkHistory() {
     // of work history data has been submitted to the DB
     const [workHistorySubmitted, setWorkHistorySubmitted] = useState(false);
  
-    // state variable to be flipped upon resume submission
-    const [resumeSubmitted, setResumeSubmitted] = useState(false)
 
-    // this function is passed down as props to the imageUploader component, so that it can flip this boolean for render usage on this page
-    function resumeSubmitFunction () {
-        setResumeSubmitted(true)
-        console.log('resume submitted');
-    }
 
     // increases the amount of work history elements in the array above
     function addWorkHistoryItem() {
@@ -51,6 +47,11 @@ function WorkHistory() {
         console.log(e.target.value);
         setYearsExperience(e.target.value)
 
+    }
+
+    function handleImageAttach(awsKey) {
+        setResumeSubmitted(true)
+        setResumeImageKey(awsKey)
     }
 
     async function handleNext() {
@@ -101,7 +102,7 @@ function WorkHistory() {
 
             <Typography variant="subtitle1" className="registration-title-subheading">Submit Your Resume</Typography>
             {/* takes in props above the return, and the submitResumeFunction */}
-            <ImageUploader imageType={resume} dispatchText={dispatchText} DBdispatchText={DBdispatchText} submitFunction={resumeSubmitFunction} imageSubmitted={resumeSubmitted}/>
+            <ImageUploader imageType={resume} dispatchText={dispatchText} DBdispatchText={DBdispatchText} imageSubmitted={resumeSubmitted} attachImageFunction={handleImageAttach}/>
             <br></br>
             
             <div className="text-field-wrapper">
