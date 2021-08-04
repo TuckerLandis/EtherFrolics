@@ -1,7 +1,7 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
-const { rejectUnauthenticated } = require('../modules/authentication-middleware');
+const { rejectUnauthenticated, rejectNonAdmin } = require('../modules/authentication-middleware');
 
 router.get('/', rejectUnauthenticated, (req, res) => {
 
@@ -24,8 +24,9 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
 // Get request for info in the Mission Table
 router.get('/mission', rejectUnauthenticated, (req, res) => {
-    const queryText = `SELECT "mission"."startDate", "mission".location, "mission".name, "mission"."missionLink" FROM "mission"
-		ORDER BY "mission"."startDate" ASC;`
+    const queryText = `SELECT "mission"."startDate", "mission"."endDate", "mission".location, 
+    "mission".name, "mission"."missionLink", "mission"."applyLink" FROM "mission"
+	ORDER BY "mission"."startDate" ASC;`
 
     pool.query(queryText)
         .then(result => {
@@ -37,19 +38,20 @@ router.get('/mission', rejectUnauthenticated, (req, res) => {
         })
 }) // End of Get route
 
-router.post('/mission', rejectUnauthenticated, (req, res) => {
+router.post('/mission', rejectNonAdmin, (req, res) => {
     console.log('req.body is', req.body);
     let mission = req.body;
     //define query text
-    const queryText = `INSERT INTO mission ("name", "location", "soleProvider", "startDate", "endDate",
-    "missionLink") VALUES ($1, $2, $3, $4, $5, $6);`;
+    const queryText = `INSERT INTO mission ("name", "location", "startDate", "endDate",
+    "missionLink", "applyLink") VALUES ($1, $2, $3, $4, $5, $6);`;
     //use pool to contact the server
-    pool.query(queryText, [mission.name, mission.location, mission.soleProvider, mission.startDate,
-                mission.endDate, mission.missionLink])
+    pool.query(queryText, [mission.name, mission.location, mission.startDate,
+                mission.endDate, mission.missionLink, mission.applyLink])
     .then( result => {
         res.sendStatus(201);
     })
     .catch( err => {
+        console.log('error is', err);
         res.sendStatus(500);
     })
 })
