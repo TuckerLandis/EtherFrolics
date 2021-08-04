@@ -6,15 +6,6 @@ import ImageViewer from '../ImageComponents/ImageViewer';
 // material-ui
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import TextField from 
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-        '& > *': {
-            margin: theme.spacing(1),
-        },
-    },
-}));
 
 function ProviderManagementIndividual() {
 
@@ -32,9 +23,6 @@ function ProviderManagementIndividual() {
         })
     }, [params.id])
     // params.id in this array so that when it changes, the page refreshes^
-
-    // material-ui
-    const classes = useStyles();
 
     console.log('Selected provider: ', provider);
 
@@ -55,9 +43,27 @@ function ProviderManagementIndividual() {
     // test concat for image path
     const resumePath = `/api/image/ind/${provider?.resumeKey}`
 
-    const verify = (provider) => {
-        console.log('invidiual provider to verify: ', provider);
-    }
+    // verifies provider using provider.provider_id
+    const verify = (provider_id) => {
+        console.log('invidiual provider to verify: ', provider_id);
+        dispatch({
+            type: 'VERIFY_PROVIDER',
+            payload: provider_id
+        })
+    } // end verify
+
+    // displays whether a user has been verified or not by admin
+    const verificationStatus = () => {
+        if (provider.verified == true) {
+            return (
+                'verified'
+            )
+        } else {
+            return (
+                'unverified'
+            )
+        }
+    } // end verificationStatus
 
     return (
 
@@ -119,13 +125,12 @@ function ProviderManagementIndividual() {
             </div>
 
             <div>
-                <TextField>
-                    This user is currently verified
-                </TextField>
+                <h1>Verification Status</h1>
+                <h2>{provider?.firstName} is currently {verificationStatus()}</h2>
                 <Button
                     variant="contained"
                     color="primary"
-                    onClick={() => verify(provider)}
+                    onClick={() => verify(provider?.provider_id)}
                 >
                     Verify
                 </Button>

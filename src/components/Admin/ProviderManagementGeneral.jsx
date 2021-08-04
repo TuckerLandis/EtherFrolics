@@ -24,6 +24,10 @@ import FolderIcon from '@material-ui/icons/Folder';
 import DeleteIcon from '@material-ui/icons/Delete';
 import StarIcon from '@material-ui/icons/Star';
 
+import Paper from "@material-ui/core/Paper";
+import InputBase from '@material-ui/core/InputBase';
+import SearchIcon from '@material-ui/icons/Search';
+
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
@@ -95,31 +99,46 @@ function ProviderManagementGeneral() {
 
             <div className={classes.root}>
 
-                <Grid item xs={12} md={6}>
-                    <div className={classes.demo}>
-                        <List dense={dense}>
-                            {generate(
-                                <div>
-                                    {providers?.map(provider => {
-                                        return (
-                                            <ListItem key={provider?.provider_id}>
-                                                <ListItemIcon>
-                                                    {starIcon(provider)}
-                                                </ListItemIcon>
-                                                <ListItemText
-                                                    primary={provider?.firstName}
-                                                    onClick={() => handleSelect(provider?.user_id)}
-                                                    className="mouse"
-                                                >
-                                                </ListItemText>
-                                            </ListItem>
-                                        )
-                                    })}
-                                </div>
-                            )}
-                        </List>
+                <Paper>
+                    {/* <SearchBar
+                        value={searched}
+                        onChange={(searchVal) => requestSearch(searchVal)}
+                        onCancelSearch={() => cancelSearch()}
+                    /> */}
+                    <div>
+                        <InputBase 
+                            
+                        />
+                        <SearchIcon />
                     </div>
-                </Grid>
+
+                    <Grid item xs={12} md={6}>
+                        <div className={classes.demo}>
+                            <List dense={dense}>
+                                {generate(
+                                    <div>
+                                        {providers?.map(provider => {
+                                            return (
+                                                <ListItem key={provider?.provider_id}>
+                                                    <ListItemIcon>
+                                                        {starIcon(provider)}
+                                                    </ListItemIcon>
+                                                    <ListItemText
+                                                        primary={provider?.firstName}
+                                                        onClick={() => handleSelect(provider?.user_id)}
+                                                        className="mouse"
+                                                    >
+                                                    </ListItemText>
+                                                </ListItem>
+                                            )
+                                        })}
+                                    </div>
+                                )}
+                            </List>
+                        </div>
+                    </Grid>
+
+                </Paper>
 
             </div>
 
