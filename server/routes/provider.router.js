@@ -639,6 +639,7 @@ router.put('/update/:userId/:providerId', rejectUnauthenticated, async (req, res
   console.log('Updating provider table at ' + req.params.providerId + ' as ' + req.user.id );
 
   console.log(req.params);
+  console.log('req.body is ', req.body);
 
   // destructure query params
   const {

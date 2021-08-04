@@ -14,7 +14,7 @@ function ProviderGenItem({ provider }) {
     return (
         <div>
             {editState ? (
-                <EditGenInfo provider={provider}/>
+                <EditGenInfo provider={provider} editState={editState}/>
             ) : (
             <div> 
             <Accordion>
