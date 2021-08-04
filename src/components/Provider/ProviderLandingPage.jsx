@@ -69,6 +69,41 @@ function ProviderLandingPage() {
         })
     }, []);
 
+    const updateInputConfig = {
+        credentialUpdate: [
+            {
+                inputLabel: 'Credential Taxonomy',
+                inputName: 'credentialTaxonomy',
+                inputType: 'text'
+            },
+            {
+                inputLabel: 'Licensing Board',
+                inputName: 'licensingBoard',
+                inputType: 'text'
+            },
+            {
+                inputLabel: 'License Number',
+                inputName: 'licenseNumber',
+                inputType: 'text'
+            },
+            {
+                inputLabel: 'Date Received',
+                inputName: 'dateReceived',
+                inputType: 'date'
+            },  
+            {
+                inputLabel: 'Date Renewed',
+                inputName: 'dateRenewed',
+                inputType: 'date'
+            },  
+            {
+                inputLabel: 'Date Expired',
+                inputName: 'dateExpired',
+                inputType: 'date'
+            }                                  
+        ]
+    }
+
     //create a function so that the provider can view upcoming missions
     const viewMissions = () => {
         history.push('/missions')
@@ -129,7 +164,7 @@ function ProviderLandingPage() {
                 </Route>
                         
                 <Route exact path={`${path}/edit`}>
-                    <ProviderCredEdit provider={ provider } credentialEntry={credentialEntry} />
+                    <ProviderCredEdit provider={ provider } inputConfig={updateInputConfig.credentialUpdate} credentialEntry={credentialEntry} />
                 </Route> 
             </Switch>
         </div>

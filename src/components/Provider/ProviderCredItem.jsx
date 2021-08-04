@@ -86,7 +86,7 @@ function ProviderCredItem({ provider, credentialEntry, ImageViewer }) {
                                     <ListItem key={i} button >
                                         <ListItemIcon>
                                             <IconButton edge="start" >
-                                                {/* <ImageViewer imagePath={credentialImagePath} /> */}
+                                                <ImageViewer imagePath={credentialImagePath} />
                                             </IconButton>
                                         </ListItemIcon>
                                         <ListItemText primary={`${credential.credentialName}`} onClick={handleCloseOptions} secondary={`Expiration: ${credential.dateExpiring}`} />
