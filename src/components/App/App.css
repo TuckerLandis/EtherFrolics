@@ -184,3 +184,10 @@ input[type=text]{
   align-items: center;
   flex-direction: column;
 }
+
+.provider-role-wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.8em;
+}
