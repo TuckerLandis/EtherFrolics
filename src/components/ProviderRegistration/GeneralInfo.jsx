@@ -24,6 +24,7 @@ function GeneralInfo() {
     function handleChange(e) {
 
         console.log(e.target.id);
+        console.log(e.target.parentNode)
 
         switch (e.target.id) {
             case 'firstNameInput':
@@ -34,9 +35,6 @@ function GeneralInfo() {
                 break
             case 'dateOfBirthInput':
                 setDob(e.target.value)
-                break
-            case 'providerRoleInput':
-                setProviderRole(e.target.value)
                 break
             case "validPassportRadioTrue":
                 setValidPassport(true)
@@ -90,6 +88,11 @@ function GeneralInfo() {
         history.push('/generalinfoaddress')
     }
 
+    function handleProviderRole (e) {
+        setProviderRole(e.target.value);
+    }
+
+
     const activeStep = 0
 
 
@@ -141,14 +144,31 @@ function GeneralInfo() {
 
                     </div>
 
+
+                    {/* <KeyboardDatePicker
+                    margin="normal"
+                    id="dateOfBirthInput"
+                    label="Date of Birth"
+                    format="MM/dd/yyyy"
+                    value={selectedDate}
+                    onChange={handleDateChange}
+                    KeyboardButtonProps={{
+                        'aria-label': 'change date',
+                    }}
+                /> */}
+
                     <Typography htmlFor="providerRoleInput">Provider Role</Typography>
-                    <select variant="outlined" name="providerRole" id="providerRoleInput" value={providerRole} onChange={handleChange}>
-                        <option value="-">-</option>
-                        <option value="CRNA">CRNA</option>
-
-                        {/* need more options here */}
-                    </select>
-
+                    <Select variant="outlined" name="providerRole" id="providerRoleInput" value={providerRole} onChange={handleProviderRole}>
+                        <MenuItem value="-">-</MenuItem>
+                        <MenuItem value="CRNA">cRNA</MenuItem>
+                        <MenuItem value="RN">RN</MenuItem>
+                        <MenuItem value="CNP">CNP</MenuItem>
+                        <MenuItem value="CNS">CNS</MenuItem>
+                        <MenuItem value="PA-C">PA-C</MenuItem>
+                        <MenuItem value="MD">MD</MenuItem>
+                        <MenuItem value="DO">DO</MenuItem>
+                        <MenuItem value="Other">Other</MenuItem>
+                    </Select>
 
 
                     <Typography variant="body1">Do you have a valid passport?</Typography>
