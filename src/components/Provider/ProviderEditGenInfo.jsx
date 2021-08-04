@@ -16,6 +16,9 @@ function EditGenInfo ( {provider} ) {
         phoneNumber: provider.phoneNumber,
         emailAddress: provider.emailAddress,
         validPassport: provider.validPassport,
+        table: 'credential',
+        userId: user.id,
+        providerId: provider.provider_id
     })
 
     const handleChange = (evt) => {
@@ -26,10 +29,14 @@ function EditGenInfo ( {provider} ) {
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
+        dispatch({
+            type: 'UPDATE_PROVDER',
+            payload: editObj
+        })
+
     }
 console.log(editObj);
 console.log('provider is', provider);
-console.log('user is', user);
 
     return (
         <div>
