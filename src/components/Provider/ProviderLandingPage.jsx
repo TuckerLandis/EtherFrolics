@@ -150,16 +150,14 @@ function ProviderLandingPage() {
                         <Typography variant="h4">Please register to view upcoming missions</Typography>
                     )}
 
-                    {provider?.registrationComplete ? (
+                    {provider?.registrationComplete && 
                     <div>
                     <Typography align="center" variant="h5">Credential Info</Typography>
                     <ProviderCredItem provider={provider}/>
                     <Button
                     variant="contained" color="primary" onClick={addCredentialNav} >Add New Credential</Button>
                     </div>
-                    ) : (
-                    <p></p>
-                    )}  
+                    }
                 </Route>
                         
                 <Route exact path={`${path}/edit`}>
