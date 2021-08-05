@@ -197,7 +197,6 @@ function App() {
               // with authRedirect:
               // - if logged in, redirects to "/user"
               // - else shows LandingPage at "/home"
-              exact
               path="/providerlandingpage"
               // adminRedirect="/adminlandingpage"
             >
