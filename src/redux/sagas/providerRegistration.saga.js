@@ -79,7 +79,7 @@ function* completeRegistration (action) {
     yield axios.put('/api/provider/completeregistration')
 
     put({
-      type: 'GET_PROVIDERS'
+      type: 'GET_PROVIDER_LANDING'
     })
   } catch (error) {
     console.log('error completing registration', error);
