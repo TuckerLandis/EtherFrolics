@@ -8,11 +8,11 @@ function ImageViewer(props) {
   return (
     <div>
 
-      {/* {props.imagePath.includes('PDF') ? <embed src={props.imagePath} width="800px" height="2100px" /> : <img width="32px" src={props.imagePath} alt="" /> } */}
+      {props.imagePath.includes('PDF') ? <embed src={props.imagePath} width="800px" height="2100px" /> : <LightBoxComponent imagePath={props.imagePath} /> }
 
-      {props.imagePath.includes('PDF') ? <object src={props.imagePath} type="application/pdf" width="300" height="200">
+      {/* {props.imagePath.includes('PDF') ? <object data={props.imagePath} type="application/pdf" width="300" height="200">
         alt : <a href="data/test.pdf">test.pdf</a>
-      </object> : <img width="32px" src={props.imagePath} alt="" />}
+      </object> : <LightBoxComponent imagePath={props.imagePath} />} */}
 
 
 
