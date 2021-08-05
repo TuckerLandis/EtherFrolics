@@ -95,7 +95,10 @@ function EducationMultiRow(props) {
                             value={endDate} onChange={handleChange} />
                     </div>
 
+                    <div className="text-field-wrapper">
                     <Typography variant="body1">Attach a Transcript</Typography>
+                    </div>
+                    
 
                     <ImageUploader imageType={imageType} attachImageFunction={handleImageAttach} />
 
