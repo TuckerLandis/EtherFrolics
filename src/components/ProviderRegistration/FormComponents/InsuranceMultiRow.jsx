@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { TextField } from "@material-ui/core";
+import { TextField, Typography } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import FormLabel from '@material-ui/core/FormLabel';
 import Button from '@material-ui/core/Button';
@@ -34,7 +34,7 @@ import ImageUploader from "../../ImageComponents/ImageUploader";
 // - [ ]  post route to insurance table
 // - [ ]  post to amazon s3 type: insurance
 
-function InsuranceMultiRow (props) {
+function InsuranceMultiRow(props) {
     const dispatch = useDispatch();
 
     // create states to collect the form data
@@ -46,32 +46,32 @@ function InsuranceMultiRow (props) {
     const [dateRenewed, setDateRenewed] = useState('');
     const [dateExpiring, setDateExpiring] = useState('');
     const [submitted, setSubmitted] = useState(false);
-  
+
 
     const [imageSubmit, setImageSubmit] = useState(false)
     const [insuranceImageKey, setInsuranceImageKey] = useState('')
 
     const handleChange = (evt) => {
         switch (evt.target.id) {
-            case "type" :
+            case "type":
                 setInsuranceType(evt.target.value);
                 break
-            case "provider" :
+            case "provider":
                 setInsuranceProvider(evt.target.value);
                 break
-            case "number" :
+            case "number":
                 setPolicyNumber(evt.target.value);
                 break
-            case "state" :
+            case "state":
                 setState(evt.target.value);
                 break
-            case "issued" :
+            case "issued":
                 setDateInitial(evt.target.value);
                 break
-            case "renewed" :
+            case "renewed":
                 setDateRenewed(evt.target.value);
                 break
-            case "expired" :
+            case "expired":
                 setDateExpiring(evt.target.value);
         }
     }
@@ -80,7 +80,7 @@ function InsuranceMultiRow (props) {
         setImageSubmit(true)
         setInsuranceImageKey(awsKey)
     }
-    
+
     //need a function to dispatch the information
     const submitInsurance = (event) => {
         event.preventDefault();
@@ -96,7 +96,7 @@ function InsuranceMultiRow (props) {
             dateRenewed: dateRenewed,
             dateExpiring: dateExpiring,
             insuranceImageKey: insuranceImageKey
-           
+
         }
         console.log(insuranceObj);
 
@@ -114,91 +114,96 @@ function InsuranceMultiRow (props) {
 
     return (
         <div className="general-form-display">
-            <form onSubmit={submitInsurance}>
-
-            <div className="text-field-wrapper">
-            <TextField
-                required
-                label="Type of Insurance"
-                id="type"
-                value={insuranceType}
-                onChange={handleChange} />
-            </div>
-            
-            <div className="text-field-wrapper">
-            <TextField 
-                required
-                label="Provider"
-                id="provider"
-                value={insuranceProvider}
-                onChange={handleChange}/>
-            </div>
-
-            <div className="text-field-wrapper">
-            <TextField 
-                required
-                label="Policy #"
-                id="number"
-                value={policyNumber}
-                onChange={handleChange}/>
-            </div>
-
-            <div className="text-field-wrapper">
-            <TextField 
-                required
-                label="State Initials"
-                id="state"
-                value={state}
-                onChange={handleChange}/>
-            </div>
-
-            <div className="text-field-wrapper">
-            {/* <FormLabel>Date Issued:</FormLabel> */}
-            <TextField
-                required
-                type="date"
-                id="issued"
-                label="Date Issued"
-                InputLabelProps={{ shrink: true }}
-                value={dateInitial}
-                onChange={handleChange}/>
-            </div>
-
-            <div className="text-field-wrapper">
-           {/* <FormLabel>Date Renewed:</FormLabel> */}
-            <TextField 
-                required
-                type="date"
-                id="renewed"
-                label="Date Renewed"
-                InputLabelProps={{ shrink: true }}
-                value={dateRenewed}
-                onChange={handleChange}/>            
-            </div>
-
-            <div className="text-field-wrapper">
-            {/* <FormLabel>Date Expired:</FormLabel> */}
-            <TextField
-                required
-                type="date"
-                id="expired"
-                label="Date Expired"
-                InputLabelProps={{ shrink: true }}
-                value={dateExpiring}
-                onChange={handleChange}/>
-            </div>
-
-                <ImageUploader imageType={imageType} attachImageFunction={handleImageAttach} />
 
             {submitted ? (
-                <p>Information Submitted!</p>
+                <Typography variant="body1">Submitted!</Typography>
             ) : (
-    
+
+                <form onSubmit={submitInsurance}>
+
+                    <div className="text-field-wrapper">
+                        <TextField
+                            required
+                            label="Type of Insurance"
+                            id="type"
+                            value={insuranceType}
+                            onChange={handleChange} />
+                    </div>
+
+                    <div className="text-field-wrapper">
+                        <TextField
+                            required
+                            label="Provider"
+                            id="provider"
+                            value={insuranceProvider}
+                            onChange={handleChange} />
+                    </div>
+
+                    <div className="text-field-wrapper">
+                        <TextField
+                            required
+                            label="Policy #"
+                            id="number"
+                            value={policyNumber}
+                            onChange={handleChange} />
+                    </div>
+
+                    <div className="text-field-wrapper">
+                        <TextField
+                            required
+                            label="State Initials"
+                            id="state"
+                            value={state}
+                            onChange={handleChange} />
+                    </div>
+
+                    <div className="text-field-wrapper">
+                        {/* <FormLabel>Date Issued:</FormLabel> */}
+                        <TextField
+                            required
+                            type="date"
+                            id="issued"
+                            label="Date Issued"
+                            InputLabelProps={{ shrink: true }}
+                            value={dateInitial}
+                            onChange={handleChange} />
+                    </div>
+
+                    <div className="text-field-wrapper">
+                        {/* <FormLabel>Date Renewed:</FormLabel> */}
+                        <TextField
+                            required
+                            type="date"
+                            id="renewed"
+                            label="Date Renewed"
+                            InputLabelProps={{ shrink: true }}
+                            value={dateRenewed}
+                            onChange={handleChange} />
+                    </div>
+
+                    <div className="text-field-wrapper">
+                        {/* <FormLabel>Date Expired:</FormLabel> */}
+                        <TextField
+                            required
+                            type="date"
+                            id="expired"
+                            label="Date Expired"
+                            InputLabelProps={{ shrink: true }}
+                            value={dateExpiring}
+                            onChange={handleChange} />
+                    </div>
+
+                    <ImageUploader imageType={imageType} attachImageFunction={handleImageAttach} />
+
+
+
                     <div className="text-field-wrapper">
                         <Button variant="contained" color="secondary" type="submit">Add Insurance Entry+</Button>
                     </div>
+
+                </form>
+
             )}
-            </form>
         </div>
     )
 }

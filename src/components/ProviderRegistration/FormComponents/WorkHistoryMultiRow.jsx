@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { TextField } from "@material-ui/core"
+import { TextField, Typography } from "@material-ui/core"
 import { useDispatch } from "react-redux"
 import {Button} from '@material-ui/core'
 
@@ -79,6 +79,9 @@ function WorkHistoryMultiRow(props) {
 
     return (
         <div className="general-form-display">
+            {hasBeenSubmitted ? (
+                    <Typography variant="body1">Submitted!</Typography>
+                ) : (
             <form onSubmit={submitWorkHistoryItem}>
                 <div className="text-field-wrapper">
                     {/* <label htmlFor="workPlaceInput">Work Place</label> */}
@@ -119,19 +122,19 @@ function WorkHistoryMultiRow(props) {
                         label="End Date" InputLabelProps={{ shrink: true }}
                         value={endDate} onChange={handleChange} variant="outlined" />
                 </div>
-                {hasBeenSubmitted ? (
-                    <p>submitted</p>
-                ) : (
+
+                
+                
                 
                     <div className="text-field-wrapper">
                         <Button variant="contained" color="secondary" type="submit">Add Work History Entry+</Button>
                     </div>
                     
-                )}
+                
 
             </form>
 
-
+            )}
 
         </div>
     )
