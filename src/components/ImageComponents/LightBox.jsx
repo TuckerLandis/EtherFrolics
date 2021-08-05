@@ -15,7 +15,7 @@ function LightBoxComponent(props) {
                 :
 
                 // this could simply be a button so we don't have to worry about image widths, but i'm setting it to 32px manually
-                <img width="32px" src={modifiedImagePath} alt="" onClick={e => setIsOpen(true)} />}
+                <img width="32px" height="32px" src={modifiedImagePath} alt="" onClick={e => setIsOpen(true)} />}
 
 
 
