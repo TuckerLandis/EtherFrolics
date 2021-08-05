@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
+import { useHistory, Route, Switch, useRouteMatch } from 'react-router-dom';
+import { Button, Typography } from '@material-ui/core';
 import ProviderGenItem from './ProviderGenItem';
 import ProviderCredItem from './ProviderCredItem';
-import ImageViewer from '../ImageComponents/ImageViewer';
+import ProviderCredEntry from '../Provider/ProviderCredEntry';
 
 /*
 CHECKLIST
@@ -42,6 +42,7 @@ CHECKLIST
 function ProviderLandingPage() {
     const dispatch = useDispatch();
     const history = useHistory();
+    const { path, url } = useRouteMatch();
 
     const user = useSelector(store => store.user);
     //bring in the provider data from the reducer
@@ -50,12 +51,48 @@ function ProviderLandingPage() {
     const provider = useSelector(store => store.providerLandingReducer) // < ---- changed reducer to new provider landing reducer
     //bring in the credential data from the reducer
 
+    const credentialEntry = useSelector(store => store.credentialEntry);
+
     useEffect( () => {
         dispatch({
             type: 'GET_PROVIDER_LANDING'
         })
     }, []);
 
+    const updateInputConfig = {
+        credentialUpdate: [
+            {
+                inputLabel: 'Credential Taxonomy',
+                inputName: 'credentialTaxonomy',
+                inputType: 'text'
+            },
+            {
+                inputLabel: 'Licensing Board',
+                inputName: 'licensingBoard',
+                inputType: 'text'
+            },
+            {
+                inputLabel: 'License Number',
+                inputName: 'licenseNumber',
+                inputType: 'text'
+            },
+            {
+                inputLabel: 'Date Received',
+                inputName: 'dateReceived',
+                inputType: 'date'
+            },  
+            {
+                inputLabel: 'Date Renewed',
+                inputName: 'dateRenewed',
+                inputType: 'date'
+            },  
+            {
+                inputLabel: 'Date Expired',
+                inputName: 'dateExpired',
+                inputType: 'date'
+            }                                  
+        ]
+    }
 
     //create a function so that the provider can view upcoming missions
     const viewMissions = () => {
@@ -67,49 +104,71 @@ function ProviderLandingPage() {
         history.push('/generalInfo')
     }
 
+    // function to navigate to add credential page
+    const addCredentialNav = () => {
+        dispatch({
+            type: 'RESET_CREDENTIAL_ENTRY',
+            payload: {
+                credentialName: '',
+                licensingBoard: '',
+                licenseNumber: '',
+                dateInitial: '',
+                dateRenewed: '',
+                dateExpiring: '',
+                credentialImageKey: ''
+            }
+        })
 
-    // test concat for image path
-    const resumePath = `/api/image/prov/${provider?.resumeKey}`
+        history.push(`${path}/add`)
+    }
 
+    console.log(url + '/edit');
     return (
         <div>
-            <h2>Welcome, {user.username} </h2>
+            <Typography variant="h3">{user.username}'s Profile</Typography>
 
             {provider?.registrationComplete ? (
                 <Button
                     variant="contained"
+                    color="secondary"
                     onClick={viewMissions}>View Missions</Button>
             ) : (
                 <Button
                     variant="contained"
+                    color="primary"
                     onClick={providerRegister}>Register</Button>
             )}
+            <Switch>
+                <Route exact path={path}>
+                    {provider?.registrationComplete ? ( 
+                    <div>
+                    <Typography align="center" variant="h5">General Info</Typography>
+                        
+                    <ProviderGenItem provider={provider}/>
+                    </div>
+                    ) : (
+                        <Typography variant="h4">Please register to view upcoming missions</Typography>
+                    )}
 
-            {provider?.registrationComplete ? ( 
-            <div>
-            <h2>General Info</h2>
-                
-             <h3>Your Resume</h3>
-            <ImageViewer imagePath={resumePath} />
-            <ProviderGenItem provider={provider}/>
-            </div>
-            ) : (
-                <h3>Please register to view upcoming missions</h3>
-            )}
-
-            {provider?.registrationComplete ? (
-            <div>
-            <h2>Credential Info</h2>
-            <ProviderCredItem provider={provider}/>
-            <Button
-            variant="contained">Edit Credentials</Button>
-            </div>
-            ) : (
-            <p></p>
-            )}  
+                    {provider?.registrationComplete && 
+                    <div>
+                    <Typography align="center" variant="h5">Credential Info</Typography>
+                    <ProviderCredItem provider={provider}/>
+                    <Button
+                    variant="contained" color="primary" onClick={addCredentialNav} >Add New Credential</Button>
+                    </div>
+                    }
+                </Route>
+                        
+                <Route exact path={`${path}/edit`}>
+                    <ProviderCredEntry entryType="edit" provider={ provider } inputConfig={updateInputConfig.credentialUpdate} credentialEntry={credentialEntry} />
+                </Route> 
+                <Route exact path={`${path}/add`}>
+                    <ProviderCredEntry  entryType="add" provider={ provider } inputConfig={updateInputConfig.credentialUpdate} credentialEntry={credentialEntry}/> 
+                </Route>
+            </Switch>
         </div>
     )
 }
 
 export default ProviderLandingPage;
-
