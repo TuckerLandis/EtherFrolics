@@ -41,7 +41,7 @@ loadingTask.promise.then(function(pdf) {
 
     // Prepare canvas using PDF page dimensions
     var canvas = document.getElementById(modifiedImagePath);
-    // id could be props
+   
 
 
     var context = canvas.getContext('2d');
