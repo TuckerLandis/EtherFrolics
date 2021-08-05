@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import {Button, MenuItem, Select, TextField} from '@material-ui/core';
 
 
-function EditGenInfo ( {provider, editState} ) {
+function EditGenInfo ( {provider} ) {
 
     const dispatch = useDispatch();
     const history = useHistory();

@@ -1,34 +1,35 @@
 import React from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import FormLabel from '@material-ui/core/FormLabel';
+import { useHistory } from 'react-router-dom';
+import {Button, TextField, Typography} from '@material-ui/core';
 
 function CreateMissionPage() {
     const dispatch = useDispatch();
+    const history = useHistory();
 
     //create local states to collect data
-    const [organization, setOrganization] = useState('');
+    const [name, setName] = useState('');
     const [location, setLocation] = useState('');
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
     const [missionLink, setMissionLink] = useState('');
     const [applyLink, setApplyLink] = useState('');
+    const [missionActive, setMissionActive] = useState(true);
 
     //create a function that will send the form data to the server
     const handleSubmit = (evt) => {
         evt.preventDefault();
         //need to create an object that will collect the data and dispatch it to the saga
         const missionObj = {
-            name: organization,
+            name: name,
             location: location,
             startDate: startDate,
             endDate: endDate,
             missionLink: missionLink,
-            applyLink: applyLink
+            applyLink: applyLink,
+            missionActive: missionActive
         }
-        console.log(missionObj);
 
         dispatch({
             type: 'POST_MISSION_DATA',
@@ -36,60 +37,91 @@ function CreateMissionPage() {
         })
 
         //clear local states
-        setOrganization('');
+        setName('');
         setLocation('');
         setStartDate('');
         setEndDate('');
         setMissionLink('');
         setApplyLink('');
+
+        history.push('/missions')
     }
     
 
     return (
         <div>
 
-            <h2>Create Mission</h2>
+            <Typography variant="h4" className="registration-title">Create Mission</Typography>
+
+            <div className="general-form-display">
+
             <form onSubmit={handleSubmit}>
+                <div className="general-form-sub-display">
+
+                <div className="text-field-wrapper">
                 <TextField
                     type="text"
                     label="Organization"
-                    value={organization}
-                    onChange={(evt) => setOrganization(evt.target.value)} />
+                    value={name}
+                    onChange={(evt) => setName(evt.target.value)} />
+                </div>
+
+                <div className="text-field-wrapper">
                 <TextField
                     type="text"
                     label="Location"
                     value={location}
                     onChange={(evt) => setLocation(evt.target.value)} />
-                <FormLabel>Start Date</FormLabel>
+                </div>
+
+                <div className="text-field-wrapper">
                 <TextField
                     type="date"
+                    label="Start Date"
+                    InputLabelProps={{ shrink: true }}
                     value={startDate}
                     onChange={(evt) => setStartDate(evt.target.value)} />
-                <FormLabel>End Date</FormLabel>
+                </div>
+                
+                <div className="text-field-wrapper">
                 <TextField
                     type="date"
+                    label="End Date"
+                    InputLabelProps={{ shrink: true }}
                     value={endDate}
                     onChange={(evt) => setEndDate(evt.target.value)}
                 />
+                </div>
+
+                <div className="text-field-wrapper">
                 <TextField
                     type="text"
-                    label="Link to Mission "
+                    label="Link to Mission"
+                    required
                     value={missionLink}
                     onChange={(evt) => setMissionLink(evt.target.value)} />
+                </div>
 
+                <div className="text-field-wrapper">
                 <TextField
                     type="text"
-                    label="Link to Apply "
+                    label="Link to Apply"
+                    required
                     value={applyLink}
                     onChange={(evt) => setApplyLink(evt.target.value)} />
-                                        
+                </div>
+
+                <div className="text-field-wrapper">                    
                 <Button
                     type="submit"
+                    color="primary"
                     variant="contained"
                 >Add Mission</Button>
+                </div>
 
-
+            </div>
             </form>
+            </div>
 
         </div>
     )
