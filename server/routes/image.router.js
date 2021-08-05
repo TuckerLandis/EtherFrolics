@@ -27,8 +27,7 @@ router.post('/s3', upload.single('image'), rejectUnauthenticated, async (req, re
     // uploads the image to s3
     const result = await uploadFile(file)
 
-    // scrubs image from server /uploads
-    // seems to work but throws an error, need to ask dane? - maybe just put it in the .then
+    
 
 
         .then(result => {
@@ -37,6 +36,7 @@ router.post('/s3', upload.single('image'), rejectUnauthenticated, async (req, re
         })
         .then(() => {
         unlinkFile(file.path)
+        // scrubs image from server /uploads
         })
         .catch(error => {
             console.log('error in image post', error);

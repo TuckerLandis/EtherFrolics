@@ -31,6 +31,8 @@ function ImageUploader(props) {
     const formData = new FormData()
     formData.append("image", image)
 
+    console.log(formData);
+
     // actually posts the image to s3, and returns the post information object, that includes the key, for usage below
     const result = await axios.post('/api/image/s3', formData, { headers: { 'Content-Type': 'multipart/formData' } })
 

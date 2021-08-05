@@ -4,10 +4,11 @@ function PDFBox(props) {
 
 const [PDFcanvasClass, setPDFCanvasClass] = useState('PDF-closed')
 
+const modifiedImagePath = props.imagePath.replace("PDF", "")
 
 // If absolute URL from the remote server is provided, configure the CORS
 // header on that server.
-var url = props.imagePath
+var url = modifiedImagePath
 
 // Loaded via <script> tag, create shortcut to access PDF.js exports.
 var pdfjsLib = window['pdfjs-dist/build/pdf'];
@@ -30,7 +31,7 @@ loadingTask.promise.then(function(pdf) {
     var viewport = page.getViewport({scale: scale});
 
     // Prepare canvas using PDF page dimensions
-    var canvas = document.getElementById(props.imagePath);
+    var canvas = document.getElementById(modifiedImagePath);
     // id could be props
 
 
@@ -59,7 +60,7 @@ loadingTask.promise.then(function(pdf) {
         <div>
 
             
-          {loadingTask.promise && <canvas width="32px" className={PDFcanvasClass} id={props?.imagePath} alt="" onClick={e => setPDFCanvasClass('PDF-open')}></canvas> } 
+          {loadingTask.promise && <canvas width="32px" className={PDFcanvasClass} id={modifiedImagePath} alt="" onClick={e => setPDFCanvasClass('PDF-open')}></canvas> } 
 
             {/* <canvas id="the-canvas"></canvas> */}
 
