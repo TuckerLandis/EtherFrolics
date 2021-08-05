@@ -63,19 +63,10 @@ router.get('/ind/:key', rejectNonAdmin, (req, res) => {
  */
  router.get('/prov/:key', rejectUnauthenticated, (req, res) => {
     const key = req.params.key
-
-    // added to try to just send the pdf bin data back to client
-    // if (key.includes('PDF')) {
-    //     res.send(getFileStream(key)) 
-    // } else {
-    
     const readStream = getFileStream(key)
 
     // pipes the readestream created in our s3.getObject function to the response object, for render
     readStream.pipe(res)
-    // }
-
-    
 })
 
 

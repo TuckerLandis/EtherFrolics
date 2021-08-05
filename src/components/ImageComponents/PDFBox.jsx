@@ -2,7 +2,7 @@ import { useState } from "react";
 
 function PDFBox(props) {
 
-    const [PDFcanvasClass, setPDFCanvasClass] = useState('PDF-closed')
+const [PDFcanvasClass, setPDFCanvasClass] = useState('PDF-closed')
 
 
 // If absolute URL from the remote server is provided, configure the CORS
@@ -59,7 +59,7 @@ loadingTask.promise.then(function(pdf) {
         <div>
 
             
-            <canvas width="32px" className={PDFcanvasClass} id={props.imagePath} alt="" onClick={e => setPDFCanvasClass('PDF-open')}></canvas> 
+          {loadingTask && <canvas width="32px" className={PDFcanvasClass} id={props?.imagePath} alt="" onClick={e => setPDFCanvasClass('PDF-open')}></canvas> } 
 
             {/* <canvas id="the-canvas"></canvas> */}
 
