@@ -44,6 +44,8 @@ function getFileStream(fileKey) {
     }
 
     return s3.getObject(downloadParams).createReadStream()
+
+    
     //  if (fileKey.includes('PDF')) {
     //     s3.getObject(downloadParams, function(err, data) {
     //         if (err)
