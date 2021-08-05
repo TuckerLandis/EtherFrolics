@@ -4,6 +4,15 @@ function PDFBox(props) {
 
 const [PDFcanvasClass, setPDFCanvasClass] = useState('PDF-closed')
 
+function openOrClosePDF() {
+    if (PDFcanvasClass === 'PDF-closed') {
+        setPDFCanvasClass('PDF-open')
+    } else if (PDFcanvasClass === 'PDF-open') {
+        setPDFCanvasClass('PDF-closed')
+    }
+}
+
+
 const modifiedImagePath = props.imagePath.replace("PDF", "")
 
 // If absolute URL from the remote server is provided, configure the CORS
@@ -60,7 +69,7 @@ loadingTask.promise.then(function(pdf) {
         <div>
 
             
-          {loadingTask.promise && <canvas width="32px" className={PDFcanvasClass} id={modifiedImagePath} alt="" onClick={e => setPDFCanvasClass('PDF-open')}></canvas> } 
+          {loadingTask.promise && <canvas width="32px" className={PDFcanvasClass} id={modifiedImagePath} alt="" onClick={openOrClosePDF}></canvas> } 
 
             {/* <canvas id="the-canvas"></canvas> */}
 

@@ -198,8 +198,8 @@ input[type=text]{
   max-width: 20%;
 }
 
-.PDF-closed {
+.PDF-open {
   border: 1px solid black;
   direction: ltr;
-  max-width: 80%;
+  max-width: 100%;
 }
