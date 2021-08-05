@@ -16,6 +16,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Collapse from '@material-ui/core/Collapse';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
+import Divider from '@material-ui/core/Divider';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -159,6 +160,7 @@ function ProviderManagementIndividual() {
                 }
                 className={classes.root}
             >
+                <Divider />
                 <ListItem button onClick={handleClickGen}>
                     <ListItemText>
                         <Typography variant="h6">General Information</Typography>
@@ -169,22 +171,36 @@ function ProviderManagementIndividual() {
                     <List component="div" disablePadding>
                         <ListItem button className={classes.nested}>
                             <ListItemText>
-                                <Typography>Date of birth: {provider?.DOB}</Typography>
+                                <Divider component="li" variant="middle" />
+                                <br />
+                                <Typography variant="h6">Date of Birth</Typography>
+                                <Typography>{provider?.DOB}</Typography>
+                                <br />
+                                <Divider component="li" variant="middle" />
+                                <br />
                                 <Typography
                                     variant="h6">Contact Info</Typography>
-                                <Typography>{provider?.emailAddress}</Typography>
+                                <Typography variant="subitle2">{provider?.emailAddress}</Typography>
                                 <Typography>{provider?.streetAddress}</Typography>
                                 <Typography>{provider?.city}</Typography>
                                 <Typography>{provider?.state}</Typography>
                                 <Typography>{provider?.zipCode}</Typography>
+                                <br />
+                                <Divider component="li" variant="middle" />
+                                <br />
                                 <Typography variant="h6">Provider Role</Typography>
                                 <Typography>{provider?.providerRole}</Typography>
+                                <br />
+                                <Divider component="li" variant="middle" />
+                                <br />
                                 <Typography variant="h6">Comfortable Filling a Solo Provider Role?</Typography>
-                                {soloProviderStatus()}
+                                <Typography>{soloProviderStatus()}</Typography>
                             </ListItemText>
                         </ListItem>
                     </List>
                 </Collapse>
+
+                <Divider />
 
                 <ListItem button onClick={handleClickRes}>
                     <ListItemText>
@@ -197,12 +213,16 @@ function ProviderManagementIndividual() {
                         <ListItem button className={classes.nested}>
                             {/* test of image get from s3 */}
                             <ListItemText>
+                                <Divider component="li" variant="middle" />
+                                <br />
                                 {/* works! can make this a light box, also only works atm if a provider has a resume image key, will bug otherwise, need to require the resume submission */}
                                 {resumePath && <ImageViewer imagePath={resumePath} />}
                             </ListItemText>
                         </ListItem>
                     </List>
                 </Collapse>
+
+                <Divider />
 
                 <ListItem button onClick={handleClickCred}>
                     <ListItemText>
@@ -214,11 +234,17 @@ function ProviderManagementIndividual() {
                     <List component="div" disablePadding>
                         <ListItem button className={classes.nested}>
                             <ListItemText>
-
+                                <Divider component="li" variant="middle" />
+                                <br />
+                                {provider?.credential_array?.map(credential => {
+                                    return <p>{credential?.credentialName}</p> // needs to be flesched out, but gets data back
+                                })}
                             </ListItemText>
                         </ListItem>
                     </List>
                 </Collapse>
+
+                <Divider />
 
                 <ListItem button onClick={handleClickWork}>
                     <ListItemText>
@@ -230,11 +256,17 @@ function ProviderManagementIndividual() {
                     <List component="div" disablePadding>
                         <ListItem button className={classes.nested}>
                             <ListItemText>
-
+                                <Divider component="li" variant="middle" />
+                                <br />
+                                {provider?.work_experience_array?.map(workHistory => {
+                                    return <p>{workHistory?.workplace}</p> // needs to be flesched out, but gets data back
+                                })}
                             </ListItemText>
                         </ListItem>
                     </List>
                 </Collapse>
+
+                <Divider />
 
                 <ListItem button onClick={handleClickMis}>
                     <ListItemText>
@@ -246,49 +278,93 @@ function ProviderManagementIndividual() {
                     <List component="div" disablePadding>
                         <ListItem button className={classes.nested}>
                             <ListItemText>
-
+                                {provider?.mission_experience_array?.map(missionExp => {
+                                    return(
+                                        <div>
+                                            <Divider component="li" variant="middle" />
+                                            <br />
+                                            <Typography>{missionExp?.location}</Typography>
+                                        </div>
+                                        ) // needs to be flesched out, but gets data back
+                                })}
                             </ListItemText>
                         </ListItem>
                     </List>
                 </Collapse>
 
+                <Divider />
+
                 <ListItem button onClick={handleClickEd}>
-                    <ListItemText primary="Education" />
+                    <ListItemText>
+                        <Typography variant="h6">Education</Typography>
+                    </ListItemText>
                     {openEd ? <ExpandLess /> : <ExpandMore />}
                 </ListItem>
                 <Collapse in={openEd} timeout="auto" unmountOnExit>
                     <List component="div" disablePadding>
                         <ListItem button className={classes.nested}>
                             <ListItemText>
-
+                                {provider?.education_array?.map(education => {
+                                    return (
+                                        <div>
+                                            <Divider component="li" variant="middle" />
+                                            <br />
+                                            <Typography>{education?.institution}</Typography>
+                                            <Divider component="li" variant="middle" />
+                                            <br />
+                                            <Typography>{education?.degree}</Typography>
+                                        </div>
+                                    ) // needs to be flesched out, but gets data back
+                                })}
                             </ListItemText>
                         </ListItem>
                     </List>
                 </Collapse>
 
+                <Divider />
+
                 <ListItem button onClick={handleClickIns}>
-                    <ListItemText primary="Insurance" />
+                    <ListItemText>
+                        <Typography variant="h6">Insurance</Typography>
+                    </ListItemText>
                     {openIns ? <ExpandLess /> : <ExpandMore />}
                 </ListItem>
                 <Collapse in={openIns} timeout="auto" unmountOnExit>
                     <List component="div" disablePadding>
                         <ListItem button className={classes.nested}>
                             <ListItemText>
-
+                                {provider?.insurance_array?.map(insurance => {
+                                    return(
+                                        <div>
+                                            <Divider component="li" variant="middle" />
+                                            <br />
+                                            <Typography>{insurance?.insuranceType}</Typography>
+                                            <Typography>{insurance?.insuranceProvider}</Typography>
+                                            <Typography>{insurance?.state}</Typography>
+                                            <Typography>{insurance?.dateInitial}</Typography>
+                                            <Typography>{insurance?.dateRenewed}</Typography>
+                                            <Typography>{insurance?.dateExpiring}</Typography>
+                                        </div>
+                                        ) // needs to be flesched out, but gets data back
+                                })}
                             </ListItemText>
                         </ListItem>
                     </List>
                 </Collapse>
 
+                <Divider />
+
                 <ListItem button onClick={handleClickVer}>
-                    <ListItemText primary="Verification Status" />
+                    <ListItemText>
+                        <Typography variant="h6">Verification Status</Typography>
+                    </ListItemText>
                     {openVer ? <ExpandLess /> : <ExpandMore />}
                 </ListItem>
                 <Collapse in={openVer} timeout="auto" unmountOnExit>
                     <List component="div" disablePadding>
                         <ListItem button className={classes.nested}>
                             <ListItemText>
-
+                                <Typography>{provider?.firstName} is currently {verificationStatus()}</Typography>
                             </ListItemText>
                         </ListItem>
                     </List>
@@ -296,43 +372,7 @@ function ProviderManagementIndividual() {
 
             </List>
 
-            <div key={provider?.provider_id}>
-                
-                <div>
-                    <h1>Provider Credentials</h1>
-                    {provider?.credential_array?.map(credential => {
-                        return <p>{credential?.credentialName}</p> // needs to be flesched out, but gets data back
-                    })}
-                </div>
-                <div>
-                    <h1>Provider Work History</h1>
-                    {provider?.work_experience_array?.map(workHistory => {
-                        return <p>{workHistory?.workplace}</p> // needs to be flesched out, but gets data back
-                    })}
-                </div>
-                <div>
-                    <h1>Provider Mission History</h1>
-                    {provider?.mission_experience_array?.map(missionExp => {
-                        return <p>{missionExp?.location}</p> // needs to be flesched out, but gets data back
-                    })}
-                </div>
-                <div>
-                    <h1>Provider Education</h1>
-                    {provider?.education_array?.map(education => {
-                        return <p>{education?.institution}</p> // needs to be flesched out, but gets data back
-                    })}
-                </div>
-                <div>
-                    <h1>Provider Insurance</h1>
-                    {provider?.insurance_array?.map(insurance => {
-                        return <p>{insurance?.insuranceProvider}</p> // needs to be flesched out, but gets data back
-                    })}
-                </div>
-            </div>
-
             <div>
-                <h1>Verification Status</h1>
-                <p>{provider?.firstName} is currently {verificationStatus()}</p>
                 <Button
                     variant="contained"
                     color="primary"
