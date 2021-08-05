@@ -7,11 +7,16 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import EditGenInfo from './ProviderEditGenInfo';
 
+import ImageViewer from '../ImageComponents/ImageViewer';
+
 function ProviderGenItem({ provider }) {
 
-    const [editState, setEditState] = useState(false);
+    const [editState, setEditState] = useState(false); 
 
-    return (
+    // path to s3 for image rendering
+    const resumePath = `/api/image/prov/${provider?.resumeKey}`
+        
+    return ( 
         <div>
             {editState ? (
                 <EditGenInfo provider={provider} editState={editState}/>
@@ -78,6 +83,18 @@ function ProviderGenItem({ provider }) {
                 <AccordionDetails>
                     <Typography>
                         {provider?.validPassport ? "Yes" : "No"}
+                    </Typography>
+                </AccordionDetails>
+            </Accordion>
+            <Accordion>
+                <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                >
+                    <Typography variant="h6">Resume</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                    <Typography>
+                        <ImageViewer imagePath={resumePath} />
                     </Typography>
                 </AccordionDetails>
             </Accordion>

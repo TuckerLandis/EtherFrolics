@@ -1,10 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, Route, Switch, useRouteMatch } from 'react-router-dom';
 import { Button, Typography } from '@material-ui/core';
 import ProviderGenItem from './ProviderGenItem';
 import ProviderCredItem from './ProviderCredItem';
-import ImageViewer from '../ImageComponents/ImageViewer';
 import ProviderCredEntry from '../Provider/ProviderCredEntry';
 
 /*
@@ -105,10 +104,6 @@ function ProviderLandingPage() {
         history.push('/generalInfo')
     }
 
-
-    // test concat for image path
-    const resumePath = `/api/image/prov/${provider?.resumeKey}`
-
     // function to navigate to add credential page
     const addCredentialNav = () => {
         dispatch({
@@ -149,8 +144,6 @@ function ProviderLandingPage() {
                     <div>
                     <Typography align="center" variant="h5">General Info</Typography>
                         
-                    <Typography variant="body1">Resume</Typography>
-                    <ImageViewer imagePath={resumePath} />
                     <ProviderGenItem provider={provider}/>
                     </div>
                     ) : (
