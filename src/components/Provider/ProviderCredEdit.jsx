@@ -3,6 +3,8 @@ import { TextField, Typography, Button } from "@material-ui/core"
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
+import ImageUploader from '../ImageComponents/ImageUploader';
+
 function ProviderCredEdit({ provider, credentialEntry, inputConfig }) {
 
   const dispatch = useDispatch();
@@ -16,6 +18,7 @@ function ProviderCredEdit({ provider, credentialEntry, inputConfig }) {
     dateRenewed: credentialEntry.dateRenewed, 
     dateExpired: credentialEntry.dateExpiring,
     table: 'credential',
+    credentialImageKey: credentialEntry.credentialImageKey,
     credentialId: credentialEntry?.credential_id,
     userId: provider.id
   })
@@ -23,6 +26,8 @@ function ProviderCredEdit({ provider, credentialEntry, inputConfig }) {
   const handleChange = e => {
 
     e.preventDefault();
+
+    console.log(e.target.name, e.target.value);
 
     setCredUpdate({
       ...credUpdate,
@@ -38,6 +43,8 @@ function ProviderCredEdit({ provider, credentialEntry, inputConfig }) {
       type: 'UPDATE_PROVIDER',
       payload: credUpdate
     })
+
+    history.push('/providerlandingpage')
   }
 
   const validateProps = credentialEntry => {
@@ -48,6 +55,13 @@ function ProviderCredEdit({ provider, credentialEntry, inputConfig }) {
     }
   }
 
+  const handleImageAttach = (awsKey) => {
+    setCredUpdate({
+      ...credUpdate,
+      credentialImageKey: awsKey
+    })
+  }
+
   console.log(credUpdate);
   return (
     <div>
@@ -55,7 +69,11 @@ function ProviderCredEdit({ provider, credentialEntry, inputConfig }) {
        Update Credential: {validateProps(credentialEntry)}
       </Typography>
       <div className="general-form-display" >
+
         <form onSubmit={sendUpdate} >
+          <div className="text-field-wrapper">
+            <ImageUploader attachImageFunction={handleImageAttach} />
+          </div>
           {inputConfig.map((config, i) => {
             return(
               <div key={i} className="text-field-wrapper">
@@ -64,9 +82,11 @@ function ProviderCredEdit({ provider, credentialEntry, inputConfig }) {
             )
             
           })}
-          <div className="text-field-wrapper">
-            <Button type="submit" color="primary" >Save</Button>
-          </div>
+
+        <div className="text-field-wrapper">
+          <Button type="submit" color="primary" size="large" variant="outlined" >Save Changes</Button>  
+        </div>
+
         </form>
       </div>
     </div>

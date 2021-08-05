@@ -138,7 +138,8 @@ router.get('/landing', rejectUnauthenticated, (req, res) => {
     FROM
       (SELECT "credential_id", "licensingBoard", "credentialName", "licenseNumber", "dateInitial", "dateRenewed", "dateExpiring", "credentialImageKey" 
       FROM "credential"
-      WHERE "credential".user_id = "user".id) AS providerCredentials) AS credential_array, 
+      WHERE "credential".user_id = "user".id
+      ORDER BY "dateExpiring" ASC) AS providerCredentials) AS credential_array, 
   (SELECT JSON_AGG(providerEducation)
     FROM 
       (SELECT "education_id", "institution", "startDate", "endDate", "degree", "degreeImageKey"
@@ -624,7 +625,6 @@ router.put('/completeregistration', rejectUnauthenticated, (req, res) => {
 
   const queryText = `UPDATE "provider" SET "registrationComplete" = true
     WHERE "provider".user_id = $1
-    RETURNING "provider".user_id
     ;`;
 
   pool.query(queryText, [req.user.id])
@@ -725,7 +725,8 @@ console.log('Updating the credential table at ' + req.params.credentialId + ' as
     licenseNumber,
     dateReceived,
     dateRenewed,
-    dateExpired
+    dateExpired,
+    credentialImageKey
   } = req.body;
 
   const updateQuery = 
@@ -735,8 +736,9 @@ console.log('Updating the credential table at ' + req.params.credentialId + ' as
     "licenseNumber" = $3,
     "dateInitial" = $4,
     "dateRenewed" = $5,
-    "dateExpiring" = $6
-    WHERE credential_id = $7;
+    "dateExpiring" = $6,
+    "credentialImageKey" = $7
+    WHERE credential_id = $8;
     `;
 
     if (userId == req.user.id) {
@@ -749,7 +751,7 @@ console.log('Updating the credential table at ' + req.params.credentialId + ' as
         // start transaction block
         await client.query('BEGIN;');
 
-        await client.query(updateQuery, [credentialTaxonomy, licensingBoard, licenseNumber, dateReceived, dateRenewed, dateExpired, credentialId]);
+        await client.query(updateQuery, [credentialTaxonomy, licensingBoard, licenseNumber, dateReceived, dateRenewed, dateExpired, credentialImageKey, credentialId]);
 
         // commit changes to the DB
         await client.query('COMMIT;');
@@ -766,7 +768,7 @@ console.log('Updating the credential table at ' + req.params.credentialId + ' as
         res.sendStatus(500);
         
       } finally {
-        console.log('End provider PUT')
+        console.log('End credential PUT')
 
         await client.release();
       }
