@@ -18,7 +18,7 @@ function EducationMultiRow(props) {
     function submitEducationHistoryItem(event, awsKey) {
         event.preventDefault()
 
-        if(degreeImageKey === '') {
+        if (degreeImageKey === '') {
             return alert('Please attach a transcript')
         }
 
@@ -39,7 +39,7 @@ function EducationMultiRow(props) {
     }
 
     function handleImageAttach(awsKey) {
-        
+
         setDegreeImageKey(awsKey)
     }
 
@@ -60,52 +60,57 @@ function EducationMultiRow(props) {
         }
     }
 
-    const imageType='education'
+    const imageType = 'education'
 
     return (
         <div className="general-form-display">
-            <form onSubmit={submitEducationHistoryItem}>
-
-            <div className="text-field-wrapper">
-                {/* <label htmlFor="schoolInput">School</label> */}
-                <TextField required label="School" id="schoolInput" value={school} onChange={handleChange} variant="outlined" />
-            </div>
-
-            <div className="text-field-wrapper">
-                {/* <label htmlFor="degreeInput">Job Title</label> */}
-                <TextField required label="Degree" id="degreeInput" value={degree} onChange={handleChange} variant="outlined" />
-            </div>
-
-            <div className="text-field-wrapper">
-                {/* <label htmlFor="startDateInput">Start Date</label> */}
-                    <TextField type="date" name="startDate" id="startDateInput"
-                        label="Start Date" InputLabelProps={{ shrink: true }} variant="outlined"
-                        value={startDate} onChange={handleChange} />
-            </div>
-
-            <div className="text-field-wrapper">
-                {/* <label htmlFor="endDateInput">End Date</label> */}
-                    <TextField type="date" name="endDate" id="endDateInput"
-                        label="End Date" InputLabelProps={{ shrink: true }} variant="outlined"
-                        value={endDate} onChange={handleChange} />
-            </div>
-
-            <Typography variant="body1">Attach a Transcript</Typography>
-
-            <ImageUploader imageType={imageType} attachImageFunction={handleImageAttach} />
 
             {hasBeenSubmitted ? (
-                <p>submitted</p>
+                <Typography variant="body1">Submitted!</Typography>
             ) : (
 
-                <div className="text-field-wrapper">
-                    <Button variant="contained" color="secondary" type="submit">Add Education Entry+</Button>
-                </div>
+                <form onSubmit={submitEducationHistoryItem}>
+
+                    <div className="text-field-wrapper">
+                        {/* <label htmlFor="schoolInput">School</label> */}
+                        <TextField required label="School" id="schoolInput" value={school} onChange={handleChange} variant="outlined" />
+                    </div>
+
+                    <div className="text-field-wrapper">
+                        {/* <label htmlFor="degreeInput">Job Title</label> */}
+                        <TextField required label="Degree" id="degreeInput" value={degree} onChange={handleChange} variant="outlined" />
+                    </div>
+
+                    <div className="text-field-wrapper">
+                        {/* <label htmlFor="startDateInput">Start Date</label> */}
+                        <TextField type="date" name="startDate" id="startDateInput"
+                            label="Start Date" InputLabelProps={{ shrink: true }} variant="outlined"
+                            value={startDate} onChange={handleChange} />
+                    </div>
+
+                    <div className="text-field-wrapper">
+                        {/* <label htmlFor="endDateInput">End Date</label> */}
+                        <TextField type="date" name="endDate" id="endDateInput"
+                            label="End Date" InputLabelProps={{ shrink: true }} variant="outlined"
+                            value={endDate} onChange={handleChange} />
+                    </div>
+
+                    <Typography variant="body1">Attach a Transcript</Typography>
+
+                    <ImageUploader imageType={imageType} attachImageFunction={handleImageAttach} />
+
+
+
+                    <div className="text-field-wrapper">
+                        <Button variant="contained" color="secondary" type="submit">Add Education Entry+</Button>
+                    </div>
+
+
+
+                </form>
+
             )}
 
-
-            </form>
-            
 
         </div>
     )

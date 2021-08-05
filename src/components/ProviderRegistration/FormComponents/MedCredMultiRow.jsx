@@ -96,7 +96,7 @@ function MedCredMultiRow(props) {
   return (
     <div className="general-form-display">
       {itemSubmit ? (
-            <p>submitted</p>
+            <Typography variant="body1">Submitted!</Typography>
           ) : (
       <form onSubmit={submitCredentialHistory}>
 

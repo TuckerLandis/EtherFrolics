@@ -86,7 +86,7 @@ function MissionHistoryMultiRow(props) {
         <div className="general-form-display">
 
             {hasBeenSubmitted ? (
-                <p>submitted</p>
+                <Typography variant="body1">Submitted!</Typography>
             ) : (
 
                 <form onSubmit={submitMissionHistoryItem}>

@@ -116,7 +116,7 @@ function InsuranceMultiRow(props) {
         <div className="general-form-display">
 
             {submitted ? (
-                <p>Information Submitted!</p>
+                <Typography variant="body1">Submitted!</Typography>
             ) : (
 
                 <form onSubmit={submitInsurance}>
