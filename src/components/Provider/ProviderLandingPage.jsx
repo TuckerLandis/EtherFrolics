@@ -5,7 +5,7 @@ import { Button, Typography } from '@material-ui/core';
 import ProviderGenItem from './ProviderGenItem';
 import ProviderCredItem from './ProviderCredItem';
 import ImageViewer from '../ImageComponents/ImageViewer';
-import ProviderCredEdit from '../Provider/ProviderCredEdit';
+import ProviderCredEntry from '../Provider/ProviderCredEntry';
 
 /*
 CHECKLIST
@@ -109,6 +109,24 @@ function ProviderLandingPage() {
     // test concat for image path
     const resumePath = `/api/image/prov/${provider?.resumeKey}`
 
+    // function to navigate to add credential page
+    const addCredentialNav = () => {
+        dispatch({
+            type: 'RESET_CREDENTIAL_ENTRY',
+            payload: {
+                credentialName: '',
+                licensingBoard: '',
+                licenseNumber: '',
+                dateInitial: '',
+                dateRenewed: '',
+                dateExpiring: '',
+                credentialImageKey: ''
+            }
+        })
+
+        history.push(`${path}/add`)
+    }
+
     console.log(url + '/edit');
     return (
         <div>
@@ -144,7 +162,7 @@ function ProviderLandingPage() {
                     <Typography align="center" variant="h5">Credential Info</Typography>
                     <ProviderCredItem provider={provider}/>
                     <Button
-                    variant="contained" color="primary">Add New Credential</Button>
+                    variant="contained" color="primary" onClick={addCredentialNav} >Add New Credential</Button>
                     </div>
                     ) : (
                     <p></p>
@@ -152,10 +170,10 @@ function ProviderLandingPage() {
                 </Route>
                         
                 <Route exact path={`${path}/edit`}>
-                    <ProviderCredEdit provider={ provider } inputConfig={updateInputConfig.credentialUpdate} credentialEntry={credentialEntry} />
+                    <ProviderCredEntry entryType="edit" provider={ provider } inputConfig={updateInputConfig.credentialUpdate} credentialEntry={credentialEntry} />
                 </Route> 
                 <Route exact path={`${path}/add`}>
-                    <p>add Credential Component here</p>
+                    <ProviderCredEntry  entryType="add" provider={ provider } inputConfig={updateInputConfig.credentialUpdate} credentialEntry={credentialEntry}/> 
                 </Route>
             </Switch>
         </div>
@@ -163,4 +181,3 @@ function ProviderLandingPage() {
 }
 
 export default ProviderLandingPage;
-

@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 
 import ImageUploader from '../ImageComponents/ImageUploader';
 
-function ProviderCredEdit({ provider, credentialEntry, inputConfig }) {
+function ProviderCredEntry({ entryType, provider, credentialEntry, inputConfig }) {
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -39,12 +39,62 @@ function ProviderCredEdit({ provider, credentialEntry, inputConfig }) {
 
     e.preventDefault();
 
-    dispatch({
-      type: 'UPDATE_PROVIDER',
-      payload: credUpdate
-    })
+    if (entryType === 'edit'){
+      
+      dispatch({
+        type: 'UPDATE_PROVIDER',
+        payload: credUpdate
+      })
 
-    history.push('/providerlandingpage')
+      dispatch({
+        type: 'RESET_CREDENTIAL_ENTRY',
+        payload: {
+            credentialName: '',
+            licensingBoard: '',
+            licenseNumber: '',
+            dateInitial: '',
+            dateRenewed: '',
+            dateExpiring: '',
+            credentialImageKey: ''
+        }
+      })
+  
+      history.push('/providerlandingpage')
+
+    } else {
+      if (
+        credUpdate.credentialTaxonomy != '' 
+        && credUpdate.licensingBoard != ''
+        && credUpdate.licenseNumber != ''
+        && credUpdate.dateReceived != ''
+        && credUpdate.dateRenewed != ''
+        && credUpdate.dateExpired != ''
+        && credUpdate.credentialImageKey != ''
+        ) {
+          dispatch({
+            type: 'ADD_CREDENTIAL_HISTORY_DATA',
+            payload: [credUpdate]
+          })
+
+          dispatch({
+            type: 'RESET_CREDENTIAL_ENTRY',
+            payload: {
+                credentialName: '',
+                licensingBoard: '',
+                licenseNumber: '',
+                dateInitial: '',
+                dateRenewed: '',
+                dateExpiring: '',
+                credentialImageKey: ''
+            }
+          })
+      
+          history.push('/providerlandingpage')
+
+      } else {
+        alert('One or more TextFields requires more information before submission.')
+      }
+    }
   }
 
   const validateProps = credentialEntry => {
@@ -69,9 +119,16 @@ function ProviderCredEdit({ provider, credentialEntry, inputConfig }) {
   console.log(credUpdate);
   return (
     <div>
-      <Typography variant="h6" className="registration-title">
-       Update Credential: {validateProps(credentialEntry)}
-      </Typography>
+      {entryType === 'edit' ?
+        <Typography variant="h6" className="registration-title">
+        Update Credential: {validateProps(credentialEntry)}
+        </Typography>
+      :
+        <Typography variant="h6" className="registration-title">
+        Add New Credential
+        </Typography>
+      }
+
       <div className="general-form-display" >
 
         <form onSubmit={sendUpdate} >
@@ -87,9 +144,15 @@ function ProviderCredEdit({ provider, credentialEntry, inputConfig }) {
             
           })}
 
-          <div className="text-field-wrapper">
-            <Button type="submit" color="primary" size="large" variant="outlined" >Save Changes</Button>  
-          </div>
+          {entryType === 'edit' ?
+            <div className="text-field-wrapper">
+              <Button type="submit" color="primary" size="large" variant="outlined" >Save Changes</Button>  
+            </div>
+          :
+            <div className="text-field-wrapper">
+              <Button type="submit" color="primary" size="large" variant="outlined" >Add Credential</Button>  
+            </div>
+          }
 
           <div className="text-field-wrapper">
             <Button color="secondary" size="large" variant="outlined" onClick={cancelEdit} >Cancel</Button>
@@ -101,4 +164,4 @@ function ProviderCredEdit({ provider, credentialEntry, inputConfig }) {
   );
 }
 
-export default ProviderCredEdit;
+export default ProviderCredEntry;

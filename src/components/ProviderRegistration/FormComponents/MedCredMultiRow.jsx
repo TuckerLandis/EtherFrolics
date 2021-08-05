@@ -58,7 +58,7 @@ function MedCredMultiRow(props) {
       dateReceived: '',
       dateRenewed: '',
       dateExpired: '',
-      credImageKey: ''
+      credentialImageKey: ''
   });
 
   const submitCredentialHistory = (e) => {
