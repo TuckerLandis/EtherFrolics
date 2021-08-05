@@ -3,6 +3,9 @@ import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import ImageViewer from '../ImageComponents/ImageViewer';
 
+// css
+import './ProviderManagementIndividual.css';
+
 // material-ui
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -259,7 +262,11 @@ function ProviderManagementIndividual() {
                                 <Divider component="li" variant="middle" />
                                 <br />
                                 {provider?.work_experience_array?.map(workHistory => {
-                                    return <p>{workHistory?.workplace}</p> // needs to be flesched out, but gets data back
+                                    return(
+                                        <div>
+                                            <Typography>{workHistory?.workplace}</Typography>
+                                        </div>
+                                        ) // needs to be flesched out, but gets data back
                                 })}
                             </ListItemText>
                         </ListItem>
@@ -279,13 +286,13 @@ function ProviderManagementIndividual() {
                         <ListItem button className={classes.nested}>
                             <ListItemText>
                                 {provider?.mission_experience_array?.map(missionExp => {
-                                    return(
+                                    return (
                                         <div>
                                             <Divider component="li" variant="middle" />
                                             <br />
                                             <Typography>{missionExp?.location}</Typography>
                                         </div>
-                                        ) // needs to be flesched out, but gets data back
+                                    ) // needs to be flesched out, but gets data back
                                 })}
                             </ListItemText>
                         </ListItem>
@@ -309,9 +316,12 @@ function ProviderManagementIndividual() {
                                         <div>
                                             <Divider component="li" variant="middle" />
                                             <br />
+                                            <Typography variant="h6">Institution</Typography>
                                             <Typography>{education?.institution}</Typography>
+                                            <br />
                                             <Divider component="li" variant="middle" />
                                             <br />
+                                            <Typography variant="h6">Degree</Typography>
                                             <Typography>{education?.degree}</Typography>
                                         </div>
                                     ) // needs to be flesched out, but gets data back
@@ -325,7 +335,7 @@ function ProviderManagementIndividual() {
 
                 <ListItem button onClick={handleClickIns}>
                     <ListItemText>
-                        <Typography variant="h6">Insurance</Typography>
+                        <Typography variant="h6">Insurance Policies</Typography>
                     </ListItemText>
                     {openIns ? <ExpandLess /> : <ExpandMore />}
                 </ListItem>
@@ -334,18 +344,39 @@ function ProviderManagementIndividual() {
                         <ListItem button className={classes.nested}>
                             <ListItemText>
                                 {provider?.insurance_array?.map(insurance => {
-                                    return(
+                                    return (
                                         <div>
                                             <Divider component="li" variant="middle" />
                                             <br />
+                                            <Typography variant="h6">Type</Typography>
                                             <Typography>{insurance?.insuranceType}</Typography>
+                                            <br />
+                                            <Divider component="li" variant="middle" />
+                                            <br />
+                                            <Typography variant="h6">Provider</Typography>
                                             <Typography>{insurance?.insuranceProvider}</Typography>
+                                            <br />
+                                            <Divider component="li" variant="middle" />
+                                            <br />
+                                            <Typography variant="h6">State</Typography>
                                             <Typography>{insurance?.state}</Typography>
+                                            <br />
+                                            <Divider component="li" variant="middle" />
+                                            <br />
+                                            <Typography variant="h6">Initial Date</Typography>
                                             <Typography>{insurance?.dateInitial}</Typography>
+                                            <br />
+                                            <Divider component="li" variant="middle" />
+                                            <br />
+                                            <Typography variant="h6">Renewal Date</Typography>
                                             <Typography>{insurance?.dateRenewed}</Typography>
+                                            <br />
+                                            <Divider component="li" variant="middle" />
+                                            <br />
+                                            <Typography variant="h6">Expiration Date</Typography>
                                             <Typography>{insurance?.dateExpiring}</Typography>
                                         </div>
-                                        ) // needs to be flesched out, but gets data back
+                                    ) // needs to be flesched out, but gets data back
                                 })}
                             </ListItemText>
                         </ListItem>
@@ -364,6 +395,8 @@ function ProviderManagementIndividual() {
                     <List component="div" disablePadding>
                         <ListItem button className={classes.nested}>
                             <ListItemText>
+                                <Divider component="li" variant="middle" />
+                                <br />
                                 <Typography>{provider?.firstName} is currently {verificationStatus()}</Typography>
                             </ListItemText>
                         </ListItem>
