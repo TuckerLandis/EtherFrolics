@@ -11,6 +11,7 @@ import missionHistoryReducer from './missionHistory.reducer';
 import educationHistoryReducer from './educationHistory.reducer'
 import credentialHistoryReducer from './credentialHistory.reducer';
 import insuranceItemReducer from './insuranceItem.reducer';
+import credentialEntry from './credentialEntry.reducer';
 
 
 
@@ -37,7 +38,8 @@ const rootReducer = combineReducers({
   missionHistoryReducer,
   educationHistoryReducer,
   credentialHistoryReducer,
-  insuranceItemReducer
+  insuranceItemReducer,
+  credentialEntry
 
   
 });

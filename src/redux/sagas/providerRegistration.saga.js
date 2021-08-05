@@ -76,11 +76,10 @@ function* completeRegistration (action) {
   console.log('completing registration');
 
   try {
-    const response = yield axios.put('/api/provider/completeregistration')
+    yield axios.put('/api/provider/completeregistration')
 
     put({
-      type: 'SELECT_PROVIDER',
-      payload: response.data.user_id
+      type: 'GET_PROVIDER_LANDING'
     })
   } catch (error) {
     console.log('error completing registration', error);

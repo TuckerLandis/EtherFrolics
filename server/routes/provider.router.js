@@ -138,7 +138,8 @@ router.get('/landing', rejectUnauthenticated, (req, res) => {
     FROM
       (SELECT "credential_id", "licensingBoard", "credentialName", "licenseNumber", "dateInitial", "dateRenewed", "dateExpiring", "credentialImageKey" 
       FROM "credential"
-      WHERE "credential".user_id = "user".id) AS providerCredentials) AS credential_array, 
+      WHERE "credential".user_id = "user".id
+      ORDER BY "dateExpiring" ASC) AS providerCredentials) AS credential_array, 
   (SELECT JSON_AGG(providerEducation)
     FROM 
       (SELECT "education_id", "institution", "startDate", "endDate", "degree", "degreeImageKey"
@@ -624,7 +625,6 @@ router.put('/completeregistration', rejectUnauthenticated, (req, res) => {
 
   const queryText = `UPDATE "provider" SET "registrationComplete" = true
     WHERE "provider".user_id = $1
-    RETURNING "provider".user_id
     ;`;
 
   pool.query(queryText, [req.user.id])
@@ -637,6 +637,7 @@ router.put('/completeregistration', rejectUnauthenticated, (req, res) => {
     })
 })
 
+// PUT Route to update provider table
 router.put('/update/:userId/:providerId', rejectUnauthenticated, async (req, res) => {
   console.log('Updating provider table at ' + req.params.providerId + ' as ' + req.user.id );
 
@@ -705,7 +706,79 @@ router.put('/update/:userId/:providerId', rejectUnauthenticated, async (req, res
     res.sendStatus(401);
 
   }
-})
+}) // end provider table PUT
+
+// PUT Route to update credential table
+router.put('/update/credential/:userId/:credentialId', rejectUnauthenticated, async (req, res) => {
+console.log('Updating the credential table at ' + req.params.credentialId + ' as ' + req.user.id);
+
+  // destructure query params
+  const {
+    userId,
+    credentialId
+  } = req.params;
+
+  // destructure request body
+  const {
+    credentialTaxonomy,
+    licensingBoard,
+    licenseNumber,
+    dateReceived,
+    dateRenewed,
+    dateExpired,
+    credentialImageKey
+  } = req.body;
+
+  const updateQuery = 
+    `UPDATE "credential"
+    SET "credentialName" = $1,
+    "licensingBoard" = $2,
+    "licenseNumber" = $3,
+    "dateInitial" = $4,
+    "dateRenewed" = $5,
+    "dateExpiring" = $6,
+    "credentialImageKey" = $7
+    WHERE credential_id = $8;
+    `;
+
+    if (userId == req.user.id) {
+
+      // make a connection to pool client for transaction
+      const client = await pool.connect();
+
+      try {
+
+        // start transaction block
+        await client.query('BEGIN;');
+
+        await client.query(updateQuery, [credentialTaxonomy, licensingBoard, licenseNumber, dateReceived, dateRenewed, dateExpired, credentialImageKey, credentialId]);
+
+        // commit changes to the DB
+        await client.query('COMMIT;');
+
+        // send good response
+        res.sendStatus(204);
+        
+      } catch (error) {
+
+        console.error(`Error in Provider PUT, changes rolledback ${error}`);
+
+        await client.query('ROLLBACK;');
+    
+        res.sendStatus(500);
+        
+      } finally {
+        console.log('End credential PUT')
+
+        await client.release();
+      }
+
+    } else {
+
+      res.sendStatus(401);
+      
+    }
+  })
 
 router.put('/verify/:id', rejectUnauthenticated, (req, res) => {
 
