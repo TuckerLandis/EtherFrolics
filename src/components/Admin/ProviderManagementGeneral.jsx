@@ -13,21 +13,16 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
-import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import FolderIcon from '@material-ui/icons/Folder';
-import DeleteIcon from '@material-ui/icons/Delete';
 import StarIcon from '@material-ui/icons/Star';
+import { TextField } from '@material-ui/core';
+import Divider from '@material-ui/core/Divider';
 
 import Paper from "@material-ui/core/Paper";
-import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 import Button from '@material-ui/core/Button';
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -36,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
         height: 1,
         '& > *': {
             margin: theme.spacing(1),
+            width: '25ch',
         },
     },
     demo: {
@@ -44,6 +40,14 @@ const useStyles = makeStyles((theme) => ({
     title: {
         margin: theme.spacing(4, 0, 2),
     },
+    alignItemsAndJustifyContent: {
+        width: 500,
+        height: 80,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'pink',
+      },
 }));
 
 function ProviderManagementGeneral() {
@@ -90,31 +94,21 @@ function ProviderManagementGeneral() {
         }
     }
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-    } // end handleSubmit
-
     return (
 
-        <div>
+        <div className="admin-prov-gen">
 
-            <h1 className="providerMgmtListTitle">PROVIDERS</h1>
+            <Typography variant="h4" className="providerMgmtListTitle">PROVIDERS</Typography>
 
             <div className={classes.root}>
-                    <div>
-                        <form onSubmit={handleSubmit}>
-                            <InputBase
+                    <div className="search-wrapper">
+                            <TextField
+                                label="Search..."
+                                type="texts"
+                                variant="outlined"
                                 onChange={event => setSearchQuery(event.target.value)}
                             />
-                            <SearchIcon />
-                            <Button
-                                variant="contained"
-                                color="secondary"
-                                type="submit"
-                            >
-                                Search
-                            </Button>
-                        </form>
+                            <TextField />
                     </div>
                     <Paper style={{maxHeight: 300, overflow: 'auto'}}>
                     {providers?.filter(provider => {
@@ -135,12 +129,13 @@ function ProviderManagementGeneral() {
                                                         {starIcon(provider)}
                                                     </ListItemIcon>
                                                     <ListItemText
-                                                        primary={provider?.firstName}
                                                         onClick={() => handleSelect(provider?.user_id)}
                                                         className="mouse"
                                                     >
+                                                        <Typography>{provider?.firstName}</Typography>
                                                     </ListItemText>
                                                 </ListItem>
+                                                <Divider />
                                             </div>
                                         </List>
                                     </div>
