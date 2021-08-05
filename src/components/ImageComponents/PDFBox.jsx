@@ -59,7 +59,7 @@ loadingTask.promise.then(function(pdf) {
         <div>
 
             
-          {loadingTask && <canvas width="32px" className={PDFcanvasClass} id={props?.imagePath} alt="" onClick={e => setPDFCanvasClass('PDF-open')}></canvas> } 
+          {loadingTask.promise && <canvas width="32px" className={PDFcanvasClass} id={props?.imagePath} alt="" onClick={e => setPDFCanvasClass('PDF-open')}></canvas> } 
 
             {/* <canvas id="the-canvas"></canvas> */}
 
