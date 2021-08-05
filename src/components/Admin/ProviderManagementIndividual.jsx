@@ -16,11 +16,16 @@ function ProviderManagementIndividual() {
 
     const params = useParams();
 
-    useEffect(() => {
+    const selectProvider = () => {
         dispatch({
             type: 'SELECT_PROVIDER',
             payload: params.id
         })
+    } // end selectProvider
+
+    useEffect(() => {
+        console.log('individual provider params.id: ', params.id);
+        selectProvider();
     }, [params.id])
     // params.id in this array so that when it changes, the page refreshes^
 
@@ -50,6 +55,7 @@ function ProviderManagementIndividual() {
             type: 'VERIFY_PROVIDER',
             payload: provider_id
         })
+        selectProvider();
     } // end verify
     
     const disable = (provider_id) => {
@@ -58,6 +64,7 @@ function ProviderManagementIndividual() {
             type: 'DISABLE_PROVIDER',
             payload: provider_id
         })
+        selectProvider();
     } // end disable
 
     // displays whether a user has been verified or not by admin
@@ -68,7 +75,7 @@ function ProviderManagementIndividual() {
             )
         } else {
             return (
-                'unverified'
+                'disabled'
             )
         }
     } // end verificationStatus

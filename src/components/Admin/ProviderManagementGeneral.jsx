@@ -66,15 +66,15 @@ function ProviderManagementGeneral() {
 
     console.log('Provider Mgmt Gen providers:', providers);
 
-    const handleSelect = (providerId) => {
+    const handleSelect = (id) => {
 
-        console.log('Provider Mgmt Gen provider id: ', providerId);
+        console.log(`Provider Mgmt Gen provider's user_id: `, id);
 
         dispatch({
             type: 'SELECT_PROVIDER',
-            payload: providerId
+            payload: id
         })
-        history.push(`/providermgmt/${providerId}`);
+        history.push(`/providermgmt/${id}`);
     } // end handleSelect
 
     // const verifiedProviders = providers.filter(provider => provider.verified === true)
@@ -101,13 +101,6 @@ function ProviderManagementGeneral() {
             <h1 className="providerMgmtListTitle">PROVIDERS</h1>
 
             <div className={classes.root}>
-
-                <Paper>
-                    {/* <SearchBar
-                        value={searched}
-                        onChange={(searchVal) => requestSearch(searchVal)}
-                        onCancelSearch={() => cancelSearch()}
-                    /> */}
                     <div>
                         <form onSubmit={handleSubmit}>
                             <InputBase
@@ -123,7 +116,7 @@ function ProviderManagementGeneral() {
                             </Button>
                         </form>
                     </div>
-
+                    <Paper style={{maxHeight: 300, overflow: 'auto'}}>
                     {providers?.filter(provider => {
                         if (searchQuery == '') {
                             return provider
@@ -155,7 +148,8 @@ function ProviderManagementGeneral() {
                             </div>
                         )
                     })}
-                </Paper>
+                    </Paper>
+               
 
             </div>
 
