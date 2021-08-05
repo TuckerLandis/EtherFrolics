@@ -62,6 +62,10 @@ function ProviderCredEdit({ provider, credentialEntry, inputConfig }) {
     })
   }
 
+  const cancelEdit = e => {
+    history.push('/providerlandingpage')
+  }
+
   console.log(credUpdate);
   return (
     <div>
@@ -83,10 +87,13 @@ function ProviderCredEdit({ provider, credentialEntry, inputConfig }) {
             
           })}
 
-        <div className="text-field-wrapper">
-          <Button type="submit" color="primary" size="large" variant="outlined" >Save Changes</Button>  
-        </div>
+          <div className="text-field-wrapper">
+            <Button type="submit" color="primary" size="large" variant="outlined" >Save Changes</Button>  
+          </div>
 
+          <div className="text-field-wrapper">
+            <Button color="secondary" size="large" variant="outlined" onClick={cancelEdit} >Cancel</Button>
+          </div>
         </form>
       </div>
     </div>

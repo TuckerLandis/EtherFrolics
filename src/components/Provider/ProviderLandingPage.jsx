@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, Route, Switch, useRouteMatch } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
+import { Button, Typography } from '@material-ui/core';
 import ProviderGenItem from './ProviderGenItem';
 import ProviderCredItem from './ProviderCredItem';
 import ImageViewer from '../ImageComponents/ImageViewer';
@@ -112,7 +112,7 @@ function ProviderLandingPage() {
     console.log(url + '/edit');
     return (
         <div>
-            <h2>Welcome, {user.username} </h2>
+            <Typography variant="h3">{user.username}'s Profile</Typography>
 
             {provider?.registrationComplete ? (
                 <Button
@@ -127,19 +127,19 @@ function ProviderLandingPage() {
                 <Route exact path={path}>
                     {provider?.registrationComplete ? ( 
                     <div>
-                    <h2>General Info</h2>
+                    <Typography align="center" variant="h5">General Info</Typography>
                         
-                    <h3>Your Resume</h3>
+                    <Typography variant="body1">Resume</Typography>
                     <ImageViewer imagePath={resumePath} />
                     <ProviderGenItem provider={provider}/>
                     </div>
                     ) : (
-                        <h3>Please register to view upcoming missions</h3>
+                        <Typography variant="h4">Please register to view upcoming missions</Typography>
                     )}
 
                     {provider?.registrationComplete ? (
                     <div>
-                    <h2>Credential Info</h2>
+                    <Typography align="center" variant="h5">Credential Info</Typography>
                     <ProviderCredItem provider={provider}/>
                     <Button
                     variant="contained">Edit Credentials</Button>
