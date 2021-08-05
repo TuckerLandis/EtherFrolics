@@ -2,8 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import {Button, TextField, Typography} from '@material-ui/core';
 
 function CreateMissionPage() {
     const dispatch = useDispatch();
@@ -16,6 +15,7 @@ function CreateMissionPage() {
     const [endDate, setEndDate] = useState('');
     const [missionLink, setMissionLink] = useState('');
     const [applyLink, setApplyLink] = useState('');
+    const [missionActive, setMissionActive] = useState(true);
 
     //create a function that will send the form data to the server
     const handleSubmit = (evt) => {
@@ -27,9 +27,9 @@ function CreateMissionPage() {
             startDate: startDate,
             endDate: endDate,
             missionLink: missionLink,
-            applyLink: applyLink
+            applyLink: applyLink,
+            missionActive: missionActive
         }
-        console.log(missionObj);
 
         dispatch({
             type: 'POST_MISSION_DATA',
@@ -51,26 +51,39 @@ function CreateMissionPage() {
     return (
         <div>
 
-            <h2>Create Mission</h2>
+            <Typography variant="h4" className="registration-title">Create Mission</Typography>
+
+            <div className="general-form-display">
+
             <form onSubmit={handleSubmit}>
+                <div className="general-form-sub-display">
+
+                <div className="text-field-wrapper">
                 <TextField
                     type="text"
-                    label="Name"
+                    label="Organization"
                     value={name}
                     onChange={(evt) => setName(evt.target.value)} />
+                </div>
+
+                <div className="text-field-wrapper">
                 <TextField
                     type="text"
                     label="Location"
                     value={location}
                     onChange={(evt) => setLocation(evt.target.value)} />
-                
+                </div>
+
+                <div className="text-field-wrapper">
                 <TextField
                     type="date"
                     label="Start Date"
                     InputLabelProps={{ shrink: true }}
                     value={startDate}
                     onChange={(evt) => setStartDate(evt.target.value)} />
+                </div>
                 
+                <div className="text-field-wrapper">
                 <TextField
                     type="date"
                     label="End Date"
@@ -78,25 +91,37 @@ function CreateMissionPage() {
                     value={endDate}
                     onChange={(evt) => setEndDate(evt.target.value)}
                 />
+                </div>
+
+                <div className="text-field-wrapper">
                 <TextField
                     type="text"
-                    label="Link to Mission "
+                    label="Link to Mission"
+                    required
                     value={missionLink}
                     onChange={(evt) => setMissionLink(evt.target.value)} />
+                </div>
 
+                <div className="text-field-wrapper">
                 <TextField
                     type="text"
-                    label="Link to Apply "
+                    label="Link to Apply"
+                    required
                     value={applyLink}
                     onChange={(evt) => setApplyLink(evt.target.value)} />
-                                        
+                </div>
+
+                <div className="text-field-wrapper">                    
                 <Button
                     type="submit"
+                    color="primary"
                     variant="contained"
                 >Add Mission</Button>
+                </div>
 
-
+            </div>
             </form>
+            </div>
 
         </div>
     )

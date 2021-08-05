@@ -55,10 +55,10 @@ function MissionTable() {
 
     const getData = () => {
         dispatch({
-            type: 'GET_PROVIDER_LANDING'
+            type: 'FETCH_MISSIONS'
         });
         dispatch({
-            type: 'FETCH_MISSIONS'
+            type: 'GET_PROVIDER_LANDING'
         })
     }
     console.log(provider);
@@ -66,7 +66,7 @@ function MissionTable() {
     return (
         <div>
             <h2>Upcoming Missions</h2>
-        {provider.verified ? (<div>
+        {provider.verified || user.authorization === 100 ? (<div>
         <TableContainer component={Paper}>
             <Table className={classes.table}>
                 <TableHead>
