@@ -13,17 +13,11 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
-import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import FolderIcon from '@material-ui/icons/Folder';
-import DeleteIcon from '@material-ui/icons/Delete';
 import StarIcon from '@material-ui/icons/Star';
 import { TextField } from '@material-ui/core';
+import Divider from '@material-ui/core/Divider';
 
 import Paper from "@material-ui/core/Paper";
 import SearchIcon from '@material-ui/icons/Search';
@@ -104,7 +98,7 @@ function ProviderManagementGeneral() {
 
         <div className="admin-prov-gen">
 
-            <h1 className="providerMgmtListTitle">PROVIDERS</h1>
+            <Typography variant="h4" className="providerMgmtListTitle">PROVIDERS</Typography>
 
             <div className={classes.root}>
                     <div className="search-wrapper">
@@ -135,12 +129,13 @@ function ProviderManagementGeneral() {
                                                         {starIcon(provider)}
                                                     </ListItemIcon>
                                                     <ListItemText
-                                                        primary={provider?.firstName}
                                                         onClick={() => handleSelect(provider?.user_id)}
                                                         className="mouse"
                                                     >
+                                                        <Typography>{provider?.firstName}</Typography>
                                                     </ListItemText>
                                                 </ListItem>
+                                                <Divider />
                                             </div>
                                         </List>
                                     </div>
