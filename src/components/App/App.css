@@ -195,7 +195,7 @@ input[type=text]{
 .PDF-closed {
   border: 1px solid black;
   direction: ltr;
-  max-width: 20%;
+  max-width: 10%;
 }
 
 .PDF-open {
