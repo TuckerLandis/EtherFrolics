@@ -191,3 +191,15 @@ input[type=text]{
   justify-content: center;
   margin-bottom: 0.8em;
 }
+
+.PDF-closed {
+  border: 1px solid black;
+  direction: ltr;
+  max-width: 20%;
+}
+
+.PDF-closed {
+  border: 1px solid black;
+  direction: ltr;
+  max-width: 80%;
+}
