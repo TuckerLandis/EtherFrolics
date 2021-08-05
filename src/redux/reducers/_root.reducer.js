@@ -5,6 +5,7 @@ import administrators from './admin.reducer';
 import providers from './provider.reducer';
 import selectedProvider from './selected.provider.reducer';
 import mission from './mission.reducer';
+import editMission from './editMission.reducer';
 import providerLandingReducer from './providerLanding.reducer';
 import workHistoryReducer from './workHistory.reducer';
 import missionHistoryReducer from './missionHistory.reducer';
@@ -33,6 +34,7 @@ const rootReducer = combineReducers({
   providers,
   selectedProvider,
   mission,
+  editMission,
   providerLandingReducer,
   workHistoryReducer,
   missionHistoryReducer,
