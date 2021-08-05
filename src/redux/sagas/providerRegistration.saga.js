@@ -1,5 +1,6 @@
 import { takeLatest } from "@redux-saga/core/effects";
 import axios from "axios";
+import { put } from "redux-saga/effects";
 
 
 function* postProvider(action) {
@@ -75,7 +76,12 @@ function* completeRegistration (action) {
   console.log('completing registration');
 
   try {
-    yield axios.put('/api/provider/completeregistration')
+    const response = yield axios.put('/api/provider/completeregistration')
+
+    put({
+      type: 'SELECT_PROVIDER',
+      payload: response.data.user_id
+    })
   } catch (error) {
     console.log('error completing registration', error);
     

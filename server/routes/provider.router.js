@@ -624,11 +624,12 @@ router.put('/completeregistration', rejectUnauthenticated, (req, res) => {
 
   const queryText = `UPDATE "provider" SET "registrationComplete" = true
     WHERE "provider".user_id = $1
+    RETURNING "provider".user_id
     ;`;
 
   pool.query(queryText, [req.user.id])
     .then(result => {
-      res.sendStatus(200)
+      res.send(result.rows)
     })
     .catch(error => {
       console.log('error completing registration', error);
