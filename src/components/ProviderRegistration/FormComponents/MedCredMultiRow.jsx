@@ -95,6 +95,9 @@ function MedCredMultiRow(props) {
   console.log(medCredValues);
   return (
     <div className="general-form-display">
+      {itemSubmit ? (
+            <p>submitted</p>
+          ) : (
       <form onSubmit={submitCredentialHistory}>
 
       
@@ -119,14 +122,13 @@ function MedCredMultiRow(props) {
 
           <ImageUploader imageType={imageType} attachImageFunction={handleImageAttach}/>
         
-        {itemSubmit ? (
-            <p>submitted</p>
-          ) : (
+        
             <div className="text-field-wrapper">
               <Button variant="contained" color="secondary" type="submit">Add Medical Credential +</Button>
             </div>
-          )}
+          
       </form>
+      )}
     </div>
   );
 }
