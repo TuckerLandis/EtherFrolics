@@ -9,11 +9,13 @@ function ImageViewer(props) {
   return (
     <div>
 
-      {/* {props.imagePath.includes('PDF') ? <embed src={props.imagePath} width="800px" height="2100px" /> : <LightBoxComponent imagePath={props.imagePath} /> } */}
+      {props.imagePath.includes('PDF') ? <embed src={props.imagePath} width="800px" height="2100px" /> : <LightBoxComponent imagePath={props.imagePath} /> }
 
-      {props.imagePath.includes('PDF') ? <object data={props.imagePath} type="application/pdf" width="300" height="200">
+      {/* {props.imagePath.includes('PDF') ? <object data={props.imagePath} type="application/pdf" width="300" height="200">
         alt : <a href="data/test.pdf">test.pdf</a>
-      </object> : <LightBoxComponent imagePath={props.imagePath} />}
+      </object> : <LightBoxComponent imagePath={props.imagePath} />} */}
+
+      {/* {props.imagePath.includes('PDF') ? <PDFViewer imagePath={props.imagePath} width="800px" height="2100px" /> : <LightBoxComponent imagePath={props.imagePath} /> } */}
 
 
 
