@@ -84,9 +84,17 @@ function ProviderGenItem({ provider }) {
             </div>
             )}
 
-            <Button 
-            variant="contained"
-            onClick={ () => {setEditState(!editState)}}>Edit General Info</Button>
+            {!editState ?
+                <Button 
+                variant="contained"
+                color="primary"
+                onClick={ () => {setEditState(!editState)}}>Edit General Info</Button>
+            :
+                <Button 
+                variant="contained"
+                color="secondary"
+                onClick={ () => {setEditState(!editState)}}>Cancel Edit</Button>
+            }
         
         </div>
     )

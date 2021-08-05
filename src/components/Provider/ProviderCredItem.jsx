@@ -95,24 +95,24 @@ function ProviderCredItem({ provider }) {
                                 console.log(credential);
                                 return (
                                     hasBeenClicked?.[credential.credentialName] ?
-                                            <ListItem key={i} button >
-                                                <ListItemIcon>
-                                                    <IconButton edge="start" >
-                                                        <ImageViewer imagePath={credentialImagePath} />
-                                                    </IconButton>
-                                                </ListItemIcon>
-                                                <ListItemText primary={`${credential.credentialName}`} onClick={handleCloseOptions} secondary={`Expiration: ${credential.dateExpiring}`} />
-                                                <ListItemSecondaryAction>
-                                                    <IconButton edge="end" onClick={editCredential}>
-                                                        <EditIcon />
-                                                    </IconButton>
-                                                </ListItemSecondaryAction>
-                                            </ListItem>
+                                        <ListItem key={i} button >
+                                            <ListItemIcon>
+                                                <IconButton edge="start" >
+                                                    <ImageViewer imagePath={credentialImagePath} />
+                                                </IconButton>
+                                            </ListItemIcon>
+                                            <ListItemText primary={`${credential.credentialName}`} onClick={handleCloseOptions} secondary={`Expiration: ${credential.dateExpiring}`} />
+                                            <ListItemSecondaryAction>
+                                                <IconButton edge="end" onClick={editCredential}>
+                                                    <EditIcon />
+                                                </IconButton>
+                                            </ListItemSecondaryAction>
+                                        </ListItem>
                                     :
 
-                                    <ListItem key={i} button >
-                                        <ListItemText primary={`${credential.credentialName}`} onClick={ e => handleDisplayOptions(e, credential)} secondary={`Expiration: ${credential.dateExpiring}`} />
-                                    </ListItem>
+                                        <ListItem key={i} button >
+                                            <ListItemText primary={`${credential.credentialName}`} onClick={ e => handleDisplayOptions(e, credential)} secondary={`Expiration: ${credential.dateExpiring}`} />
+                                        </ListItem>
                                     
                                 )
                             })}

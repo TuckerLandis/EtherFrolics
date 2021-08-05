@@ -117,10 +117,12 @@ function ProviderLandingPage() {
             {provider?.registrationComplete ? (
                 <Button
                     variant="contained"
+                    color="secondary"
                     onClick={viewMissions}>View Missions</Button>
             ) : (
                 <Button
                     variant="contained"
+                    color="primary"
                     onClick={providerRegister}>Register</Button>
             )}
             <Switch>
@@ -142,7 +144,7 @@ function ProviderLandingPage() {
                     <Typography align="center" variant="h5">Credential Info</Typography>
                     <ProviderCredItem provider={provider}/>
                     <Button
-                    variant="contained">Edit Credentials</Button>
+                    variant="contained" color="primary">Add New Credential</Button>
                     </div>
                     ) : (
                     <p></p>
