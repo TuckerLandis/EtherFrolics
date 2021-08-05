@@ -73,6 +73,8 @@ function ImageUploader(props) {
     // logs the s3 info to show a succesful post, possible render somewhere if we pass down a callback
     console.log(result);
 
+
+    // adds a prefix of the image type or PDF to the key
     result.Key = `${imgOrPDF}${result.Key}`
     result.key = `${imgOrPDF}${result.Key}`
 
