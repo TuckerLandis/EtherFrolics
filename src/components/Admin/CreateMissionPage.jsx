@@ -1,15 +1,16 @@
 import React from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import FormLabel from '@material-ui/core/FormLabel';
 
 function CreateMissionPage() {
     const dispatch = useDispatch();
+    const history = useHistory();
 
     //create local states to collect data
-    const [organization, setOrganization] = useState('');
+    const [name, setName] = useState('');
     const [location, setLocation] = useState('');
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
@@ -21,7 +22,7 @@ function CreateMissionPage() {
         evt.preventDefault();
         //need to create an object that will collect the data and dispatch it to the saga
         const missionObj = {
-            name: organization,
+            name: name,
             location: location,
             startDate: startDate,
             endDate: endDate,
@@ -36,12 +37,14 @@ function CreateMissionPage() {
         })
 
         //clear local states
-        setOrganization('');
+        setName('');
         setLocation('');
         setStartDate('');
         setEndDate('');
         setMissionLink('');
         setApplyLink('');
+
+        history.push('/missions')
     }
     
 
@@ -52,22 +55,26 @@ function CreateMissionPage() {
             <form onSubmit={handleSubmit}>
                 <TextField
                     type="text"
-                    label="Organization"
-                    value={organization}
-                    onChange={(evt) => setOrganization(evt.target.value)} />
+                    label="Name"
+                    value={name}
+                    onChange={(evt) => setName(evt.target.value)} />
                 <TextField
                     type="text"
                     label="Location"
                     value={location}
                     onChange={(evt) => setLocation(evt.target.value)} />
-                <FormLabel>Start Date</FormLabel>
+                
                 <TextField
                     type="date"
+                    label="Start Date"
+                    InputLabelProps={{ shrink: true }}
                     value={startDate}
                     onChange={(evt) => setStartDate(evt.target.value)} />
-                <FormLabel>End Date</FormLabel>
+                
                 <TextField
                     type="date"
+                    label="End Date"
+                    InputLabelProps={{ shrink: true }}
                     value={endDate}
                     onChange={(evt) => setEndDate(evt.target.value)}
                 />

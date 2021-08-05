@@ -1,19 +1,100 @@
-// ## Checklist
+import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom';
+import {Button, FormLabel, TextField} from '@material-ui/core';
 
-// - [ ]  Mission Edit Form (will navigate back to this upon edit button being clicked)
-//     - [ ]  Will be able to change the:
-//     - [ ]  Organization name
-//     - [ ]  Location name
-//     - [ ]  Date boxes
-//     - [ ]  Check box or un-check solo practitioner
-//     - [ ]  Check box to enable or disable if it is still a mission
-//     - [ ]  Submit Changes button (PUT route with all info to update the missions table)
+function EditMissionPage () {
+    const dispatch = useDispatch();
+    const history = useHistory();
 
-// # Component(s)
+    const mission = useSelector(store => store.editMission)
+    
+    const setDateIfAvailable = (whichDate) => {
+        if (mission.startDate && mission.endDate){
+            const justDate = mission[whichDate].split('T');
+            return justDate[0];
+        } else {
+            return '';
+        }
+    }
 
-// - [ ]  Mission Detail component
-//     - [ ]  Can re-use Mission Detail component (stretch)
+    const [missionObj, setMissionObj] = useState({
+        startDate: setDateIfAvailable('startDate'),
+        endDate: setDateIfAvailable('endDate'),
+        location: mission.location,
+        name: mission.name,
+        missionLink: mission.missionLink,
+        applyLink: mission.applyLink,
+        mission_id: mission.mission_id
+    })
 
-// # Route(s)
+    const handleChange = (evt) => {
+        evt.preventDefault();
 
-// - [ ]  PUT route to the Mission Detail view
+        setMissionObj({...missionObj, [evt.target.name]: evt.target.value})
+    }
+    
+    const handleSubmit = (evt) => {
+        evt.preventDefault();
+
+        dispatch({
+            type: 'UPDATE_MISSION',
+            payload: missionObj
+        })
+        history.push('/missions')
+    }
+    console.log(mission);
+
+    return (
+        <div>
+            <h2>Edit Mission</h2>
+            <form onSubmit={handleSubmit}>
+                <TextField
+                type="text"
+                value={missionObj.name}
+                name="name"
+                onChange={handleChange}/>
+                <TextField 
+                type="text" 
+                value={missionObj.location} 
+                name="location" 
+                onChange={handleChange}/>
+
+                <TextField
+                type="date"
+                label="Start Date"
+                InputLabelProps={{ shrink: true }}
+                name="startDate"
+                value={missionObj.startDate}
+                onChange={handleChange}/>
+
+                <TextField
+                type="date"
+                label="End Date"
+                InputLabelProps={{ shrink: true }}
+                name="endDate"
+                value={missionObj.endDate}
+                onChange={handleChange}/>
+
+                 <TextField 
+                 type="text"
+                 name="missionLink"
+                 value={missionObj.missionLink}
+                 onChange={handleChange}/>
+
+                 <TextField 
+                 type="text"
+                 name="applyLink"
+                 value={missionObj.applyLink}
+                 onChange={handleChange}/>
+
+                <Button
+                variant="contained"
+                type="submit"
+                >Submit</Button>
+            </form>
+        </div>
+    )
+}
+
+export default EditMissionPage;
