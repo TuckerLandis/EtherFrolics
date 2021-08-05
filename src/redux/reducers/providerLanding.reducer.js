@@ -1,4 +1,4 @@
-const providerLandingReducer = (state = {}, action) => {
+const providerLandingReducer = (state = [], action) => {
     switch (action.type) {
         case 'SET_PROVIDER_LANDING':
             return action.payload[0];

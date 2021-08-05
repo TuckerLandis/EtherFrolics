@@ -40,7 +40,7 @@ import CreateMissionPage from '../Admin/CreateMissionPage';
 
 // Mission Components
 import MissionTable from '../Mission/MissionTable';
-
+import EditMissionPage from '../Admin/EditMissionPage'
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -197,7 +197,6 @@ function App() {
               // with authRedirect:
               // - if logged in, redirects to "/user"
               // - else shows LandingPage at "/home"
-              exact
               path="/providerlandingpage"
               // adminRedirect="/adminlandingpage"
             >
@@ -268,6 +267,13 @@ function App() {
             >
               <CreateMissionPage />
               </ProtectedRoute>
+
+            <ProtectedRoute
+            exact
+            path="/editmission">
+              <EditMissionPage />
+            </ProtectedRoute>
+            
 
             <ProtectedRoute
               exact
