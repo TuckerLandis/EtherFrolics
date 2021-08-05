@@ -13,6 +13,7 @@ function ImageUploader(props) {
   //state variable for the file being uploaded
   const [file, setFile] = useState('')
   const [fileName, setFileName] = useState('Select a file')
+  const [imgOrPDF, setImgOrPDF] = useState('neither')
 
   const [attachButtonText, setAttachButtonText] = useState('Attach')
   const [attachButtonColor, setAttachButtonColor] = useState('secondary')
@@ -43,6 +44,16 @@ function ImageUploader(props) {
   const fileSelected = event => {
     console.log(event.target.files[0]);
     const file = event.target.files[0]
+
+    if (file.type === 'application/pdf') {
+      console.log('this is a pdf');
+      setImgOrPDF('PDF')
+      
+    } else if (file.type.includes('image')) {
+      console.log('this is an image');
+      setImgOrPDF('IMG')
+    }
+
     setFile(file)
     setFileName(file.name)
   }
@@ -62,6 +73,9 @@ function ImageUploader(props) {
     // logs the s3 info to show a succesful post, possible render somewhere if we pass down a callback
     console.log(result);
 
+    result.Key = `${imgOrPDF}${result.Key}`
+    result.key = `${imgOrPDF}${result.Key}`
+
     
     // if resume, just post to DB, can change this in the put work history dispatch
     if (props.imageType === 'resume') {
@@ -71,6 +85,8 @@ function ImageUploader(props) {
         imageType: imageType
       })
     }
+
+    
 
 
     // attaches the image key from s3 to the row to be submitted to the db

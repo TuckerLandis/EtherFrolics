@@ -17,7 +17,7 @@ function MedCredMultiRow(props) {
   function handleImageAttach(awsKey) {
     setImageSubmit(true)
     setMedCredValues(
-      { ...medCredValues , credImageKey: awsKey }
+      { ...medCredValues , credentialImageKey: awsKey }
       )
 }
 
@@ -58,7 +58,7 @@ function MedCredMultiRow(props) {
       dateReceived: '',
       dateRenewed: '',
       dateExpired: '',
-      credImageKey: ''
+      credentialImageKey: ''
   });
 
   const submitCredentialHistory = (e) => {
