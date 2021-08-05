@@ -21,7 +21,7 @@ var loadingTask = pdfjsLib.getDocument(url);
 loadingTask.promise.then(function(pdf) {
   console.log('PDF loaded');
   
-  // Fetch the first page -- can loop over page numbers
+  // Fetch the first page -- can loop over page numbers here somehow?
   
   var pageNumber = 1;
   pdf.getPage(pageNumber).then(function(page) {
