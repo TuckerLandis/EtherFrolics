@@ -21,8 +21,10 @@ Grid
 
 .welcome {
   text-align: center;
-  margin: 20px 20px 0 20px;
+  display: inline;
   padding: 5px 5px 5px 5px;
+  background-color: #7FBF7F;
+  width: 100%;
 }
 
 .infoCardStepper {
@@ -52,12 +54,14 @@ Grid
 
 .titleViewHeading {
   display: flex;
-  align-items: center;
-  flex-flow: column wrap;
+  align-items: flex-end;
+  flex-flow: row-reverse wrap;
+  background-image: url("../../images/IMG_1194.JPG");
+  background-color: #7FBF7F;
+  background-size: contain;
   width: 100%;
   max-height: 546px;
-  height: 450px;
-  margin-top: 30px;
+  height: 475px;
 }
 
 .globe {
@@ -71,9 +75,24 @@ Grid
   display: flex;
   align-items: center;
   flex-flow: column wrap;
+  background-color: #588585;
 }
 
 .userLink {
   width: 100%;
   padding: 10px 10px 10px 10px;
+  background-color: #98CBCB;
+  align-self: center;
+  height: 75px;
+}
+
+.subhead {
+  background-color: rgba(88, 133, 133, 0.60);
+  border-radius: 10%;
+  align-self: flex-start;
+  width: 100%;
+}
+
+.login{
+  background-color: #588558;
 }
