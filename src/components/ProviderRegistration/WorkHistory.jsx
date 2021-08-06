@@ -98,7 +98,7 @@ function WorkHistory() {
             <Typography variant="h4" className="registration-title">Work History</Typography>
             
         
-            
+            <hr class="separator separator--dots" />
 
             <Typography variant="subtitle1" className="registration-title-subheading">Submit Your Resume</Typography>
             {/* takes in props above the return, and the submitResumeFunction */}
