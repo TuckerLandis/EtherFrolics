@@ -43,7 +43,22 @@ function getFileStream(fileKey) {
         Bucket: bucketName
     }
 
-    // returns a getObject function (built into s3 SDK) as a readStream
     return s3.getObject(downloadParams).createReadStream()
+
+    
+    //  if (fileKey.includes('PDF')) {
+    //     s3.getObject(downloadParams, function(err, data) {
+    //         if (err)
+    //             return err;
+    //         return data.Body.toString('utf-8')
+    //     })
+    // } else {
+    //     // returns a getObject function (built into s3 SDK) as a readStream
+    //     return s3.getObject(downloadParams).createReadStream()
+    
+    //     }
+    
 }
 exports.getFileStream = getFileStream
+
+// (fileKey.includes('IMG')) 
