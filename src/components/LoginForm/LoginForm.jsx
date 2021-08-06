@@ -28,7 +28,7 @@ function LoginForm() {
 
   return (
     <form className="formPanel" onSubmit={login}>
-      <Typography variant= "h4">Login</Typography>
+        <Typography variant= "h4">Login</Typography>
       {errors.loginMessage && (
         <h3 className="alert" role="alert">
           {errors.loginMessage}
@@ -36,8 +36,9 @@ function LoginForm() {
       )}
       <div>
         <label htmlFor="username">
-          Username:
-          <input
+        
+          <TextField
+            label="Username:"
             type="text"
             name="username"
             required
@@ -48,8 +49,9 @@ function LoginForm() {
       </div>
       <div>
         <label htmlFor="password">
-          Password:
-          <input
+          {/* Password: */}
+          <TextField
+            label="Password:"
             type="password"
             name="password"
             required
