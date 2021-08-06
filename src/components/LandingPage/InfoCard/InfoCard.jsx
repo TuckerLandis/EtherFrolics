@@ -39,7 +39,7 @@ function TemplateFunction() {
           <CardContent>
             <Typography className="cardHeading" variant="h5" color="textSecondary">Our Values</Typography>
             <List>
-              {['Education', 'Empowerment', 'Adaptive delivery of services', 'Leverage the power of people and technology', 'Sustainable environmentally sound practices', 'Education is empowerment', 'Employee balance and health', 'Employee balance and health', 'Spread good vibes']
+              {['Education', 'Empowerment', 'Adaptive delivery of services', 'Leverage the power of people and technology', 'Sustainable environmentally sound practices', 'Education is empowerment', 'Employee balance and health', 'Empowering innovation to more efficiently deliver current services and expand to new services', 'Spread good vibes']
               .map(value => {
                   return (
                     <ListItem>

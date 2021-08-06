@@ -46,10 +46,10 @@ Grid
   border-radius: 2%;
   padding: 16px 0 16px 0;
   width: 317px;
-  max-height: 800px;
+  max-height: 825px;
   display: flex;
-  align-items: center;
-  flex-flow: column wrap;
+  justify-content: center;
+  flex-flow: row-reverse wrap;
 }
 
 .titleViewHeading {
@@ -71,7 +71,7 @@ Grid
 
 .organizationPillars {
   width: 100%;
-  max-height: 800px;
+  max-height: 825px;
   display: flex;
   align-items: center;
   flex-flow: column wrap;
