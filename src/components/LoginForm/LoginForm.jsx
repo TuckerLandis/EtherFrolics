@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {useSelector} from 'react-redux';
+import { TextField, Typography } from "@material-ui/core"
+import Button from '@material-ui/core/Button';
 
 function LoginForm() {
   const [username, setUsername] = useState('');
@@ -26,7 +28,7 @@ function LoginForm() {
 
   return (
     <form className="formPanel" onSubmit={login}>
-      <h2>Login</h2>
+      <Typography variant= "h4">Login</Typography>
       {errors.loginMessage && (
         <h3 className="alert" role="alert">
           {errors.loginMessage}
