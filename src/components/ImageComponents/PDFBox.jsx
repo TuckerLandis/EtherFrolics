@@ -13,7 +13,10 @@ function openOrClosePDF() {
 }
 
 
-const modifiedImagePath = props.imagePath.replace("PDF", "")
+    const modifiedImagePath = props.imagePath.replace("PDF", "")
+
+
+
 
 // If absolute URL from the remote server is provided, configure the CORS
 // header on that server.
@@ -27,6 +30,9 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.w
 
 // Asynchronous download of PDF
 var loadingTask = pdfjsLib.getDocument(url);
+
+
+
 loadingTask.promise.then(function(pdf) {
   console.log('PDF loaded');
   
@@ -42,9 +48,8 @@ loadingTask.promise.then(function(pdf) {
     // Prepare canvas using PDF page dimensions
     var canvas = document.getElementById(modifiedImagePath);
    
-
-
-    var context = canvas.getContext('2d');
+    if (canvas) {
+      var context = canvas?.getContext('2d');
     canvas.height = viewport.height;
     canvas.width = viewport.width;
 
@@ -57,19 +62,30 @@ loadingTask.promise.then(function(pdf) {
     renderTask.promise.then(function () {
       console.log('Page rendered');
     });
+      
+    }
+
+
+    
   });
 }, function (reason) {
   // PDF loading error
   console.error(reason);
 });
 
+    
+
+
+
+
+
 
 
     return (
         <div>
 
-            
-          {loadingTask.promise && <canvas width="32px" className={PDFcanvasClass} id={modifiedImagePath} alt="" onClick={openOrClosePDF}></canvas> } 
+                    
+          {loadingTask.promise && <canvas width="32px" className={PDFcanvasClass} id={modifiedImagePath} alt="" onClick={openOrClosePDF}></canvas>  } 
 
             {/* <canvas id="the-canvas"></canvas> */}
 

@@ -85,8 +85,8 @@ function MissionTable() {
                     {missions.map((mission) => (
                         <TableRow key={mission.mission_id}>
                             <TableCell><a href={mission.missionLink} target="_blank">{mission.location}</a></TableCell>
-                            <TableCell>{mission.startDate}</TableCell>
-                            <TableCell>{mission.endDate}</TableCell>
+                            <TableCell>{mission.startDate.slice(0, 10)}</TableCell>
+                            <TableCell>{mission.endDate.slice(0, 10)}</TableCell>
                             <TableCell>{mission.name}</TableCell>
                             <TableCell>
                                 <a href={mission.applyLink}
