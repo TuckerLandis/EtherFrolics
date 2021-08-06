@@ -3,7 +3,7 @@ import { Route, useHistory, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import './LandingPage.css';
-import GlobalSvg from '../../images/etherfrolics.svg';
+import EFLOGOSvg from '../../images/etherlogooff.svg';
 
 
 import MobileStepper from '@material-ui/core/MobileStepper';
@@ -87,17 +87,20 @@ function LandingPage({ theme }) {
   return (
     <div className="grid">
 
-      <div className="titleViewHeading" style={{backgroundColor: theme.palette.primary.light}} >
-        
-        <img src={GlobalSvg} alt="Global Medicine Vector Image" height="300" width="300" />
+      <div className="titleViewHeading" >
+
+        <div className="subhead">
+          <Typography align="center" variant="h6" color="textPrimary" ><strong>Spreading euphoria and relieving pain across the globe</strong></Typography>
+        </div>
 
         <div className="welcome">
-          <Typography variant="h3" >EtherFrolics</Typography>
+          <img src={EFLOGOSvg} alt="Global Medicine Vector Image" height="40" width="65" />
+          <Typography variant="h3" >EtherFrolics</Typography> <br />
         </div>
-        <Typography align="left" variant="h6" color="textSecondary">Spreading euphoria and relieving pain across the globe</Typography>
+
       </div>
 
-      <div className="organizationPillars" style={{backgroundColor: theme.palette.secondary.dark}}>
+      <div className="organizationPillars">
 
         <div className="infoCarousel">
 
@@ -129,8 +132,8 @@ function LandingPage({ theme }) {
       </div>
       <center className="userNav">
 
-        <div className="userLink" style={{backgroundColor: theme.palette.secondary.light}}>
-          <h4>New User?</h4>
+        <div className="userLink">
+          <Typography variant="body1">New User?</Typography>
           <Button 
           size="small"
           color="primary" 
@@ -141,8 +144,8 @@ function LandingPage({ theme }) {
           </Button>
         </div>
 
-        <div className="userLink" style={{backgroundColor: theme.palette.primary.dark}}>
-          <h4 style={{color: '#fff'}}>Already a Member?</h4>
+        <div className="userLink login">
+          <Typography variant="body1" style={{color: '#fff'}}>Already a Member?</Typography>
           <Button 
           size="small"
           color="secondary" 
