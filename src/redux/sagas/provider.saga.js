@@ -40,10 +40,16 @@ function* getProviderLanding(action){
     
     const response = yield axios.get('/api/provider/landing')
 
-    yield put({
-        type: 'SET_PROVIDER_LANDING',
-        payload: response.data
-    });
+    if (response.data[0] === undefined) {
+        yield put({
+            type: 'REGISTRATION_IN_PROGRESS'
+        });
+    } else {
+        yield put({
+            type: 'SET_PROVIDER_LANDING',
+            payload: response.data
+        });
+    }
 
     }
      catch (error) {
