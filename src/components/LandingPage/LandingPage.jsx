@@ -3,7 +3,8 @@ import { Route, useHistory, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import './LandingPage.css';
-import IMG_1194 from '../../images/IMG_1194.JPG';
+import EFLOGOSvg from '../../images/ether-logo-off.svg';
+
 
 
 import MobileStepper from '@material-ui/core/MobileStepper';
