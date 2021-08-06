@@ -98,7 +98,7 @@ function WorkHistory() {
             <Typography variant="h4" className="registration-title">Work History</Typography>
             
         
-            
+            <hr></hr>
 
             <Typography variant="subtitle1" className="registration-title-subheading">Submit Your Resume</Typography>
             {/* takes in props above the return, and the submitResumeFunction */}
@@ -107,7 +107,10 @@ function WorkHistory() {
             
             <div className="text-field-wrapper">
 
+            <div className="text-field-wrapper">
             <Typography variant="body1" htmlFor="yearsExperienceInput">Years of experience</Typography>
+            </div>
+            
             <Select variant="outlined" value={yearsExperience} name="yearsExperience" id="yearsExperienceInput" onChange={handleChange}>
                 <MenuItem value="-">-</MenuItem>
                 <MenuItem value="1-2">1-2</MenuItem>

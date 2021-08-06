@@ -49,6 +49,7 @@ function Education() {
     return (
         <div>
             <Typography variant="h4" className="registration-title">Education</Typography>
+            <hr></hr>
 
             {/* maps a state array to render relevant number of education history forms */}
             {amountOfEducationHistories.map((education, i )=> {
