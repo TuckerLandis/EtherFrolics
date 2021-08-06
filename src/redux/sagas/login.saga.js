@@ -49,6 +49,10 @@ function* logoutUser(action) {
     // it will end the session
     yield axios.post('/api/user/logout', config);
 
+    yield put({
+      type:'RESET_PROVIDER_LANDING_OBJ'
+    })
+
     // now that the session has ended on the server
     // remove the client-side user object to let
     // the client-side code know the user is logged out

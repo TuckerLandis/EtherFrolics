@@ -11,13 +11,6 @@ function LogOutButton(props) {
     history.push('/')
   }
 
-  function resetProviderLanding() {
-
-    dispatch({
-      type: 'RESET_PROVIDER_LANDING_OBJ'
-    })
-  }
-
   // function resetAdmin() {
 
   //   dispatch({
@@ -31,7 +24,7 @@ function LogOutButton(props) {
       // because it's styled differently depending on where it is used, the className
       // is passed to it from it's parents through React props
       className={props.className}
-      onClick={() => dispatch({ type: 'LOGOUT', pushToHome: pushToHome, resetProviderLanding: resetProviderLanding})}
+      onClick={() => dispatch({ type: 'LOGOUT', pushToHome: pushToHome })}
     >
       Log Out
     </button>
