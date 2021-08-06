@@ -97,17 +97,17 @@ function WorkHistoryMultiRow(props) {
 
                 <div className="text-field-wrapper">
                     {/* <label htmlFor="referenceNameInput">Reference Name</label> */}
-                    <TextField required label="Reference Name" type="text" name="referenceName" id="referenceNameInput"
+                    <TextField label="Reference Name" type="text" name="referenceName" id="referenceNameInput"
                         value={referenceName} onChange={handleChange} variant="outlined" />
                 </div>
                 <div className="text-field-wrapper">
                     {/* <label htmlFor="referencePhoneInput">Reference Contact #</label> */}
-                    <TextField required label="Reference's Phone #" type="text" name="referencePhone" id="referencePhoneInput"
+                    <TextField  label="Reference's Phone #" type="text" name="referencePhone" id="referencePhoneInput"
                         value={referencePhone} onChange={handleChange} variant="outlined" />
                 </div>
                 <div className="text-field-wrapper">
                     {/* <label htmlFor="referenceEmailInput">Reference Email Address</label> */}
-                    <TextField required label="Reference's Email" type="text" name="referenceEmail" id="referenceEmailInput"
+                    <TextField label="Reference's Email" type="text" name="referenceEmail" id="referenceEmailInput"
                         value={referenceEmailAddress} onChange={handleChange} variant="outlined" />
                 </div>
                 <div className="text-field-wrapper">

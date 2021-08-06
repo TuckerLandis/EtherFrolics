@@ -27,7 +27,7 @@ function MedCredMultiRow(props) {
       inputName: 'licensingBoard'
     },
     {
-      inputLabel: 'Credential Taxonomy',
+      inputLabel: 'Credential Taxonomy (NPI#)',
       inputName: 'credentialTaxonomy'
     },
     {

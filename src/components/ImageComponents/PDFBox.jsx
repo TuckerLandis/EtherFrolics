@@ -13,7 +13,10 @@ function openOrClosePDF() {
 }
 
 
-const modifiedImagePath = props.imagePath.replace("PDF", "")
+    const modifiedImagePath = props.imagePath.replace("PDF", "")
+
+
+
 
 // If absolute URL from the remote server is provided, configure the CORS
 // header on that server.
@@ -44,7 +47,7 @@ loadingTask.promise.then(function(pdf) {
    
 
 
-    var context = canvas.getContext('2d');
+    var context = canvas?.getContext('2d');
     canvas.height = viewport.height;
     canvas.width = viewport.width;
 
@@ -63,13 +66,19 @@ loadingTask.promise.then(function(pdf) {
   console.error(reason);
 });
 
+    
+
+
+
+
+
 
 
     return (
         <div>
 
-            
-          {loadingTask.promise && <canvas width="32px" className={PDFcanvasClass} id={modifiedImagePath} alt="" onClick={openOrClosePDF}></canvas> } 
+                    
+          {loadingTask.promise && <canvas width="32px" className={PDFcanvasClass} id={modifiedImagePath} alt="" onClick={openOrClosePDF}></canvas>  } 
 
             {/* <canvas id="the-canvas"></canvas> */}
 
