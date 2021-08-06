@@ -50,6 +50,7 @@ function MedCred () {
   return(
       <div>
         <Typography variant="h4" className="registration-title">Medical Credentials</Typography>
+        <hr></hr>
           
 
       {/* medCred multi row form component goes here, along with submit button, included in that component */}

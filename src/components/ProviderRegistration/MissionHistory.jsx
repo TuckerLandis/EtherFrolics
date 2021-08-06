@@ -65,6 +65,7 @@ function MissionHistory () {
         <div>
 
             <Typography variant="h4" className="registration-title">Mission History</Typography>
+            <hr></hr>
  
             {/* maps a state array to render relevant number of work history forms */}
             {amountOfMissionHistories.map((education, i) => {

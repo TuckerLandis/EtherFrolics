@@ -11,6 +11,9 @@ const styles = {
     minWidth: 300,
     maxWidth: 400,
     flexGrow: 1,
+    borderRadius: 20,
+    marginLeft: 5,
+    marginRight: 5,
   },
 };
 
@@ -26,6 +29,7 @@ class ProgressMobileStepper extends React.Component {
 
     if (this.props.submitFunction) {
         this.props.submitFunction(event)
+        window.scrollTo(0, 0)
     }
    
   };

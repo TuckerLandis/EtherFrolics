@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { TextField } from "@material-ui/core"
+import { TextField, Typography } from "@material-ui/core"
 import Button from '@material-ui/core/Button';
 
 import { useDispatch } from "react-redux"
@@ -17,7 +17,7 @@ function MedCredMultiRow(props) {
   function handleImageAttach(awsKey) {
     setImageSubmit(true)
     setMedCredValues(
-      { ...medCredValues , credImageKey: awsKey }
+      { ...medCredValues , credentialImageKey: awsKey }
       )
 }
 
@@ -27,7 +27,7 @@ function MedCredMultiRow(props) {
       inputName: 'licensingBoard'
     },
     {
-      inputLabel: 'Credential Taxonomy',
+      inputLabel: 'Credential Taxonomy (NPI#)',
       inputName: 'credentialTaxonomy'
     },
     {
@@ -95,6 +95,9 @@ function MedCredMultiRow(props) {
   console.log(medCredValues);
   return (
     <div className="general-form-display">
+      {itemSubmit ? (
+            <Typography variant="body1">Submitted!</Typography>
+          ) : (
       <form onSubmit={submitCredentialHistory}>
 
       
@@ -119,14 +122,13 @@ function MedCredMultiRow(props) {
 
           <ImageUploader imageType={imageType} attachImageFunction={handleImageAttach}/>
         
-        {itemSubmit ? (
-            <p>submitted</p>
-          ) : (
+        
             <div className="text-field-wrapper">
               <Button variant="contained" color="secondary" type="submit">Add Medical Credential +</Button>
             </div>
-          )}
+          
       </form>
+      )}
     </div>
   );
 }

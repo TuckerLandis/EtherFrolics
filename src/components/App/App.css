@@ -2,7 +2,7 @@ html,
 body,
 #react-root {
   height: 100%;
-  background-color: #588585;
+  background-color: #b9e2e2;
 }
 
 body {
@@ -136,6 +136,7 @@ input {
 
 .registration-title{
   text-align: center;
+  padding-top: 0.5em;
 }
 
 .registration-title-subheading{
@@ -166,13 +167,11 @@ input[type=text]{
   font-family: Alegreya-Sans,Arial,Georgia,system-ui;
   line-height: 1.75;
   border-radius: 4px;
-  
-
-
   margin-bottom: 0.5em;
   color: black;
   background-color: #7fbf7f;
   display: inline-block;
+  box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%),
 }
 
 .inputfile-label:focus,
@@ -192,4 +191,24 @@ input[type=text]{
   align-items: center;
   justify-content: center;
   margin-bottom: 0.8em;
+}
+
+.PDF-closed {
+  border: 1px solid black;
+  direction: ltr;
+  max-width: 10%;
+}
+
+.PDF-open {
+  border: 1px solid black;
+  direction: ltr;
+  max-width: 100%;
+}
+
+hr { 
+  width: 60%;
+  
+  height: 10px; 
+  border: 0; 
+  box-shadow: 0 10px 10px -10px #3da1bd inset;
 }
