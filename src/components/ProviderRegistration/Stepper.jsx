@@ -29,6 +29,7 @@ class ProgressMobileStepper extends React.Component {
 
     if (this.props.submitFunction) {
         this.props.submitFunction(event)
+        window.scrollTo(0, 0)
     }
    
   };
