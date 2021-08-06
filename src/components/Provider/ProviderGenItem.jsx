@@ -19,7 +19,7 @@ function ProviderGenItem({ provider }) {
     return ( 
         <div>
             {editState ? (
-                <EditGenInfo provider={provider}/>
+                <EditGenInfo provider={provider} editState={editState}/>
             ) : (
             <div> 
             <Accordion>
@@ -93,9 +93,7 @@ function ProviderGenItem({ provider }) {
                     <Typography variant="h6">Resume</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                    <Typography>
-                        <ImageViewer imagePath={resumePath} />
-                    </Typography>
+                    <ImageViewer imagePath={resumePath} />
                 </AccordionDetails>
             </Accordion>
             </div>
