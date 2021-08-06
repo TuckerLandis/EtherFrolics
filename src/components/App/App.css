@@ -205,3 +205,10 @@ input[type=text]{
   max-width: 100%;
 }
 
+hr { 
+  width: 60%;
+  
+  height: 10px; 
+  border: 0; 
+  box-shadow: 0 10px 10px -10px #3da1bd inset;
+}

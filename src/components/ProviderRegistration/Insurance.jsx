@@ -52,6 +52,7 @@ function Insurance () {
     return(
         <div>
           <Typography className="registration-title" variant="h4">Insurance</Typography>
+          <hr></hr>
 
             {amountOfInsuranceHistories.map( (insurance, i) => {
                 return (<InsuranceMultiRow key={i} addInsuranceItem={addInsuranceItem}/>)

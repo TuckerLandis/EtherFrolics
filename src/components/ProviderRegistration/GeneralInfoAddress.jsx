@@ -62,6 +62,7 @@ function GeneralInfoAddress() {
     return (
         <div>
             <Typography variant="h4" className="registration-title">Contact Info</Typography>
+            <hr></hr>
             <div className="general-form-display">
 
                 <form onSubmit={handleNext}>
