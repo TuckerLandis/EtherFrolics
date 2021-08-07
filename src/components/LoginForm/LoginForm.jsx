@@ -36,7 +36,6 @@ function LoginForm() {
       )}
       <div className="padding">
         <label htmlFor="username">
-        
           <TextField
             label="Username:"
             type="text"
@@ -49,7 +48,6 @@ function LoginForm() {
       </div>
       <div>
         <label htmlFor="password">
-          {/* Password: */}
           <TextField
             label="Password:"
             type="password"
