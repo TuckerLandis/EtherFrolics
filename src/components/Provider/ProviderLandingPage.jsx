@@ -128,7 +128,6 @@ function ProviderLandingPage() {
     return (
         <div className="providerProfile">
             <div className="profileContainer">
-            
                 <div className="profileHeader">
                     <Typography variant="h3">{user.username}'s Profile</Typography>
                     <hr></hr>
@@ -167,12 +166,14 @@ function ProviderLandingPage() {
                         </Switch>
                     </div>
                 ) : (
-                <div className="unregisteredProfile">
-                    <Typography variant="h4">Please register to view upcoming missions</Typography>
+                <div className="general-form-display">
+                    <div className="unregisteredProfile">
+                    <Typography variant="h4" align="center" >Please register to view upcoming missions</Typography>
                     <Button
                     variant="contained"
                     color="primary"
                     onClick={providerRegister}>Register</Button>
+                    </div>
                 </div>
                 )}
             </div>
