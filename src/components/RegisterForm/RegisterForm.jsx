@@ -28,7 +28,7 @@ function RegisterForm() {
           {errors.registrationMessage}
         </h3>
       )}
-      <div className="padding">
+      <div className="padding-top">
         <label htmlFor="username">
           <TextField
             label="Username:"
@@ -40,7 +40,7 @@ function RegisterForm() {
           />
         </label>
       </div>
-      <div>
+      <div className="padding-bottom">
         <label htmlFor="password">
           <TextField
             label="Password:"

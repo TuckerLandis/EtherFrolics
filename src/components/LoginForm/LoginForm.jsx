@@ -34,7 +34,7 @@ function LoginForm() {
           {errors.loginMessage}
         </h3>
       )}
-      <div className="padding">
+      <div className="padding-top">
         <label htmlFor="username">
           <TextField
             label="Username:"
@@ -46,7 +46,7 @@ function LoginForm() {
           />
         </label>
       </div>
-      <div>
+      <div className="padding-bottom">
         <label htmlFor="password">
           <TextField
             label="Password:"
