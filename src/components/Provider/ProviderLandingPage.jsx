@@ -6,6 +6,8 @@ import ProviderGenItem from './ProviderGenItem';
 import ProviderCredItem from './ProviderCredItem';
 import ProviderCredEntry from '../Provider/ProviderCredEntry';
 
+import './ProviderLanding.css';
+
 /*
 CHECKLIST
 
@@ -124,49 +126,56 @@ function ProviderLandingPage() {
 
     console.log(url + '/edit');
     return (
-        <div>
-            <Typography variant="h3">{user.username}'s Profile</Typography>
+        <div className="providerProfile">
+            <div className="profileContainer">
+            
+                <div className="profileHeader">
+                    <Typography variant="h3">{user.username}'s Profile</Typography>
+                    <hr></hr>
+                </div>
 
-            {provider?.registrationComplete ? (
-                <Button
-                    variant="contained"
-                    color="secondary"
-                    onClick={viewMissions}>View Missions</Button>
-            ) : (
-                <Button
+                {provider?.registrationComplete ? (
+                    <div className="registeredProfile">
+                        <Button
+                        variant="contained"
+                        color="secondary"
+                        onClick={viewMissions}>View Missions</Button>
+
+                        <Switch>
+                            <Route exact path={path}>
+                                <div>
+                                    <Typography align="center" variant="h5">General Info</Typography>
+                                
+                                    <ProviderGenItem provider={provider}/>
+                                </div>
+
+                                <div className="credSection">
+                                    <Typography align="center" variant="h5">Credential Info</Typography>
+                                    <ProviderCredItem provider={provider}/>
+                                    <Button
+                                    variant="contained" color="primary" size="large" onClick={addCredentialNav} >Add New Credential</Button>
+                                </div>
+
+                            </Route>
+                                
+                            <Route exact path={`${path}/edit`}>
+                                <ProviderCredEntry entryType="edit" provider={ provider } inputConfig={updateInputConfig.credentialUpdate} credentialEntry={credentialEntry} />
+                            </Route> 
+                            <Route exact path={`${path}/add`}>
+                                <ProviderCredEntry  entryType="add" provider={ provider } inputConfig={updateInputConfig.credentialUpdate} credentialEntry={credentialEntry}/> 
+                            </Route>
+                        </Switch>
+                    </div>
+                ) : (
+                <div className="unregisteredProfile">
+                    <Typography variant="h4">Please register to view upcoming missions</Typography>
+                    <Button
                     variant="contained"
                     color="primary"
                     onClick={providerRegister}>Register</Button>
-            )}
-            <Switch>
-                <Route exact path={path}>
-                    {provider?.registrationComplete ? ( 
-                    <div>
-                    <Typography align="center" variant="h5">General Info</Typography>
-                        
-                    <ProviderGenItem provider={provider}/>
-                    </div>
-                    ) : (
-                        <Typography variant="h4">Please register to view upcoming missions</Typography>
-                    )}
-
-                    {provider?.registrationComplete && 
-                    <div>
-                    <Typography align="center" variant="h5">Credential Info</Typography>
-                    <ProviderCredItem provider={provider}/>
-                    <Button
-                    variant="contained" color="primary" onClick={addCredentialNav} >Add New Credential</Button>
-                    </div>
-                    }
-                </Route>
-                        
-                <Route exact path={`${path}/edit`}>
-                    <ProviderCredEntry entryType="edit" provider={ provider } inputConfig={updateInputConfig.credentialUpdate} credentialEntry={credentialEntry} />
-                </Route> 
-                <Route exact path={`${path}/add`}>
-                    <ProviderCredEntry  entryType="add" provider={ provider } inputConfig={updateInputConfig.credentialUpdate} credentialEntry={credentialEntry}/> 
-                </Route>
-            </Switch>
+                </div>
+                )}
+            </div>
         </div>
     )
 }
