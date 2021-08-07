@@ -86,13 +86,39 @@ function ProviderManagementIndividual() {
         selectProvider();
     } // end verify
 
+    // const disable = (provider_id) => {
+    //     console.log('individual provider to disable: ', provider_id);
+    //     dispatch({
+    //         type: 'DISABLE_PROVIDER',
+    //         payload: provider_id
+    //     })
+    //     selectProvider();
+    // } // end disable
+
     const disable = (provider_id) => {
         console.log('individual provider to disable: ', provider_id);
-        dispatch({
-            type: 'DISABLE_PROVIDER',
-            payload: provider_id
+        Swal.fire({
+            title: "Are you Sure?",
+            text: "Once you want to disable this provider",
+            icon: "warning",
+            confirmButtonText: 'Yes!',
+            showCancelButton: true,
+        }).then((result) => {
+
+            if (result.value) {
+                Swal.fire({
+                    title: "Provider disabled",
+                    icon: "success",
+                })
+                dispatch({
+                    type: 'DISABLE_PROVIDER',
+                    payload: provider_id
+                })
+                selectProvider();
+            } else {
+                Swal.fire("Provider not disabled")
+            }
         })
-        selectProvider();
     } // end disable
 
     // displays whether a user has been verified or not by admin
