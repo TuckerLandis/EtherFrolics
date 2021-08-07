@@ -10,7 +10,7 @@ import './ProviderManagementIndividual.css';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-
+import Paper from '@material-ui/core/Paper';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -24,7 +24,7 @@ import Divider from '@material-ui/core/Divider';
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
-        maxWidth: 360,
+        maxWidth: '100%',
         backgroundColor: theme.palette.background.paper,
     },
     nested: {
@@ -153,17 +153,15 @@ function ProviderManagementIndividual() {
         <div>
             <div key={provider?.provider_id}></div>
 
+            <Typography className="centerText" variant="h4">{provider?.firstName} {provider?.lastName}</Typography>
+            <hr />
+
+            <Paper>
             <List
                 component="nav"
                 aria-labelledby="nested-list-subheader"
-                subheader={
-                    <ListSubheader component="div" id="nested-list-subheader">
-                        <Typography variant="h4">Provider: {provider.firstName} {provider.lastName}</Typography>
-                    </ListSubheader>
-                }
                 className={classes.root}
             >
-                <Divider />
                 <ListItem button onClick={handleClickGen}>
                     <ListItemText>
                         <Typography variant="h6">General Information</Typography>
@@ -404,12 +402,14 @@ function ProviderManagementIndividual() {
                 </Collapse>
 
             </List>
+            </Paper>
 
-            <div>
+            <div className="pmiBtn">
                 <Button
                     variant="contained"
                     color="primary"
                     onClick={() => verify(provider?.id)}
+                    className="pmiB"
                 >
                     Verify
                 </Button>
@@ -417,6 +417,7 @@ function ProviderManagementIndividual() {
                     variant="contained"
                     color="primary"
                     onClick={() => disable(provider?.id)}
+                    className="pmiB"
                 >
                     Disable
                 </Button>

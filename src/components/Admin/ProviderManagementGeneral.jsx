@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
         height: 1,
         '& > *': {
             margin: theme.spacing(1),
-            width: '25ch',
+            width: '100%',
         },
     },
     demo: {
@@ -99,6 +99,7 @@ function ProviderManagementGeneral() {
         <div className="admin-prov-gen">
 
             <Typography variant="h4" className="providerMgmtListTitle">PROVIDERS</Typography>
+            <hr />
 
             <div className={classes.root}>
                     <div className="search-wrapper">
@@ -107,6 +108,7 @@ function ProviderManagementGeneral() {
                                 type="texts"
                                 variant="outlined"
                                 onChange={event => setSearchQuery(event.target.value)}
+                                className="search-wrapper"
                             />
                             <TextField />
                     </div>
@@ -132,7 +134,7 @@ function ProviderManagementGeneral() {
                                                         onClick={() => handleSelect(provider?.user_id)}
                                                         className="mouse"
                                                     >
-                                                        <Typography>{provider?.firstName}</Typography>
+                                                        <Typography>{provider?.firstName} {provider?.lastName} - {provider?.providerRole}</Typography>
                                                     </ListItemText>
                                                 </ListItem>
                                                 <Divider />

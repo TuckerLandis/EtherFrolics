@@ -55,6 +55,7 @@ function AdminLandingPage() {
                 >
                     Welcome, {admin?.username}!
                 </Typography>
+                <hr />
             </div>
 
             <div className="buttonCorral">
