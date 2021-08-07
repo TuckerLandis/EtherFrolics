@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import {Button, TextField, Typography} from '@material-ui/core';
+import { Button, TextField, Typography } from '@material-ui/core';
 
 function CreateMissionPage() {
     const dispatch = useDispatch();
@@ -44,9 +44,10 @@ function CreateMissionPage() {
         setMissionLink('');
         setApplyLink('');
 
-        history.push('/missions')
+        
+        // history.push('/missions')
     }
-    
+
 
     return (
         <div>
@@ -55,72 +56,80 @@ function CreateMissionPage() {
 
             <div className="general-form-display">
 
-            <form onSubmit={handleSubmit}>
-                <div className="general-form-sub-display">
+                <form onSubmit={handleSubmit}>
+                    <div className="general-form-sub-display">
 
-                <div className="text-field-wrapper">
-                <TextField
-                    type="text"
-                    label="Organization"
-                    value={name}
-                    onChange={(evt) => setName(evt.target.value)} />
-                </div>
+                        <div className="text-field-wrapper">
+                            <TextField
+                                type="text"
+                                variant="outlined"
+                                label="Organization"
+                                required
+                                value={name}
+                                onChange={(evt) => setName(evt.target.value)} />
+                        </div>
 
-                <div className="text-field-wrapper">
-                <TextField
-                    type="text"
-                    label="Location"
-                    value={location}
-                    onChange={(evt) => setLocation(evt.target.value)} />
-                </div>
+                        <div className="text-field-wrapper">
+                            <TextField
+                                type="text"
+                                variant="outlined"
+                                label="Location"
+                                required
+                                value={location}
+                                onChange={(evt) => setLocation(evt.target.value)} />
+                        </div>
 
-                <div className="text-field-wrapper">
-                <TextField
-                    type="date"
-                    label="Start Date"
-                    InputLabelProps={{ shrink: true }}
-                    value={startDate}
-                    onChange={(evt) => setStartDate(evt.target.value)} />
-                </div>
-                
-                <div className="text-field-wrapper">
-                <TextField
-                    type="date"
-                    label="End Date"
-                    InputLabelProps={{ shrink: true }}
-                    value={endDate}
-                    onChange={(evt) => setEndDate(evt.target.value)}
-                />
-                </div>
+                        <div className="text-field-wrapper">
+                            <TextField
+                                type="date"
+                                variant="outlined"
+                                label="Start Date"
+                                required
+                                InputLabelProps={{ shrink: true }}
+                                value={startDate}
+                                onChange={(evt) => setStartDate(evt.target.value)} />
+                        </div>
 
-                <div className="text-field-wrapper">
-                <TextField
-                    type="text"
-                    label="Link to Mission"
-                    required
-                    value={missionLink}
-                    onChange={(evt) => setMissionLink(evt.target.value)} />
-                </div>
+                        <div className="text-field-wrapper">
+                            <TextField
+                                type="date"
+                                variant="outlined"
+                                label="End Date"
+                                required
+                                InputLabelProps={{ shrink: true }}
+                                value={endDate}
+                                onChange={(evt) => setEndDate(evt.target.value)}
+                            />
+                        </div>
 
-                <div className="text-field-wrapper">
-                <TextField
-                    type="text"
-                    label="Link to Apply"
-                    required
-                    value={applyLink}
-                    onChange={(evt) => setApplyLink(evt.target.value)} />
-                </div>
+                        <div className="text-field-wrapper">
+                            <TextField
+                                type="text"
+                                variant="outlined"
+                                label="Link to Mission"
+                                value={missionLink}
+                                onChange={(evt) => setMissionLink(evt.target.value)} />
+                        </div>
 
-                <div className="text-field-wrapper">                    
-                <Button
-                    type="submit"
-                    color="primary"
-                    variant="contained"
-                >Add Mission</Button>
-                </div>
+                        <div className="text-field-wrapper">
+                            <TextField
+                                type="text"
+                                variant="outlined"
+                                label="Link to Apply"
+                                value={applyLink}
+                                onChange={(evt) => setApplyLink(evt.target.value)} />
+                        </div>
 
-            </div>
-            </form>
+                        <div className="text-field-wrapper">
+                            <Button
+                                type="submit"
+                                color="primary"
+                                variant="contained"
+                            >Add Mission</Button>
+                        </div>
+
+                    </div>
+                </form>
             </div>
 
         </div>
