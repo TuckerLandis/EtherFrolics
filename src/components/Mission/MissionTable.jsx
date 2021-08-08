@@ -74,15 +74,6 @@ function MissionTable() {
         history.push('/editmission')
     }
 
-    // const getData = () => {
-    //     dispatch({
-    //         type: 'FETCH_MISSIONS'
-    //     });
-    //     dispatch({
-    //         type: 'GET_PROVIDER_LANDING'
-    //     });
-    // }
-
     return (
         <div>
             <Typography variant="h4" className="registration-title">Upcoming Missions</Typography>
