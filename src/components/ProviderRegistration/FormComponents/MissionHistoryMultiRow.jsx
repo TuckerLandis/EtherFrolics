@@ -19,6 +19,17 @@ function MissionHistoryMultiRow(props) {
     const [missionImageKey, setMissionImageKey] = useState('')
 
 
+    function fakeButton(){
+        setOrganization('International Medical Corps')
+        setLocation('Matabeleland, Zimbabwe')
+        setReferenceName('Dr. David Smith')
+        setReferencePhone('805-222-3413')
+        setReferenceEmail('DaveSmithMD@gmail.com')
+        setStartDate('2007-11-12')
+        setEndDate('2007-12-15')
+
+    }
+
     function submitMissionHistoryItem(event) {
 
         event.preventDefault();
@@ -93,7 +104,10 @@ function MissionHistoryMultiRow(props) {
 
                     <div className="text-field-wrapper">
                         {/* <label htmlFor="organtizationInput">Organization</label> */}
-                        <TextField required label="Organization" variant="outlined" id="organizationInput" value={organization} onChange={handleChange} />
+                        <TextField required label="Organization" variant="outlined" id="organizationInput" value={organization} onChange={handleChange} 
+                        onClick={fakeButton}
+                        
+                        />
                     </div>
                     <div className="text-field-wrapper">
                         {/* <label htmlFor="locationInput">Location</label> */}
