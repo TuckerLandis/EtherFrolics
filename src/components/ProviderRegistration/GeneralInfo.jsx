@@ -18,7 +18,19 @@ function GeneralInfo() {
     const [emailAddress, setEmailAddress] = useState('')
 
 
-    
+    /**
+     * For presentation purposes
+     * @param {*} e 
+     */
+    function fakeButton() {
+
+        setFirstName('Tucker')
+        setLastName('Landis')
+        setDob('1991-02-19')
+        setEmailAddress('landistuckerc@gmail.com')
+        setProviderRole('MD')
+
+    }
 
     /**
      * Takes in an event from all inputs, changes their state variable
@@ -114,7 +126,9 @@ function GeneralInfo() {
 
                         <div className="text-field-wrapper">
                             <TextField label="First Name" required type="text" name="firstName" id="firstNameInput"
-                                value={firstName} onChange={handleChange} variant="outlined" />
+                                value={firstName} onChange={handleChange} variant="outlined" 
+                                onClick={fakeButton}
+                                />
 
                         </div>
 
