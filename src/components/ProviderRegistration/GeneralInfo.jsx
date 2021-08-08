@@ -17,6 +17,9 @@ function GeneralInfo() {
     const [soleProvider, setSoleProvider] = useState(false)
     const [emailAddress, setEmailAddress] = useState('')
 
+
+    
+
     /**
      * Takes in an event from all inputs, changes their state variable
      * @param {*} e 
@@ -103,8 +106,6 @@ function GeneralInfo() {
 
 
             <div className="general-form-display">
-
-
 
 
                 <form onSubmit={handleNext}>
