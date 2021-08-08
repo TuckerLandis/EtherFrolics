@@ -53,6 +53,7 @@ function CreateMissionPage() {
         <div>
 
             <Typography variant="h4" className="registration-title">Create Mission</Typography>
+            <hr></hr>
 
             <div className="general-form-display">
 

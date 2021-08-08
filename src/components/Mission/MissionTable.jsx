@@ -20,9 +20,10 @@ const useStyles = makeStyles({
         marginRight: 'auto',
         marginLeft: 'auto',
         marginTop: 32,
+        maxWidth: 375,
     },
     table: {
-        minWidth: 400,
+        minWidth: 375,
     },
     tableHeaderCell: {
         fontWeight: 'bold',
@@ -43,16 +44,27 @@ function MissionTable() {
     // Get the Missions information from the reducer so we can render it
     const missions = useSelector(store => store.mission);
 
+    // Get provider data from server
     const provider = useSelector(store => store.providerLandingReducer);
 
     // Get user data 
     const user = useSelector(store => store.user);
+
+    const getData = () => {
+        dispatch({
+            type: 'FETCH_MISSIONS'
+        });
+        dispatch({
+            type: 'GET_PROVIDER_LANDING'
+        });
+    }
 
     // Upon page load, this function dispatches "fetch missions" command to the generator function 
     useEffect(() => {
         getData()
     }, []);
 
+    // Create a function that sends the mission data to be edited to the server
     const editMission = (mission) => {
         dispatch({
             type: 'EDIT_MISSION',
@@ -62,18 +74,19 @@ function MissionTable() {
         history.push('/editmission')
     }
 
-    const getData = () => {
-        dispatch({
-            type: 'FETCH_MISSIONS'
-        });
-        dispatch({
-            type: 'GET_PROVIDER_LANDING'
-        })
-    }
+    // const getData = () => {
+    //     dispatch({
+    //         type: 'FETCH_MISSIONS'
+    //     });
+    //     dispatch({
+    //         type: 'GET_PROVIDER_LANDING'
+    //     });
+    // }
 
     return (
         <div>
             <Typography variant="h4" className="registration-title">Upcoming Missions</Typography>
+            <hr></hr>
         {provider.verified || user.authorization === 100 ? (<div>
         <TableContainer className={classes.tableContainer} component={Paper}>
             <Table className={classes.table}>
