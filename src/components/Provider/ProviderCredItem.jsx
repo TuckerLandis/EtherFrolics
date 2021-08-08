@@ -4,6 +4,7 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import EditIcon from '@material-ui/icons/Edit';
 import { List, ListItem, ListItemText, ListItemSecondaryAction, ListItemIcon, IconButton} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -12,16 +13,34 @@ import { useDispatch } from 'react-redux';
 
 import ImageViewer from '../ImageComponents/ImageViewer';
 
-const useStyles = makeStyles((theme) => ({
+const listItemClass = makeStyles((theme) => ({
     root: {
       width: '100%',
       textAlign: 'center'
     },
+    warning: {
+        backgroundColor: '#ffff89'
+    },
+    urgent: {
+        backgroundColor: '#e14048',
+    }
   }));
 
-function ProviderCredItem({ provider }) {
+  const listTextClass = makeStyles((theme) => ({
+    root: {
+        backgroundColor: '#fff',
+        padding: 15,
+    },
+    icon: {
+        minWidth: 48,
+        maxWidth: 84
+    }
+  }));
 
-    const classes = useStyles();
+function ProviderCredItem({ provider, threeMonthsFromToday }) {
+
+    const listItemClasses = listItemClass();
+    const listTextClasses = listTextClass();
     const history = useHistory();
     const dispatch = useDispatch();
     const { url } = useRouteMatch();
@@ -79,6 +98,7 @@ function ProviderCredItem({ provider }) {
     }
 
     console.log(ImageViewer);
+    console.log(`three months from today: ${threeMonthsFromToday}`);
     return (
         <div>
             <Accordion>
@@ -88,21 +108,18 @@ function ProviderCredItem({ provider }) {
                     <Typography variant="h6">Credentials</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                    <div className={classes.root}>
+                    <div className={listItemClasses.root}>
                         <List component="nav">
                             {provider.credential_array.map( (credential, i) => {
                                 const credentialImagePath = `/api/image/prov/${credential.credentialImageKey}`
-                                console.log(credential);
                                 return (
                                     hasBeenClicked?.[credential.credentialName] ?
-                                        <ListItem key={i} button >
-                                            <ListItemIcon>
-                                                <IconButton edge="start" >
-                                                    <ImageViewer imagePath={credentialImagePath} />
-                                                </IconButton>
-                                            </ListItemIcon>
-                                            <ListItemText primary={`${credential.credentialName}`} onClick={handleCloseOptions} secondary={`Expiration: ${credential.dateExpiring}`} />
-                                            <ListItemSecondaryAction>
+                                        <ListItem  divider key={i} button >                
+                                            <ListItemIcon className={listTextClasses.icon}>                                                    
+                                                <ImageViewer imagePath={credentialImagePath} />
+                                            </ListItemIcon>                                            
+                                            <ListItemText className={listTextClasses.root} primary={`${credential.credentialName}`} onClick={handleCloseOptions} secondary={`Expiration: ${credential.dateExpiring}`} />
+                                            <ListItemSecondaryAction onClick={editCredential}>
                                                 <IconButton edge="end" onClick={editCredential}>
                                                     <EditIcon />
                                                 </IconButton>
@@ -110,8 +127,16 @@ function ProviderCredItem({ provider }) {
                                         </ListItem>
                                     :
 
-                                        <ListItem key={i} button >
-                                            <ListItemText primary={`${credential.credentialName}`} onClick={ e => handleDisplayOptions(e, credential)} secondary={`Expiration: ${credential.dateExpiring}`} />
+                                        <ListItem divider key={i} button >
+                                            <ListItemIcon className={listTextClasses.icon}>
+                                                <ImageViewer imagePath={credentialImagePath} />
+                                            </ListItemIcon>
+                                            <ListItemText className={listTextClasses.root} primary={`${credential.credentialName}`} onClick={ e => handleDisplayOptions(e, credential)} secondary={`Expiration: ${credential.dateExpiring}`} />
+                                            {new Date(credential.dateExpiring + 'T00:00:00').getTime() - threeMonthsFromToday.getTime() <= 0 &&
+                                                <ListItemSecondaryAction>
+                                                    <ErrorOutlineIcon fontSize="large" color="error" />
+                                                </ListItemSecondaryAction>
+                                            }
                                         </ListItem>
                                     
                                 )
