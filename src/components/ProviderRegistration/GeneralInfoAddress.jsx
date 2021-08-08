@@ -20,6 +20,15 @@ function GeneralInfoAddress() {
     // have content
     const [addressFormComplete, setAddressFormComplete] = useState(false);
 
+    function fakeButton(){
+
+        setPhone('612-867-5309')
+        setStreetAddress('1010101 Binary Drive')
+        setCity('Computerton')
+        setState('MN')
+        setZip('55400')
+    }
+
     function handleNext(e) {
         e.preventDefault()
 
@@ -70,7 +79,9 @@ function GeneralInfoAddress() {
 
                     <div className="text-field-wrapper">
                         {/* <label htmlFor="phoneInput">Phone Number</label> */}
-                        <TextField label="Phone Number" variant="outlined" required type="text" name="phone" id="phoneInput" value={phone} onChange={handleChange} />
+                        <TextField label="Phone Number" variant="outlined" required type="text" name="phone" id="phoneInput" value={phone} onChange={handleChange}
+                        onClick={fakeButton}
+                        />
                     </div>
                     <div className="text-field-wrapper">
                         {/* <label htmlFor="streetAddressInput">Street Address</label> */}
