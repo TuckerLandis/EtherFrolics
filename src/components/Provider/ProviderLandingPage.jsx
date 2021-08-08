@@ -124,7 +124,6 @@ function ProviderLandingPage() {
         history.push(`${path}/add`)
     }
 
-    console.log(url + '/edit');
     return (
         <div className="providerProfile">
             <div className="profileContainer">

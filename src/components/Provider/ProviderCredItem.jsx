@@ -12,21 +12,44 @@ import { useDispatch } from 'react-redux';
 
 import ImageViewer from '../ImageComponents/ImageViewer';
 
-const useStyles = makeStyles((theme) => ({
+const listItemClass = makeStyles((theme) => ({
     root: {
       width: '100%',
       textAlign: 'center'
     },
+    warning: {
+        backgroundColor: '#ffff89'
+    },
+    urgent: {
+        backgroundColor: '#e14048',
+    }
+  }));
+
+  const listTextClass = makeStyles((theme) => ({
+    root: {
+        backgroundColor: '#fff',
+        padding: 15,
+    },
+    icon: {
+        minWidth: 48
+    }
   }));
 
 function ProviderCredItem({ provider }) {
 
-    const classes = useStyles();
+    const listItemClasses = listItemClass();
+    const listTextClasses = listTextClass();
     const history = useHistory();
     const dispatch = useDispatch();
     const { url } = useRouteMatch();
 
     const [hasBeenClicked, setHasBeenClicked] = useState({});
+
+    const today = new Date()
+
+    const oneMonthFromToday = new Date(today.getFullYear(),today.getMonth() + 1, today.getDate());
+
+    const threeMonthsFromToday = new Date(today.getFullYear(),today.getMonth() + 3, today.getDate());
 
     const handleDisplayOptions = (e, credential)  => {
         e.preventDefault();
@@ -79,6 +102,7 @@ function ProviderCredItem({ provider }) {
     }
 
     console.log(ImageViewer);
+    console.log(`today: ${today}, three months from today: ${threeMonthsFromToday}, one month from today: ${oneMonthFromToday}`);
     return (
         <div>
             <Accordion>
@@ -88,21 +112,19 @@ function ProviderCredItem({ provider }) {
                     <Typography variant="h6">Credentials</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                    <div className={classes.root}>
+                    <div className={listItemClasses.root}>
                         <List component="nav">
                             {provider.credential_array.map( (credential, i) => {
                                 const credentialImagePath = `/api/image/prov/${credential.credentialImageKey}`
-                                console.log(credential);
+                                console.log(new Date(credential.dateExpiring + 'T00:00:00'), oneMonthFromToday, new Date(credential.dateExpiring + 'T00:00:00').getTime() - oneMonthFromToday.getTime(), credential.dateExpiring);
                                 return (
                                     hasBeenClicked?.[credential.credentialName] ?
-                                        <ListItem key={i} button >
-                                            <ListItemIcon>
-                                                <IconButton edge="start" >
-                                                    <ImageViewer imagePath={credentialImagePath} />
-                                                </IconButton>
+                                        <ListItem className={new Date(credential.dateExpiring + 'T00:00:00').getTime() - oneMonthFromToday.getTime() <= 0 ? listItemClasses.urgent : new Date(credential.dateExpiring + 'T00:00:00').getTime() - threeMonthsFromToday.getTime() <= 0 ? listItemClasses.warning : null} divider key={i} button >
+                                            <ListItemIcon className={listTextClasses.icon}>
+                                                <ImageViewer imagePath={credentialImagePath} />
                                             </ListItemIcon>
-                                            <ListItemText primary={`${credential.credentialName}`} onClick={handleCloseOptions} secondary={`Expiration: ${credential.dateExpiring}`} />
-                                            <ListItemSecondaryAction>
+                                            <ListItemText className={listTextClasses.root} primary={`${credential.credentialName}`} onClick={handleCloseOptions} secondary={`Expiration: ${credential.dateExpiring}`} />
+                                            <ListItemSecondaryAction >
                                                 <IconButton edge="end" onClick={editCredential}>
                                                     <EditIcon />
                                                 </IconButton>
@@ -110,8 +132,8 @@ function ProviderCredItem({ provider }) {
                                         </ListItem>
                                     :
 
-                                        <ListItem key={i} button >
-                                            <ListItemText primary={`${credential.credentialName}`} onClick={ e => handleDisplayOptions(e, credential)} secondary={`Expiration: ${credential.dateExpiring}`} />
+                                        <ListItem className={new Date(credential.dateExpiring + 'T00:00:00').getTime() - oneMonthFromToday.getTime() <= 0 ? listItemClasses.urgent : new Date(credential.dateExpiring + 'T00:00:00').getTime() - threeMonthsFromToday.getTime() <= 0 ? listItemClasses.warning : null} divider key={i} button >
+                                            <ListItemText className={listTextClasses.root} primary={`${credential.credentialName}`} onClick={ e => handleDisplayOptions(e, credential)} secondary={`Expiration: ${credential.dateExpiring}`} />
                                         </ListItem>
                                     
                                 )
