@@ -45,7 +45,7 @@ function CreateMissionPage() {
         setApplyLink('');
 
         
-        // history.push('/missions')
+        history.push('/missions')
     }
 
 

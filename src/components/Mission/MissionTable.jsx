@@ -15,6 +15,14 @@ const useStyles = makeStyles({
     centerText: {
         textAlign: 'center',
     },
+    backgroundDate: {
+        backgroundColor: '#b9e2e2',
+        textAlign: 'center',
+    },
+    organization: {
+        backgroundColor: '#7fbf7f',
+        textAlign: 'center',
+    },
     tableContainer: {
         borderRadius: 32,
         marginRight: 'auto',
@@ -106,18 +114,18 @@ function MissionTable() {
                                     >
                                     Apply</Link></TableCell></TableCell>
 
-                            <TableCell className={classes.centerText}><Typography>{mission.startDate.slice(0, 10)}</Typography></TableCell>
-                            <TableCell className={classes.centerText}><Typography>{mission.endDate.slice(0, 10)}</Typography></TableCell>
-                            <TableCell className={classes.centerText}><Typography>{mission.name}</Typography></TableCell>
+                            <TableCell className={classes.backgroundDate}><Typography>{mission.startDate.slice(0, 10)}</Typography></TableCell>
+                            <TableCell className={classes.backgroundDate}><Typography>{mission.endDate.slice(0, 10)}</Typography></TableCell>
+                            <TableCell className={classes.organization}><Typography>{mission.name}</Typography></TableCell>
                             {user.authorization === 100 ? 
                             (
-                            <TableCell><Button
+                            <TableCell className={classes.backgroundDate}><Button
                             onClick={() => {editMission(mission)}}
                             variant="contained"
-                            color="primary"
-                            >Edit</Button></TableCell>
+                            style={{backgroundColor: '#b9e2e2'}}
+                            >Edit Mission</Button></TableCell>
                             ) :
-                            (<TableCell></TableCell>)}
+                            (<TableCell className={classes.organization}></TableCell>)}
                         </TableRow>
                     ))}
                 </TableBody>
