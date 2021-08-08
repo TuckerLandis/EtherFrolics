@@ -31,11 +31,12 @@ const listItemClass = makeStyles((theme) => ({
         padding: 15,
     },
     icon: {
-        minWidth: 48
+        minWidth: 48,
+        maxWidth: 84
     }
   }));
 
-function ProviderCredItem({ provider }) {
+function ProviderCredItem({ provider, oneMonthFromToday, threeMonthsFromToday }) {
 
     const listItemClasses = listItemClass();
     const listTextClasses = listTextClass();
@@ -44,12 +45,6 @@ function ProviderCredItem({ provider }) {
     const { url } = useRouteMatch();
 
     const [hasBeenClicked, setHasBeenClicked] = useState({});
-
-    const today = new Date()
-
-    const oneMonthFromToday = new Date(today.getFullYear(),today.getMonth() + 1, today.getDate());
-
-    const threeMonthsFromToday = new Date(today.getFullYear(),today.getMonth() + 3, today.getDate());
 
     const handleDisplayOptions = (e, credential)  => {
         e.preventDefault();
@@ -102,7 +97,7 @@ function ProviderCredItem({ provider }) {
     }
 
     console.log(ImageViewer);
-    console.log(`today: ${today}, three months from today: ${threeMonthsFromToday}, one month from today: ${oneMonthFromToday}`);
+    console.log(`three months from today: ${threeMonthsFromToday}, one month from today: ${oneMonthFromToday}`);
     return (
         <div>
             <Accordion>

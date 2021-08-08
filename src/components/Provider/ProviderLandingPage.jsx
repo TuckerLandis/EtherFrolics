@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, Route, Switch, useRouteMatch } from 'react-router-dom';
 import { Button, Typography } from '@material-ui/core';
@@ -50,8 +50,10 @@ function ProviderLandingPage() {
     //bring in the provider data from the reducer
     // const provider = useSelector(store => store.selectedProvider)
 
-    const provider = useSelector(store => store.providerLandingReducer) // < ---- changed reducer to new provider landing reducer
+    const provider = useSelector(store => store.providerLandingReducer.providerInformationReducer) // < ---- changed reducer to new provider landing reducer
     //bring in the credential data from the reducer
+
+    const credentialExperation
 
     const credentialEntry = useSelector(store => store.credentialEntry);
 
@@ -95,6 +97,12 @@ function ProviderLandingPage() {
             }                                  
         ]
     }
+
+    const today = new Date()
+
+    const oneMonthFromToday = new Date(today.getFullYear(),today.getMonth() + 1, today.getDate());
+
+    const threeMonthsFromToday = new Date(today.getFullYear(),today.getMonth() + 3, today.getDate());
 
     //create a function so that the provider can view upcoming missions
     const viewMissions = () => {
@@ -149,7 +157,7 @@ function ProviderLandingPage() {
 
                                 <div className="credSection">
                                     <Typography align="center" variant="h5">Credential Info</Typography>
-                                    <ProviderCredItem provider={provider}/>
+                                    <ProviderCredItem provider={provider} oneMonthFromToday={oneMonthFromToday} threeMonthsFromToday={threeMonthsFromToday} />
                                     <Button
                                     variant="contained" color="primary" size="large" onClick={addCredentialNav} >Add New Credential</Button>
                                 </div>
