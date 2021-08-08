@@ -4,6 +4,7 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import EditIcon from '@material-ui/icons/Edit';
 import { List, ListItem, ListItemText, ListItemSecondaryAction, ListItemIcon, IconButton} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -36,7 +37,7 @@ const listItemClass = makeStyles((theme) => ({
     }
   }));
 
-function ProviderCredItem({ provider, oneMonthFromToday, threeMonthsFromToday }) {
+function ProviderCredItem({ provider, threeMonthsFromToday }) {
 
     const listItemClasses = listItemClass();
     const listTextClasses = listTextClass();
@@ -97,7 +98,7 @@ function ProviderCredItem({ provider, oneMonthFromToday, threeMonthsFromToday })
     }
 
     console.log(ImageViewer);
-    console.log(`three months from today: ${threeMonthsFromToday}, one month from today: ${oneMonthFromToday}`);
+    console.log(`three months from today: ${threeMonthsFromToday}`);
     return (
         <div>
             <Accordion>
@@ -111,15 +112,14 @@ function ProviderCredItem({ provider, oneMonthFromToday, threeMonthsFromToday })
                         <List component="nav">
                             {provider.credential_array.map( (credential, i) => {
                                 const credentialImagePath = `/api/image/prov/${credential.credentialImageKey}`
-                                console.log(new Date(credential.dateExpiring + 'T00:00:00'), oneMonthFromToday, new Date(credential.dateExpiring + 'T00:00:00').getTime() - oneMonthFromToday.getTime(), credential.dateExpiring);
                                 return (
                                     hasBeenClicked?.[credential.credentialName] ?
-                                        <ListItem className={new Date(credential.dateExpiring + 'T00:00:00').getTime() - oneMonthFromToday.getTime() <= 0 ? listItemClasses.urgent : new Date(credential.dateExpiring + 'T00:00:00').getTime() - threeMonthsFromToday.getTime() <= 0 ? listItemClasses.warning : null} divider key={i} button >
-                                            <ListItemIcon className={listTextClasses.icon}>
+                                        <ListItem  divider key={i} button >                
+                                            <ListItemIcon className={listTextClasses.icon}>                                                    
                                                 <ImageViewer imagePath={credentialImagePath} />
-                                            </ListItemIcon>
+                                            </ListItemIcon>                                            
                                             <ListItemText className={listTextClasses.root} primary={`${credential.credentialName}`} onClick={handleCloseOptions} secondary={`Expiration: ${credential.dateExpiring}`} />
-                                            <ListItemSecondaryAction >
+                                            <ListItemSecondaryAction onClick={editCredential}>
                                                 <IconButton edge="end" onClick={editCredential}>
                                                     <EditIcon />
                                                 </IconButton>
@@ -127,8 +127,16 @@ function ProviderCredItem({ provider, oneMonthFromToday, threeMonthsFromToday })
                                         </ListItem>
                                     :
 
-                                        <ListItem className={new Date(credential.dateExpiring + 'T00:00:00').getTime() - oneMonthFromToday.getTime() <= 0 ? listItemClasses.urgent : new Date(credential.dateExpiring + 'T00:00:00').getTime() - threeMonthsFromToday.getTime() <= 0 ? listItemClasses.warning : null} divider key={i} button >
+                                        <ListItem divider key={i} button >
+                                            <ListItemIcon className={listTextClasses.icon}>
+                                                <ImageViewer imagePath={credentialImagePath} />
+                                            </ListItemIcon>
                                             <ListItemText className={listTextClasses.root} primary={`${credential.credentialName}`} onClick={ e => handleDisplayOptions(e, credential)} secondary={`Expiration: ${credential.dateExpiring}`} />
+                                            {new Date(credential.dateExpiring + 'T00:00:00').getTime() - threeMonthsFromToday.getTime() <= 0 &&
+                                                <ListItemSecondaryAction>
+                                                    <ErrorOutlineIcon fontSize="large" color="error" />
+                                                </ListItemSecondaryAction>
+                                            }
                                         </ListItem>
                                     
                                 )

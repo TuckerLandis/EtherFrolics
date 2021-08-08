@@ -1,4 +1,4 @@
-const providerInformationReducer = (state = {}, action) => {
+const providerLandingReducer = (state = {}, action) => {
     switch (action.type) {
         case 'SET_PROVIDER_LANDING':
             return action.payload[0];
@@ -11,18 +11,4 @@ const providerInformationReducer = (state = {}, action) => {
     }
 }
 
-const credentialExpirationReducer = (state = {}, action) => {
-    switch (action.type) {
-        case 'EXPIRING_WARNING':
-            return {...state, [action.payload.index]: action.payload.expiringWarning};
-        case 'EXPIRING_URGENT':
-                return {...state, [action.payload.credId]: action.payload.expiringUrgent};
-        default:
-            return state;
-    }
-}
-
-export default combineReducers({
-    providerInformationReducer,
-    credentialExpirationReducer
-});
+export default providerLandingReducer
