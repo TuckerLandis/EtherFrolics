@@ -78,13 +78,39 @@ function ProviderManagementIndividual() {
 
     // verifies provider using provider.provider_id
     const verify = (provider_id) => {
-        console.log('invidiual provider to verify: ', provider_id);
-        dispatch({
-            type: 'VERIFY_PROVIDER',
-            payload: provider_id
+        console.log('individual provider to verify: ', provider_id);
+        Swal.fire({
+            title: "Are you Sure?",
+            text: "You want to verify this provider",
+            icon: "warning",
+            confirmButtonText: 'Yes!',
+            showCancelButton: true,
+        }).then((result) => {
+
+            if (result.value) {
+                Swal.fire({
+                    title: "Provider verified",
+                    icon: "success",
+                })
+                 dispatch({
+                    type: 'VERIFY_PROVIDER',
+                    payload: provider_id
+                 })
+                selectProvider();
+            } else {
+                Swal.fire("Provider not verified")
+            }
         })
-        selectProvider();
     } // end verify
+
+// const verify = (provider_id) => {
+    //     console.log('individual provider to verify: ', provider_id);
+    //     dispatch({
+    //         type: 'VERIFY_PROVIDER',
+    //         payload: provider_id
+    //     })
+    //     selectProvider();
+    // } // end verify
 
     // const disable = (provider_id) => {
     //     console.log('individual provider to disable: ', provider_id);
@@ -99,7 +125,7 @@ function ProviderManagementIndividual() {
         console.log('individual provider to disable: ', provider_id);
         Swal.fire({
             title: "Are you Sure?",
-            text: "Once you want to disable this provider",
+            text: "This Provider will be disabled",
             icon: "warning",
             confirmButtonText: 'Yes!',
             showCancelButton: true,
