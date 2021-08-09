@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
     root: {
         '& > *': {
             margin: theme.spacing(1),
+            // padding: '10px',
         },
         borderRadius: 3,
         border: 0,
@@ -62,20 +63,25 @@ function AdminLandingPage() {
                 <Button
                     className="adminBtn"
                     variant="contained"
+                    color="secondary"
                     onClick={() => history.push('/providermgmt')}
                 >
                     Provider Management
                 </Button>
+                <br />
                 <Button
                     className="adminBtn"
                     variant="contained"
+                    color="secondary"
                     onClick={() => history.push('/missions')}
                 >
                     Mission Management
                 </Button>
+                <br />
                 <Button
                     className="adminBtn"
                     variant="contained"
+                    color="secondary"
                     onClick={() => history.push('/createmissionpage')}
                 >
                     Create Mission
