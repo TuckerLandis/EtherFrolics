@@ -1,10 +1,12 @@
 .providerProfile {
+    height: inherit;
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
 }
 
 .profileContainer {
+    height: inherit;
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
@@ -27,17 +29,19 @@
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-between;
-    height: 675px;
+    height: inherit;
 }
 
 .credSection {
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
+    height: inherit;
 }
 
 .genSection {
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
+    height: inherit;
 }
