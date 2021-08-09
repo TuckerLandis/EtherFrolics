@@ -41,6 +41,13 @@ router.get('/mission', rejectUnauthenticated, (req, res) => {
 router.post('/mission', rejectNonAdmin, (req, res) => {
     console.log('req.body is', req.body);
     let mission = req.body;
+
+    if (mission.missionLink === ''){
+        mission.missionLink = '#0';
+    };
+    if (mission.applyLink === '') {
+        mission.applyLink = '#0';
+    };
     //define query text
     const queryText = `INSERT INTO mission ("name", "location", "startDate", "endDate",
     "missionLink", "applyLink", "missionActive") VALUES ($1, $2, $3, $4, $5, $6, $7);`;
