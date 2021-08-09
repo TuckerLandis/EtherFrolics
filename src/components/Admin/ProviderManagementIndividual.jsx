@@ -372,6 +372,7 @@ function ProviderManagementIndividual() {
                                             <div>
                                                 <Divider component="li" variant="middle" />
                                                 <br />
+                                                <Typography variant="h6">Location</Typography>
                                                 <Typography>{missionExp?.location}</Typography>
                                                 <br />
                                                 <Divider component="li" variant="middle" />
