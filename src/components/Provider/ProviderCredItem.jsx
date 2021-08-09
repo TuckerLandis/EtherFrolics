@@ -116,7 +116,7 @@ function ProviderCredItem({ provider, threeMonthsFromToday }) {
                                     hasBeenClicked?.[credential.credentialName] ?
                                         <ListItem  divider key={i} button >                
                                             <ListItemIcon className={listTextClasses.icon}>                                                    
-                                                <ImageViewer imagePath={credentialImagePath} />
+                                                {credential.credentialImageKey && <ImageViewer imagePath={credentialImagePath} />}
                                             </ListItemIcon>                                            
                                             <ListItemText className={listTextClasses.root} primary={`${credential.credentialName}`} onClick={handleCloseOptions} secondary={`Expiration: ${credential.dateExpiring}`} />
                                             <ListItemSecondaryAction onClick={editCredential}>

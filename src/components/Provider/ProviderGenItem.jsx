@@ -95,7 +95,7 @@ function ProviderGenItem({ provider }) {
                     <Typography variant="h6">Resume</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                    <ImageViewer imagePath={resumePath} />
+                    {provider.resumeKey && <ImageViewer imagePath={resumePath} />}
                 </AccordionDetails>
             </Accordion>
             </div>
