@@ -114,10 +114,12 @@ function ProviderCredItem({ provider, threeMonthsFromToday }) {
                                 const credentialImagePath = `/api/image/prov/${credential.credentialImageKey}`
                                 return (
                                     hasBeenClicked?.[credential.credentialName] ?
-                                        <ListItem  divider key={i} button >                
+                                        <ListItem  divider key={i} button >  
+                                        {credential.credential &&              
                                             <ListItemIcon className={listTextClasses.icon}>                                                    
-                                                {credential.credentialImageKey && <ImageViewer imagePath={credentialImagePath} />}
-                                            </ListItemIcon>                                            
+                                                <ImageViewer imagePath={credentialImagePath} />
+                                            </ListItemIcon>
+                                        }
                                             <ListItemText className={listTextClasses.root} primary={`${credential.credentialName}`} onClick={handleCloseOptions} secondary={`Expiration: ${credential.dateExpiring}`} />
                                             <ListItemSecondaryAction onClick={editCredential}>
                                                 <IconButton edge="end" onClick={editCredential}>
@@ -128,9 +130,11 @@ function ProviderCredItem({ provider, threeMonthsFromToday }) {
                                     :
 
                                         <ListItem divider key={i} button >
+                                        {credential.credential && 
                                             <ListItemIcon className={listTextClasses.icon}>
                                                 <ImageViewer imagePath={credentialImagePath} />
                                             </ListItemIcon>
+                                        }
                                             <ListItemText className={listTextClasses.root} primary={`${credential.credentialName}`} onClick={ e => handleDisplayOptions(e, credential)} secondary={`Expiration: ${credential.dateExpiring}`} />
                                             {new Date(credential.dateExpiring + 'T00:00:00').getTime() - threeMonthsFromToday.getTime() <= 0 &&
                                                 <ListItemSecondaryAction>
