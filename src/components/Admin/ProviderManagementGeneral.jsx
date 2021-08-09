@@ -27,27 +27,21 @@ import Button from '@material-ui/core/Button';
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
-        maxWidth: 752,
+        maxWidth: '100%',
         height: 1,
         '& > *': {
             margin: theme.spacing(1),
-            width: '25ch',
+            width: '75%',
         },
+        alignItems: 'center',
+        margin: 'auto',
     },
     demo: {
-        backgroundColor: theme.palette.background.paper,
+        // backgroundColor: '#2E8B57',
     },
     title: {
         margin: theme.spacing(4, 0, 2),
     },
-    alignItemsAndJustifyContent: {
-        width: 500,
-        height: 80,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: 'pink',
-      },
 }));
 
 function ProviderManagementGeneral() {
@@ -87,7 +81,7 @@ function ProviderManagementGeneral() {
     const starIcon = (provider) => {
         if (provider.verified == true) {
             return (
-                <StarIcon />
+                <StarIcon color="primary" />
             )
         } else {
             return;
@@ -99,6 +93,7 @@ function ProviderManagementGeneral() {
         <div className="admin-prov-gen">
 
             <Typography variant="h4" className="providerMgmtListTitle">PROVIDERS</Typography>
+            <hr />
 
             <div className={classes.root}>
                     <div className="search-wrapper">
@@ -107,19 +102,20 @@ function ProviderManagementGeneral() {
                                 type="texts"
                                 variant="outlined"
                                 onChange={event => setSearchQuery(event.target.value)}
+                                className="search-wrapper"
                             />
                             <TextField />
                     </div>
-                    <Paper style={{maxHeight: 300, overflow: 'auto'}}>
+                    <Paper style={{maxHeight: 300, overflow: 'auto', maxWidth: '100%'}} className="admin-prov-gen-paper">
                     {providers?.filter(provider => {
                         if (searchQuery == '') {
                             return provider
-                        } else if (provider?.firstName.toLowerCase().includes(searchQuery.toLowerCase())) {
+                        } else if (provider?.firstName?.toLowerCase().includes(searchQuery?.toLowerCase())) {
                             return provider
                         }
                     }).map(provider => {
                         return (
-                            <div key={provider?.provider_id}>
+                            <div key={provider?.provider_id} className="listOfProviders">
                                 <Grid item xs={12} md={6}>
                                     <div className={classes.demo}>
                                         <List dense={dense}>
@@ -132,7 +128,7 @@ function ProviderManagementGeneral() {
                                                         onClick={() => handleSelect(provider?.user_id)}
                                                         className="mouse"
                                                     >
-                                                        <Typography>{provider?.firstName}</Typography>
+                                                        <Typography>{provider?.firstName} {provider?.lastName} - {provider?.providerRole}</Typography>
                                                     </ListItemText>
                                                 </ListItem>
                                                 <Divider />

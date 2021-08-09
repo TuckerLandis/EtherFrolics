@@ -1,0 +1,25 @@
+.pmiBtn {
+    text-align: center;
+    padding: 25px;
+}
+
+.pmiB {
+    padding: 10px;
+    margin: 5%;
+}
+
+.centerText {
+    margin-top: 5%;
+    text-align: center;
+}
+
+.individualDiv {
+    margin: 10px;
+    padding: 10px;
+}
+
+.individualPaper {
+    border: 2px solid gray;
+    border-radius: 25px;
+    box-shadow: 25px 25px 25px #7fbf7f;
+}

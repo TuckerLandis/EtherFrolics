@@ -1,0 +1,47 @@
+.providerProfile {
+    height: inherit;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+
+.profileContainer {
+    height: inherit;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    max-width: 375px;
+}
+
+.profileHeader {
+    margin: 20px 0 35px 0;
+    text-align: center;
+}
+
+.unregisteredProfile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 15px 10px 15px 10px;
+}
+
+.registeredProfile {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    height: inherit;
+}
+
+.credSection {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    height: inherit;
+}
+
+.genSection {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    height: inherit;
+}
