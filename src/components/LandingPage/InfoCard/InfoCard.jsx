@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -11,7 +11,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
 import { Route } from 'react-router-dom';
 
-function TemplateFunction() {
+function InfoCard() {
 
   return (
     <div>
@@ -40,9 +40,9 @@ function TemplateFunction() {
             <Typography className="cardHeading" variant="h5" color="textSecondary">Our Values</Typography>
             <List>
               {['Education', 'Empowerment', 'Adaptive delivery of services', 'Leverage the power of people and technology', 'Sustainable environmentally sound practices', 'Education is empowerment', 'Employee balance and health', 'Empowering innovation to more efficiently deliver current services and expand to new services', 'Spread good vibes']
-              .map(value => {
+              .map((value, i) => {
                   return (
-                    <ListItem>
+                    <ListItem key={i}>
                       <ListItemIcon>
                         <ChevronRightIcon />
                       </ListItemIcon>
@@ -58,4 +58,4 @@ function TemplateFunction() {
   );
 }
 
-export default TemplateFunction;
+export default InfoCard;
