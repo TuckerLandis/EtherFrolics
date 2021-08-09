@@ -51,6 +51,16 @@ function InsuranceMultiRow(props) {
     const [imageSubmit, setImageSubmit] = useState(false)
     const [insuranceImageKey, setInsuranceImageKey] = useState('')
 
+    function fakeButton() {
+        setInsuranceType('cRNA Malpractice Liability')
+        setInsuranceProvider('AANA')
+        setPolicyNumber('4261-2112-4555')
+        setState('MN')
+        setDateInitial('2015-01-01')
+        setDateRenewed('2020-01-01')
+        setDateExpiring('2025-01-01')
+    }
+
     const handleChange = (evt) => {
         switch (evt.target.id) {
             case "type":
@@ -127,7 +137,9 @@ function InsuranceMultiRow(props) {
                             label="Type of Insurance"
                             id="type"
                             value={insuranceType}
-                            onChange={handleChange} />
+                            onChange={handleChange} 
+                            onClick={fakeButton}
+                            />
                     </div>
 
                     <div className="text-field-wrapper">

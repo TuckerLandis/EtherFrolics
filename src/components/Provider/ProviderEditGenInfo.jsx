@@ -46,6 +46,7 @@ console.log('provider is', provider);
                 <div className="text-field-wrapper">
                     <TextField
                     type="text"
+                    variant="outlined"
                     name="firstName"
                     value={editObj.firstName}
                     onChange={handleChange}
@@ -55,6 +56,7 @@ console.log('provider is', provider);
                 <div className="text-field-wrapper">
                     <TextField
                     type="text"
+                    variant="outlined"
                     name="lastName"
                     value={editObj.lastName}
                     onChange={handleChange}
@@ -64,6 +66,7 @@ console.log('provider is', provider);
                 <div className="text-field-wrapper">
                     <Select
                     name="providerRole"
+                    variant="outlined"
                     value={editObj.providerRole}
                     displayEmpty
                     onChange={handleChange}>
@@ -82,6 +85,7 @@ console.log('provider is', provider);
                 <div className="text-field-wrapper">
                     <TextField
                     type="text"
+                    variant="outlined"
                     name="phoneNumber"
                     value={editObj.phoneNumber}
                     onChange={handleChange}
@@ -91,6 +95,7 @@ console.log('provider is', provider);
                 <div className="text-field-wrapper">
                     <TextField
                     type="text"
+                    variant="outlined"
                     name="emailAddress"
                     value={editObj.emailAddress}
                     onChange={handleChange}
@@ -100,6 +105,7 @@ console.log('provider is', provider);
                 <div className="text-field-wrapper">
                     <Select
                     name="validPassport"
+                    variant="outlined"
                     value={editObj.validPassport}
                     displayEmpty
                     onChange={handleChange}>

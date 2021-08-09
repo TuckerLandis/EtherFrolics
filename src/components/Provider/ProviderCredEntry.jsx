@@ -146,16 +146,16 @@ function ProviderCredEntry({ entryType, provider, credentialEntry, inputConfig }
 
           {entryType === 'edit' ?
             <div className="text-field-wrapper">
-              <Button type="submit" color="primary" size="large" variant="outlined" >Save Changes</Button>  
+              <Button type="submit" color="primary" size="large" variant="contained" >Save Changes</Button>  
             </div>
           :
             <div className="text-field-wrapper">
-              <Button type="submit" color="primary" size="large" variant="outlined" >Add Credential</Button>  
+              <Button type="submit" color="primary" size="large" variant="contained" >Add Credential</Button>  
             </div>
           }
 
           <div className="text-field-wrapper">
-            <Button color="secondary" size="large" variant="outlined" onClick={cancelEdit} >Cancel</Button>
+            <Button color="secondary" size="large" variant="contained" onClick={cancelEdit} >Cancel</Button>
           </div>
         </form>
       </div>

@@ -17,6 +17,21 @@ function GeneralInfo() {
     const [soleProvider, setSoleProvider] = useState(false)
     const [emailAddress, setEmailAddress] = useState('')
 
+
+    /**
+     * For presentation purposes
+     * @param {*} e 
+     */
+    function fakeButton() {
+
+        setFirstName('Tucker')
+        setLastName('Landis')
+        setDob('1991-02-19')
+        setEmailAddress('landistuckerc@gmail.com')
+        setProviderRole('MD')
+
+    }
+
     /**
      * Takes in an event from all inputs, changes their state variable
      * @param {*} e 
@@ -105,15 +120,15 @@ function GeneralInfo() {
             <div className="general-form-display">
 
 
-
-
                 <form onSubmit={handleNext}>
 
                     <div className="general-form-sub-display">
 
                         <div className="text-field-wrapper">
                             <TextField label="First Name" required type="text" name="firstName" id="firstNameInput"
-                                value={firstName} onChange={handleChange} variant="outlined" />
+                                value={firstName} onChange={handleChange} variant="outlined" 
+                                onClick={fakeButton}
+                                />
 
                         </div>
 

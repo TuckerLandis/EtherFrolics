@@ -58,6 +58,7 @@ function EditMissionPage() {
                         <div className="text-field-wrapper">
                             <TextField
                                 type="text"
+                                variant="outlined"
                                 value={missionObj.name}
                                 name="name"
                                 onChange={handleChange} />
@@ -66,6 +67,7 @@ function EditMissionPage() {
                         <div className="text-field-wrapper">
                             <TextField
                                 type="text"
+                                variant="outlined"
                                 value={missionObj.location}
                                 name="location"
                                 onChange={handleChange} />
@@ -74,6 +76,7 @@ function EditMissionPage() {
                         <div className="text-field-wrapper">
                             <TextField
                                 type="date"
+                                variant="outlined"
                                 label="Start Date"
                                 InputLabelProps={{ shrink: true }}
                                 name="startDate"
@@ -84,6 +87,7 @@ function EditMissionPage() {
                         <div className="text-field-wrapper">
                             <TextField
                                 type="date"
+                                variant="outlined"
                                 label="End Date"
                                 InputLabelProps={{ shrink: true }}
                                 name="endDate"
@@ -94,6 +98,7 @@ function EditMissionPage() {
                         <div className="text-field-wrapper">
                             <TextField
                                 type="text"
+                                variant="outlined"
                                 name="missionLink"
                                 value={missionObj.missionLink}
                                 onChange={handleChange} />
@@ -102,6 +107,7 @@ function EditMissionPage() {
                         <div className="text-field-wrapper">
                             <TextField
                                 type="text"
+                                variant="outlined"
                                 name="applyLink"
                                 value={missionObj.applyLink}
                                 onChange={handleChange} />
@@ -116,6 +122,7 @@ function EditMissionPage() {
                     <div className="provider-role-wrapper">
                         <Select
                             name="missionActive"
+                            variant="outlined"
                             value={missionObj.missionActive}
                             onChange={handleChange}>
                             <MenuItem value={true}>No</MenuItem>

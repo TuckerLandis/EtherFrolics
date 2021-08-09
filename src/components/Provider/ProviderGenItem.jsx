@@ -9,6 +9,8 @@ import EditGenInfo from './ProviderEditGenInfo';
 
 import ImageViewer from '../ImageComponents/ImageViewer';
 
+import './ProviderLanding.css';
+
 function ProviderGenItem({ provider }) {
 
     const [editState, setEditState] = useState(false); 
@@ -17,7 +19,7 @@ function ProviderGenItem({ provider }) {
     const resumePath = `/api/image/prov/${provider?.resumeKey}`
         
     return ( 
-        <div>
+        <div className="genSection">
             {editState ? (
                 <EditGenInfo provider={provider} editState={editState}/>
             ) : (
@@ -103,11 +105,13 @@ function ProviderGenItem({ provider }) {
                 <Button 
                 variant="contained"
                 color="primary"
+                size="large"
                 onClick={ () => {setEditState(!editState)}}>Edit General Info</Button>
             :
                 <Button 
                 variant="contained"
                 color="secondary"
+                size="large"
                 onClick={ () => {setEditState(!editState)}}>Cancel Edit</Button>
             }
         

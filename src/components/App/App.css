@@ -3,6 +3,7 @@ body,
 #react-root {
   height: 100%;
   background-color: #b9e2e2;
+  ;
 }
 
 body {
@@ -33,11 +34,12 @@ Button
   border-color: #014041;
   border-width: 1px 1px 3px;
   border-radius: 4px;
-  background-color: #00acb0;
+  background-color: #7fbf7f;
   color: #f8f8f8;
   font-size: 1.1rem;
   outline: 0;
   cursor: pointer;
+  
 }
 
 .btn_sizeMin {
@@ -211,4 +213,12 @@ hr {
   height: 10px; 
   border: 0; 
   box-shadow: 0 10px 10px -10px #3da1bd inset;
+}
+
+.padding-top {
+  padding-top: 10px;
+}
+
+.padding-bottom {
+  padding-bottom: 20px;
 }

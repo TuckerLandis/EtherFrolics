@@ -21,6 +21,9 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import Divider from '@material-ui/core/Divider';
 
+// sweetalert
+import Swal from 'sweetalert2';
+
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
@@ -75,21 +78,55 @@ function ProviderManagementIndividual() {
 
     // verifies provider using provider.provider_id
     const verify = (provider_id) => {
-        console.log('invidiual provider to verify: ', provider_id);
-        dispatch({
-            type: 'VERIFY_PROVIDER',
-            payload: provider_id
+        console.log('individual provider to verify: ', provider_id);
+        Swal.fire({
+            title: "Are you Sure?",
+            text: "This provider will be verified.",
+            icon: "warning",
+            confirmButtonText: 'Yes!',
+            showCancelButton: true,
+        }).then((result) => {
+
+            if (result.value) {
+                Swal.fire({
+                    title: "Provider verified",
+                    icon: "success",
+                })
+                 dispatch({
+                    type: 'VERIFY_PROVIDER',
+                    payload: provider_id
+                 })
+                selectProvider();
+            } else {
+                Swal.fire("Provider not verified")
+            }
         })
-        selectProvider();
     } // end verify
 
     const disable = (provider_id) => {
         console.log('individual provider to disable: ', provider_id);
-        dispatch({
-            type: 'DISABLE_PROVIDER',
-            payload: provider_id
+        Swal.fire({
+            title: "Are you Sure?",
+            text: "This Provider will be disabled",
+            icon: "warning",
+            confirmButtonText: 'Yes!',
+            showCancelButton: true,
+        }).then((result) => {
+
+            if (result.value) {
+                Swal.fire({
+                    title: "Provider disabled",
+                    icon: "success",
+                })
+                dispatch({
+                    type: 'DISABLE_PROVIDER',
+                    payload: provider_id
+                })
+                selectProvider();
+            } else {
+                Swal.fire("Provider not disabled")
+            }
         })
-        selectProvider();
     } // end disable
 
     // displays whether a user has been verified or not by admin
