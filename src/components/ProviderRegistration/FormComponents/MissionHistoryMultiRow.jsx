@@ -23,7 +23,7 @@ function MissionHistoryMultiRow(props) {
         setOrganization('International Medical Corps')
         setLocation('Matabeleland, Zimbabwe')
         setReferenceName('Dr. David Smith')
-        setReferencePhone('805-222-3413')
+        setReferencePhone('8052223413')
         setReferenceEmail('DaveSmithMD@gmail.com')
         setStartDate('2007-11-12')
         setEndDate('2007-12-15')

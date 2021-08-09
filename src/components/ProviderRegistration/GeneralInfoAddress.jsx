@@ -22,7 +22,7 @@ function GeneralInfoAddress() {
 
     function fakeButton(){
 
-        setPhone('612-867-5309')
+        setPhone('6128675309')
         setStreetAddress('1010101 Binary Drive')
         setCity('Computerton')
         setState('MN')
