@@ -11,4 +11,4 @@ const providerLandingReducer = (state = {}, action) => {
     }
 }
 
-export default providerLandingReducer;
+export default providerLandingReducer

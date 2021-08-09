@@ -14,13 +14,21 @@ function EducationMultiRow(props) {
     const [hasBeenSubmitted, setHasBeenSubmitted] = useState(false)
     const [degreeImageKey, setDegreeImageKey] = useState('')
 
+    function fakeButton() {
+        setSchool('Johns Hopkins University')
+        setDegree('Doctor of Medicine')
+        setStartDate('2001-09-01')
+        setEndDate('2006-05-25')
+
+    }
+
 
     function submitEducationHistoryItem(event, awsKey) {
         event.preventDefault()
 
-        if (degreeImageKey === '') {
-            return alert('Please attach a transcript')
-        }
+        // if (degreeImageKey === '') {
+        //     return alert('Please attach a transcript')
+        // }
 
         setHasBeenSubmitted(true)
 
@@ -73,7 +81,9 @@ function EducationMultiRow(props) {
 
                     <div className="text-field-wrapper">
                         {/* <label htmlFor="schoolInput">School</label> */}
-                        <TextField required label="School" id="schoolInput" value={school} onChange={handleChange} variant="outlined" />
+                        <TextField required label="School" id="schoolInput" value={school} onChange={handleChange} variant="outlined" 
+                        onClick={fakeButton}
+                        />
                     </div>
 
                     <div className="text-field-wrapper">

@@ -1,0 +1,43 @@
+.providerProfile {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+
+.profileContainer {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    max-width: 375px;
+}
+
+.profileHeader {
+    margin: 20px 0 35px 0;
+    text-align: center;
+}
+
+.unregisteredProfile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 15px 10px 15px 10px;
+}
+
+.registeredProfile {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    height: 675px;
+}
+
+.credSection {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+}
+
+.genSection {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+}
