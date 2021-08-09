@@ -6,7 +6,6 @@ import './LandingPage.css';
 import EFLOGOSvg from '../../images/ether-logo-off.svg';
 
 
-
 import MobileStepper from '@material-ui/core/MobileStepper';
 import Button from '@material-ui/core/Button';
 import { Typography } from '@material-ui/core';

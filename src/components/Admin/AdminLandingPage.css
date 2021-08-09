@@ -4,14 +4,8 @@
 }
 
 .buttonCorral {
-    display: inline-grid;
-    position: aboslute;
-    float: center;
     text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.adminBtn {
-    padding: 10px;
+    display: inline-grid;
+    padding: 75px;
+    margin: 5%;
 }

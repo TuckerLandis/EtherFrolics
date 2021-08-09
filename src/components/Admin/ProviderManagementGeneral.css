@@ -2,6 +2,11 @@
     text-align: center;
 }
 
-.search-wrapper {
+.admin-prov-gen-paper {
+    border: 0.5px solid gray;
+}
 
+.search-wrapper {
+    text-align: right;
+    margin: auto;
 }
