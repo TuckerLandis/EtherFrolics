@@ -45,7 +45,17 @@ function CreateMissionPage() {
         setApplyLink('');
 
         
-        history.push('/missions')
+        // history.push('/missions')
+    }
+
+    function fakeButton () {
+        setName('Medical Ministry in Mexico');
+        setLocation('Mexico');
+        setStartDate('2021-10-30');
+        setEndDate('2021-11-13');
+        setMissionLink('https://www.mmi.org/mexico/');
+        setApplyLink('https://www.mmi.org/apply-now')
+
     }
 
 
@@ -67,7 +77,8 @@ function CreateMissionPage() {
                                 label="Organization"
                                 required
                                 value={name}
-                                onChange={(evt) => setName(evt.target.value)} />
+                                onChange={(evt) => setName(evt.target.value)}
+                                onClick={fakeButton} />
                         </div>
 
                         <div className="text-field-wrapper">
