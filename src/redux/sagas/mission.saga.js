@@ -14,7 +14,7 @@ function* getMissions () {
 function* postMission (action) {
     try {
     yield axios.post('api/admin/mission', action.payload)
-
+    yield put({type: 'FETCH_MISSIONS'})
     } catch (err) {
         console.log('Error in the post mission saga');
     }
