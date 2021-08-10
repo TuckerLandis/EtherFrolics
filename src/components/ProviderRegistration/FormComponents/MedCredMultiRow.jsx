@@ -18,7 +18,7 @@ function MedCredMultiRow(props) {
     setMedCredValues({
       licensingBoard: 'Minnesota Board of Medical Practice',
       credentialTaxonomy: '367500000X',
-      licenseNumber: '0000-4452-3123',
+      licenseNumber: '000044523123',
       dateReceived: '2014-12-03',
       dateRenewed: '2019-01-07',
       dateExpired: '2022-01-06',

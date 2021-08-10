@@ -20,7 +20,7 @@ function WorkHistoryMultiRow(props) {
         setWorkplace('Sacred Heart Hospital')
         setJobTitle('Co-Chief Resident')
         setReferenceName('Dr. Christopher Turk')
-        setReferencePhone('612-660-2222')
+        setReferencePhone('6126602222')
         setReferenceEmailAddress('ChrisTurkMD@gmail.com')
         setStartDate('2008-12-01')
         setEndDate('2015-03-05')
