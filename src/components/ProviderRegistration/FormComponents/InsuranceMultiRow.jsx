@@ -54,7 +54,7 @@ function InsuranceMultiRow(props) {
     function fakeButton() {
         setInsuranceType('cRNA Malpractice Liability')
         setInsuranceProvider('AANA')
-        setPolicyNumber('426121124555')
+        setPolicyNumber('4261555')
         setState('MN')
         setDateInitial('2015-01-01')
         setDateRenewed('2020-01-01')
