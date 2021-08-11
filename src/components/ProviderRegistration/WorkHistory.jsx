@@ -45,12 +45,14 @@ function WorkHistory() {
 
     }
 
+    // sets years of experience based on select
     function handleChange(e) {
         console.log(e.target.value);
         setYearsExperience(e.target.value)
 
     }
 
+    // passed down as props to image uploader, to be triggered upon attach button click, see ImageUploader.jsx
     function handleImageAttach(awsKey) {
         setResumeSubmitted(true)
         setResumeImageKey(awsKey)
@@ -88,7 +90,8 @@ function WorkHistory() {
             type: 'POST_WORK_HISTORY_ITEMS',
             payload: workHistoryItems
         })
-
+        
+        // send user to next page
         history.push('/missionhistory')
     }
 
