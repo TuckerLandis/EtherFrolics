@@ -69,8 +69,6 @@ function GeneralInfo() {
             return alert('Please complete all required fields')
         }
 
-        console.log('next clicked');
-
         // bundle provider general info
         const newProviderGeneralInfo = {
             firstName: firstName,
