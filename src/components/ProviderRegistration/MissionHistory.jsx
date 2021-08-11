@@ -17,19 +17,11 @@ function MissionHistory () {
     // once a subform is submitted, this counts up by one, rendering a new subform
     const [amountOfMissionHistories, setAmountOfMissionHistories] = useState([1])
 
-    // state variable to track if at least 1 section
-    // of mission history data has been submitted to the DB, not a required field as of now, this variable doesn't get referenced at this time
-    const [missionHistorySubmitted, setMissionHistorySubmitted] = useState(false);
-
     // increases the amount of mission history elements in the array above
     function addMissionHistoryItem() {
 
         setAmountOfMissionHistories(amountOfMissionHistories =>
             [...amountOfMissionHistories, amountOfMissionHistories.length + 1])
-
-        // missionHistorySubmitted set to true enables
-        // NEXT button to navigate to the next page
-        setMissionHistorySubmitted(true);
 
     }
     
