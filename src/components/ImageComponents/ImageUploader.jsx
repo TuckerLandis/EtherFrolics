@@ -113,9 +113,6 @@ function ImageUploader(props) {
 
         </div>
 
-
-
-
         <div>
           <Button variant="contained" color={attachButtonColor} onClick={handleSubmitImage}><AttachmentIcon />{attachButtonText}</Button>
         </div>

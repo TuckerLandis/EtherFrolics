@@ -10,13 +10,16 @@ import EditGenInfo from './ProviderEditGenInfo';
 import ImageViewer from '../ImageComponents/ImageViewer';
 
 import './ProviderLanding.css';
+import { useSelector } from 'react-redux';
 
 function ProviderGenItem({ provider }) {
 
     const [editState, setEditState] = useState(false); 
+    const user = useSelector(store => store.user)
 
     // path to s3 for image rendering
-    const resumePath = `/api/image/prov/${provider?.resumeKey}`
+    // const resumePath = `/api/image/prov/${provider?.resumeKey}`
+    const resumePath = `/api/image/prov/${user.id}/${provider?.resumeKey}`
         
     return ( 
         <div className="genSection">

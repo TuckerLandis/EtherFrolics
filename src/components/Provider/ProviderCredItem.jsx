@@ -9,7 +9,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import { List, ListItem, ListItemText, ListItemSecondaryAction, ListItemIcon, IconButton} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory, useRouteMatch } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import ImageViewer from '../ImageComponents/ImageViewer';
 
@@ -46,6 +46,8 @@ function ProviderCredItem({ provider, threeMonthsFromToday }) {
     const { url } = useRouteMatch();
 
     const [hasBeenClicked, setHasBeenClicked] = useState({});
+
+    const user = useSelector(store => store.user)
 
     const handleDisplayOptions = (e, credential)  => {
         e.preventDefault();
@@ -111,7 +113,7 @@ function ProviderCredItem({ provider, threeMonthsFromToday }) {
                     <div className={listItemClasses.root}>
                         <List component="nav">
                             {provider.credential_array.map( (credential, i) => {
-                                const credentialImagePath = `/api/image/prov/${credential.credentialImageKey}`
+                                const credentialImagePath = `/api/image/prov/${user.id}/${credential.credentialImageKey}`
                                 return (
                                     hasBeenClicked?.[credential.credentialName] ?
                                         <ListItem  divider key={i} button >  
