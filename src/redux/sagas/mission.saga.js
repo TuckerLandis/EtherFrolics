@@ -21,7 +21,6 @@ function* postMission (action) {
 }
 
 function* updateMission (action) {
-    console.log('action.payload is', action.payload);
     try{
         yield axios.put(`api/admin/mission/${action.payload.mission_id}`, action.payload);
         yield put({type: 'FETCH_MISSIONS'})
