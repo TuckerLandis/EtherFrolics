@@ -15,9 +15,6 @@ function WorkHistory() {
     // boolean state for if a resume has been submitted, for form validation
     const [resumeSubmitted, setResumeSubmitted] = useState(false)
 
-    // setter for resumeImageKey
-    const [resumeImageKey, setResumeImageKey] = useState('')
-
     // use selector for work history items, this could be used to render upon submit
     const workHistoryItems = useSelector(store => store.workHistoryReducer)
 
@@ -27,11 +24,6 @@ function WorkHistory() {
     // state array on which work history sub components are rendered, 
     //once a subform is submitted, this counts up by one, rendering a new subform
     const [amountOfWorkHistories, setAmountOfWorkHistories] = useState([1])
-
-
-    // state variable to track if at least 1 section
-    // of work history data has been submitted to the DB, for form validation
-    const [workHistorySubmitted, setWorkHistorySubmitted] = useState(false);
  
     // increases the amount of work history elements in the array above
     function addWorkHistoryItem() {
@@ -47,7 +39,6 @@ function WorkHistory() {
 
     // sets years of experience based on select
     function handleChange(e) {
-        console.log(e.target.value);
         setYearsExperience(e.target.value)
 
     }
