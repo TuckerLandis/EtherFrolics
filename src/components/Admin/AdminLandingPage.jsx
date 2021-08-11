@@ -43,8 +43,6 @@ function AdminLandingPage() {
         dispatch({ type: 'GET_ADMIN' });
     }, []);
 
-    console.log('Admin Landing Page administrator:', admin);
-
     return (
 
         <div>
