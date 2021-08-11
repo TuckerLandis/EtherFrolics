@@ -60,6 +60,7 @@ function GeneralInfo() {
 
     /**
      * Upon clicking next button, validate forms, bundle info, send dispatch, push to next page
+     * Passed down to stepper, next button, as props
      */
     function handleNext(e) {
         e.preventDefault()
@@ -70,6 +71,7 @@ function GeneralInfo() {
 
         console.log('next clicked');
 
+        // bundle provider general info
         const newProviderGeneralInfo = {
             firstName: firstName,
             lastName: lastName,
@@ -80,6 +82,7 @@ function GeneralInfo() {
             providerEmail: emailAddress
         }
 
+        // this dispatch triggers first post request of a provider
         dispatch({
             type: 'POST_PROVIDER_GENERAL',
             payload: newProviderGeneralInfo
