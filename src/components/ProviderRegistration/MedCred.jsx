@@ -5,16 +5,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import RegistrationStepper from './Stepper'
 import { Typography } from '@material-ui/core';
 
-import Button from '@material-ui/core/Button';
-
 function MedCred () {
 
   const history = useHistory();
 
+  // useSelector for provider creds, can be used to render here after add, before submit
   const providerCredentials = useSelector(store => store.credentialHistoryReducer)
 
   const dispatch = useDispatch();
 
+  // amount of credentials array, to render more forms
   const [credentialList, setCredentialList] = useState([1]);
 
   // state variable to track if at least 1 section
@@ -31,6 +31,7 @@ function MedCred () {
 
   };
 
+  // passed down as props to stepper
   const handleNext = () => {
 
     console.log('handle next');
@@ -43,8 +44,7 @@ function MedCred () {
     history.push('/insurance') 
   };
 
-  console.log(credentialList);
-
+  // passed down as props to stepper to render progress bar
   const activeStep = 6
 
   return(
@@ -60,10 +60,6 @@ function MedCred () {
         )
       })}
       
-      {/* next button goes here */}
-      {/* <Button disabled={!credentialSubmitted ? true : false} onClick={handleNext} color="primary" variant="outlined">Next</Button> */}
-      {/* stepper goes here with props of which page */}
-
       < RegistrationStepper activeStep={activeStep} submitFunction={handleNext}/>
 
       </div>
@@ -73,31 +69,3 @@ function MedCred () {
 
 export default MedCred
 
-
-// ## Checklist
-
-// - [ ]  Inputs
-//     - [x]  licensing board
-//     - [x]  date inital
-//     - [x]  date renewed
-//     - [x]  date expiring
-//     - [x]  cert name / taxonomy
-//     - [x]  license number
-//     - [x]  button to add new license
-//     - [ ]  PDF upload
-// - [ ]  Stepper
-
-// - [x]  Next button → insurance
-
-// ## Components
-
-// - [x]  credential form component - this contains inputs for credentials, gets duplicated by + button
-// - [ ]  header, stepper
-
-// - [ ]  pdf upload component - gets passed props from URL params to denote which type of file is uploaded
-
-// ## Routes
-
-// - [ ]  put route to provider table
-// - [ ]  post route to education history table
-// - [ ]  post to amazon s3 type: credential pdf

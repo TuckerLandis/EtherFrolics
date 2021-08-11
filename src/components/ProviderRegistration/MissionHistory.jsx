@@ -13,12 +13,12 @@ function MissionHistory () {
 
     const missionHistoryItems = useSelector(store => store.missionHistoryReducer)
 
-    const [lastMission, setLastMission] = useState('')
-
+    // state array on which mission history sub components are rendered, 
+    // once a subform is submitted, this counts up by one, rendering a new subform
     const [amountOfMissionHistories, setAmountOfMissionHistories] = useState([1])
 
     // state variable to track if at least 1 section
-    // of mission history data has been submitted to the DB
+    // of mission history data has been submitted to the DB, not a required field as of now, this variable doesn't get referenced at this time
     const [missionHistorySubmitted, setMissionHistorySubmitted] = useState(false);
 
     // increases the amount of mission history elements in the array above
@@ -32,22 +32,10 @@ function MissionHistory () {
         setMissionHistorySubmitted(true);
 
     }
-
-    // function handleChange(e) {
-    //     setLastMission(e.target.value)
-    // }
-
+    
+    // passed down as props to <RegistrationStepper />
     function handleNext(e) {
         e.preventDefault
-
-        // dispatch({
-        //     type: "PUT_LAST_MISSION",
-        //     payload: {
-        //         lastMission: lastMission
-        //     }
-        // })
-
-        
         
          dispatch({
              type: 'POST_MISSION_HISTORY_ITEMS',
@@ -55,10 +43,11 @@ function MissionHistory () {
 
          })
        
-
+        // sends user to next page
         history.push('/education')
     }
 
+    // sent down as props to render progress bar in stepper component
     const activeStep = 3
 
     return(
@@ -74,9 +63,8 @@ function MissionHistory () {
                 )
             })}
 
-        {/* <button disabled={!missionHistorySubmitted ? true : false} onClick={handleNext}>Next</button> */}
 
-            {/* stepper goes here with props of which page */}
+        
             < RegistrationStepper activeStep={activeStep} submitFunction={handleNext}/>
 
         </div>
