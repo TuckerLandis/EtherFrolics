@@ -15,7 +15,7 @@ function EducationMultiRow(props) {
     const [degreeImageKey, setDegreeImageKey] = useState('')
 
     // passed down as props to stepper for next button press
-    function submitEducationHistoryItem(event, awsKey) {
+    function submitEducationHistoryItem(event) {
         event.preventDefault()
         // validates if a transcript image has been attached
 
