@@ -19,17 +19,7 @@ function MissionHistoryMultiRow(props) {
     const [missionImageKey, setMissionImageKey] = useState('')
 
 
-    function fakeButton(){
-        setOrganization('International Medical Corps')
-        setLocation('Matabeleland, Zimbabwe')
-        setReferenceName('Dr. David Smith')
-        setReferencePhone('8052223413')
-        setReferenceEmail('DaveSmithMD@gmail.com')
-        setStartDate('2007-11-12')
-        setEndDate('2007-12-15')
-
-    }
-
+    // submit function for a mission history item, validates forms, sends dispatch
     function submitMissionHistoryItem(event) {
 
         event.preventDefault();
@@ -53,10 +43,11 @@ function MissionHistoryMultiRow(props) {
                 missionExperienceImageKey: missionImageKey
             }
         })
-
+        // adds a mission history item to the array in parent component, rendering a new copy of this component
         props.addMissionHistoryItem()
     }
 
+    // attaches aws image key to form row
     function handleImageAttach(awsKey) {
         setImageSubmit(true)
         setMissionImageKey(awsKey)
@@ -89,9 +80,8 @@ function MissionHistoryMultiRow(props) {
 
         }
     }
-
+    // passed to image uploader, not used at this time
     const imageType = 'mission'
-    // const dispatchText = 'UPLOAD_MISSION_HISTORY'
 
     return (
         <div className="general-form-display">
@@ -104,10 +94,7 @@ function MissionHistoryMultiRow(props) {
 
                     <div className="text-field-wrapper">
                         {/* <label htmlFor="organtizationInput">Organization</label> */}
-                        <TextField required label="Organization" variant="outlined" id="organizationInput" value={organization} onChange={handleChange} 
-                        onClick={fakeButton}
-                        
-                        />
+                        <TextField required label="Organization" variant="outlined" id="organizationInput" value={organization} onChange={handleChange} />
                     </div>
                     <div className="text-field-wrapper">
                         {/* <label htmlFor="locationInput">Location</label> */}
