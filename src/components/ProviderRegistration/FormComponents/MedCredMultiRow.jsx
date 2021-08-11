@@ -14,18 +14,6 @@ function MedCredMultiRow(props) {
   const [imageSubmit, setImageSubmit] = useState(false)
   const [credImageKey, setCredImageKey] = useState('')
 
-  function fakeButton() {
-    setMedCredValues({
-      licensingBoard: 'Minnesota Board of Medical Practice',
-      credentialTaxonomy: '367500000X',
-      licenseNumber: '000044523123',
-      dateReceived: '2014-12-03',
-      dateRenewed: '2019-01-07',
-      dateExpired: '2022-01-06',
-      credentialImageKey: ''
-
-    })
-  }
 
   function handleImageAttach(awsKey) {
     setImageSubmit(true)
@@ -119,7 +107,6 @@ function MedCredMultiRow(props) {
 
             <div className="text-field-wrapper">
               <TextField key={i} required label={textInputConfig.inputLabel} variant="outlined" name={textInputConfig.inputName} value={medCredValues[textInputConfig.inputName]} onChange={handleChange} 
-              onClick={fakeButton}
               />
 
             </div>

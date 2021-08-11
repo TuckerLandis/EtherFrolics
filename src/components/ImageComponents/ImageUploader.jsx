@@ -10,11 +10,11 @@ import ImageViewer from './ImageViewer'
 
 function ImageUploader(props) {
   const dispatch = useDispatch();
-  //state variable for the file being uploaded
+  //state variables for the file being uploaded
   const [file, setFile] = useState('')
   const [fileName, setFileName] = useState('Select a file')
   const [imgOrPDF, setImgOrPDF] = useState('neither')
-
+  // state vars for button render
   const [attachButtonText, setAttachButtonText] = useState('Attach')
   const [attachButtonColor, setAttachButtonColor] = useState('secondary')
 
@@ -38,7 +38,7 @@ function ImageUploader(props) {
 
     console.log(result);
 
-    // this return becomes result on line 51, for posting to pg
+    // this return becomes result on line 73, for posting to pg
     return result.data
   }
 
@@ -48,11 +48,11 @@ function ImageUploader(props) {
     const file = event.target.files[0]
 
     if (file.type === 'application/pdf') {
-      console.log('this is a pdf');
+      // console.log('this is a pdf');
       setImgOrPDF('PDF')
-      
+
     } else if (file.type.includes('image')) {
-      console.log('this is an image');
+      // console.log('this is an image');
       setImgOrPDF('IMG')
     }
 
@@ -76,11 +76,11 @@ function ImageUploader(props) {
     console.log(result);
 
 
-    // adds a prefix of the image type or PDF to the key
+    // adds a prefix of the image type or PDF to the key for interpretation when this key is evaluated by the imageViewer
     result.Key = `${imgOrPDF}${result.Key}`
     result.key = `${imgOrPDF}${result.Key}`
 
-    
+
     // if resume, just post to DB, can change this in the put work history dispatch
     if (props.imageType === 'resume') {
       dispatch({
@@ -90,12 +90,10 @@ function ImageUploader(props) {
       })
     }
 
-    
-
-
     // attaches the image key from s3 to the row to be submitted to the db
     props.attachImageFunction(result.Key)
 
+    // changes color and text for attach button 
     setAttachButtonText('Attached')
     setAttachButtonColor('primary')
   }
@@ -105,29 +103,25 @@ function ImageUploader(props) {
 
 
   return (
-    
+
     <div>
       <div className="button-div">
         <div>
-        <label className="inputfile-label" ><Typography variant="button"><FileCopyIcon/>{fileName}</Typography>
-        <input name="file" className="inputfile" onChange={fileSelected} type="file" accept="image/*"></input>
-        </label>
-      
-        </div>
-    
+          <label className="inputfile-label" ><Typography variant="button"><FileCopyIcon />{fileName}</Typography>
+            <input name="file" className="inputfile" onChange={fileSelected} type="file" accept="image/*"></input>
+          </label>
 
-      
-      
-      
-      <div>
-      <Button variant="contained" color={attachButtonColor} onClick={handleSubmitImage}><AttachmentIcon/>{attachButtonText}</Button>
-      </div>
+        </div>
+
+        <div>
+          <Button variant="contained" color={attachButtonColor} onClick={handleSubmitImage}><AttachmentIcon />{attachButtonText}</Button>
+        </div>
       </div>
       {/* can conditionally render this button based on props.imageSubmitted if we want */}
-      
+
     </div>
 
- 
+
   )
 }
 

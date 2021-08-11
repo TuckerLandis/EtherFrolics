@@ -12,25 +12,27 @@ function WorkHistory() {
     const dispatch = useDispatch();
     const history = useHistory();
 
+    // boolean state for if a resume has been submitted, for form validation
     const [resumeSubmitted, setResumeSubmitted] = useState(false)
+
+    // setter for resumeImageKey
     const [resumeImageKey, setResumeImageKey] = useState('')
 
-    
-
+    // use selector for work history items, this could be used to render upon submit
     const workHistoryItems = useSelector(store => store.workHistoryReducer)
 
+    // state variable for years of experience, default to -, set upon handleNext and for validated
     const [yearsExperience, setYearsExperience] = useState('-');
 
-    // state array on which work history sub components are rendered
+    // state array on which work history sub components are rendered, 
+    //once a subform is submitted, this counts up by one, rendering a new subform
     const [amountOfWorkHistories, setAmountOfWorkHistories] = useState([1])
-    // let keyForWorkHistoryMultiRow = 1
+
 
     // state variable to track if at least 1 section
-    // of work history data has been submitted to the DB
+    // of work history data has been submitted to the DB, for form validation
     const [workHistorySubmitted, setWorkHistorySubmitted] = useState(false);
  
-
-
     // increases the amount of work history elements in the array above
     function addWorkHistoryItem() {
 
@@ -43,17 +45,24 @@ function WorkHistory() {
 
     }
 
+    // sets years of experience based on select
     function handleChange(e) {
         console.log(e.target.value);
         setYearsExperience(e.target.value)
 
     }
 
+    // passed down as props to image uploader, to be triggered upon attach button click, see ImageUploader.jsx
     function handleImageAttach(awsKey) {
         setResumeSubmitted(true)
         setResumeImageKey(awsKey)
     }
 
+    /**
+     * Passed down to stepper, upon pressing next, form validate, then send dispatches as below
+     * once dispatches are complete, send user to next page
+     * @returns 
+     */
     async function handleNext() {
 
         if(yearsExperience === '-') {
@@ -76,12 +85,13 @@ function WorkHistory() {
             }
         })
 
-        // send a dispatch to post all work histories
+        // send a dispatch to post all work histories from the reducer
         await dispatch({
             type: 'POST_WORK_HISTORY_ITEMS',
             payload: workHistoryItems
         })
-
+        
+        // send user to next page
         history.push('/missionhistory')
     }
 

@@ -2,20 +2,20 @@ require('dotenv').config()
 const fs = require('fs')
 const S3 = require('aws-sdk/clients/s3')
 
-
+// sourcing in ENV vars for aws config, these are subject to change, i think if we set proc.env vars in heroku, they will be picked up, as our .env file is git-ignored
 const bucketName = process.env.AWS_BUCKET_NAME
 const region = process.env.AWS_BUCKET_REGION
 const accessKeyId = process.env.AWS_ACCESS_KEY
 const secretAccessKey = process.env.AWS_SECRET_KEY
 
-//instantiate a new s3 instance for this app, using .env vars ^ - see tucker for these
+//instantiate a new s3 instance for this app, using .env vars ^
 const s3 = new S3({
     region, 
     accessKeyId,
     secretAccessKey,
 })
 
-// upload to s3
+// upload image object to s3, return KEY for submitting to db
 function uploadFile(file) {
     const fileStream = fs.createReadStream(file.path)
 
@@ -34,7 +34,7 @@ function uploadFile(file) {
 exports.uploadFile = uploadFile
 
 
-// download from s3
+// download object from s3
 function getFileStream(fileKey) {
 
     // sets downloadParams config object to the passed in fileKey, and the bucketName in our .env
@@ -44,19 +44,6 @@ function getFileStream(fileKey) {
     }
 
     return s3.getObject(downloadParams).createReadStream()
-
-    
-    //  if (fileKey.includes('PDF')) {
-    //     s3.getObject(downloadParams, function(err, data) {
-    //         if (err)
-    //             return err;
-    //         return data.Body.toString('utf-8')
-    //     })
-    // } else {
-    //     // returns a getObject function (built into s3 SDK) as a readStream
-    //     return s3.getObject(downloadParams).createReadStream()
-    
-    //     }
     
 }
 exports.getFileStream = getFileStream

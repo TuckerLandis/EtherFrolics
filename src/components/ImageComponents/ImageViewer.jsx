@@ -1,21 +1,13 @@
 import LightBoxComponent from "./LightBox"
-// import { getFileStream } from "../../../server/s3"
 import PDFBox from "./PDFBox"
-
-
 
 function ImageViewer(props) {
 
-
-
-// If absolute URL from the remote server is provided, configure the CORS
-// header on that server.
-
-
-
-
   return (
     <div>
+
+      {/* a couple attempts at embedding a pdf. cause a weird bug where "document" is what is embedded, effectively showing a second copy of the webpage inside the embed tag. leaving these if a future dev wants
+      to simply use an embed tag, and can figure out the bug */}
 
       {/* {props.imagePath.includes('PDF') ? <embed src={props.imagePath} width="800px" height="2100px" /> : <LightBoxComponent imagePath={props.imagePath} /> } */}
 
@@ -23,10 +15,9 @@ function ImageViewer(props) {
         alt : <a href="data/test.pdf">test.pdf</a>
       </object> : <LightBoxComponent imagePath={props.imagePath} />} */}
 
+      {/* if the aws key contains PDF, render a PDFbox component, if not, render a lightbox component */}
+
       {props.imagePath.includes('PDF') ? <PDFBox imagePath={props.imagePath} /> : <LightBoxComponent imagePath={props.imagePath} /> }
-
-
-
 
     </div>
   )
@@ -34,10 +25,5 @@ function ImageViewer(props) {
 
 export default ImageViewer
 
-// {isOpen ? <Lightbox image={props.imagePath} title="image title" onClose={e => setIsOpen(false)} /> 
-// :
-
-// // this could simply be a button so we don't have to worry about image widths, but i'm setting it to 32px manually
-// <img width="32px" src={props.imagePath} alt="" onClick={e => setIsOpen(true)}/> }
 
 

@@ -16,18 +16,6 @@ function WorkHistoryMultiRow(props) {
     const [endDate, setEndDate] = useState('')
     const [hasBeenSubmitted, setHasBeenSubmitted] = useState(false)
 
-    function fakeButton(){
-        setWorkplace('Sacred Heart Hospital')
-        setJobTitle('Co-Chief Resident')
-        setReferenceName('Dr. Christopher Turk')
-        setReferencePhone('6126602222')
-        setReferenceEmailAddress('ChrisTurkMD@gmail.com')
-        setStartDate('2008-12-01')
-        setEndDate('2015-03-05')
-
-
-    }
-
 
     /**
      * on clicking the add button, flip boolean for this item, send dispatch, call function that lives in WorkHistory to render new item
@@ -98,9 +86,7 @@ function WorkHistoryMultiRow(props) {
                 <div className="text-field-wrapper">
                     {/* <label htmlFor="workPlaceInput">Work Place</label> */}
                     <TextField required label="Work Place" type="text" name="workplace" id="workplaceInput"
-                        value={workplace} onChange={handleChange} variant="outlined" 
-                        onClick={fakeButton} /// FAKE BUTTON ------
-                        />
+                        value={workplace} onChange={handleChange} variant="outlined" />
                 </div>
 
                 <div className="text-field-wrapper">
@@ -156,13 +142,3 @@ function WorkHistoryMultiRow(props) {
 
 
 export default WorkHistoryMultiRow
-
-
-// - [ x]  multi row work submit
-//     - [x ]  workplace
-//     - [x ]  job title
-//     - [x ]  reference name
-//     - [ x]  reference contact #
-//      - [x] reference email
-//     - [x ]  start date
-//     - [x ]  end date
