@@ -52,7 +52,6 @@ function ProviderCredItem({ provider, threeMonthsFromToday }) {
     const handleDisplayOptions = (e, credential)  => {
         e.preventDefault();
 
-        console.log(credential);
         dispatch({
             type: 'SET_CREDENTIAL_ENTRY_UPDATE',
             payload: {
