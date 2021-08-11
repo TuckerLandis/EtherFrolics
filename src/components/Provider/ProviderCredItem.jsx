@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import ImageViewer from '../ImageComponents/ImageViewer';
 
-const listItemClass = makeStyles((theme) => ({
+const listItemClass = makeStyles(() => ({
     root: {
       width: '100%',
       textAlign: 'center'
@@ -26,7 +26,7 @@ const listItemClass = makeStyles((theme) => ({
     }
   }));
 
-  const listTextClass = makeStyles((theme) => ({
+  const listTextClass = makeStyles(() => ({
     root: {
         backgroundColor: '#fff',
         padding: 15,
@@ -99,8 +99,6 @@ function ProviderCredItem({ provider, threeMonthsFromToday }) {
         history.push(`${url}/edit`)
     }
 
-    console.log(ImageViewer);
-    console.log(`three months from today: ${threeMonthsFromToday}`);
     return (
         <div>
             <Accordion>
