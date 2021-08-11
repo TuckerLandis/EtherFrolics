@@ -36,8 +36,6 @@ function EditGenInfo ( {provider} ) {
         });
         history.push('/providerlandingpage')
     }
-console.log(editObj);
-console.log('provider is', provider);
 
     return (
         <div className="general-form-display">
