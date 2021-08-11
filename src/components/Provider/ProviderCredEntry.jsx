@@ -114,7 +114,6 @@ function ProviderCredEntry({ entryType, provider, credentialEntry, inputConfig }
     history.push('/providerlandingpage')
   }
 
-  console.log(credUpdate);
   return (
     <div>
       {entryType === 'edit' ?
