@@ -22,14 +22,11 @@ router.post('/s3', upload.single('image'), rejectUnauthenticated, async (req, re
 
 
     const file = req.file
-  
-    console.log('file info', file);
 
     // uploads the image to s3
     const result = await uploadFile(file)
 
         .then(result => {
-            console.log('response from s3', result);
             res.send(result)
         })
         .then(() => {
@@ -82,9 +79,6 @@ router.post('/db', rejectUnauthenticated, async (req, res) => {
 
     const image = req.body
 
-    console.log(image);
-
-
     // sending a imageType from props where each image uploader is rendered, using the below switch statement to generate query text based on that
     switch (image.imageType) {
         case 'resume':
@@ -96,8 +90,6 @@ router.post('/db', rejectUnauthenticated, async (req, res) => {
     }
     pool.query(queryText, [image.payload.Key, req.user.id])
         .then(result => {
-            console.log(result);
-
             res.sendStatus(200)
         })
         .catch(error => {
