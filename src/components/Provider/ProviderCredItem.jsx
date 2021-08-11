@@ -115,7 +115,7 @@ function ProviderCredItem({ provider, threeMonthsFromToday }) {
                                 return (
                                     hasBeenClicked?.[credential.credentialName] ?
                                         <ListItem  divider key={i} button >  
-                                        {credential.credential &&              
+                                        {credential?.credentialImageKey &&              
                                             <ListItemIcon className={listTextClasses.icon}>                                                    
                                                 <ImageViewer imagePath={credentialImagePath} />
                                             </ListItemIcon>
@@ -130,7 +130,7 @@ function ProviderCredItem({ provider, threeMonthsFromToday }) {
                                     :
 
                                         <ListItem divider key={i} button >
-                                        {credential.credential && 
+                                        {credential?.credentialImageKey && 
                                             <ListItemIcon className={listTextClasses.icon}>
                                                 <ImageViewer imagePath={credentialImagePath} />
                                             </ListItemIcon>

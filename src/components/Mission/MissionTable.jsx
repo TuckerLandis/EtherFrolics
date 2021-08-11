@@ -28,7 +28,7 @@ const useStyles = makeStyles({
         marginRight: 'auto',
         marginLeft: 'auto',
         marginTop: 32,
-        maxWidth: 375,
+        maxWidth: '100vh',
     },
     table: {
         minWidth: 375,
