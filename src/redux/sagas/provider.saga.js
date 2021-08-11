@@ -18,7 +18,7 @@ function* getProviders() {
 
 function* selectProvider(action){
     try{
-        console.log(action.payload);
+
         const response = yield axios.get(`/api/provider/ind/${action.payload}`);
 
         yield put({
@@ -26,50 +26,50 @@ function* selectProvider(action){
             payload: response.data
         });
 
-        // yield put({ type: 'GET_PROVIDERS' });
     }
     catch (err) {
         console.log('Error selecting individual provider', err);
     }
 } // end selectProvider fn*
 
-function* getProviderLanding(action){
+function* getProviderLanding(){
 
     try{
-        console.log('in providerLanding function');
     
     const response = yield axios.get('/api/provider/landing')
 
     if (response.data[0] === undefined) {
+
         yield put({
             type: 'REGISTRATION_IN_PROGRESS'
         });
+
     } else {
+
         yield put({
             type: 'SET_PROVIDER_LANDING',
             payload: response.data
         });
+
     }
 
     }
-     catch (error) {
+    catch (error) {
         console.log('error in getProviderLanding Function', error);
         
     }
-}
+}// end getProviderLanding fn*
 
 function* updateProvider(action) {
 
     try {
-        console.log('Sending provider data update');
 
         if (action.payload.table === 'credential') {
-            console.log('in if');
 
            yield axios.put(`/api/provider/update/credential/${action.payload.userId}/${action.payload.credentialId}`, action.payload);
 
         } else {
-            console.log('in else');
+
             yield axios.put(`/api/provider/update/${action.payload.userId}/${action.payload.providerId}`, action.payload);
 
         }
@@ -85,17 +85,13 @@ function* updateProvider(action) {
         console.error(`Error in editProvider saga ${error}`);
 
     }
-}
+}// end updateProvider fn*
 
 function* verifyProvider(action) {
 
     try {
 
-        console.log('verifying provider with provider_id: ', action.payload);
-
         yield axios.put(`api/provider/verify/${action.payload}`);
-
-        // yield put({ type: 'SELECT_PROVIDER' });
 
     }
     catch (error) {
@@ -103,17 +99,13 @@ function* verifyProvider(action) {
         console.error('Error verifying provider: ', error);
 
     }
-}
+}// end verifyProvider fn*
 
 function* disableProvider(action) {
 
     try {
 
-        console.log('disabling provider with provider_id: ', action.payload);
-
         yield axios.put(`api/provider/disable/${action.payload}`);
-
-        // yield put ({ type: 'SELECT_PROVIDER' });
 
     }
     catch (error) {
@@ -121,7 +113,7 @@ function* disableProvider(action) {
         console.error('Error disabling provider: ', error);
 
     }
-}
+}// end disableProvider fn*
 
 function* providerSaga() {
     yield takeLatest('GET_PROVIDERS', getProviders);
