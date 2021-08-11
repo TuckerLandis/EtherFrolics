@@ -17,24 +17,15 @@ function MedCred () {
   // amount of credentials array, to render more forms
   const [credentialList, setCredentialList] = useState([1]);
 
-  // state variable to track if at least 1 section
-  // of credential data has been submitted to the DB
-  const [credentialSubmitted, setCredentialSubmitted] = useState(false);
-
   const addCredentialHistoryData = () => {
 
     setCredentialList(amountOfCredentials =>
       [...amountOfCredentials, amountOfCredentials.length + 1]);
 
-      // credential submitted becoming true enables next button
-      setCredentialSubmitted(true);
-
   };
 
   // passed down as props to stepper
   const handleNext = () => {
-
-    console.log('handle next');
 
     dispatch({
       type: 'ADD_CREDENTIAL_HISTORY_DATA',
