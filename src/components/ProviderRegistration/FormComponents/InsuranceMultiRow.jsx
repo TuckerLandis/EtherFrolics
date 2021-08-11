@@ -17,9 +17,6 @@ function InsuranceMultiRow(props) {
     const [dateRenewed, setDateRenewed] = useState('');
     const [dateExpiring, setDateExpiring] = useState('');
     const [submitted, setSubmitted] = useState(false);
-
-
-    const [imageSubmit, setImageSubmit] = useState(false)
     const [insuranceImageKey, setInsuranceImageKey] = useState('')
 
     const handleChange = (evt) => {
@@ -48,7 +45,6 @@ function InsuranceMultiRow(props) {
     }
 
     function handleImageAttach(awsKey) {
-        setImageSubmit(true)
         setInsuranceImageKey(awsKey)
     }
 
@@ -69,7 +65,6 @@ function InsuranceMultiRow(props) {
             insuranceImageKey: insuranceImageKey
 
         }
-        console.log(insuranceObj);
 
         dispatch({
             type: 'ADD_INSURANCE_ITEM',
