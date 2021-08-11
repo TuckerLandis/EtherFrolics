@@ -11,12 +11,8 @@ function MedCredMultiRow(props) {
   const dispatch = useDispatch();
 
   const [itemSubmit, setItemSubmit] = useState(false);
-  const [imageSubmit, setImageSubmit] = useState(false)
-  const [credImageKey, setCredImageKey] = useState('')
-
 
   function handleImageAttach(awsKey) {
-    setImageSubmit(true)
     setMedCredValues(
       { ...medCredValues , credentialImageKey: awsKey }
       )
@@ -66,8 +62,6 @@ function MedCredMultiRow(props) {
 
     event.preventDefault();
 
-    console.log('submitting history');
-
     setItemSubmit(true);
 
     dispatch({
@@ -82,8 +76,6 @@ function MedCredMultiRow(props) {
 
     e.preventDefault();
 
-    console.log(e.target.name, e.target.value);
-
     setMedCredValues({
       ...medCredValues,
       [e.target.name]: e.target.value  
@@ -93,7 +85,6 @@ function MedCredMultiRow(props) {
 
   const imageType = 'credential'
 
-  console.log(medCredValues);
   return (
     <div className="general-form-display">
       {itemSubmit ? (
