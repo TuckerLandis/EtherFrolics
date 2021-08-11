@@ -15,7 +15,6 @@ function MissionHistoryMultiRow(props) {
     const [startDate, setStartDate] = useState('')
     const [endDate, setEndDate] = useState('')
     const [hasBeenSubmitted, setHasBeenSubmitted] = useState(false)
-    const [imageSubmit, setImageSubmit] = useState(false)
     const [missionImageKey, setMissionImageKey] = useState('')
 
 
@@ -49,7 +48,6 @@ function MissionHistoryMultiRow(props) {
 
     // attaches aws image key to form row
     function handleImageAttach(awsKey) {
-        setImageSubmit(true)
         setMissionImageKey(awsKey)
     }
 
