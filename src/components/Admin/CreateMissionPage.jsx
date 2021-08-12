@@ -68,8 +68,7 @@ function CreateMissionPage() {
                                 label="Organization"
                                 required
                                 value={name}
-                                onChange={(evt) => setName(evt.target.value)}
-                                onClick={fakeButton} />
+                                onChange={(evt) => setName(evt.target.value)}/>
                         </div>
 
                         <div className="text-field-wrapper">
