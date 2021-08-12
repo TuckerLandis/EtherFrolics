@@ -16,19 +16,10 @@ function GeneralInfoAddress() {
     const [state, setState] = useState('')
     const [zip, setZip] = useState('')
 
-    // state variable to track if all inputs
-    // have content
-    const [addressFormComplete, setAddressFormComplete] = useState(false);
-
-    function fakeButton(){
-
-        setPhone('6128675309')
-        setStreetAddress('1010101 Binary Drive')
-        setCity('Computerton')
-        setState('MN')
-        setZip('55400')
-    }
-
+    /**
+     * Passed down to the stepper component as props to be called upon pressing the next button
+     * @param {*} e 
+     */
     function handleNext(e) {
         e.preventDefault()
 
@@ -42,10 +33,14 @@ function GeneralInfoAddress() {
                 phone: phone
             }
         })
-
+        // sends user to next page
         history.push('/workhistory')
     }
 
+    /**
+     * Takes in events, changes state variables accordingly
+     * @param {*} e 
+     */
     function handleChange(e) {
         switch (e.target.id) {
             case 'streetAddressInput':
@@ -66,6 +61,7 @@ function GeneralInfoAddress() {
       
     }
 
+    // passed down to stepper for rendering progress bar
     const activeStep = 1
 
     return (
@@ -75,13 +71,11 @@ function GeneralInfoAddress() {
             <div className="general-form-display">
 
                 <form onSubmit={handleNext}>
-                    {/* <div className="general-form-sub-display"> */}
+                   
 
                     <div className="text-field-wrapper">
                         {/* <label htmlFor="phoneInput">Phone Number</label> */}
-                        <TextField label="Phone Number" variant="outlined" required type="text" name="phone" id="phoneInput" value={phone} onChange={handleChange}
-                        onClick={fakeButton}
-                        />
+                        <TextField label="Phone Number" variant="outlined" required type="text" name="phone" id="phoneInput" value={phone} onChange={handleChange} />
                     </div>
                     <div className="text-field-wrapper">
                         {/* <label htmlFor="streetAddressInput">Street Address</label> */}
@@ -100,10 +94,10 @@ function GeneralInfoAddress() {
                         {/* <label htmlFor="zipInput">Zip Code</label> */}
                         <TextField label="Zip Code" variant="outlined" required type="text" name="zip" id="zipInput" value={zip} onChange={handleChange} />
                     </div>
-                    {/* <button disabled={!addressFormComplete ? true : false} type="submit">Next</button> */}
+                    
 
 
-                    {/* </div> */}
+                    
 
 
 
@@ -124,25 +118,3 @@ function GeneralInfoAddress() {
 
 export default GeneralInfoAddress
 
-
-
-// ## Checklist
-
-// NEXT - finish saga > route
-
-// - [x ]  Input fields
-//     - [ x]  street address
-//     - [ x]  city
-//     - [ x]  state
-//     - [x ]  zip
-// - [x ]  next button → work history
-
-// ## Components
-
-// - [ ]  bringing in stepper
-// - [ ]  bringing in header
-// - [ ]  form container -
-
-// ## Routes
-
-// - [ ]  put route to provider table

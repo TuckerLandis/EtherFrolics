@@ -13,13 +13,9 @@ function MissionHistory () {
 
     const missionHistoryItems = useSelector(store => store.missionHistoryReducer)
 
-    const [lastMission, setLastMission] = useState('')
-
+    // state array on which mission history sub components are rendered, 
+    // once a subform is submitted, this counts up by one, rendering a new subform
     const [amountOfMissionHistories, setAmountOfMissionHistories] = useState([1])
-
-    // state variable to track if at least 1 section
-    // of mission history data has been submitted to the DB
-    const [missionHistorySubmitted, setMissionHistorySubmitted] = useState(false);
 
     // increases the amount of mission history elements in the array above
     function addMissionHistoryItem() {
@@ -27,27 +23,11 @@ function MissionHistory () {
         setAmountOfMissionHistories(amountOfMissionHistories =>
             [...amountOfMissionHistories, amountOfMissionHistories.length + 1])
 
-        // missionHistorySubmitted set to true enables
-        // NEXT button to navigate to the next page
-        setMissionHistorySubmitted(true);
-
     }
-
-    // function handleChange(e) {
-    //     setLastMission(e.target.value)
-    // }
-
+    
+    // passed down as props to <RegistrationStepper />
     function handleNext(e) {
         e.preventDefault
-
-        // dispatch({
-        //     type: "PUT_LAST_MISSION",
-        //     payload: {
-        //         lastMission: lastMission
-        //     }
-        // })
-
-        
         
          dispatch({
              type: 'POST_MISSION_HISTORY_ITEMS',
@@ -55,10 +35,11 @@ function MissionHistory () {
 
          })
        
-
+        // sends user to next page
         history.push('/education')
     }
 
+    // sent down as props to render progress bar in stepper component
     const activeStep = 3
 
     return(
@@ -74,9 +55,8 @@ function MissionHistory () {
                 )
             })}
 
-        {/* <button disabled={!missionHistorySubmitted ? true : false} onClick={handleNext}>Next</button> */}
 
-            {/* stepper goes here with props of which page */}
+        
             < RegistrationStepper activeStep={activeStep} submitFunction={handleNext}/>
 
         </div>

@@ -9,11 +9,11 @@ import EditIcon from '@material-ui/icons/Edit';
 import { List, ListItem, ListItemText, ListItemSecondaryAction, ListItemIcon, IconButton} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory, useRouteMatch } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import ImageViewer from '../ImageComponents/ImageViewer';
 
-const listItemClass = makeStyles((theme) => ({
+const listItemClass = makeStyles(() => ({
     root: {
       width: '100%',
       textAlign: 'center'
@@ -26,7 +26,7 @@ const listItemClass = makeStyles((theme) => ({
     }
   }));
 
-  const listTextClass = makeStyles((theme) => ({
+  const listTextClass = makeStyles(() => ({
     root: {
         backgroundColor: '#fff',
         padding: 15,
@@ -47,10 +47,11 @@ function ProviderCredItem({ provider, threeMonthsFromToday }) {
 
     const [hasBeenClicked, setHasBeenClicked] = useState({});
 
+    const user = useSelector(store => store.user)
+
     const handleDisplayOptions = (e, credential)  => {
         e.preventDefault();
 
-        console.log(credential);
         dispatch({
             type: 'SET_CREDENTIAL_ENTRY_UPDATE',
             payload: {
@@ -97,8 +98,6 @@ function ProviderCredItem({ provider, threeMonthsFromToday }) {
         history.push(`${url}/edit`)
     }
 
-    console.log(ImageViewer);
-    console.log(`three months from today: ${threeMonthsFromToday}`);
     return (
         <div>
             <Accordion>
@@ -111,7 +110,7 @@ function ProviderCredItem({ provider, threeMonthsFromToday }) {
                     <div className={listItemClasses.root}>
                         <List component="nav">
                             {provider.credential_array.map( (credential, i) => {
-                                const credentialImagePath = `/api/image/prov/${credential.credentialImageKey}`
+                                const credentialImagePath = `/api/image/prov/${user.id}/${credential.credentialImageKey}`
                                 return (
                                     hasBeenClicked?.[credential.credentialName] ?
                                         <ListItem  divider key={i} button >  

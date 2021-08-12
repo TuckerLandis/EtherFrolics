@@ -14,17 +14,10 @@ function EducationMultiRow(props) {
     const [hasBeenSubmitted, setHasBeenSubmitted] = useState(false)
     const [degreeImageKey, setDegreeImageKey] = useState('')
 
-    function fakeButton() {
-        setSchool('Johns Hopkins University')
-        setDegree('Doctor of Medicine')
-        setStartDate('2001-09-01')
-        setEndDate('2006-05-25')
-
-    }
-
-
-    function submitEducationHistoryItem(event, awsKey) {
+    // passed down as props to stepper for next button press
+    function submitEducationHistoryItem(event) {
         event.preventDefault()
+        // validates if a transcript image has been attached
 
         // if (degreeImageKey === '') {
         //     return alert('Please attach a transcript')
@@ -46,11 +39,12 @@ function EducationMultiRow(props) {
         props.addEducationHistoryItem()
     }
 
+    // attaches image key from aws to form
     function handleImageAttach(awsKey) {
 
         setDegreeImageKey(awsKey)
     }
-
+    // takes in events, sets state variables for education items
     function handleChange(e) {
         switch (e.target.id) {
             case 'schoolInput':
@@ -67,7 +61,7 @@ function EducationMultiRow(props) {
                 break
         }
     }
-
+    // passed down to imageUploader but not used at this time
     const imageType = 'education'
 
     return (
@@ -81,9 +75,7 @@ function EducationMultiRow(props) {
 
                     <div className="text-field-wrapper">
                         {/* <label htmlFor="schoolInput">School</label> */}
-                        <TextField required label="School" id="schoolInput" value={school} onChange={handleChange} variant="outlined" 
-                        onClick={fakeButton}
-                        />
+                        <TextField required label="School" id="schoolInput" value={school} onChange={handleChange} variant="outlined" />
                     </div>
 
                     <div className="text-field-wrapper">

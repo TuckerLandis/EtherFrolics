@@ -15,7 +15,9 @@ function CreateMissionPage() {
     const [endDate, setEndDate] = useState('');
     const [missionLink, setMissionLink] = useState('');
     const [applyLink, setApplyLink] = useState('');
-    const [missionActive, setMissionActive] = useState(true);
+
+    // read-only variable for the mission status
+    const missionActive = true;
 
     //create a function that will send the form data to the server
     const handleSubmit = (evt) => {
@@ -45,19 +47,8 @@ function CreateMissionPage() {
         setApplyLink('');
 
         
-        // history.push('/missions')
+        history.push('/missions');
     }
-
-    function fakeButton () {
-        setName('Medical Ministry in Mexico');
-        setLocation('Mexico');
-        setStartDate('2021-10-30');
-        setEndDate('2021-11-13');
-        setMissionLink('https://www.mmi.org/mexico/');
-        setApplyLink('https://www.mmi.org/apply-now')
-
-    }
-
 
     return (
         <div>
@@ -77,8 +68,7 @@ function CreateMissionPage() {
                                 label="Organization"
                                 required
                                 value={name}
-                                onChange={(evt) => setName(evt.target.value)}
-                                onClick={fakeButton} />
+                                onChange={(evt) => setName(evt.target.value)}/>
                         </div>
 
                         <div className="text-field-wrapper">

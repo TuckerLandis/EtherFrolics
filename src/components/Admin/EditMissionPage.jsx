@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom';
-import { Button, InputLabel, MenuItem, Select, TextField, Typography } from '@material-ui/core';
+import { Button, MenuItem, Select, TextField, Typography } from '@material-ui/core';
 
 function EditMissionPage() {
     const dispatch = useDispatch();
@@ -44,7 +44,6 @@ function EditMissionPage() {
         })
         history.push('/missions')
     }
-    console.log(mission);
 
     return (
         <div>
@@ -58,6 +57,7 @@ function EditMissionPage() {
                         <div className="text-field-wrapper">
                             <TextField
                                 type="text"
+                                label="Organization"
                                 variant="outlined"
                                 value={missionObj.name}
                                 name="name"
@@ -67,6 +67,7 @@ function EditMissionPage() {
                         <div className="text-field-wrapper">
                             <TextField
                                 type="text"
+                                label="Location"
                                 variant="outlined"
                                 value={missionObj.location}
                                 name="location"
@@ -99,6 +100,7 @@ function EditMissionPage() {
                             <TextField
                                 type="text"
                                 variant="outlined"
+                                label="Link to Mission"
                                 name="missionLink"
                                 value={missionObj.missionLink}
                                 onChange={handleChange} />
@@ -108,6 +110,7 @@ function EditMissionPage() {
                             <TextField
                                 type="text"
                                 variant="outlined"
+                                label="Link to Apply"
                                 name="applyLink"
                                 value={missionObj.applyLink}
                                 onChange={handleChange} />

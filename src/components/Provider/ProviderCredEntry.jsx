@@ -27,8 +27,6 @@ function ProviderCredEntry({ entryType, provider, credentialEntry, inputConfig }
 
     e.preventDefault();
 
-    console.log(e.target.name, e.target.value);
-
     setCredUpdate({
       ...credUpdate,
       [e.target.name]: e.target.value
@@ -116,7 +114,6 @@ function ProviderCredEntry({ entryType, provider, credentialEntry, inputConfig }
     history.push('/providerlandingpage')
   }
 
-  console.log(credUpdate);
   return (
     <div>
       {entryType === 'edit' ?

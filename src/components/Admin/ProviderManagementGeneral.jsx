@@ -9,20 +9,14 @@ import './ProviderManagementGeneral.css';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import StarIcon from '@material-ui/icons/Star';
-import { TextField } from '@material-ui/core';
+import TextField from '@material-ui/core/TextField';
 import Divider from '@material-ui/core/Divider';
-
 import Paper from "@material-ui/core/Paper";
-import SearchIcon from '@material-ui/icons/Search';
-import Button from '@material-ui/core/Button';
-
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -55,18 +49,12 @@ function ProviderManagementGeneral() {
 
     // material-ui
     const classes = useStyles();
-    const [dense, setDense] = React.useState(false);
-    const [secondary, setSecondary] = React.useState(false);
 
     useEffect(() => {
         dispatch({ type: 'GET_PROVIDERS' });
     }, []);
 
-    console.log('Provider Mgmt Gen providers:', providers);
-
     const handleSelect = (id) => {
-
-        console.log(`Provider Mgmt Gen provider's user_id: `, id);
 
         dispatch({
             type: 'SELECT_PROVIDER',
@@ -118,7 +106,7 @@ function ProviderManagementGeneral() {
                             <div key={provider?.provider_id} className="listOfProviders">
                                 <Grid item xs={12} md={6}>
                                     <div className={classes.demo}>
-                                        <List dense={dense}>
+                                        <List dense={false}>
                                             <div>
                                                 <ListItem>
                                                     <ListItemIcon>

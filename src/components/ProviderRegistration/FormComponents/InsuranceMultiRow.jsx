@@ -5,35 +5,6 @@ import FormLabel from '@material-ui/core/FormLabel';
 import Button from '@material-ui/core/Button';
 import ImageUploader from "../../ImageComponents/ImageUploader";
 
-// ## Checklist
-
-// - [ ]  inputs
-//     - [ ]  insurance provider
-//     - [ ]  policy number
-//     - [ ]  state
-//     - [ ]  date issued
-//     - [ ]  date renewed
-//     - [ ]  date expiring
-//     - [ ]  button for adding a policy,
-//     - [ ]  PDF upload for insurance
-
-// - [ ]  stepper
-
-// - [ ]  submit button !!
-
-// ## Components
-
-// - [ ]  insurance form component - this contains inputs for insurance, gets duplicated by + button
-// - [ ]  header, stepper
-
-// - [ ]  pdf upload component - gets passed props from URL params to denote which type of file is uploaded
-
-// ## Routes
-
-// - [ ]  put route to provider table  ?
-// - [ ]  post route to insurance table
-// - [ ]  post to amazon s3 type: insurance
-
 function InsuranceMultiRow(props) {
     const dispatch = useDispatch();
 
@@ -46,20 +17,7 @@ function InsuranceMultiRow(props) {
     const [dateRenewed, setDateRenewed] = useState('');
     const [dateExpiring, setDateExpiring] = useState('');
     const [submitted, setSubmitted] = useState(false);
-
-
-    const [imageSubmit, setImageSubmit] = useState(false)
     const [insuranceImageKey, setInsuranceImageKey] = useState('')
-
-    function fakeButton() {
-        setInsuranceType('cRNA Malpractice Liability')
-        setInsuranceProvider('AANA')
-        setPolicyNumber('4261555')
-        setState('MN')
-        setDateInitial('2015-01-01')
-        setDateRenewed('2020-01-01')
-        setDateExpiring('2025-01-01')
-    }
 
     const handleChange = (evt) => {
         switch (evt.target.id) {
@@ -87,7 +45,6 @@ function InsuranceMultiRow(props) {
     }
 
     function handleImageAttach(awsKey) {
-        setImageSubmit(true)
         setInsuranceImageKey(awsKey)
     }
 
@@ -108,7 +65,6 @@ function InsuranceMultiRow(props) {
             insuranceImageKey: insuranceImageKey
 
         }
-        console.log(insuranceObj);
 
         dispatch({
             type: 'ADD_INSURANCE_ITEM',
@@ -138,7 +94,6 @@ function InsuranceMultiRow(props) {
                             id="type"
                             value={insuranceType}
                             onChange={handleChange} 
-                            onClick={fakeButton}
                             />
                     </div>
 

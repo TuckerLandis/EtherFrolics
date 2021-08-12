@@ -11,7 +11,6 @@ const homeStepper = (state = { activeStep: 0, pageViewParams: '/home/0' }, actio
             return {...state, pageViewParams: `/home/${state.activeStep}`}
     
         default:
-            console.log('default');
             return state;
     };
 };

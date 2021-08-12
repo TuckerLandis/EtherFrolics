@@ -19,27 +19,10 @@ function GeneralInfo() {
 
 
     /**
-     * For presentation purposes
-     * @param {*} e 
-     */
-    function fakeButton() {
-
-        setFirstName('Tucker')
-        setLastName('Landis')
-        setDob('1991-02-19')
-        setEmailAddress('landistuckerc@gmail.com')
-        setProviderRole('MD')
-
-    }
-
-    /**
      * Takes in an event from all inputs, changes their state variable
      * @param {*} e 
      */
     function handleChange(e) {
-
-        console.log(e.target.id);
-        console.log(e.target.parentNode)
 
         switch (e.target.id) {
             case 'firstNameInput':
@@ -70,18 +53,23 @@ function GeneralInfo() {
 
     }
 
+    // handles provider role dropdown events
+    function handleProviderRole(e) {
+        setProviderRole(e.target.value);
+    }
+
     /**
      * Upon clicking next button, validate forms, bundle info, send dispatch, push to next page
+     * Passed down to stepper, next button, as props
      */
     function handleNext(e) {
         e.preventDefault()
 
         if (firstName === '' || lastName === '' || dob === '' || providerRole === '' || validPassport === '' || soleProvider === '' || emailAddress === '') {
-        return alert('Please complete all required fields')
+            return alert('Please complete all required fields')
         }
 
-        console.log('next clicked');
-
+        // bundle provider general info
         const newProviderGeneralInfo = {
             firstName: firstName,
             lastName: lastName,
@@ -92,6 +80,7 @@ function GeneralInfo() {
             providerEmail: emailAddress
         }
 
+        // this dispatch triggers first post request of a provider
         dispatch({
             type: 'POST_PROVIDER_GENERAL',
             payload: newProviderGeneralInfo
@@ -103,9 +92,7 @@ function GeneralInfo() {
         history.push('/generalinfoaddress')
     }
 
-    function handleProviderRole (e) {
-        setProviderRole(e.target.value);
-    }
+    
 
 
     const activeStep = 0
@@ -126,9 +113,8 @@ function GeneralInfo() {
 
                         <div className="text-field-wrapper">
                             <TextField label="First Name" required type="text" name="firstName" id="firstNameInput"
-                                value={firstName} onChange={handleChange} variant="outlined" 
-                                onClick={fakeButton}
-                                />
+                                value={firstName} onChange={handleChange} variant="outlined"
+                            />
 
                         </div>
 
@@ -161,51 +147,51 @@ function GeneralInfo() {
                     </div>
 
                     <div className="provider-role-wrapper">
-                    <Typography htmlFor="providerRoleInput">Provider Role</Typography>
-                    <Select variant="outlined" name="providerRole" id="providerRoleInput" value={providerRole} onChange={handleProviderRole}>
-                        <MenuItem value="-">-</MenuItem>
-                        <MenuItem value="CRNA">cRNA</MenuItem>
-                        <MenuItem value="RN">RN</MenuItem>
-                        <MenuItem value="CNP">CNP</MenuItem>
-                        <MenuItem value="CNS">CNS</MenuItem>
-                        <MenuItem value="PA-C">PA-C</MenuItem>
-                        <MenuItem value="MD">MD</MenuItem>
-                        <MenuItem value="DO">DO</MenuItem>
-                        <MenuItem value="Other">Other</MenuItem>
-                    </Select>
+                        <Typography htmlFor="providerRoleInput">Provider Role</Typography>
+                        <Select variant="outlined" name="providerRole" id="providerRoleInput" value={providerRole} onChange={handleProviderRole}>
+                            <MenuItem value="-">-</MenuItem>
+                            <MenuItem value="CRNA">cRNA</MenuItem>
+                            <MenuItem value="RN">RN</MenuItem>
+                            <MenuItem value="CNP">CNP</MenuItem>
+                            <MenuItem value="CNS">CNS</MenuItem>
+                            <MenuItem value="PA-C">PA-C</MenuItem>
+                            <MenuItem value="MD">MD</MenuItem>
+                            <MenuItem value="DO">DO</MenuItem>
+                            <MenuItem value="Other">Other</MenuItem>
+                        </Select>
 
                     </div>
 
-                    
+
 
                     <div className="text-field-wrapper">
-                    <Typography variant="body1">Do you have a valid passport?</Typography>
-                        
+                        <Typography variant="body1">Do you have a valid passport?</Typography>
+
                     </div>
                     <div className="text-field-wrapper">
-                    <label htmlFor="yes">Yes</label>
-                    <input required type="radio" name="validPassport" id="validPassportRadioTrue" value="true" onChange={handleChange} />
-                    <label htmlFor="no">No</label>
-                    <input type="radio" name="validPassport" id="validPassportRadioFalse" value="false" onChange={handleChange} />
+                        <label htmlFor="yes">Yes</label>
+                        <input required type="radio" name="validPassport" id="validPassportRadioTrue" value="true" onChange={handleChange} />
+                        <label htmlFor="no">No</label>
+                        <input type="radio" name="validPassport" id="validPassportRadioFalse" value="false" onChange={handleChange} />
 
                     </div>
-                    
 
-                    
+
+
                     <div className="text-field-wrapper">
-                    <Typography variant="body1">Are you comfortable working as a sole provider?</Typography>
+                        <Typography variant="body1">Are you comfortable working as a sole provider?</Typography>
 
 
                     </div>
-                    
+
                     <div className="text-field-wrapper">
-                    <label htmlFor="yes">Yes</label>
-                    <input required type="radio" name="soleProvider" id="soleProviderRadioTrue" value="true" onChange={handleChange} />
-                    <label htmlFor="no">No</label>
-                    <input type="radio" name="soleProvider" id="soleProviderRadioFalse" value="false" onChange={handleChange} />
+                        <label htmlFor="yes">Yes</label>
+                        <input required type="radio" name="soleProvider" id="soleProviderRadioTrue" value="true" onChange={handleChange} />
+                        <label htmlFor="no">No</label>
+                        <input type="radio" name="soleProvider" id="soleProviderRadioFalse" value="false" onChange={handleChange} />
 
                     </div>
-                    
+
 
                     <RegistrationStepper activeStep={activeStep} submitFunction={handleNext} />
 
@@ -222,33 +208,3 @@ function GeneralInfo() {
 
 
 export default GeneralInfo
-
-// submitFunction={handleNext}
-
-
-// ## Checklist
-
-// - [x]  Input fields
-//     - [x]  Name
-//     - [x]  DOB
-//     - [x]  Provider role
-//     - [x]  sole provider checkbox
-//     - [x]  valid passport checkbox
-//     - [x]  opt -in recruiters checkbox
-//     - [x]  next button
-//     - [ ]  steppers specific - separate component - url params
-// - [ ]  divs - structure
-//     - [ ]  
-//     - [ ]  
-// - [ ]  write post route
-
-// ## Components
-
-// - [ ]  bringing in stepper
-// - [ ]  header
-// - [ ]  form container - structure, div type stuff
-//     - [ ]  inputs
-
-// ## Routes
-
-// - [ ]  post - provider table

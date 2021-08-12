@@ -13,11 +13,12 @@ function Insurance () {
 
     const insuranceItems = useSelector(store => store.insuranceItemReducer)
 
-    // create an array that will render the insurance history subcomponents
+    // creates an array that will render the insurance history subcomponents
     const [amountOfInsuranceHistories, setAmountOfInsuranceHistories] = useState([1]);
 
     // state variable to track if at least 1 section
     // of insurance data has been submitted to the DB
+    // not referenced as of now
     const [insuranceSubmitted, setInsuranceSubmitted] = useState(false);
 
     // create a function that will increase the amount of insurance histories
@@ -59,13 +60,6 @@ function Insurance () {
             })}
 
            
-            {/* <Button
-            disabled={!insuranceSubmitted ? true : false}
-            variant="contained"
-            color="primary"
-            onClick={nextPage}>NEXT</Button> */}
-            
-            {/* stepper goes here with props of which page */}
             < RegistrationStepper activeStep={activeStep} submitFunction={nextPage}/>
             
         </div>
@@ -74,33 +68,3 @@ function Insurance () {
 
 
 export default Insurance;
-
-
-// ## Checklist
-
-// - [ ]  inputs
-//     - [ ]  insurance provider
-//     - [ ]  policy number
-//     - [ ]  state
-//     - [ ]  date issued
-//     - [ ]  date renewed
-//     - [ ]  date expiring
-//     - [ ]  button for adding a policy,
-//     - [ ]  PDF upload for insurance
-
-// - [ ]  stepper
-
-// - [ ]  submit button !!
-
-// ## Components
-
-// - [ ]  insurance form component - this contains inputs for insurance, gets duplicated by + button
-// - [ ]  header, stepper
-
-// - [ ]  pdf upload component - gets passed props from URL params to denote which type of file is uploaded
-
-// ## Routes
-
-// - [ ]  put route to provider table  ?
-// - [ ]  post route to insurance table
-// - [ ]  post to amazon s3 type: insurance

@@ -13,7 +13,6 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     pool
         .query(queryText)
         .then(result => {
-            console.log('admin GET result.rows:', result.rows);
             res.send(result.rows);
         })
         .catch(err => {
@@ -30,7 +29,6 @@ router.get('/mission', rejectUnauthenticated, (req, res) => {
     pool.query(queryText)
         .then(result => {
             res.send(result.rows);
-            console.log(result.rows);
         })
         .catch(err => {
             console.log('ERROR: Get all Missions', err);
@@ -39,7 +37,6 @@ router.get('/mission', rejectUnauthenticated, (req, res) => {
 }) // End of Get route
 
 router.post('/mission', rejectNonAdmin, (req, res) => {
-    console.log('req.body is', req.body);
     let mission = req.body;
 
     if (mission.missionLink === ''){
@@ -64,8 +61,6 @@ router.post('/mission', rejectNonAdmin, (req, res) => {
 })
 
 router.put('/mission/:id', rejectNonAdmin, (req, res) => {
-    console.log('req.body is', req.body);
-    console.log('req.params is', req.params);
     const queryText = `UPDATE mission
     SET "startDate" = $1,
     "endDate" = $2,

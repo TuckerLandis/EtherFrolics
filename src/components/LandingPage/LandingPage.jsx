@@ -14,7 +14,7 @@ import { Typography } from '@material-ui/core';
 import InfoCard from './InfoCard/InfoCard';
 
 
-function LandingPage({ theme }) {
+function LandingPage() {
 
   const history = useHistory();
 
@@ -28,7 +28,6 @@ function LandingPage({ theme }) {
 
 
   useEffect(() => {
-    console.log('in useEffect');
     handleNav(params, location.pathname);
   }, [])
 
@@ -81,8 +80,6 @@ function LandingPage({ theme }) {
   const onRegister = () => {
     history.push('/registration');
   };
-
-  console.log(theme);
 
   return (
     <div className="grid">

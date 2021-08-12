@@ -1,5 +1,7 @@
 import Lightbox from 'react-awesome-lightbox'
 import 'react-awesome-lightbox/build/style.css';
+
+// ^ used react-awesome-lightbox for rendering images (not pdfs) documentation here https://www.npmjs.com/package/react-awesome-lightbox
 import { useState } from 'react';
 
 function LightBoxComponent(props) {

@@ -16,14 +16,11 @@ router.get('/', rejectNonAdmin, (req, res) => {
 
   pool.query(queryText)
     .then(result => {
-      console.log('prov mgmt get: ');
-
       res.send(result.rows)
     })
     .catch(error => {
-      console.log('error in prov mgmt get: ');
+      console.log('error in prov mgmt get:', error);
       res.sendStatus(500)
-
     })
 })
 
@@ -33,9 +30,6 @@ router.get('/', rejectNonAdmin, (req, res) => {
  * 
  */
 router.get('/ind/:id', rejectNonAdmin, (req, res) => {
-
-  console.log('Arrived at individual provider GET: ', req.params);
-  
   const queryText = `SELECT 
   "user".id, "user".username, 
   "provider".provider_id, 
@@ -93,11 +87,11 @@ router.get('/ind/:id', rejectNonAdmin, (req, res) => {
 
   pool.query(queryText, [req.params.id])
     .then(result => {
-      console.log('Individual provider GET: ', result.rows);
       res.send(result.rows);
     })
     .catch(error => {
       console.log('error in individual provider get', error);
+      res.sendStatus(500)
     })
 })
 
@@ -107,9 +101,6 @@ router.get('/ind/:id', rejectNonAdmin, (req, res) => {
  * 
  */
 router.get('/landing', rejectUnauthenticated, (req, res) => {
-
-  console.log('got to providerLanding GET');
-
   const queryText = `SELECT 
   "user".id, "user".username, 
   "provider".provider_id, 
@@ -169,12 +160,11 @@ router.get('/landing', rejectUnauthenticated, (req, res) => {
 
   pool.query(queryText, [req.user.id])
     .then(result => {
-      console.log(result.rows);
       res.send(result.rows)
     })
     .catch(error => {
       console.log('error in provider landing get', error);
-
+      res.sendStatus(500)
     })
 })
 
@@ -182,9 +172,6 @@ router.get('/landing', rejectUnauthenticated, (req, res) => {
  * POST route for initial provider post from /generalinfo
  */
 router.post('/', rejectUnauthenticated, (req, res) => {
-
-  console.log('Reached provider reg POST:', req.body);
-
   let provider = req.body
 
   const queryText = `INSERT INTO "provider" (
@@ -213,7 +200,6 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 
   ])
     .then(result => {
-      console.log('created new provider');
       res.sendStatus(200)
     })
     .catch(error => {
@@ -223,11 +209,6 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 });
 
 router.post('/workhistoryitem', rejectUnauthenticated, async (req, res) => {
-  // POST route code here
-  console.log('Reached provider reg POST /workhistoryitem', req.body);
-  // res.sendStatus(200)
-  // Tucker
-
   // make a connection to pool client for transaction
   const client = await pool.connect();
 
@@ -296,8 +277,6 @@ router.post('/workhistoryitem', rejectUnauthenticated, async (req, res) => {
     res.sendStatus(500);
     
   } finally {
-    console.log('End work history item POST')
-
     // release the pool connection
     await client.release();
   }
@@ -308,15 +287,12 @@ router.post('/workhistoryitem', rejectUnauthenticated, async (req, res) => {
  * Takes a years of experience value from /workhistory and updates wthe relevant column in the provider table
  */
 router.put('/workhistory', rejectUnauthenticated, (req, res) => {
-  console.log('Reached provider PUT /workhistory', req.body);
-
   const provider = req.body
 
   const queryText = `UPDATE "provider" SET "yearsExperience" = $1 WHERE "user_id" = $2; `;
 
   pool.query(queryText, [provider.yearsExperience, req.user.id])
     .then(result => {
-      console.log('updated yearsExperience');
       res.sendStatus(200)
     })
     .catch(error => {
@@ -327,31 +303,23 @@ router.put('/workhistory', rejectUnauthenticated, (req, res) => {
 
 // Put request to the database to update the address info of the provider
 router.put('/address', rejectUnauthenticated, (req, res) => {
-  console.log('Reached provider reg PUT /address', req.body);
-
-  console.log(req.user.id);
-
   let updatedAddress = req.body;
-  console.log('the updated address is', updatedAddress);
 
   let queryText = `UPDATE "provider" SET "streetAddress" = $1, "city" = $2, "state" = $3, "zipCode" = $4, "phoneNumber" = $5 WHERE "user_id" = $6;`;
 
   pool.query(queryText, [updatedAddress.streetAddress, updatedAddress.city, updatedAddress.state, updatedAddress.zip, updatedAddress.phone, req.user.id])
     .then(response => {
-      console.log(response.rowCount);
       res.sendStatus(200)
     }).catch(err => {
       console.log('address put request error', err);
       res.sendStatus(500);
     })
-}) // End PUT Route
+})
 
 /**
  * Takes an object from /education and posts it to the education table
  */
 router.post('/educationhistoryitem', rejectUnauthenticated, async (req, res) => {
-  console.log('Reached provider reg POST: educationhistory', req.body);
-
   // make a connection to pool client for transaction
   const client = await pool.connect();
 
@@ -415,16 +383,12 @@ router.post('/educationhistoryitem', rejectUnauthenticated, async (req, res) => 
     res.sendStatus(500);
 
   } finally {
-    console.log('End education history item POST')
-
     // release the pool connection
     await client.release();
   }
 })
 
 router.post('/missionhistoryitem', rejectUnauthenticated, async (req, res) => {
-  console.log('Reached provider reg POST: missionHistory', req.body);
-
   // make connection to pool client 
   // to initiate transaction
   const client = await pool.connect();
@@ -483,17 +447,12 @@ router.post('/missionhistoryitem', rejectUnauthenticated, async (req, res) => {
     res.sendStatus(500);
 
   } finally {
-    console.log('End mission history item POST')
-
     // release the pool connection
     await client.release();
   }
 })
 
 router.post('/insuranceitem', rejectUnauthenticated, async (req, res) => {
-  console.log('Reg.body in /insurance item is', req.body);
-  console.log('user id is', req.user.id);
-
   // make connection to pool client 
   // to initiate transaction
   const client = await pool.connect();
@@ -552,8 +511,6 @@ router.post('/insuranceitem', rejectUnauthenticated, async (req, res) => {
     res.sendStatus(500);
 
   } finally {
-    console.log('End insurance item POST');
-
     // release the pool connection
     await client.release();
   }
@@ -561,8 +518,6 @@ router.post('/insuranceitem', rejectUnauthenticated, async (req, res) => {
 
 
 router.post('/credentialhistory', rejectUnauthenticated, async (req, res) => {
-  console.log('Credential History POST for provider', req.body);
-
   // make a connection to pool client for transaction
   const client = await pool.connect();
 
@@ -611,18 +566,12 @@ router.post('/credentialhistory', rejectUnauthenticated, async (req, res) => {
     res.sendStatus(500);
 
   } finally {
-    console.log('End cred POST')
-
+    // release the pool connection
     await client.release();
-
   }
-
-  // pesto/ben
 })
 
 router.put('/completeregistration', rejectUnauthenticated, (req, res) => {
-  console.log('completing registration for: ', req.user.id);
-
   const queryText = `UPDATE "provider" SET "registrationComplete" = true
     WHERE "provider".user_id = $1
     ;`;
@@ -639,11 +588,6 @@ router.put('/completeregistration', rejectUnauthenticated, (req, res) => {
 
 // PUT Route to update provider table
 router.put('/update/:userId/:providerId', rejectUnauthenticated, async (req, res) => {
-  console.log('Updating provider table at ' + req.params.providerId + ' as ' + req.user.id );
-
-  console.log(req.params);
-  console.log('req.body is ', req.body);
-
   // destructure query params
   const {
     userId,
@@ -697,8 +641,7 @@ router.put('/update/:userId/:providerId', rejectUnauthenticated, async (req, res
       res.sendStatus(500);
       
     } finally {
-      console.log('End provider PUT')
-
+      // release the pool connection
       await client.release();
     }
   } else {
@@ -710,8 +653,6 @@ router.put('/update/:userId/:providerId', rejectUnauthenticated, async (req, res
 
 // PUT Route to update credential table
 router.put('/update/credential/:userId/:credentialId', rejectUnauthenticated, async (req, res) => {
-console.log('Updating the credential table at ' + req.params.credentialId + ' as ' + req.user.id);
-
   // destructure query params
   const {
     userId,
@@ -768,8 +709,7 @@ console.log('Updating the credential table at ' + req.params.credentialId + ' as
         res.sendStatus(500);
         
       } finally {
-        console.log('End credential PUT')
-
+        // release the pool connection
         await client.release();
       }
 
@@ -781,9 +721,6 @@ console.log('Updating the credential table at ' + req.params.credentialId + ' as
   })
 
 router.put('/verify/:id', rejectUnauthenticated, (req, res) => {
-
-  console.log('In verify put route');
-
   let verifyQuery = `
   UPDATE "provider"
   SET "verified" = TRUE
@@ -793,7 +730,6 @@ router.put('/verify/:id', rejectUnauthenticated, (req, res) => {
   pool
   .query(verifyQuery, [req.params.id])
   .then(result => {
-    console.log('Provider verification successful!');
     res.sendStatus(200);
   })
   .catch(err => {
@@ -804,9 +740,6 @@ router.put('/verify/:id', rejectUnauthenticated, (req, res) => {
 })
 
 router.put('/disable/:id', rejectUnauthenticated, (req, res) => {
-
-  console.log('In disable put route');
-
   let disableQuery = `
   UPDATE "provider"
   SET "verified" = FALSE
@@ -816,7 +749,6 @@ router.put('/disable/:id', rejectUnauthenticated, (req, res) => {
   pool
   .query(disableQuery, [req.params.id])
   .then(result => {
-    console.log('Provider disable successful!');
     res.sendStatus(200);
   })
   .catch(err => {

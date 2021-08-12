@@ -13,9 +13,6 @@ import educationHistoryReducer from './educationHistory.reducer'
 import credentialHistoryReducer from './credentialHistory.reducer';
 import insuranceItemReducer from './insuranceItem.reducer';
 import credentialEntry from './credentialEntry.reducer';
-
-
-
 import homeStepper from './homeStepper.reducer';
 
 // rootReducer is the primary reducer for our entire project
@@ -28,8 +25,6 @@ const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
   user, // will have an id and username if someone is logged in
   administrators,
-
-
   homeStepper,
   providers,
   selectedProvider,
@@ -42,8 +37,6 @@ const rootReducer = combineReducers({
   credentialHistoryReducer,
   insuranceItemReducer,
   credentialEntry
-
-  
 });
 
 export default rootReducer;
