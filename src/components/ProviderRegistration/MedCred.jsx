@@ -45,9 +45,9 @@ function MedCred () {
           
 
       {/* medCred multi row form component goes here, along with submit button, included in that component */}
-      {credentialList.map(credential => {
+      {credentialList.map((credential,i) => {
         return (
-          <MedCredMultiRow key={credential} addCredentialHistoryData={addCredentialHistoryData} />
+          <MedCredMultiRow key={i} addCredentialHistoryData={addCredentialHistoryData} />
         )
       })}
       
