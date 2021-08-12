@@ -114,11 +114,6 @@ function Nav() {
 
           <Divider />
 
-          <ListItem className="mouse" onClick={() => { history.push('/about') }} className="mouse">
-            <InfoIcon />
-            About
-          </ListItem>
-
           <Divider />
 
           <ListItem onClick={() => dispatch({ type: 'LOGOUT', pushToHome: pushToHome })} className="mouse">
