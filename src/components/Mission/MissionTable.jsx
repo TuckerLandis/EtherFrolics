@@ -103,16 +103,23 @@ function MissionTable() {
                 <TableBody>
                     {missions.map((mission) => (
                         <TableRow key={mission.mission_id}>
-                            <TableCell style={{textAlign: "center"}}><Typography><Link 
-                            href={mission.missionLink} 
-                            target="_blank" 
-                            style={{ color: "#4f8f8f", fontWeight: "bold"}}>
-                            {mission.location}</Link></Typography><TableCell>
-                                <Link href={mission.applyLink}
+                            <TableCell style={{textAlign: "center"}}>
+                                <Typography>
+                                    <Link 
+                                    href={mission.missionLink} 
+                                    target="_blank" 
+                                    style={{ color: "#4f8f8f", fontWeight: "bold"}}>
+                                    {mission.location}</Link>
+                                </Typography>
+                                <br />
+                                <Typography>
+                                    <Link href={mission.applyLink}
                                     target="_blank"
                                     style={{ color: "#508e52", fontWeight: "bold"}}
                                     >
-                                    Apply</Link></TableCell></TableCell>
+                                    Apply</Link>
+                                </Typography>
+                                </TableCell>
 
                             <TableCell className={classes.backgroundDate}><Typography>{mission.startDate.slice(0, 10)}</Typography></TableCell>
                             <TableCell className={classes.backgroundDate}><Typography>{mission.endDate.slice(0, 10)}</Typography></TableCell>
