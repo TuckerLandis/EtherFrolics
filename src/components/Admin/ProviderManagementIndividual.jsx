@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import ImageViewer from '../ImageComponents/ImageViewer';
@@ -11,10 +11,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import ListSubheader from '@material-ui/core/ListSubheader';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Collapse from '@material-ui/core/Collapse';
 import ExpandLess from '@material-ui/icons/ExpandLess';
@@ -52,12 +50,9 @@ function ProviderManagementIndividual() {
     } // end selectProvider
 
     useEffect(() => {
-        console.log('individual provider params.id: ', params.id);
         selectProvider();
     }, [params.id])
     // params.id in this array so that when it changes, the page refreshes^
-
-    console.log('Selected provider: ', provider);
 
     const soloProviderStatus = () => {
 
@@ -78,7 +73,6 @@ function ProviderManagementIndividual() {
 
     // verifies provider using provider.provider_id
     const verify = (provider_id) => {
-        console.log('individual provider to verify: ', provider_id);
         Swal.fire({
             title: "Are you Sure?",
             text: "This provider will be verified.",
@@ -104,7 +98,6 @@ function ProviderManagementIndividual() {
     } // end verify
 
     const disable = (provider_id) => {
-        console.log('individual provider to disable: ', provider_id);
         Swal.fire({
             title: "Are you Sure?",
             text: "This Provider will be disabled",
