@@ -11,13 +11,6 @@ function LogOutButton(props) {
     history.push('/')
   }
 
-  // function resetAdmin() {
-
-  //   dispatch({
-  //     type: 'RESET_ADMIN_OBJ'
-  //   })
-  // }
-
   return (
     <button
       // This button shows up in multiple locations and is styled differently
