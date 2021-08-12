@@ -32,9 +32,6 @@ function WorkHistory() {
         setAmountOfWorkHistories(amountOfWorkHistories =>
             [...amountOfWorkHistories, amountOfWorkHistories.length + 1])
 
-        // workHistorySubmitted becoming true enables the next button
-        setWorkHistorySubmitted(true);
-
     }
 
     // sets years of experience based on select
