@@ -40,11 +40,6 @@ function ProtectedRoute(props) {
     ComponentToShow = LoginPage;
   }
 
-
-  // if (user.authorization === 100 && adminRedirect != null) {
-  //   return <Redirect exact from={otherProps.path} to={adminRedirect} />
-  // }
-
   // redirect a logged in user if an authRedirect prop has been provided
   if (user.authorization === 100 && adminRedirect != null) {
     return <Redirect exact from={otherProps.path} to={adminRedirect} />
